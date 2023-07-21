@@ -28,7 +28,7 @@ public class HomeController {
 //		Member loginMember = memberService.login("admin", "1212");
 //		session.setAttribute("loginMember", loginMember);
 //		test();
-		return "home";
+		return "index";
 	}
 	
 //	public void test() {

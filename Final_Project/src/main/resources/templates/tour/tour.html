@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <title>옛이음</title>
+    <!-- SEO Meta Tags-->
+    <meta name="description" content="Around - Multipurpose Bootstrap HTML Template">
+    <meta name="keywords" content="bootstrap, business, corporate, coworking space, services, creative agency, dashboard, e-commerce, mobile app showcase, saas, multipurpose, product landing, shop, software, ui kit, web studio, landing, dark mode, html5, css3, javascript, gallery, slider, touch, creative">
+    <meta name="author" content="Createx Studio">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo_crimson.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <link rel="mask-icon" color="#6366f1" href="assets/favicon/safari-pinned-tab.svg">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- fonts - 노토산스 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="white">
+    <!-- Theme mode-->
+    <script>
+      let mode = window.localStorage.getItem('mode'),
+          root = document.getElementsByTagName('html')[0];
+      if (mode !== undefined && mode === 'dark') {
+        root.classList.add('dark-mode');
+      } else {
+        root.classList.remove('dark-mode');
+      }
+      
+      
+    </script>
+    <!-- Page loading styles-->
+    <style>
+      .page-loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all .4s .2s ease-in-out;
+        transition: all .4s .2s ease-in-out;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+      }
+      .dark-mode .page-loading {
+        background-color: #121519;
+      }
+      .page-loading.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .page-loading-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+        opacity: 0;
+      }
+      .page-loading.active > .page-loading-inner {
+        opacity: 1;
+      }
+      .page-loading-inner > span {
+        display: block;
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #6f788b;
+      }
+      .dark-mode .page-loading-inner > span {
+        color: #fff;
+        opacity: .6;
+      }
+      .page-spinner {
+        display: inline-block;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: .75rem;
+        vertical-align: text-bottom;
+        background-color: #d7dde2; 
+        border-radius: 50%;
+        opacity: 0;
+        -webkit-animation: spinner .75s linear infinite;
+        animation: spinner .75s linear infinite;
+      }
+      .dark-mode .page-spinner {
+        background-color: rgba(255,255,255,.25);
+      }
+      @-webkit-keyframes spinner {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        }
+        50% {
+          opacity: 1;
+          -webkit-transform: none;
+          transform: none;
+        }
+      }
+      @keyframes spinner {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        }
+        50% {
+          opacity: 1;
+          -webkit-transform: none;
+          transform: none;
+        }
+      }
+      
+    </style>
+    <!-- Page loading scripts-->
+    <script>
+      (function () {
+        window.onload = function () {
+          const preloader = document.querySelector('.page-loading');
+          preloader.classList.remove('active');
+          setTimeout(function () {
+            preloader.remove();
+          }, 1500);
+        };
+      })();
+      
+    </script>
+    <!-- Import Google Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" id="google-font">
+    <!-- Vendor styles-->
+    <link rel="stylesheet" media="screen" href="assets/vendor/flatpickr/dist/flatpickr.min.css"/>
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="assets/css/theme.css">
+  </head>
+  <!-- Body-->
+  <body>
+    <!-- Page loading spinner-->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Loading...</span>
+      </div>
+    </div>
+    <!-- Page wrapper-->
+    <main class="page-wrapper">
+      <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
+      <header class="navbar navbar-expand-lg fixed-top bg-light py-0 fs-5">
+        <div class="container">
+          <a class="navbar-brand p-2 swap-image" href="index.html">
+            <img src="assets/img/logo_crimson.png" class="swap-to" width="50">
+            <div class="swap-from">
+              <img src="assets/img/logo_black.png" class="d-dark-mode-none" width="50">
+              <img src="assets/img/logo_dark_gray.png" class="d-none d-dark-mode-block" width="50">
+            </div>
+          </a>
+          <div class="form-check form-switch mode-switch order-lg-2 me-3 me-lg-4 ms-auto" data-bs-toggle="mode">
+            <input class="form-check-input" type="checkbox" id="theme-mode">
+            <label class="form-check-label" for="theme-mode"><i class="ai-sun fs-lg"></i></label>
+            <label class="form-check-label" for="theme-mode"><i class="ai-moon fs-lg"></i></label>
+          </div>
+          <div class="nav align-items-center order-lg-3 ms-n1 me-3 me-sm-0">
+            <a class="nav-link position-relative fs-4 p-2" href="#cartOffcanvas" data-bs-toggle="offcanvas">
+              <i class="ai-cart"></i>
+            </a>
+            <a class="nav-link fs-4 p-2 mx-sm-1 d-none d-sm-flex" href="account-signin.html">
+              <i class="ai-user"></i>
+            </a>
+          </div>
+          <button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+          <nav class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px;">
+              <li class="nav-item active"><a class="nav-link fw-bold" href="#">문화재</a></li>
+              <li class="nav-item"><a class="nav-link fw-bold" href="#">박물관</a></li>
+              <li class="nav-item"><a class="nav-link fw-bold" href="#">행사일정</a></li>
+              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">전시</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown"><a class="dropdown-item" href="#">박물관 전시</a>
+                  </li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">문화재 전시</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">투어</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown"><a class="dropdown-item" href="#">나의 투어플랜 만들기</a>
+                  </li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">투어 인원 모집</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">커뮤니티</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown"><a class="dropdown-item" href="#">문화 소식</a>
+                  </li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">자유게시판</a>
+                  </li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">포토게시판</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item border-top mt-2 py-2 d-sm-none"><a class="nav-link" href="account-signin.html"><i class="ai-user fs-lg me-2"></i>Sign In</a></li>
+            </ul>
+            <div class="d-sm-none p-3 mt-n3"><a class="btn btn-primary w-100  mb-1" href="https://themes.getbootstrap.com/product/around-multipurpose-template-ui-kit/" target="_blank" rel="noopener"><i class="ai-cart fs-xl me-2 ms-n1"></i>Buy now</a></div>
+          </nav>
+        </div>
+      </header>
+      <!-- Hero-->
+      <section>
+        <div class="jarallax bg-dark py-5" data-jarallax data-type="scroll-opacity" data-speed="0.7" style="height: 50vh !important;">
+          <div class="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-60"></div>
+          <div class="jarallax-img" style="background-image: url(https://lh3.googleusercontent.com/TLyo276022O-OJKi4OGaQngAE_fI7ROyLiiudbdVY-trPGInygNw-mYkuxzUjMM7NvA5cytHw6IOqdw4HgtKy46-nHjyqeFQv_BxhZgWIQhGURctI8l8Yg=s0);"></div>
+          <div class="container position-relative zindex-5">
+            <!-- Text + button-->
+            <div class="row pt-lg-2 py-xl-4 py-xxl-5 mb-md-4 mb-lg-5">
+              <div class="col-md-10 col-lg-9 col-xl-8 col-xxl-7 pt-5 mb-5">
+                <h1 class="display-2 text-light pb-sm-2 pb-md-3">투어</h1>
+                <h5 class="fs-4 text-light pb-sm-2 pb-md-3">
+                  나만의 투어플랜을 만들고<br>
+                  함께 할 친구를 모집해 보세요
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Page content-->
+      <div class="container mt-5">
+        <!-- Breadcrumb-->
+        <nav aria-label="breadcrumb">
+          <ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">홈</a></li>
+            <li class="breadcrumb-item active" aria-current="page">투어</li>
+          </ol>
+        </nav>
+        <div class="row mb-md-2 mb-xl-4">
+          <!-- Blog posts-->
+          <div class="col-lg-9 pe-lg-4 pe-xl-5">
+            <h1 class="pb-3 pb-lg-4">투어 모집</h1>
+            <!-- Post-->
+            <article class="row g-0 border-0 mb-4"><a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" href="blog-single-v1.html" style="background-image: url(assets/img/blog/list/01.jpg); min-height: 14rem"></a>
+              <div class="col-sm-7">
+                <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
+                  <h3><a href="blog-single-v1.html">같이 경주 둘러보실 분</a></h3>
+                  <p class="d-sm-none d-md-block">
+                    <span class="text-body fw-bold me-2">지역</span>대구/경북 <br>
+                    <span class="text-body fw-bold me-2">일정</span>07-01 ~ 07-02 | 1박 2일 <br>
+                    <span class="text-body fw-bold me-2">인원</span>2명 <br>
+                  </p>
+                  <div class="d-flex flex-wrap align-items-center mt-n2"><a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#"><i class="ai-message fs-lg me-1"></i>12</a><span class="fs-xs opacity-20 mt-2 mx-3">|</span><span class="fs-sm text-muted mt-2">8시간 전</span><span class="fs-xs opacity-20 mt-2 mx-3">|</span><a class="badge text-nav fs-xs border mt-2" href="#">문화재</a></div>
+                </div>
+              </div>
+            </article>
+            <!-- Post-->
+            <article class="row g-0 border-0 pt-3 pt-sm-0 mb-4"><a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" href="blog-single-v2.html" style="background-image: url(assets/img/blog/list/02.jpg); min-height: 14rem"></a>
+              <div class="col-sm-7">
+                <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
+                  <h3><a href="blog-single-v1.html">한글박물관 같이 가요</a></h3>
+                  <p class="d-sm-none d-md-block">
+                    <span class="text-body fw-bold me-2">지역</span>서울/인천/경기 <br>
+                    <span class="text-body fw-bold me-2">일정</span>07-01 ~ 07-01 | 당일 <br>
+                    <span class="text-body fw-bold me-2">인원</span>2명 <br>
+                  </p>
+                  <div class="d-flex flex-wrap align-items-center mt-n2"><a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#"><i class="ai-message fs-lg me-1"></i>12</a><span class="fs-xs opacity-20 mt-2 mx-3">|</span><span class="fs-sm text-muted mt-2">8시간 전</span><span class="fs-xs opacity-20 mt-2 mx-3">|</span><a class="badge text-nav fs-xs border mt-2" href="#">박물관</a></div>
+                </div>
+              </div>
+            </article>
+            <!-- Post-->
+            <article class="row g-0 border-0 mb-4"><a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" href="blog-single-v1.html" style="background-image: url(assets/img/blog/list/01.jpg); min-height: 14rem"></a>
+              <div class="col-sm-7">
+                <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
+                  <h3><a href="blog-single-v1.html">같이 경주 둘러보실 분</a></h3>
+                  <p class="d-sm-none d-md-block">
+                    <span class="text-body fw-bold me-2">지역</span>대구/경북 <br>
+                    <span class="text-body fw-bold me-2">일정</span>07-01 ~ 07-02 | 1박 2일 <br>
+                    <span class="text-body fw-bold me-2">인원</span>2명 <br>
+                  </p>
+                  <div class="d-flex flex-wrap align-items-center mt-n2"><a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#"><i class="ai-message fs-lg me-1"></i>12</a><span class="fs-xs opacity-20 mt-2 mx-3">|</span><span class="fs-sm text-muted mt-2">8시간 전</span><span class="fs-xs opacity-20 mt-2 mx-3">|</span><a class="badge text-nav fs-xs border mt-2" href="#">문화재</a></div>
+                </div>
+              </div>
+            </article>
+            <!-- Post-->
+            <article class="row g-0 border-0 pt-3 pt-sm-0 mb-4"><a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" href="blog-single-v2.html" style="background-image: url(assets/img/blog/list/02.jpg); min-height: 14rem"></a>
+              <div class="col-sm-7">
+                <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
+                  <h3><a href="blog-single-v1.html">한글박물관 같이 가요</a></h3>
+                  <p class="d-sm-none d-md-block">
+                    <span class="text-body fw-bold me-2">지역</span>서울/인천/경기 <br>
+                    <span class="text-body fw-bold me-2">일정</span>07-01 ~ 07-01 | 당일 <br>
+                    <span class="text-body fw-bold me-2">인원</span>2명 <br>
+                  </p>
+                  <div class="d-flex flex-wrap align-items-center mt-n2"><a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#"><i class="ai-message fs-lg me-1"></i>12</a><span class="fs-xs opacity-20 mt-2 mx-3">|</span><span class="fs-sm text-muted mt-2">8시간 전</span><span class="fs-xs opacity-20 mt-2 mx-3">|</span><a class="badge text-nav fs-xs border mt-2" href="#">박물관</a></div>
+                </div>
+              </div>
+            </article>
+            <!-- Post-->
+            <article class="row g-0 border-0 mb-4"><a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" href="blog-single-v1.html" style="background-image: url(assets/img/blog/list/01.jpg); min-height: 14rem"></a>
+              <div class="col-sm-7">
+                <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
+                  <h3><a href="blog-single-v1.html">같이 경주 둘러보실 분</a></h3>
+                  <p class="d-sm-none d-md-block">
+                    <span class="text-body fw-bold me-2">지역</span>대구/경북 <br>
+                    <span class="text-body fw-bold me-2">일정</span>07-01 ~ 07-02 | 1박 2일 <br>
+                    <span class="text-body fw-bold me-2">인원</span>2명 <br>
+                  </p>
+                  <div class="d-flex flex-wrap align-items-center mt-n2"><a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#"><i class="ai-message fs-lg me-1"></i>12</a><span class="fs-xs opacity-20 mt-2 mx-3">|</span><span class="fs-sm text-muted mt-2">8시간 전</span><span class="fs-xs opacity-20 mt-2 mx-3">|</span><a class="badge text-nav fs-xs border mt-2" href="#">문화재</a></div>
+                </div>
+              </div>
+            </article>
+            <!-- Post-->
+            <article class="row g-0 border-0 pt-3 pt-sm-0 mb-4"><a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" href="blog-single-v2.html" style="background-image: url(assets/img/blog/list/02.jpg); min-height: 14rem"></a>
+              <div class="col-sm-7">
+                <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
+                  <h3><a href="blog-single-v1.html">한글박물관 같이 가요</a></h3>
+                  <p class="d-sm-none d-md-block">
+                    <span class="text-body fw-bold me-2">지역</span>서울/인천/경기 <br>
+                    <span class="text-body fw-bold me-2">일정</span>07-01 ~ 07-01 | 당일 <br>
+                    <span class="text-body fw-bold me-2">인원</span>2명 <br>
+                  </p>
+                  <div class="d-flex flex-wrap align-items-center mt-n2"><a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#"><i class="ai-message fs-lg me-1"></i>12</a><span class="fs-xs opacity-20 mt-2 mx-3">|</span><span class="fs-sm text-muted mt-2">8시간 전</span><span class="fs-xs opacity-20 mt-2 mx-3">|</span><a class="badge text-nav fs-xs border mt-2" href="#">박물관</a></div>
+                </div>
+              </div>
+            </article>
+            <!-- Pagination-->
+            <div class="gy-3 align-items-center mt-lg-5 pt-2 pt-md-4 pt-lg-0">
+              <nav class="justify-content-center">
+                <ul class="pagination pagination-lg justify-content-center">
+                  <li class="page-item">
+                    <a href="#" class="page-link">
+                      <i class="ai-arrow-left fs-xl"></i>
+                    </a>
+                  </li>
+                  <li class="page-item d-none d-sm-block active" aria-current="page">
+                    <a href="#" class="page-link">1</a>
+                  </li>
+                  <li class="page-item d-none d-sm-block">
+                    <a href="#" class="page-link">2</a>
+                  </li>
+                  <li class="page-item d-none d-sm-block">
+                    <a href="#" class="page-link">3</a>
+                  </li>
+                  <li class="page-item d-none d-sm-block">
+                    <a href="#" class="page-link">4</a>
+                  </li>
+                  <li class="page-item d-none d-sm-block">
+                    <a href="#" class="page-link">5</a>
+                  </li>
+                  <li class="page-item">
+                    <a href="#" class="page-link">
+                      <i class="ai-arrow-right fs-xl"></i>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <!-- Sidebar (offcanvas on sreens < 992px)-->
+          <aside class="col-lg-3">
+            <div class="offcanvas-lg offcanvas-end" id="sidebarBlog">
+              <div class="offcanvas-header">
+                <h4 class="offcanvas-title">Sidebar</h4>
+                <button class="btn-close ms-auto" type="button" data-bs-dismiss="offcanvas" data-bs-target="#sidebarBlog"></button>
+              </div>
+              <div class="offcanvas-body">
+                <button type="button" class="btn btn-secondary w-100 mb-5">내 투어플랜 만들기</button>
+                <!-- Search box-->
+                <form>
+                  <div class="position-relative mb-4 mb-lg-5">
+                    <button type="submit" class="btn btn-link ai-search position-absolute top-50 start-0 translate-middle-y ms-3 px-1" style="color: #202020;"></button>
+                    <input class="form-control ps-5" type="search" placeholder="키워드로 검색">
+                  </div>
+                  <!-- 구분 -->
+                  <div class="pb-4">
+                    <h4>구분</h4>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="ex-check-4" checked>
+                      <label class="form-check-label" for="ex-check-4">문화재</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="ex-check-5" checked>
+                      <label class="form-check-label" for="ex-check-5">박물관</label>
+                    </div>
+                  </div>
+                  <!-- 일정 -->
+                  <div class="pb-4">
+                    <h4>일정</h4>
+                    <div class="input-group py-0">
+                      <span class="input-group-text">
+                        <i class="ai-calendar"></i>
+                      </span>
+                      <input class="form-control date-picker date-range" type="text" placeholder="시작 날짜" data-datepicker-options='{"altInput": true, "altFormat": "Y-m-d", "dateFormat": "Y-m-d"}' data-linked-input="#end-date">
+                      <span class="border-end border-input"></span>
+                      <input class="form-control date-picker" type="text" placeholder="끝 날짜" data-datepicker-options='{"altInput": true, "altFormat": "Y-m-d", "dateFormat": "Y-m-d"}' id="end-date">
+                    </div>
+                  </div>
+                  <!-- 지역 -->
+                  <div class="pb-4">
+                    <h4>지역</h4>
+                    <select id="select-md" class="form-select">
+                      <option>지역 선택</option>
+                      <option>서울/인천/경기</option>
+                      <option>강원</option>
+                      <option>대전/충청</option>
+                      <option>대구/경북</option>
+                      <option>부산/울산/경남</option>
+                      <option>전북</option>
+                      <option>광주/전남</option>
+                      <option>제주</option>
+                    </select>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+      <!-- Sidebar toggle button-->
+      <button class="d-lg-none btn btn-sm fs-sm btn-primary w-100 rounded-0 fixed-bottom" data-bs-toggle="offcanvas" data-bs-target="#sidebarBlog"><i class="ai-layout-column me-2"></i>Sidebar</button>
+    </main>
+    <!-- Footer-->
+    <footer class="footer bg-dark position-relative pb-3 mt-5">
+      <div class="d-none d-dark-mode-block position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(255,255,255, .02);"></div>
+      <div class="dark-mode container position-relative zindex-2 pt-5 pb-2">
+        <!-- Columns with links-->
+        <div class="row" id="links">
+          <div class="col-6 pb-2 pb-md-0">
+            <a class="navbar-brand swap-image" href="index.html">
+              <img src="assets/img/logo_crimson.png" class="swap-to" width="80">
+              <div class="swap-from">
+                <img src="assets/img/logo_black.png" class="d-dark-mode-none" width="80">
+                <img src="assets/img/logo_dark_gray.png" class="d-none d-dark-mode-block" width="80">
+              </div>
+            </a>
+            <p class="fs-lg pt-4 py-2">옛이음은 옛날과 오늘날을 잇는, 문화와 이야기가 깃든 플랫폼입니다.</p>
+          </div>
+          <div class="col-2">
+            <h3 class="h6 d-none d-md-block">페이지</h3><a class="btn-more h6 mb-1  text-decoration-none d-flex align-items-center collapsed d-md-none" href="#useful" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="useful" data-show-label="Useful links" data-hide-label="Useful links"></a>
+            <div class="collapse d-md-block" id="useful" data-bs-parent="#links">
+              <div class="row">
+                <div class="col-6">
+                  <ul class="nav flex-column pb-2 pb-md-0">
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">회원가입</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">문화재</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">행사일정</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">온라인 전시</a></li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <ul class="nav flex-column pb-2 pb-md-0">
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">로그인</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">박물관</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">투어</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">쇼핑몰</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-xl-2 pb-2 pb-md-0">
+            <h3 class="h6  d-none d-md-block">커뮤니티</h3><a class="btn-more h6 mb-1  text-decoration-none d-flex align-items-center collapsed d-md-none" href="#decors" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="decors" data-show-label="Decors" data-hide-label="Decors"></a>
+            <div class="collapse d-md-block" id="decors" data-bs-parent="#links">
+              <ul class="nav flex-column pb-2 pb-md-0">
+                <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">자유게시판</a></li>
+                <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">문화소식</a></li>
+                <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">포토게시판</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3 col-xl-2 pb-2 pb-md-0">
+            <h3 class="h6  d-none d-md-block">개발자</h3><a class="btn-more h6 mb-1  text-decoration-none d-flex align-items-center collapsed d-md-none" href="#categories" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="categories" data-show-label="Categories" data-hide-label="Categories"></a>
+            <div class="collapse d-md-block" id="categories" data-bs-parent="#links">
+              <div class="row">
+                <div class="col-6">
+                  <ul class="nav flex-column pb-2 pb-md-0">
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">김상혁</span></li>
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">정희선</span></li>
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">차용택</span></li>
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">함지우</span></li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <ul class="nav flex-column pb-2 pb-md-0">
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">봉홍석</span></li>
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">지석환</span></li>
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">추정빈</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br><hr>
+        <!-- Logo + Socials + Cards-->
+        <div class="d-sm-flex align-items-center pt-4 row">
+          <div class="d-sm-flex align-items-center pe-sm-2 col-4">
+            <div class="text-nowrap mb-4 mb-sm-0"><a class="btn btn-icon btn-sm btn-secondary btn-telegram rounded-circle mx-2 ms-sm-0 me-sm-3" href="#"><i class="ai-telegram"></i></a><a class="btn btn-icon btn-sm btn-secondary btn-instagram rounded-circle mx-2 ms-sm-0 me-sm-3" href="#"><i class="ai-instagram"></i></a><a class="btn btn-icon btn-sm btn-secondary btn-facebook rounded-circle mx-2 ms-sm-0 me-sm-3" href="#"><i class="ai-facebook"></i></a><a class="btn btn-icon btn-sm btn-secondary btn-pinterest rounded-circle mx-2 ms-sm-0 me-sm-3" href="#"><i class="ai-pinterest"></i></a></div>
+          </div>
+          <div class="col-4 text-center">
+            © 2023. 옛이음. All rights reserved.
+          </div>
+          <div class="col-4 text-end">
+            <img class="ms-sm-auto" src="assets/img/shop/footer-cards.png" width="187" alt="Accepted cards">
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Back to top button--><a class="btn-scroll-top" href="#top" data-scroll>
+      <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
+      </svg><i class="ai-arrow-up"></i></a>
+    <!-- Vendor scripts: js libraries and plugins-->
+    <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.js"></script>
+    <script src="assets/vendor/jarallax/dist/jarallax.min.js"></script>
+    <script src="assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
+    <script src="assets/vendor/flatpickr/dist/plugins/rangePlugin.js"></script>
+    <!-- Main theme script-->
+    <script src="assets/js/theme.js"></script>
+  </body>
+</html>

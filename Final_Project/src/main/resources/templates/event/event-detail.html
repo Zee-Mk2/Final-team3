@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>옛이음</title>
+    <!-- SEO Meta Tags-->
+    <meta name="description" content="Around - Multipurpose Bootstrap HTML Template" />
+    <meta
+      name="keywords"
+      content="bootstrap, business, corporate, coworking space, services, creative agency, dashboard, e-commerce, mobile app showcase, saas, multipurpose, product landing, shop, software, ui kit, web studio, landing, dark mode, html5, css3, javascript, gallery, slider, touch, creative" />
+    <meta name="author" content="Createx Studio" />
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo_crimson.png" />
+    <link rel="manifest" href="assets/favicon/site.webmanifest" />
+    <link rel="mask-icon" color="#6366f1" href="assets/favicon/safari-pinned-tab.svg" />
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- fonts - 노토산스 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet" />
+
+    <meta name="msapplication-TileColor" content="#080032" />
+    <meta name="msapplication-config" content="assets/favicon/browserconfig.xml" />
+    <meta name="theme-color" content="white" />
+    <!-- Theme mode-->
+    <script>
+      let mode = window.localStorage.getItem("mode"),
+        root = document.getElementsByTagName("html")[0];
+      if (mode !== undefined && mode === "dark") {
+        root.classList.add("dark-mode");
+      } else {
+        root.classList.remove("dark-mode");
+      }
+    </script>
+    <!-- Page loading styles-->
+    <style>
+      .page-loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all 0.4s 0.2s ease-in-out;
+        transition: all 0.4s 0.2s ease-in-out;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+      }
+      .dark-mode .page-loading {
+        background-color: #121519;
+      }
+      .page-loading.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .page-loading-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: opacity 0.2s ease-in-out;
+        transition: opacity 0.2s ease-in-out;
+        opacity: 0;
+      }
+      .page-loading.active > .page-loading-inner {
+        opacity: 1;
+      }
+      .page-loading-inner > span {
+        display: block;
+        font-family: "Inter", sans-serif;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #6f788b;
+      }
+      .dark-mode .page-loading-inner > span {
+        color: #fff;
+        opacity: 0.6;
+      }
+      .page-spinner {
+        display: inline-block;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: 0.75rem;
+        vertical-align: text-bottom;
+        background-color: #d7dde2;
+        border-radius: 50%;
+        opacity: 0;
+        -webkit-animation: spinner 0.75s linear infinite;
+        animation: spinner 0.75s linear infinite;
+      }
+      .dark-mode .page-spinner {
+        background-color: rgba(255, 255, 255, 0.25);
+      }
+      @-webkit-keyframes spinner {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        }
+        50% {
+          opacity: 1;
+          -webkit-transform: none;
+          transform: none;
+        }
+      }
+      @keyframes spinner {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        }
+        50% {
+          opacity: 1;
+          -webkit-transform: none;
+          transform: none;
+        }
+      }
+    </style>
+    <!-- Page loading scripts-->
+    <script>
+      (function () {
+        window.onload = function () {
+          const preloader = document.querySelector(".page-loading");
+          preloader.classList.remove("active");
+          setTimeout(function () {
+            preloader.remove();
+          }, 1500);
+        };
+      })();
+    </script>
+    <!-- Import Google Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" id="google-font" />
+    <!-- Vendor styles-->
+    <link rel="stylesheet" media="screen" href="assets/vendor/lightgallery/css/lightgallery-bundle.min.css" />
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="assets/css/theme.css" />
+  </head>
+  <!-- Body-->
+  <body>
+    <!-- Page loading spinner-->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div>
+        <span>Loading...</span>
+      </div>
+    </div>
+    <!-- Page wrapper-->
+    <main class="page-wrapper">
+      <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
+      <header class="navbar navbar-expand-lg fixed-top bg-light py-0 fs-5">
+        <div class="container">
+          <a class="navbar-brand p-2 swap-image" href="index.html">
+            <img src="assets/img/logo_crimson.png" class="swap-to" width="50" />
+            <div class="swap-from">
+              <img src="assets/img/logo_black.png" class="d-dark-mode-none" width="50" />
+              <img src="assets/img/logo_dark_gray.png" class="d-none d-dark-mode-block" width="50" />
+            </div>
+          </a>
+          <div class="form-check form-switch mode-switch order-lg-2 me-3 me-lg-4 ms-auto" data-bs-toggle="mode">
+            <input class="form-check-input" type="checkbox" id="theme-mode" />
+            <label class="form-check-label" for="theme-mode"><i class="ai-sun fs-lg"></i></label>
+            <label class="form-check-label" for="theme-mode"><i class="ai-moon fs-lg"></i></label>
+          </div>
+          <div class="nav align-items-center order-lg-3 ms-n1 me-3 me-sm-0">
+            <a class="nav-link position-relative fs-4 p-2" href="#cartOffcanvas" data-bs-toggle="offcanvas">
+              <i class="ai-cart"></i>
+            </a>
+            <a class="nav-link fs-4 p-2 mx-sm-1 d-none d-sm-flex" href="account-signin.html">
+              <i class="ai-user"></i>
+            </a>
+          </div>
+          <button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+          <nav class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px">
+              <li class="nav-item active"><a class="nav-link fw-bold" href="#">문화재</a></li>
+              <li class="nav-item"><a class="nav-link fw-bold" href="#">박물관</a></li>
+              <li class="nav-item"><a class="nav-link fw-bold" href="#">행사일정</a></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">전시</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown"><a class="dropdown-item" href="#">박물관 전시</a></li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">문화재 전시</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">투어</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown"><a class="dropdown-item" href="#">나의 투어플랜 만들기</a></li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">투어 인원 모집</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">커뮤니티</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown"><a class="dropdown-item" href="#">문화 소식</a></li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">자유게시판</a></li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">포토게시판</a></li>
+                </ul>
+              </li>
+              <li class="nav-item border-top mt-2 py-2 d-sm-none">
+                <a class="nav-link" href="account-signin.html">
+                  <i class="ai-user fs-lg me-2"></i>
+                  Sign In
+                </a>
+              </li>
+            </ul>
+            <div class="d-sm-none p-3 mt-n3">
+              <a class="btn btn-primary w-100 mb-1" href="https://themes.getbootstrap.com/product/around-multipurpose-template-ui-kit/" target="_blank" rel="noopener">
+                <i class="ai-cart fs-xl me-2 ms-n1"></i>
+                Buy now
+              </a>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <!-- Hero-->
+      <!-- Page content-->
+      <div class="container pt-5 pb-sm-3 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
+        <!-- Breadcrumb-->
+        <nav aria-label="breadcrumb">
+          <ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">홈</a></li>
+            <li class="breadcrumb-item" aria-current="page">행사일정</li>
+            <li class="breadcrumb-item active" aria-current="page">상세보기</li>
+          </ol>
+        </nav>
+        <!-- Item-->
+        <article class="row align-items-center pb-5 mb-md-2 mb-lg-3 mb-xl-4">
+          <div class="col-md-6 offset-xxl-1 mb-4 mb-md-0">
+            <a href="#"><img class="rounded-5" src="assets\img\event\m_poster_2022.png" width="500" alt="Image" /></a>
+          </div>
+          <div class="col-md-5 col-xl-4">
+            <div class="ms-md-4 ms-lg-5 ms-xxl-0">
+              <h2 class="mb-lg-5" style="width: 600px">
+                2023 피란수도 부산 문화재 야행
+                <br />
+                (부산에서 만난 우리들)
+              </h2>
+              <p class="mb-0 mb-md-1">
+                대한민국의 '피란수도 부산'을 재발견하는 시간! 부산은 1,129일의 한국전쟁 기간 중 1,023일간 대한민국의 수도로서 다양한 역할을 수행하며 부산으로 내려온 피란민들을 품고 위기를 극복한
+                포용성과 개방성을 지닌 도시로, 지금까지도 도심 속 가까이에 살아있는 피란유산의 역사적 의미와 피란시절의 생활상을 전시, 공연, 체험 등을 통해 향유하는 프로그램
+              </p>
+            </div>
+            <a class="btn btn-primary w-100 w-sm-auto mt-5" href="#c-comment">후기 작성하기</a>
+            <div class="d-flex align-items-center pt-2 pt-lg-3 mt-3">
+              <i class="ai-star-filled text-warning"></i>
+              <i class="ai-star-filled text-warning"></i>
+              <i class="ai-star-filled text-warning"></i>
+              <i class="ai-star-half text-warning"></i>
+              <i class="ai-star text-warning"></i>
+              <span class="text-warning fw-bold mt-n1 ms-2">3.5</span>
+              <span class="text-muted mt-n1 ms-2">(1,234)</span>
+            </div>
+            <div class="mt-5 h5">문의</div>
+            <div class="h5">부산광역시청 문화유산과 / 051-888-5094</div>
+          </div>
+          <!-- Gallery grid with enabled thumbnails -->
+          <div class="gallery row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" data-thumbnails="true">
+            <!-- Item -->
+            <div class="col">
+              <a href="assets\img\event\1138.jpg" class="gallery-item d-block card-hover h-100">
+                <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 rounded-4 overflow-hidden zindex-2 opacity-0">
+                  <i class="ai-zoom-in fs-2 text-white position-relative zindex-2"></i>
+                  <div class="position-absolute bottom-0 start-0 w-100 text-center text-white fs-sm fw-medium zindex-2 pb-3">Image #1</div>
+                  <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-40"></div>
+                </div>
+                <img src="assets\img\event\1138.jpg" class="d-block rounded-4 h-100" alt="Image #1" />
+              </a>
+            </div>
+
+            <!-- Item -->
+            <div class="col">
+              <a href="assets\img\event\1139.jpg" class="gallery-item d-block card-hover h-100">
+                <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 rounded-4 overflow-hidden zindex-2 opacity-0">
+                  <i class="ai-zoom-in fs-2 text-white position-relative zindex-2"></i>
+                  <div class="position-absolute bottom-0 start-0 w-100 text-center text-white fs-sm fw-medium zindex-2 pb-3">Image #2</div>
+                  <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-40"></div>
+                </div>
+                <img src="assets\img\event\1139.jpg" class="d-block rounded-4 h-100" alt="Image #2" />
+              </a>
+            </div>
+
+            <!-- Item -->
+            <div class="col">
+              <a href="assets\img\event\1140.jpg" class="gallery-item d-block card-hover h-100">
+                <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 rounded-4 overflow-hidden zindex-2 opacity-0">
+                  <i class="ai-zoom-in fs-2 text-white position-relative zindex-2"></i>
+                  <div class="position-absolute bottom-0 start-0 w-100 text-center text-white fs-sm fw-medium zindex-2 pb-3">Image #3</div>
+                  <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-40"></div>
+                </div>
+                <img src="assets\img\event\1140.jpg" class="d-block rounded-4 h-100" alt="Image #3" />
+              </a>
+            </div>
+          </div>
+
+          <div class="mt-xxl-4 row">
+            <h1 class="mt-5 ms-5 ps-5 text-primary">주요프로그램</h1>
+            <div class="col-lg-12 pe-lg-4 pe-xl-5 ms-5">
+              <div class="card ms-xxl-5 mt-5 mb-5" style="width: 450px; height: 400px; float: left">
+                <div class="card-body align">
+                  <h2 class="card-title">야경 夜景</h2>
+                  <p class="card-text" style="font-size: 20px; min-height: 100px">
+                    • 피란수도 부산의 여름밤
+                    <br />
+                    • 피란수도 부산의 기적
+                    <br />
+                    • 피란수도 부산으로 가는 길
+                    <br />
+                  </p>
+                  <h3>장소</h3>
+                  <p class="card-text" style="font-size: 20px">부산항 제1부두 등 서구 및 중구 일원 문화재</p>
+                </div>
+              </div>
+
+              <div class="card ms-xxl-5 mt-5 mb-5 me-5" style="width: 450px; height: 400px; float: right">
+                <div class="card-body">
+                  <h2 class="card-title">야로 夜路</h2>
+                  <p class="card-text" style="font-size: 20px">
+                    • 피란수도 드로잉 투어
+                    <br />
+                    • 뚜벅뚜벅 AR 챌린지
+                    <br />
+                    • 과거와 현재가 만나는 곳, 부산!
+                    <br />
+                  </p>
+                  <h3>장소</h3>
+                  <p class="card-text" style="font-size: 20px">피란수도 부산유산 유적지 일원</p>
+                </div>
+              </div>
+
+              <div class="card ms-xxl-5 mt-5 mb-5" style="width: 450px; height: 400px; float: left">
+                <div class="card-body align">
+                  <h2 class="card-title">야설 夜設</h2>
+                  <p class="card-text" style="font-size: 20px; min-height: 100px">
+                    • 피란수도 예술을 보여줘
+                    <br />
+                    • 피란의 기억을 되돌아보다
+                    <br />
+                  </p>
+                  <h3>장소</h3>
+                  <p class="card-text" style="font-size: 20px">부산항 제1부두</p>
+                </div>
+              </div>
+
+              <div class="card ms-xxl-5 mt-5 mb-5 me-5" style="width: 450px; height: 400px; float: right">
+                <div class="card-body">
+                  <h2 class="card-title">야사 夜史</h2>
+                  <p class="card-text" style="font-size: 20px; min-height: 100px">
+                    • 금순아 ~ 학교가자
+                    <br />
+                    • 1023 피란 LAND
+                    <br />
+                  </p>
+                  <h3>장소</h3>
+                  <p class="card-text" style="font-size: 20px">피란수도 부산유산 유적지 일원</p>
+                </div>
+              </div>
+
+              <div class="card ms-xxl-5 mt-5 mb-5" style="width: 450px; height: 400px; float: left">
+                <div class="card-body align">
+                  <h2 class="card-title">야화 夜畵</h2>
+                  <p class="card-text" style="font-size: 20px; min-height: 100px">
+                    • 피란수도 그림엽서 공모전
+                    <br />
+                    • 금순이가 본 피란수도 이야기
+                    <br />
+                    • 피란수도 부산으로 가는 길
+                    <br />
+                  </p>
+                  <h3>장소</h3>
+                  <p class="card-text" style="font-size: 20px">구 동양척식주식회사 부산지점 일원 등</p>
+                </div>
+              </div>
+
+              <div class="card ms-xxl-5 mt-5 mb-5 me-5" style="width: 450px; height: 400px; float: right">
+                <div class="card-body">
+                  <h2 class="card-title">야시 夜市</h2>
+                  <p class="card-text" style="font-size: 20px; min-height: 100px">
+                    • 웰컴 투 피란촌
+                    <br />
+                    • 그땐 그랬지, 피란 장터
+                    <br />
+                  </p>
+                  <h3>장소</h3>
+                  <p class="card-text" style="font-size: 20px">부산항 제1부두</p>
+                </div>
+              </div>
+
+              <div class="card ms-xxl-5 mt-5 mb-5" style="width: 450px; height: 400px; float: left">
+                <div class="card-body align">
+                  <h2 class="card-title">야식 夜食</h2>
+                  <p class="card-text" style="font-size: 20px; min-height: 100px">
+                    • 피란시장 맛탐방
+                    <br />
+                    • 내가 만든 피란음식
+                    <br />
+                  </p>
+                  <h3>장소</h3>
+                  <p class="card-text" style="font-size: 20px">부산항 제1부두</p>
+                </div>
+              </div>
+
+              <div class="card ms-xxl-5 mt-5 mb-5 me-5" style="width: 450px; height: 400px; float: right">
+                <div class="card-body">
+                  <h2 class="card-title">야숙 夜宿</h2>
+                  <p class="card-text" style="font-size: 20px; min-height: 100px">
+                    • 금동이의 하루
+                    <br />
+                  </p>
+                  <h3>장소</h3>
+                  <p class="card-text" style="font-size: 20px">피란수도 부산 유산 일원</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Comment form-->
+            <div class="border-0 col-lg-12 col-xl-10 pe-lg-4 pe-xl-0 align-items-center offset-1">
+              <div class="border-bottom py-4 mt-2 mb-4">
+                <div class="d-flex align-items-center pb-1 mb-3">
+                  <img class="rounded-circle" src="assets/img/avatar/07.jpg" width="48" alt="Comment author" />
+                  <div class="ps-3">
+                    <h6 class="mb-0">후기 작성자</h6>
+                    <span class="fs-sm text-muted">xxxx.xx.xx</span>
+                  </div>
+                </div>
+                <p class="pb-2 mb-0">후기 작성 테스트</p>
+              </div>
+              <div id="comment"></div>
+
+              <!-- 후기 작성-->
+              <div class="card-body">
+                <h2 class="pb-2 pb-lg-3 pb-xl-4">후기 작성</h2>
+                <form class="row needs-validation g-4" novalidate>
+                  <div class="col-12">
+                    <label class="form-label" for="c-comment">내용</label>
+                    <textarea class="form-control" rows="4" placeholder="후기를 작성해 주세요..." required id="c-comment"></textarea>
+                  </div>
+                  <div class="col-12"></div>
+                  <div class="col-12">
+                    <button class="btn btn-primary" type="submit" style="float: right">후기 남기기</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Sidebar toggle button-->
+        <button class="d-lg-none btn btn-sm fs-sm btn-primary w-100 rounded-0 fixed-bottom" data-bs-toggle="offcanvas" data-bs-target="#sidebarBlog">
+          <i class="ai-layout-column me-2"></i>
+          Sidebar
+        </button>
+      </div>
+    </main>
+    <!-- Footer-->
+    <footer class="footer bg-dark position-relative pb-3 mt-5">
+      <div class="d-none d-dark-mode-block position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(255, 255, 255, 0.02)"></div>
+      <div class="dark-mode container position-relative zindex-2 pt-5 pb-2">
+        <!-- Columns with links-->
+        <div class="row" id="links">
+          <div class="col-6 pb-2 pb-md-0">
+            <a class="navbar-brand swap-image" href="index.html">
+              <img src="assets/img/logo_crimson.png" class="swap-to" width="80" />
+              <div class="swap-from">
+                <img src="assets/img/logo_black.png" class="d-dark-mode-none" width="80" />
+                <img src="assets/img/logo_dark_gray.png" class="d-none d-dark-mode-block" width="80" />
+              </div>
+            </a>
+            <p class="fs-lg pt-4 py-2">옛이음은 옛날과 오늘날을 잇는, 문화와 이야기가 깃든 플랫폼입니다.</p>
+          </div>
+          <div class="col-2">
+            <h3 class="h6 d-none d-md-block">페이지</h3>
+            <a
+              class="btn-more h6 mb-1 text-decoration-none d-flex align-items-center collapsed d-md-none"
+              href="#useful"
+              data-bs-toggle="collapse"
+              role="button"
+              aria-expanded="false"
+              aria-controls="useful"
+              data-show-label="Useful links"
+              data-hide-label="Useful links"></a>
+            <div class="collapse d-md-block" id="useful" data-bs-parent="#links">
+              <div class="row">
+                <div class="col-6">
+                  <ul class="nav flex-column pb-2 pb-md-0">
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">회원가입</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">문화재</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">행사일정</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">온라인 전시</a></li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <ul class="nav flex-column pb-2 pb-md-0">
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">로그인</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">박물관</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">투어</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">쇼핑몰</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-xl-2 pb-2 pb-md-0">
+            <h3 class="h6 d-none d-md-block">커뮤니티</h3>
+            <a
+              class="btn-more h6 mb-1 text-decoration-none d-flex align-items-center collapsed d-md-none"
+              href="#decors"
+              data-bs-toggle="collapse"
+              role="button"
+              aria-expanded="false"
+              aria-controls="decors"
+              data-show-label="Decors"
+              data-hide-label="Decors"></a>
+            <div class="collapse d-md-block" id="decors" data-bs-parent="#links">
+              <ul class="nav flex-column pb-2 pb-md-0">
+                <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">자유게시판</a></li>
+                <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">문화소식</a></li>
+                <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">포토게시판</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3 col-xl-2 pb-2 pb-md-0">
+            <h3 class="h6 d-none d-md-block">개발자</h3>
+            <a
+              class="btn-more h6 mb-1 text-decoration-none d-flex align-items-center collapsed d-md-none"
+              href="#categories"
+              data-bs-toggle="collapse"
+              role="button"
+              aria-expanded="false"
+              aria-controls="categories"
+              data-show-label="Categories"
+              data-hide-label="Categories"></a>
+            <div class="collapse d-md-block" id="categories" data-bs-parent="#links">
+              <div class="row">
+                <div class="col-6">
+                  <ul class="nav flex-column pb-2 pb-md-0">
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">김상혁</span></li>
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">정희선</span></li>
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">차용택</span></li>
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">함지우</span></li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <ul class="nav flex-column pb-2 pb-md-0">
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">봉홍석</span></li>
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">지석환</span></li>
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">추정빈</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <hr />
+        <!-- Logo + Socials + Cards-->
+        <div class="d-sm-flex align-items-center pt-4 row">
+          <div class="d-sm-flex align-items-center pe-sm-2 col-4">
+            <div class="text-nowrap mb-4 mb-sm-0">
+              <a class="btn btn-icon btn-sm btn-secondary btn-telegram rounded-circle mx-2 ms-sm-0 me-sm-3" href="#"><i class="ai-telegram"></i></a>
+              <a class="btn btn-icon btn-sm btn-secondary btn-instagram rounded-circle mx-2 ms-sm-0 me-sm-3" href="#"><i class="ai-instagram"></i></a>
+              <a class="btn btn-icon btn-sm btn-secondary btn-facebook rounded-circle mx-2 ms-sm-0 me-sm-3" href="#"><i class="ai-facebook"></i></a>
+              <a class="btn btn-icon btn-sm btn-secondary btn-pinterest rounded-circle mx-2 ms-sm-0 me-sm-3" href="#"><i class="ai-pinterest"></i></a>
+            </div>
+          </div>
+          <div class="col-4 text-center">© 2023. 옛이음. All rights reserved.</div>
+          <div class="col-4 text-end">
+            <img class="ms-sm-auto" src="assets/img/shop/footer-cards.png" width="187" alt="Accepted cards" />
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Back to top button-->
+    <a class="btn-scroll-top" href="#top" data-scroll>
+      <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
+      </svg>
+      <i class="ai-arrow-up"></i>
+    </a>
+    <!-- Vendor scripts: js libraries and plugins-->
+    <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.js"></script>
+    <script src="assets/vendor/jarallax/dist/jarallax.min.js"></script>
+    <script src="assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
+    <script src="assets/vendor/flatpickr/dist/plugins/rangePlugin.js"></script>
+    <script src="assets/vendor/lightgallery/lightgallery.min.js"></script>
+    <script src="assets/vendor/lightgallery/plugins/fullscreen/lg-fullscreen.min.js"></script>
+    <script src="assets/vendor/lightgallery/plugins/zoom/lg-zoom.min.js"></script>
+    <script src="assets/vendor/lightgallery/plugins/video/lg-video.min.js"></script>
+    <script src="assets/vendor/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script>
+    <!-- Main theme script-->
+    <script src="assets/js/theme.js"></script>
+  </body>
+</html>
