@@ -170,12 +170,12 @@
       <nav class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px">
           <li class="nav-item"><a class="nav-link fw-bold" href="#">문화재</a></li>
-          <li class="nav-item"><a class="nav-link fw-bold" href="#">박물관</a></li>
-          <li class="nav-item"><a class="nav-link fw-bold" href="#">행사일정</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" th:href="@{museum}">박물관</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" th:href="@{event}">행사일정</a></li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">전시</a>
+            <a class="nav-link dropdown-toggle fw-bold" th:href="@{exhibition}" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">전시</a>
             <ul class="dropdown-menu">
-              <li class="dropdown"><a class="dropdown-item" href="#">박물관 전시</a></li>
+              <li class="dropdown"><a class="dropdown-item" th:href="@{exhibition}">박물관 전시</a></li>
               <li class="dropdown"><a class="dropdown-item" href="#">문화재 전시</a></li>
             </ul>
           </li>
