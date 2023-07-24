@@ -10,4 +10,9 @@ public class TourController {
 	public String tourPage(Model model) {
 		return "/tour/tour";
 	}
+	
+	@GetMapping("/test")
+	public String test() {
+		return null;
+	}
 }
