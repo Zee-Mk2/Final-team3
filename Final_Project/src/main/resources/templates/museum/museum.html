@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	
+  <!-- Vendor styles-->
+  <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
+
+  <!-- Body-->
+  <body>
+    <!-- Page loading spinner-->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div>
+        <span>Loading...</span>
+      </div>
+    </div>
+    <!-- Page wrapper-->
+    <main class="page-wrapper">
+      <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
+      <header class="navbar navbar-expand-lg fixed-top bg-light py-0 fs-5">
+        <div class="container">
+          <a class="navbar-brand p-2 swap-image" href="index.html">
+            <img src="assets/img/logo_crimson.png" class="swap-to" width="50" />
+            <div class="swap-from">
+              <img src="assets/img/logo_black.png" class="d-dark-mode-none" width="50" />
+              <img src="assets/img/logo_dark_gray.png" class="d-none d-dark-mode-block" width="50" />
+            </div>
+          </a>
+          <div class="form-check form-switch mode-switch order-lg-2 me-3 me-lg-4 ms-auto" data-bs-toggle="mode">
+            <input class="form-check-input" type="checkbox" id="theme-mode" />
+            <label class="form-check-label" for="theme-mode"><i class="ai-sun fs-lg"></i></label>
+            <label class="form-check-label" for="theme-mode"><i class="ai-moon fs-lg"></i></label>
+          </div>
+          <div class="nav align-items-center order-lg-3 ms-n1 me-3 me-sm-0">
+            <a class="nav-link position-relative fs-4 p-2" href="#cartOffcanvas" data-bs-toggle="offcanvas">
+              <i class="ai-cart"></i>
+            </a>
+            <a class="nav-link fs-4 p-2 mx-sm-1 d-none d-sm-flex" href="account-signin.html">
+              <i class="ai-user"></i>
+            </a>
+          </div>
+          <button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+          <nav class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px">
+              <li class="nav-item active"><a class="nav-link fw-bold" href="#">문화재</a></li>
+              <li class="nav-item"><a class="nav-link fw-bold" href="#">박물관</a></li>
+              <li class="nav-item"><a class="nav-link fw-bold" href="#">행사일정</a></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">전시</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown"><a class="dropdown-item" href="#">박물관 전시</a></li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">문화재 전시</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">투어</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown"><a class="dropdown-item" href="#">나의 투어플랜 만들기</a></li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">투어 인원 모집</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">커뮤니티</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown"><a class="dropdown-item" href="#">문화 소식</a></li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">자유게시판</a></li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">포토게시판</a></li>
+                </ul>
+              </li>
+              <li class="nav-item border-top mt-2 py-2 d-sm-none">
+                <a class="nav-link" href="account-signin.html">
+                  <i class="ai-user fs-lg me-2"></i>
+                  Sign In
+                </a>
+              </li>
+            </ul>
+            <div class="d-sm-none p-3 mt-n3">
+              <a class="btn btn-primary w-100 mb-1" href="https://themes.getbootstrap.com/product/around-multipurpose-template-ui-kit/" target="_blank" rel="noopener">
+                <i class="ai-cart fs-xl me-2 ms-n1"></i>
+                Buy now
+              </a>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Hero-->
+      <section>
+        <div class="jarallax bg-dark py-5" data-jarallax data-type="scroll-opacity" data-speed="0.7" style="height: 50vh !important">
+          <div class="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-60"></div>
+          <div class="jarallax-img" style="background-image: url(https://api.cdn.visitjeju.net/photomng/imgpath/201806/28/a9a2562a-6f36-4223-b185-9d250af3306a.jpg)"></div>
+          <div class="container position-relative zindex-5">
+            <!-- Text + button-->
+            <div class="row pt-lg-2 py-xl-4 py-xxl-5 mb-md-4 mb-lg-5">
+              <div class="col-md-10 col-lg-9 col-xl-8 col-xxl-7 pt-5 mb-5 mt-5">
+                <div class="h1 text-white">박물관 검색</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Page content-->
+      <div class="container pt-1 pb-lg-5 pb-md-4 pb-2 my-5">
+        <!-- 카테고리 -->
+        <nav aria-label="breadcrumb">
+          <ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">홈</a></li>
+            <li class="breadcrumb-item"><a href="shop-catalog.html" style="color: #e39d2c">박물관 검색</a></li>
+          </ol>
+        </nav>
+        <!-- 리스트 -->
+        <div class="row align-items-center gy-2 mb-4 pb-1 pb-sm-2 pb-lg-3">
+          <div class="col-lg-5">
+            <h1 class="mb-lg-0">박물관 리스트</h1>
+          </div>
+          <div class="col-xl-2 offset-xl-1 col-lg-3 col-sm-5">
+            <select class="form-select">
+              <option>지역</option>
+              <option>서울특별시</option>
+              <option>경기도</option>
+              <option>대전광역시</option>
+              <option>충청북도</option>
+              <option>충청남도</option>
+              <option>강원도</option>
+              <option>전라북도</option>
+              <option>전라남도</option>
+              <option>광주광역시</option>
+              <option>대구광역시</option>
+              <option>경상북도</option>
+              <option>경상남도</option>
+              <option>부산광역시</option>
+              <option>제주도</option>
+            </select>
+          </div>
+          <div class="col-lg-4 col-sm-7">
+            <div class="position-relative">
+              <i class="ai-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+              <input class="form-control ps-5" type="search" placeholder="키워드 입력" />
+            </div>
+          </div>
+        </div>
+        <!-- 검색 결과-->
+        <article class="row g-0 border-0 mb-4">
+          <a
+            class="col-sm-5 col-lg-4 bg-repeat-0 bg-size-cover bg-position-center rounded-5"
+            href="blog-single-v1.html"
+            style="background-image: url(https://publicdesign.kr/festival/uploads/2022/09/1.png); min-height: 16rem"></a>
+          <div class="col-sm-7 col-lg-8">
+            <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
+              <h3><a href="blog-single-v1.html">국립한글박물관</a></h3>
+              <p class="d-sm-none d-md-block">
+                국립한글박물관은 한글 및 한글문화 관련 유물과 자료의 수집·보존·조사·연구·전시·교육 및 교류 등 한글문화의 보존, 확산 및 진흥에 관한 사무를 관장하는 대한민국 문화체육관광부의
+                소속기관이다. 2014년 2월 17일 발족하였으며, 같은 해 10월 9일 개관했다.
+              </p>
+              <div class="d-flex flex-wrap align-items-center mt-n2">
+                <a class="nav-link text-muted fs-sm fw-normal p-0 mt-2 me-3" href="#">
+                  6
+                  <i class="ai-share fs-lg ms-1"></i>
+                </a>
+                <a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#">
+                  12
+                  <i class="ai-message fs-lg ms-1"></i>
+                </a>
+                <span class="fs-xs opacity-20 mt-2 mx-3">|</span>
+                <li class="ai-star-filled text-warning"></li>
+                <li class="ai-star-filled text-warning"></li>
+                <li class="ai-star-filled text-warning"></li>
+                <li class="ai-star-filled text-warning"></li>
+                <li class="ai-star-half text-warning"></li>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="row g-0 border-0 mb-4">
+          <a
+            class="col-sm-5 col-lg-4 bg-repeat-0 bg-size-cover bg-position-center rounded-5"
+            href="blog-single-v1.html"
+            style="background-image: url(https://publicdesign.kr/festival/uploads/2022/09/1.png); min-height: 16rem"></a>
+          <div class="col-sm-7 col-lg-8">
+            <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
+              <h3><a href="blog-single-v1.html">국립한글박물관</a></h3>
+              <p class="d-sm-none d-md-block">
+                국립한글박물관은 한글 및 한글문화 관련 유물과 자료의 수집·보존·조사·연구·전시·교육 및 교류 등 한글문화의 보존, 확산 및 진흥에 관한 사무를 관장하는 대한민국 문화체육관광부의
+                소속기관이다. 2014년 2월 17일 발족하였으며, 같은 해 10월 9일 개관했다.
+              </p>
+              <div class="d-flex flex-wrap align-items-center mt-n2">
+                <a class="nav-link text-muted fs-sm fw-normal p-0 mt-2 me-3" href="#">
+                  6
+                  <i class="ai-share fs-lg ms-1"></i>
+                </a>
+                <a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#">
+                  12
+                  <i class="ai-message fs-lg ms-1"></i>
+                </a>
+                <span class="fs-xs opacity-20 mt-2 mx-3">|</span>
+                <li class="ai-star-filled text-warning"></li>
+                <li class="ai-star-filled text-warning"></li>
+                <li class="ai-star-filled text-warning"></li>
+                <li class="ai-star-filled text-warning"></li>
+                <li class="ai-star-half text-warning"></li>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="row g-0 border-0 mb-4">
+          <a
+            class="col-sm-5 col-lg-4 bg-repeat-0 bg-size-cover bg-position-center rounded-5"
+            href="blog-single-v1.html"
+            style="background-image: url(https://publicdesign.kr/festival/uploads/2022/09/1.png); min-height: 16rem"></a>
+          <div class="col-sm-7 col-lg-8">
+            <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
+              <h3><a href="blog-single-v1.html">국립한글박물관</a></h3>
+              <p class="d-sm-none d-md-block">
+                국립한글박물관은 한글 및 한글문화 관련 유물과 자료의 수집·보존·조사·연구·전시·교육 및 교류 등 한글문화의 보존, 확산 및 진흥에 관한 사무를 관장하는 대한민국 문화체육관광부의
+                소속기관이다. 2014년 2월 17일 발족하였으며, 같은 해 10월 9일 개관했다.
+              </p>
+              <div class="d-flex flex-wrap align-items-center mt-n2">
+                <a class="nav-link text-muted fs-sm fw-normal p-0 mt-2 me-3" href="#">
+                  6
+                  <i class="ai-share fs-lg ms-1"></i>
+                </a>
+                <a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#">
+                  12
+                  <i class="ai-message fs-lg ms-1"></i>
+                </a>
+                <span class="fs-xs opacity-20 mt-2 mx-3">|</span>
+                <li class="ai-star-filled text-warning"></li>
+                <li class="ai-star-filled text-warning"></li>
+                <li class="ai-star-filled text-warning"></li>
+                <li class="ai-star-filled text-warning"></li>
+                <li class="ai-star-half text-warning"></li>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="row g-0 border-0 mb-4">
+          <a
+            class="col-sm-5 col-lg-4 bg-repeat-0 bg-size-cover bg-position-center rounded-5"
+            href="blog-single-v1.html"
+            style="background-image: url(https://publicdesign.kr/festival/uploads/2022/09/1.png); min-height: 16rem"></a>
+          <div class="col-sm-7 col-lg-8">
+            <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
+              <h3><a href="blog-single-v1.html">국립한글박물관</a></h3>
+              <p class="d-sm-none d-md-block">
+                국립한글박물관은 한글 및 한글문화 관련 유물과 자료의 수집·보존·조사·연구·전시·교육 및 교류 등 한글문화의 보존, 확산 및 진흥에 관한 사무를 관장하는 대한민국 문화체육관광부의
+                소속기관이다. 2014년 2월 17일 발족하였으며, 같은 해 10월 9일 개관했다.
+              </p>
+              <div class="d-flex flex-wrap align-items-center mt-n2">
+                <a class="nav-link text-muted fs-sm fw-normal p-0 mt-2 me-3" href="#">
+                  6
+                  <i class="ai-share fs-lg ms-1"></i>
+                </a>
+                <a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#">
+                  12
+                  <i class="ai-message fs-lg ms-1"></i>
+                </a>
+                <span class="fs-xs opacity-20 mt-2 mx-3">|</span>
+                <li class="ai-star-filled text-warning"></li>
+                <li class="ai-star-filled text-warning"></li>
+                <li class="ai-star-filled text-warning"></li>
+                <li class="ai-star-filled text-warning"></li>
+                <li class="ai-star-half text-warning"></li>
+              </div>
+            </div>
+          </div>
+        </article>
+        <!-- Pagination-->
+        <div class="row">
+          <div class="col-12">
+            <div class="row gy-3 align-items-center mt-lg-5 pt-2 pt-md-3 pt-lg-0 mb-md-2 mb-xl-4">
+              <div class="order-md-3 order-2">
+                <nav aria-label="Page navigation">
+                  <ul class="pagination pagination-sm justify-content-center">
+                    <li class="page-item active" aria-current="page">
+                      <span class="page-link" style="font-size: 1.2rem">
+                        1
+                        <span class="visually-hidden">(current)</span>
+                      </span>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#" style="font-size: 1.2rem">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#" style="font-size: 1.2rem">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#" style="font-size: 1.2rem">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#" style="font-size: 1.2rem">5</a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <!-- Footer-->
+    <footer th:replace="~{common/layout :: #footer}"></footer>
+    
+    <!-- Back to top button-->
+    <a class="btn-scroll-top" href="#top" data-scroll>
+      <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
+      </svg>
+      <i class="ai-arrow-up"></i>
+    </a>
+    <!-- Vendor scripts: js libraries and plugins-->
+    <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+    <script src="assets/vendor/jarallax/dist/jarallax.min.js"></script>
+    <!-- Main theme script-->
+    <script src="assets/js/theme.min.js"></script>
+  </body>
+</html>

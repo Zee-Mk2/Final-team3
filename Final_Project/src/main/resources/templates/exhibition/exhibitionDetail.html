@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+	<!-- Vendor styles-->
+    <link rel="stylesheet" media="screen" href="assets/vendor/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" media="screen" href="assets/vendor/lightgallery/css/lightgallery-bundle.min.css"/>
+    <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
+
+  <body>
+    <!-- Page loading spinner-->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div>
+        <span>Loading...</span>
+      </div>
+    </div>
+    <!-- Page wrapper-->
+    <main class="page-wrapper">
+      <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
+      <header class="navbar navbar-expand-lg fixed-top bg-light py-0 fs-5">
+        <div class="container">
+          <a class="navbar-brand p-2 swap-image" href="index.html">
+            <img src="assets/img/logo_crimson.png" class="swap-to" width="50" />
+            <div class="swap-from">
+              <img src="assets/img/logo_black.png" class="d-dark-mode-none" width="50" />
+              <img src="assets/img/logo_dark_gray.png" class="d-none d-dark-mode-block" width="50" />
+            </div>
+          </a>
+          <div class="form-check form-switch mode-switch order-lg-2 me-3 me-lg-4 ms-auto" data-bs-toggle="mode">
+            <input class="form-check-input" type="checkbox" id="theme-mode" />
+            <label class="form-check-label" for="theme-mode"><i class="ai-sun fs-lg"></i></label>
+            <label class="form-check-label" for="theme-mode"><i class="ai-moon fs-lg"></i></label>
+          </div>
+          <div class="nav align-items-center order-lg-3 ms-n1 me-3 me-sm-0">
+            <a class="nav-link position-relative fs-4 p-2" href="#cartOffcanvas" data-bs-toggle="offcanvas">
+              <i class="ai-cart"></i>
+            </a>
+            <a class="nav-link fs-4 p-2 mx-sm-1 d-none d-sm-flex" href="account-signin.html">
+              <i class="ai-user"></i>
+            </a>
+          </div>
+          <button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+          <nav class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px">
+              <li class="nav-item"><a class="nav-link fw-bold" href="#">문화재</a></li>
+              <li class="nav-item"><a class="nav-link fw-bold" href="#">박물관</a></li>
+              <li class="nav-item"><a class="nav-link fw-bold" href="#">행사일정</a></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">전시</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown"><a class="dropdown-item" href="#">박물관 전시</a></li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">문화재 전시</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">투어</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown"><a class="dropdown-item" href="#">나의 투어플랜 만들기</a></li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">투어 인원 모집</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">커뮤니티</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown"><a class="dropdown-item" href="#">문화 소식</a></li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">자유게시판</a></li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">포토게시판</a></li>
+                </ul>
+              </li>
+              <li class="nav-item border-top mt-2 py-2 d-sm-none">
+                <a class="nav-link" href="account-signin.html">
+                  <i class="ai-user fs-lg me-2"></i>
+                  Sign In
+                </a>
+              </li>
+            </ul>
+            <div class="d-sm-none p-3 mt-n3">
+              <a class="btn btn-primary w-100 mb-1" href="https://themes.getbootstrap.com/product/around-multipurpose-template-ui-kit/" target="_blank" rel="noopener">
+                <i class="ai-cart fs-xl me-2 ms-n1"></i>
+                Buy now
+              </a>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <!-- 바디 시작 -->
+      <!-- Page content-->
+      <div class="vh-100 pt-5 pt-lg-4">
+        <div
+          class="swiper h-100"
+          data-swiper-options='{
+        "direction": "vertical",
+        "mousewheel": {
+          "thresholdDelta": 20
+        }
+      }'>
+          <div class="swiper-wrapper">
+            <!-- Item-->
+            <div class="swiper-slide">
+              <div class="position-relative h-100">
+                <div class="bg-relic1 position-absolute top-0 end-0 w-50 h-100 d-none d-lg-block"></div>
+                <div class="d-flex flex-column flex-lg-row align-items-center h-100 position-relative zindex-2">
+                  <div class="position-relative w-100 order-lg-2">
+                    <div class="bg-relic1 position-absolute top-0 end-0 w-100 h-100 d-lg-none"></div>
+                    <!-- Iframe (VR 전시) -->
+                    <div class="gallery">
+                      <a href="https://my.matterport.com/show/?m=tLzw9A4Bvp9" class="gallery-item" data-iframe="true">
+                        <img class="d-block position-relative zindex-2 mx-auto scale-up" src="assets/img/exhibition/national_museum_of_korea/relic1.png" width="600" alt="Image" />
+                      </a>
+                    </div>
+                  </div>
+                  <div class="w-100 order-lg-1 px-3 px-lg-4 py-4 pt-lg-0">
+                    <div class="text-center text-sm-start mx-auto" style="max-width: 450px">
+                      <h2 class="pb-2 pb-sm-0">도자기에 담긴 동서교류 600년</h2>
+                      <p class="d-none d-sm-block pb-3 pb-lg-4 mb-1">
+                        세계도자실은 특정 지역 문화를 소개하는 것을 넘어
+                        <br />
+                        세계 여러 문화가 만나고 발전하는 과정을 동서교류의
+                        <br />
+                        대표적인 산물인 도자기를 매개로 보여주기 위해 마련하였다.
+                      </p>
+                      <p class="h6">
+                        국립중앙박물관
+                        <br />
+                        세계문화관 세계도자실
+                      </p>
+                      <div class="d-none d-lg-flex align-items-center pb-2 pb-lg-3 mb-3"></div>
+                      <!-- Iframe (VR 전시) -->
+                      <div class="gallery">
+                        <a href="https://my.matterport.com/show/?m=tLzw9A4Bvp9" class="gallery-item btn btn-sm btn-outline-dark fs-sm rounded-pill" data-iframe="true">VR 전시 보러가기</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Item-->
+            <div class="swiper-slide">
+              <div class="position-relative h-100">
+                <div class="bg-relic2 position-absolute top-0 end-0 w-50 h-100 d-none d-lg-block"></div>
+                <div class="d-flex flex-column flex-lg-row align-items-center h-100 position-relative zindex-2">
+                  <div class="position-relative w-100 order-lg-2">
+                    <div class="bg-relic2 position-absolute top-0 end-0 w-100 h-100 d-lg-none"></div>
+                    <!-- Iframe (VR 전시) -->
+                    <div class="gallery">
+                      <a href="https://my.matterport.com/show/?m=hLX8yBzeh2p" class="gallery-item" data-iframe="true">
+                        <img class="d-block position-relative zindex-2 mx-auto scale-up" src="assets/img/exhibition/national_museum_of_korea/relic2.png" width="600" alt="Image" />
+                      </a>
+                    </div>
+                  </div>
+                  <div class="w-100 order-lg-1 px-3 px-lg-4 py-4 pt-lg-0">
+                    <div class="text-center text-sm-start mx-auto" style="max-width: 450px">
+                      <h2 class="pb-2 pb-sm-1">삶, 죽음, 부활의 이야기</h2>
+                      <p class="d-none d-sm-block pb-3 pb-lg-4 mb-1">
+                        세계 4대 문명 가운데 하나로 꼽히는 이집트 문명은 기원전
+                        <br />
+                        3천년경 나일강 하구에서 시작되었다. 나일강은 매년
+                        <br />
+                        범람하여 이집트 사람들에게 비옥한 토지를 선물하였고,
+                        <br />
+                        홍수를 극복하려는 노력에서 천문학과 수학, 달력이 생겨났다.
+                        <br />
+                        또 상형문자를 이용한 기록 문화가 발달하여 이집트 역사는
+                        <br />
+                        오늘날까지 생생하게 전한다.
+                      </p>
+                      <p class="h6">
+                        국립중앙박물관
+                        <br />
+                        세계문화관 이집트실
+                      </p>
+                      <div class="d-none d-lg-flex align-items-center pb-2 pb-lg-3 mb-3"></div>
+                      <!-- Iframe (VR 전시) -->
+                      <div class="gallery">
+                        <a href="https://my.matterport.com/show/?m=hLX8yBzeh2p" class="gallery-item btn btn-sm btn-outline-dark fs-sm rounded-pill" data-iframe="true">VR 전시 보러가기</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Item-->
+            <div class="swiper-slide">
+              <div class="position-relative h-100">
+                <div class="bg-relic3 position-absolute top-0 end-0 w-50 h-100 d-none d-lg-block"></div>
+                <div class="d-flex flex-column flex-lg-row align-items-center h-100 position-relative zindex-2">
+                  <div class="position-relative w-100 order-lg-2">
+                    <div class="bg-relic3 position-absolute top-0 end-0 w-100 h-100 d-lg-none"></div>
+                    <!-- 360° 비디오 전시 -->
+                    <div class="gallery" data-video="true">
+                      <a href="https://www.youtube.com/watch?v=b8TsnrZZeAs&t=328s" class="gallery-item">
+                        <img class="d-block position-relative zindex-2 mx-auto scale-up" src="assets/img/exhibition/national_museum_of_korea/relic3.png" width="600" alt="Image" />
+                      </a>
+                    </div>
+                  </div>
+                  <div class="w-100 order-lg-1 px-3 px-lg-4 py-4 pt-lg-0">
+                    <div class="text-center text-sm-start mx-auto" style="max-width: 450px">
+                      <h2 class="pb-2 pb-sm-0">금강산에 오르다</h2>
+                      <p class="d-none d-sm-block pb-3 pb-lg-4 mb-1">
+                        백옥같이 우뚝 선 일만 이천 봉우리, 신비한 금강산
+                        <br />
+                        조선시대 사람들 누구나 꿈꿨던 금강산 여행. 지금은
+                        <br />
+                        쉽게 갈 수 없는 금강산의 사계를 감상하며 잠시나마
+                        <br />
+                        편안한 치유의 시간을 보내시기 바랍니다.
+                      </p>
+                      <p class="h6">
+                        국립중앙박물관
+                        <br />
+                        디지털실감영상관 실감콘텐츠
+                      </p>
+                      <div class="d-none d-lg-flex align-items-center pb-2 pb-lg-3 mb-3"></div>
+                      <!-- 360° 비디오 전시 -->
+                      <div class="gallery" data-video="true">
+                        <a href="https://www.youtube.com/watch?v=b8TsnrZZeAs&t=328s" class="gallery-item btn btn-sm btn-outline-dark fs-sm rounded-pill">360° 영상 보러가기</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Item-->
+            <div class="swiper-slide">
+              <div class="position-relative h-100">
+                <div class="bg-relic4 position-absolute top-0 end-0 w-50 h-100 d-none d-lg-block"></div>
+                <div class="d-flex flex-column flex-lg-row align-items-center h-100 position-relative zindex-2">
+                  <div class="position-relative w-100 order-lg-2">
+                    <div class="bg-relic4 position-absolute top-0 end-0 w-100 h-100 d-lg-none"></div>
+                    <!-- 360° 비디오 전시 -->
+                    <div class="gallery" data-video="true">
+                      <a href="https://www.youtube.com/watch?v=dg-ytQzgkJ0&t=30s" class="gallery-item">
+                        <img class="d-block position-relative zindex-2 mx-auto scale-up" src="assets/img/exhibition/national_museum_of_korea/relic4.png" width="600" alt="Image" />
+                      </a>
+                    </div>
+                  </div>
+                  <div class="w-100 order-lg-1 px-3 px-lg-4 py-4 pt-lg-0">
+                    <div class="text-center text-sm-start mx-auto" style="max-width: 450px">
+                      <h2 class="pb-2 pb-sm-0">왕의 행차, 백성과 함께하다</h2>
+                      <p class="d-none d-sm-block pb-3 pb-lg-4 mb-1">
+                        1795년 8일간의 정조와 어머니 혜경궁의 화성행차,
+                        <br />
+                        1796년의 화성 낙성연. 조선시대 궁궐 밖으로 나선 왕의 행차는
+                        <br />
+                        왕의 위엄을 상징하는 의례이면서 백성들의 큰 볼거리였습니다.
+                        <br />
+                        성대하면서도 흥겨운 왕의 행차, 춤과 음악이 어우러진 잔치,
+                        <br />
+                        군사훈련을 축제의 이미지로 재구성한 200여년 전 그날로 함께 가볼까요?
+                      </p>
+                      <p class="h6">
+                        국립중앙박물관
+                        <br />
+                        디지털실감영상관 실감콘텐츠
+                      </p>
+                      <div class="d-none d-lg-flex align-items-center pb-2 pb-lg-3 mb-3"></div>
+                      <!-- 360° 비디오 전시 -->
+                      <div class="gallery" data-video="true">
+                        <a href="https://www.youtube.com/watch?v=dg-ytQzgkJ0&t=30s" class="gallery-item btn btn-sm btn-outline-dark fs-sm rounded-pill">360° 영상 보러가기</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="position-fixed start-50 bottom-0 translate-middle-x rounded-4 rounded-bottom-0 bg-light shadow zindex-5 fs-sm fw-medium text-dark py-2 px-3">스크롤해서 더보기</div>
+      </div>
+    </main>
+    <!-- Back to top button-->
+    <a class="btn-scroll-top" href="#top" data-scroll>
+      <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
+      </svg>
+      <i class="ai-arrow-up"></i>
+    </a>
+    <!-- Vendor scripts: js libraries and plugins-->
+    <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/lightgallery/lightgallery.min.js"></script>
+    <script src="assets/vendor/lightgallery/plugins/fullscreen/lg-fullscreen.min.js"></script>
+    <script src="assets/vendor/lightgallery/plugins/zoom/lg-zoom.min.js"></script>
+    <script src="assets/vendor/lightgallery/plugins/video/lg-video.min.js"></script>
+    <script src="assets/vendor/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script>
+    <!-- Main theme script-->
+    <script src="assets/js/theme.min.js"></script>
+  </body>
+</html>
