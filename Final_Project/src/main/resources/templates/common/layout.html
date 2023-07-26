@@ -14,10 +14,10 @@
   <!-- Viewport-->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Favicon and Touch Icons-->
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo_crimson.png" />
-  <link rel="manifest" href="assets/favicon/site.webmanifest" />
-  <link rel="mask-icon" color="#6366f1" href="assets/favicon/safari-pinned-tab.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" th:href="@{/assets/favicon/apple-touch-icon.png}" />
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/assets/img/logo_crimson.png}" />
+  <link rel="manifest" th:href="@{/assets/favicon/site.webmanifest}" />
+  <link rel="mask-icon" color="#6366f1" th:href="@{/assets/favicon/safari-pinned-tab.svg}" />
   <!-- fonts - 노토산스 -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet" />
@@ -140,17 +140,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" id="google-font" />
   <!-- Main Theme Styles + Bootstrap-->
-  <link rel="stylesheet" media="screen" href="assets/css/theme.css" />
+<!--   <link rel="stylesheet" media="screen" href="assets/css/theme.css" /> -->
+  <link rel="stylesheet" media="screen" th:href="@{/assets/css/theme.css}" />
 </head>
 
 <body>
   <header class="navbar navbar-expand-lg fixed-top bg-light py-0 fs-5" id="header">
     <div class="container">
       <a class="navbar-brand p-2 swap-image" th:href="@{/}">
-        <img src="assets/img/logo_crimson.png" class="swap-to" width="50" />
+        <img th:src="@{/assets/img/logo_crimson.png}" class="swap-to" width="50" />
         <div class="swap-from">
-          <img src="assets/img/logo_black.png" class="d-dark-mode-none" width="50" />
-          <img src="assets/img/logo_dark_gray.png" class="d-none d-dark-mode-block" width="50" />
+          <img th:src="@{/assets/img/logo_black.png}" class="d-dark-mode-none" width="50" />
+          <img th:src="@{/assets/img/logo_dark_gray.png}" class="d-none d-dark-mode-block" width="50" />
         </div>
       </a>
       <div class="form-check form-switch mode-switch order-lg-2 me-3 me-lg-4 ms-auto" data-bs-toggle="mode">
@@ -218,10 +219,10 @@
       <div class="row" id="links">
         <div class="col-6 pb-2 pb-md-0">
           <a class="navbar-brand swap-image" href="index.html">
-            <img src="assets/img/logo_crimson.png" class="swap-to" width="80" />
+            <img th:src="@{/assets/img/logo_crimson.png}" class="swap-to" width="80" />
             <div class="swap-from">
-              <img src="assets/img/logo_black.png" class="d-dark-mode-none" width="80" />
-              <img src="assets/img/logo_dark_gray.png" class="d-none d-dark-mode-block" width="80" />
+              <img th:src="@{/assets/img/logo_black.png}" class="d-dark-mode-none" width="80" />
+              <img th:src="@{/assets/img/logo_dark_gray.png}" class="d-none d-dark-mode-block" width="80" />
             </div>
           </a>
           <p class="fs-lg pt-4 py-2">옛이음은 옛날과 오늘날을 잇는, 문화와 이야기가 깃든 플랫폼입니다.</p>
@@ -323,7 +324,7 @@
         </div>
         <div class="col-4 text-center">© 2023. 옛이음. All rights reserved.</div>
         <div class="col-4 text-end">
-          <img class="ms-sm-auto" src="assets/img/shop/footer-cards.png" width="187" alt="Accepted cards" />
+          <img class="ms-sm-auto" th:src="@{/assets/img/shop/footer-cards.png}" width="187" alt="Accepted cards" />
         </div>
       </div>
     </div>

@@ -8,11 +8,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class TourController {
 	@GetMapping("/tour")
 	public String tourPage(Model model) {
-		return "/tour/tour";
+		return "tour/tour";
 	}
 	
-	@GetMapping("/test")
-	public String test() {
-		return null;
+	@GetMapping("/tour/detail")
+	public String tourDetailPage() {
+		return "tour/tour-detail";
+	}
+	
+	@GetMapping("/tour/post")
+	public String tourPostPage() {
+		return "tour/tour-post";
 	}
 }

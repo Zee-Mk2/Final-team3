@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+  <!-- Vendor styles-->
+  <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/flatpickr/dist/flatpickr.min.css}" />
+  <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/fullcalendar/main.min.css}" />
+  
+  <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
+  
+  <!-- Body-->
+  <body>
+    <!-- Page loading spinner-->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div>
+        <span>Loading...</span>
+      </div>
+    </div>
+    <!-- Page wrapper-->
+    <main class="page-wrapper">
+      <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
+	  <header th:replace="~{common/layout :: #header}"></header>
+	  
+      <!-- Hero-->
+      <section>
+        <div class="jarallax bg-dark py-5" data-jarallax data-type="scroll-opacity" data-speed="0.7" style="height: 50vh !important">
+          <div class="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-60"></div>
+          <div
+            class="jarallax-img"
+            style="
+              background-image: url(https://lh3.googleusercontent.com/TLyo276022O-OJKi4OGaQngAE_fI7ROyLiiudbdVY-trPGInygNw-mYkuxzUjMM7NvA5cytHw6IOqdw4HgtKy46-nHjyqeFQv_BxhZgWIQhGURctI8l8Yg=s0);
+            "></div>
+          <div class="container position-relative zindex-5">
+            <!-- Text + button-->
+            <div class="row pt-lg-2 py-xl-4 py-xxl-5 mb-md-4 mb-lg-5">
+              <div class="col-md-10 col-lg-9 col-xl-8 col-xxl-7 pt-5 mb-5">
+                <h1 class="display-2 text-light pb-sm-2 pb-md-3">투어</h1>
+                <h5 class="fs-4 text-light pb-sm-2 pb-md-3">
+                  나만의 투어플랜을 만들고
+                  <br />
+                  함께 할 친구를 모집해 보세요
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Page content-->
+      <div class="container mt-5">
+        <!-- Breadcrumb-->
+        <nav aria-label="breadcrumb">
+          <ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">홈</a></li>
+            <li class="breadcrumb-item"><a href="tour.html">투어</a></li>
+            <li class="breadcrumb-item active" aria-current="page">투어플랜 만들기</li>
+          </ol>
+        </nav>
+        <div class="row mb-md-2 mb-xl-4">
+          <!-- Tabs content -->
+          <form class="tab-content">
+            <!-- STEP1 -->
+            <div class="tab-pane show active" id="step1" role="tabpanel">
+              <div class="steps steps-horizontal-md steps-center">
+                <div class="step active">
+                  <div class="step-number">
+                    <div class="step-number-inner">01</div>
+                  </div>
+                  <div class="step-body">
+                    <h5 class="pb-1 mb-2">모집 개요</h5>
+                  </div>
+                </div>
+                <div class="step">
+                  <div class="step-number">
+                    <div class="step-number-inner">02</div>
+                  </div>
+                  <div class="step-body">
+                    <h5 class="pb-1 mb-2">일정 계획</h5>
+                  </div>
+                </div>
+              </div>
+              <!-- STEP Content -->
+              <div class="rounded-3 px-5 pb-2 my-3" style="background-color: #f6f9fc">
+                <div class="text-center py-5">
+                  <span class="h1 fw-bold">모집 개요</span>
+                </div>
+
+                <!-- 제목 -->
+                <div class="mb-2 mb-md-3 mt-n3 mt-md-0 row align-items-center">
+                  <div class="col-md-2 col-form-label fs-5 fw-bold" for="title">
+                    제목
+                    <span class="text-danger">*</span>
+                  </div>
+                  <div class="col-md-10">
+                    <input class="form-control bg-white" type="text" id="title" placeholder="제목" />
+                  </div>
+                </div>
+
+                <!-- 지역 -->
+                <div class="mb-2 mb-md-3 mt-n3 mt-md-0 row align-items-center">
+                  <div class="col-md-2 col-form-label fs-5 fw-bold" for="area">
+                    지역
+                    <span class="text-danger">*</span>
+                  </div>
+                  <div class="col-md-10">
+                    <select class="form-select bg-white" id="area">
+                      <option>지역 선택</option>
+                      <option>서울/인천/경기</option>
+                      <option>강원</option>
+                      <option>대전/충청</option>
+                      <option>대구/경북</option>
+                      <option>부산/울산/경남</option>
+                      <option>전북</option>
+                      <option>광주/전남</option>
+                      <option>제주</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- 모집인원 -->
+                <div class="mb-2 mb-md-3 mt-n3 mt-md-0 row align-items-center">
+                  <div class="col-md-2 col-form-label fs-5 fw-bold">
+                    모집인원
+                    <span class="text-danger">*</span>
+                  </div>
+                  <div class="col-md-10">
+                    <input class="form-control bg-white" type="number" id="numOfPeople" placeholder="본인을 포함한 인원수" />
+                  </div>
+                </div>
+
+                <!-- 일정 -->
+                <div class="mb-2 mb-md-3 mt-n3 mt-md-0 row align-items-center">
+                  <div class="col-md-2 col-form-label fs-5 fw-bold">
+                    일정
+                    <span class="text-danger">*</span>
+                  </div>
+                  <div class="col-md-10">
+                    <div class="input-group py-0 bg-white">
+                      <span class="input-group-text">
+                        <i class="ai-calendar"></i>
+                      </span>
+                      <input
+                        class="form-control date-picker date-range"
+                        type="text"
+                        placeholder="시작 날짜"
+                        data-datepicker-options='{"altInput": true, "altFormat": "Y-m-d", "dateFormat": "Y-m-d"}'
+                        data-linked-input="#end-date" />
+                      <span class="border-end border-input"></span>
+                      <input
+                        class="form-control date-picker"
+                        type="text"
+                        placeholder="끝 날짜"
+                        data-datepicker-options='{"altInput": true, "altFormat": "Y-m-d", "dateFormat": "Y-m-d"}'
+                        id="end-date" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 구분 -->
+                <div class="mb-2 mb-md-3 mt-n3 mt-md-0 row align-items-center">
+                  <div class="col-md-2 col-form-label fs-5 fw-bold">
+                    구분
+                    <span class="text-danger">*</span>
+                  </div>
+                  <div class="col-md-10">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" id="heritage" name="category" />
+                      <label class="form-check-label" for="heritage">문화재</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" id="museum" name="category" checked />
+                      <label class="form-check-label" for="museum">박물관</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 내용 -->
+                <div class="mb-2 mb-md-3 mt-n3 mt-md-0 row align-items-center">
+                  <div class="col-md-2 col-form-label fs-5 fw-bold">내용</div>
+                  <div class="col-md-10">
+                    <textarea class="form-control bg-white" id="content" rows="5" placeholder="내용"></textarea>
+                  </div>
+                </div>
+
+                <!-- 썸네일 -->
+                <div class="mb-2 mb-md-3 mt-n3 mt-md-0 row align-items-center">
+                  <div class="col-md-2 col-form-label fs-5 fw-bold">썸네일</div>
+                  <div class="col-md-10">
+                    <input class="form-control bg-white" type="file" id="file-input" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <a href="#" class="btn btn-danger">취소</a>
+                </div>
+                <div class="col-6 text-end">
+                  <button class="btn btn-primary" id="next-step" type="button" onclick="showSecond();">다음</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP2 -->
+            <div class="tab-pane show" id="step2" role="tabpanel">
+              <div class="steps steps-horizontal-md steps-center">
+                <div class="step">
+                  <div class="step-number">
+                    <div class="step-number-inner">01</div>
+                  </div>
+                  <div class="step-body">
+                    <h5 class="pb-1 mb-2">모집 개요</h5>
+                  </div>
+                </div>
+                <div class="step active">
+                  <div class="step-number">
+                    <div class="step-number-inner">02</div>
+                  </div>
+                  <div class="step-body">
+                    <h5 class="pb-1 mb-2">일정 계획</h5>
+                  </div>
+                </div>
+              </div>
+              <!-- STEP Content -->
+              <div class="my-3 row">
+                <div class="col-4 rounded-3 p-3" style="background-color: #f6f9fc">
+                  <div action="">
+                    <div class="position-relative mb-2">
+                      <button id="search-by-keyword" class="btn btn-link ai-search position-absolute top-50 start-0 translate-middle-y ms-3 px-1" style="color: #202020"></button>
+                      <input class="form-control ps-5 bg-white" type="search" placeholder="키워드로 검색" />
+                    </div>
+                    <div class="position-relative mb-2">
+                      <i class="ai-calendar position-absolute top-50 start-0 translate-middle-y ms-3 px-1"></i>
+                      <input
+                        class="form-control date-picker ps-5 bg-white"
+                        id="schedule-date"
+                        type="text"
+                        placeholder="날짜"
+                        data-datepicker-options='{"enableTime": true, "altInput": true, "altFormat": "Y-m-d", "dateFormat": "Y-m-d"}' />
+                    </div>
+                    <div class="row align-items-center">
+                      <div class="position-relative mb-2 col-5">
+                        <i class="ai-clock position-absolute top-50 start-0 translate-middle-y ms-4 px-1"></i>
+                        <input
+                          class="form-control date-picker ps-5 bg-white"
+                          id="start-time"
+                          type="text"
+                          placeholder="시작 시간"
+                          data-datepicker-options='{"noCalendar": true, "enableTime": true, "altInput": true, "altFormat": "H:i", "dateFormat": "H:i", "minuteIncrement": 30}' />
+                      </div>
+                      <div class="col-2 text-center">~</div>
+                      <div class="position-relative mb-2 col-5">
+                        <i class="ai-clock position-absolute top-50 start-0 translate-middle-y ms-4 px-1"></i>
+                        <input
+                          class="form-control date-picker ps-5 bg-white"
+                          id="end-time"
+                          type="text"
+                          placeholder="끝 시간"
+                          data-datepicker-options='{"noCalendar": true, "enableTime": true, "altInput": true, "altFormat": "H:i", "dateFormat": "H:i", "minuteIncrement": 30}' />
+                      </div>
+                    </div>
+                    <div class="overflow-scroll p-2" style="height: 300px">
+                      <button class="select-list highlight" type="button" data-item-name="첨성대" data-item-address="경상북도 경주시 인왕동 839-1" data-la="35.835116" data-lo="129.219503">
+                        <div class="text-dark fw-bold">첨성대</div>
+                        <div class="text-muted">경상북도 경주시 인왕동 839-1</div>
+                      </button>
+                      <button class="select-list highlight" type="button" data-item-name="첨성대2" data-item-address="경상북도 경주시 인왕동 839-12" data-la="35.135116" data-lo="129.119503">
+                        <div class="text-dark fw-bold">첨성대2</div>
+                        <div class="text-muted">경상북도 경주시 인왕동 839-12</div>
+                      </button>
+                      <button class="select-list highlight" type="button" data-item-name="첨성대3" data-item-address="경상북도 경주시 인왕동 839-13" data-la="35.235116" data-lo="129.319503">
+                        <div class="text-dark fw-bold">첨성대3</div>
+                        <div class="text-muted">경상북도 경주시 인왕동 839-13</div>
+                      </button>
+                      <button class="select-list highlight" type="button" data-item-name="첨성대4" data-item-address="경상북도 경주시 인왕동 839-14" data-la="35.335116" data-lo="129.419503">
+                        <div class="text-dark fw-bold">첨성대4</div>
+                        <div class="text-muted">경상북도 경주시 인왕동 839-14</div>
+                      </button>
+                    </div>
+                    <button class="btn btn-warning mt-3 w-100" type="button" id="undo">마지막에 추가한 일정 삭제</button>
+                    <style>
+                      .select-list {
+                        padding: 1rem !important;
+                        text-align: start !important;
+                        border: 0 !important;
+                        width: 100% !important;
+                        border-radius: var(--ar-border-radius-sm) !important;
+                        background-color: rgba(0, 0, 0, 0);
+                      }
+                      .highlight {
+                        background-color: rgba(0, 0, 0, 0);
+                        transition: 0.4s;
+                      }
+                      .highlight:hover {
+                        background-color: rgba(0, 0, 0, 0.05);
+                        transition: 0.4s;
+                      }
+                    </style>
+                  </div>
+                </div>
+                <div class="col-8 ps-4">
+                  <div class="rounded-1" id="map" style="width: 100%; height: 560px"></div>
+                  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b405a10ab3aef9b7d1801f29c81327a2"></script>
+                  <!-- <script>
+                    var mapContainer = document.getElementById("map"); // 지도를 표시할 div
+                    var mapOption = {
+                      center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                      level: 3, // 지도의 확대 레벨
+                    };
+
+                    // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+                    var map = new kakao.maps.Map(mapContainer, mapOption);
+                  </script> -->
+                </div>
+                <div id="calendar" class="mt-4"></div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <button class="btn btn-warning" id="prev-step" type="button" onclick="showFirst();">이전</button>
+                </div>
+                <div class="col-6 text-end">
+                  <button class="btn btn-primary" type="submit">작성</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <!-- Footer-->
+    <footer th:replace="~{common/layout :: #footer}"></footer>
+    
+    <!-- Back to top button-->
+    <a class="btn-scroll-top" href="#top" data-scroll>
+      <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
+      </svg>
+      <i class="ai-arrow-up"></i>
+    </a>
+    <!-- Vendor scripts: js libraries and plugins-->
+    <script th:src="@{/assets/vendor/bootstrap/dist/js/bootstrap.bundle.js}"></script>
+    <script th:src="@{/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.js}"></script>
+    <script th:src="@{/assets/vendor/jarallax/dist/jarallax.min.js}"></script>
+    <script th:src="@{/assets/vendor/flatpickr/dist/flatpickr.min.js}"></script>
+    <script th:src="@{/assets/vendor/flatpickr/dist/plugins/rangePlugin.js}"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script th:src="@{/assets/vendor/cleave.js/dist/cleave.min.js}"></script>
+    <script th:src="@{/assets/vendor/fullcalendar/main.min.js}"></script>
+    <!-- Main theme script-->
+    <script th:src="@{/assets/js/theme.js}"></script>
+
+    <script>
+      var initOptions = {
+        locale: "ko",
+        headerToolbar: {
+          left: "prev,next today",
+          center: "",
+          right: "dayGridMonth,timeGridWeek,listWeek",
+        },
+        initialView: "timeGridWeek",
+        eventTimeFormat: {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        },
+        events: [],
+      };
+
+      var calendar = function (userOptions) {
+        // forEach function
+        var forEach = function forEach(array, callback, scope) {
+          for (var i = 0; i < array.length; i++) {
+            callback.call(scope, i, array[i]); // passes back stuff we need
+          }
+        }; // Calendar initialisation
+
+        var calendars = document.querySelectorAll(".calendar");
+        forEach(calendars, function (index, value) {
+          var options = _objectSpread(
+            {
+              themeSystem: "bootstrap5",
+            },
+            userOptions
+          );
+
+          var calendarInstance = new FullCalendar.Calendar(value, options);
+          calendarInstance.render();
+        });
+      };
+
+      var mapObj;
+
+      function showFirst() {
+        $("#step2").removeClass("active");
+        $("#step1").addClass("active");
+      }
+
+      function showSecond() {
+        $("#step1").removeClass("active");
+        $("#step2").addClass("active");
+        var map = $("#map");
+        if (!map.hasClass("loaded")) {
+          console.log("map loaded");
+          map.addClass("loaded");
+          var mapContainer = document.getElementById("map"); // 지도를 표시할 div
+          var mapOption = {
+            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            level: 8, // 지도의 확대 레벨
+          };
+          // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+          mapObj = new kakao.maps.Map(mapContainer, mapOption);
+        }
+        var calendarDiv = $("#calendar");
+        if (!calendarDiv.hasClass("calendar")) {
+          calendarDiv.addClass("calendar");
+          calendar(initOptions);
+        }
+      }
+      $(document).ready(function () {
+        var schedulePicker = flatpickr("#schedule-date", {
+          minDate: "today",
+        });
+
+        var startPicker = flatpickr("#start-time", {
+          enableTime: true,
+          noCalendar: true,
+          altInput: true,
+          altFormat: "H:i",
+          dateFormat: "H:i",
+          minuteIncrement: 30,
+        });
+
+        var endPicker = flatpickr("#end-time", {
+          enableTime: true,
+          noCalendar: true,
+          altInput: true,
+          altFormat: "H:i",
+          dateFormat: "H:i",
+          minuteIncrement: 30,
+        });
+
+        $(".select-list").click(function () {
+          var startTime = startPicker.selectedDates[0];
+          var endTime = endPicker.selectedDates[0];
+          var scheduleDate = schedulePicker.selectedDates[0];
+          if (startTime === undefined || endTime === undefined || scheduleDate === undefined) {
+            alert("날짜 혹은 시간이 입력되지 않았습니다.");
+            return false;
+          }
+          if (startTime >= endTime) {
+            alert("끝 시간이 시작 시간보다 빠르거나 같습니다.");
+            return false;
+          }
+
+          var date = $("#schedule-date").val();
+          var startTime = date + "T" + $("#start-time").val();
+          var endTime = date + "T" + $("#end-time").val();
+          console.log(startTime, endTime);
+          var name = $(this).data("item-name");
+          var newEvent = {
+            title: name,
+            start: startTime,
+            end: endTime,
+            classNames: ["event-custom-style", "bg-light", "text-nav", "border-0", "rounded-1", "p-1", "ps-3", "border-start", "border-5", "border-purple"],
+          };
+          initOptions.events.push(newEvent);
+
+          calendar(initOptions);
+          // schedulePicker.clear();
+          // startPicker.clear();
+          // endPicker.clear();
+          var lo = $(this).data("lo");
+          var la = $(this).data("la");
+          console.log(lo + ", " + la);
+          var moveLocation = new kakao.maps.LatLng(la, lo);
+          mapObj.panTo(moveLocation);
+          addMarker(name, la, lo);
+        });
+
+        $("#undo").click(function () {
+          initOptions.events.pop();
+          calendar(initOptions);
+          deleteMarker();
+        });
+      });
+
+      var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+      var markers = [];
+      function addMarker(name, la, lo) {
+        var imageSize = new kakao.maps.Size(24, 35);
+        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+        var marker = new kakao.maps.Marker({
+          map: mapObj,
+          position: new kakao.maps.LatLng(la, lo),
+          title: name,
+          image: markerImage,
+        });
+        markers.push(marker);
+      }
+
+      function deleteMarker() {
+        markers[markers.length - 1].setMap(null);
+        markers.pop();
+      }
+    </script>
+  </body>
+</html>

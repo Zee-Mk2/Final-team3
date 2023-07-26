@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>옛이음 | 계정 - 설정</title>
+    <!-- SEO Meta Tags-->
+    <meta name="description" content="Around - Multipurpose Bootstrap HTML Template">
+    <meta name="keywords" content="bootstrap, business, corporate, coworking space, services, creative agency, dashboard, e-commerce, mobile app showcase, saas, multipurpose, product landing, shop, software, ui kit, web studio, landing, dark mode, html5, css3, javascript, gallery, slider, touch, creative">
+    <meta name="author" content="Createx Studio">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/logo_crimson.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo_crimson.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/logo_crimson.png">
+    <link rel="manifest" href="assets/img/logo_crimson.png">
+    <link rel="mask-icon" color="#6366f1" href="assets/img/logo_crimson.png">
+    <!-- fonts - 노토산스 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="white">
+    <!-- Theme mode-->
+    <script>
+      let mode = window.localStorage.getItem('mode'),
+          root = document.getElementsByTagName('html')[0];
+      if (mode !== undefined && mode === 'dark') {
+        root.classList.add('dark-mode');
+      } else {
+        root.classList.remove('dark-mode');
+      }
+      
+      
+    </script>
+    <!-- Page loading styles-->
+    <style>
+      .page-loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all .4s .2s ease-in-out;
+        transition: all .4s .2s ease-in-out;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+      }
+      .dark-mode .page-loading {
+        background-color: #121519;
+      }
+      .page-loading.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .page-loading-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+        opacity: 0;
+      }
+      .page-loading.active > .page-loading-inner {
+        opacity: 1;
+      }
+      .page-loading-inner > span {
+        display: block;
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #6f788b;
+      }
+      .dark-mode .page-loading-inner > span {
+        color: #fff;
+        opacity: .6;
+      }
+      .page-spinner {
+        display: inline-block;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: .75rem;
+        vertical-align: text-bottom;
+        background-color: #d7dde2; 
+        border-radius: 50%;
+        opacity: 0;
+        -webkit-animation: spinner .75s linear infinite;
+        animation: spinner .75s linear infinite;
+      }
+      .dark-mode .page-spinner {
+        background-color: rgba(255,255,255,.25);
+      }
+      @-webkit-keyframes spinner {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        }
+        50% {
+          opacity: 1;
+          -webkit-transform: none;
+          transform: none;
+        }
+      }
+      @keyframes spinner {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        }
+        50% {
+          opacity: 1;
+          -webkit-transform: none;
+          transform: none;
+        }
+      }
+      
+    </style>
+    <!-- Page loading scripts-->
+    <script>
+      (function () {
+        window.onload = function () {
+          const preloader = document.querySelector('.page-loading');
+          preloader.classList.remove('active');
+          setTimeout(function () {
+            preloader.remove();
+          }, 1500);
+        };
+      })();
+      
+    </script>
+    <!-- Import Google Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" id="google-font">
+    <!-- Vendor styles-->
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="assets/css/theme.css">
+  </head>
+  <!-- Body-->
+  <body class="bg-secondary">
+    <!-- Page loading spinner-->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Loading...</span>
+      </div>
+    </div>
+    <!-- Page wrapper-->
+    <main class="page-wrapper">
+      <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
+      <header class="navbar navbar-expand-lg fixed-top bg-light py-0 fs-5">
+        <div class="container">
+          <a class="navbar-brand p-2 swap-image" href="index.html">
+            <img src="assets/img/logo_crimson.png" class="swap-to" width="50" />
+            <div class="swap-from">
+              <img src="assets/img/logo_black.png" class="d-dark-mode-none" width="50" />
+              <img src="assets/img/logo_dark_gray.png" class="d-none d-dark-mode-block" width="50" />
+            </div>
+          </a>
+          <div class="form-check form-switch mode-switch order-lg-2 me-3 me-lg-4 ms-auto" data-bs-toggle="mode">
+            <input class="form-check-input" type="checkbox" id="theme-mode" />
+            <label class="form-check-label" for="theme-mode"><i class="ai-sun fs-lg"></i></label>
+            <label class="form-check-label" for="theme-mode"><i class="ai-moon fs-lg"></i></label>
+          </div>
+          <button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+          <nav class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px">
+              <li class="nav-item active"><a class="nav-link fw-bold" href="#">문화재</a></li>
+              <li class="nav-item"><a class="nav-link fw-bold" href="#">박물관</a></li>
+              <li class="nav-item"><a class="nav-link fw-bold" href="#">행사일정</a></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">전시</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown"><a class="dropdown-item" href="#">박물관 전시</a></li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">문화재 전시</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">투어</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown"><a class="dropdown-item" href="#">나의 투어플랜 만들기</a></li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">투어 인원 모집</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">커뮤니티</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown"><a class="dropdown-item" href="#">문화 소식</a></li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">자유게시판</a></li>
+                  <li class="dropdown"><a class="dropdown-item" href="#">포토게시판</a></li>
+                </ul>
+              </li>
+              <li class="nav-item border-top mt-2 py-2 d-sm-none">
+                <a class="nav-link" href="account-signin.html">
+                  <i class="ai-user fs-lg me-2"></i>
+                  Sign In
+                </a>
+              </li>
+            </ul>
+            <div class="d-sm-none p-3 mt-n3">
+              <a class="btn btn-primary w-100 mb-1" href="https://themes.getbootstrap.com/product/around-multipurpose-template-ui-kit/" target="_blank" rel="noopener">
+                <i class="ai-cart fs-xl me-2 ms-n1"></i>
+                Buy now
+              </a>
+            </div>
+          </nav>
+          <div class="dropdown nav d-none d-sm-block order-lg-3">
+            <a class="nav-link d-flex align-items-center p-0" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+              <img class="border rounded-circle" src="assets/img/avatar/01.jpg" width="48" alt="Isabella Bocouse" />
+              <div class="ps-2">
+                <div class="fs-sm dropdown-toggle fw-bold">테스트계정</div>
+              </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end my-1">
+              <h6 class="dropdown-header fs-xs fw-medium text-muted text-uppercase pb-1">계정</h6>
+              <a class="dropdown-item" href="account-overview.html">
+                <i class="ai-user-check fs-lg opacity-70 me-2"></i>
+                내정보
+              </a>
+              <a class="dropdown-item" href="account-billing.html">
+                <i class="ai-bookmark fs-base opacity-70 me-2 mt-n1"></i>
+                북마크
+              </a>
+              <a class="dropdown-item" href="account-billing.html">
+                <i class="ai-dashboard fs-base opacity-70 me-2 mt-n1"></i>
+                내 예약 정보
+              </a>
+              <a class="dropdown-item" href="account-settings.html">
+                <i class="ai-settings fs-lg opacity-70 me-2"></i>
+                설정
+              </a>
+              <div class="dropdown-divider"></div>
+              <h6 class="dropdown-header fs-xs fw-medium text-muted text-uppercase pb-1">쇼핑몰</h6>
+              <a class="dropdown-item" href="account-orders.html">
+                <i class="ai-file-text fs-lg opacity-70 me-2"></i>
+                주문내역
+              </a>
+              <a class="dropdown-item" href="account-earnings.html">
+                <i class="ai-cart fs-lg opacity-70 me-2"></i>
+                장바구니
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item text-danger" href="account-signin.html">
+                <i class="ai-logout fs-lg opacity-70 me-2"></i>
+                로그아웃
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page content-->
+      <div class="container py-5 mt-4 mt-lg-5 mb-lg-4 my-xl-5">
+        <div class="row pt-sm-2 pt-lg-0">
+          <!-- Sidebar (offcanvas on sreens < 992px)-->
+          <aside class="col-lg-3 pe-lg-4 pe-xl-5 mt-n3">
+            <div class="position-lg-sticky top-0">
+              <div class="d-none d-lg-block" style="padding-top: 105px;"></div>
+              <div class="offcanvas-lg offcanvas-start" id="sidebarAccount">
+                <button class="btn-close position-absolute top-0 end-0 mt-3 me-3 d-lg-none" type="button" data-bs-dismiss="offcanvas" data-bs-target="#sidebarAccount"></button>
+                <div class="offcanvas-body">
+                  <div class="pb-2 pb-lg-0 mb-4 mb-lg-5"><img class="d-block rounded-circle mb-2" src="assets/img/avatar/02.jpg" width="80" alt="Isabella Bocouse">
+                    <h3 class="h5 mb-1">테스트 이름</h3>
+                    <p class="fs-sm text-muted mb-0">text@email.com</p>
+                  </div>
+                  <nav class="nav flex-column pb-2 pb-lg-4 mb-3">
+                    <div class=" border-bottom border-1 mb-3"></div>
+                    <h4 class="fs-xs fw-medium text-muted text-uppercase pb-1 mb-2">계정</h4>
+                    <a class="nav-link fw-semibold py-2 px-0" href="account-overview.html"><i class="ai-user-check fs-5 opacity-60 me-2"></i>내정보</a>
+                    <a class="nav-link fw-semibold py-2 px-0" href="account-favorites.html"><i class="ai-bookmark fs-5 opacity-60 me-2"></i>북마크</a>
+                    <a class="nav-link fw-semibold py-2 px-0" href="account-orders.html"><i class="ai-dashboard fs-5 opacity-60 me-2"></i>내 예약 정보</a>
+                    <a class="nav-link fw-semibold py-2 px-0 active" href="account-settings.html"><i class="ai-settings fs-5 opacity-60 me-2"></i>설정</a>
+                  </nav>
+                  <nav class="nav flex-column pb-2 pb-lg-4 mb-3">
+                    <div class=" border-bottom border-1"></div>
+                    <h4 class="fs-xs fw-medium text-muted text-uppercase pb-1 mb-2 pt-3">쇼핑몰</h4>
+                    <a class="nav-link fw-semibold py-2 px-0" href="account-overview.html"><i class="ai-file-text fs-5 opacity-60 me-2"></i>주문내역</a>
+                    <a class="nav-link fw-semibold py-2 px-0" href="account-favorites.html"><i class="ai-cart fs-5 opacity-60 me-2"></i>장바구니</a>
+                  </nav>
+                  <nav class="nav flex-column">
+                    <div class=" border-bottom border-1"></div>
+                    <a class="nav-link fw-semibold py-2 px-0" href="account-signin.html"><i class="ai-logout fs-5 opacity-60 me-2" style="color: rgb(222, 58, 58)"></i><span style="color: rgb(238, 109, 109)">로그아웃</span></a>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </aside>
+          <!-- Page content-->
+          <div class="col-lg-9 pt-4 pb-2 pb-sm-4">
+            <h1 class="h2 mb-4">설정</h1>
+            <!-- Notifications-->
+            <section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
+              <div class="card-body">
+                <div class="d-flex align-items-center pb-4 mt-sm-n1 mb-0 mb-lg-1 mb-xl-3"><i class="ai-bell text-primary lead pe-1 me-2"></i>
+                  <h2 class="h4 mb-0">알림</h2>
+                  <button class="btn btn-sm btn-outline-secondary ms-auto" type="button" data-bs-toggle="checkbox" data-bs-target="#checkboxList">모두 전환</button>
+                </div>
+                <div id="checkboxList">
+                  <div class="form-check form-switch d-flex pb-md-2 mb-4">
+                    <input class="form-check-input flex-shrink-0" type="checkbox" checked id="product-sold">
+                    <label class="form-check-label ps-3 ps-sm-4" for="product-sold"><span class="h6 d-block mb-2">제품 배송 알림</span><span class="fs-sm text-muted">제품이 배송되었을 때 이메일 보내기</span></label>
+                  </div>
+                  <div class="form-check form-switch d-flex pb-md-2 mb-4">
+                    <input class="form-check-input flex-shrink-0" type="checkbox" checked id="product-update">
+                    <label class="form-check-label ps-3 ps-sm-4" for="product-update"><span class="h6 d-block mb-2">제품 업데이트 알림</span><span class="fs-sm text-muted">내가 구매한 제품이 업데이트되면 이메일 보내기</span></label>
+                  </div>
+                  <div class="form-check form-switch d-flex pb-md-2 mb-4">
+                    <input class="form-check-input flex-shrink-0" type="checkbox" id="product-comment">
+                    <label class="form-check-label ps-3 ps-sm-4" for="product-comment"><span class="h6 d-block mb-2">박물관 예약 알림</span><span class="fs-sm text-muted">박물관 예약 날짜가 다가오면 이메일 보내기</span></label>
+                  </div>
+                  <div class="form-check form-switch d-flex pb-md-2 mb-4">
+                    <input class="form-check-input flex-shrink-0" type="checkbox" checked id="product-review">
+                    <label class="form-check-label ps-3 ps-sm-4" for="product-review"><span class="h6 d-block mb-2">문화재 예약 알림</span><span class="fs-sm text-muted">문화재 예약 날짜가 다가오면 이메일 보내기</span></label>
+                  </div>
+                </div>
+                <div class="form-check form-switch d-flex">
+                  <input class="form-check-input flex-shrink-0" type="checkbox" disabled id="daily-summary">
+                  <label class="form-check-label opacity-100 ps-3 ps-sm-4" for="daily-summary"><span class="h6 text-muted d-block mb-2">일일 요약 이메일<span class="badge bg-faded-danger text-danger ms-3">프리미엄 전용</span></span><span class="fs-sm text-muted">제품과 오늘의 추천 박물관 및 문화재를 이메일 보내기 </span></label>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <!-- Divider for dark mode only-->
+      <hr class="d-none d-dark-mode-block">
+      <!-- Sidebar toggle button-->
+      <button class="d-lg-none btn btn-sm fs-sm btn-primary w-100 rounded-0 fixed-bottom" data-bs-toggle="offcanvas" data-bs-target="#sidebarAccount"><i class="ai-menu me-2"></i>Account menu</button>
+    </main>
+    <!-- Footer-->
+    <footer class="footer bg-dark position-relative pb-3 mt-5">
+      <div class="d-none d-dark-mode-block position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(255,255,255, .02);"></div>
+      <div class="dark-mode container position-relative zindex-2 pt-5 pb-2">
+        <!-- Columns with links-->
+        <div class="row" id="links">
+          <div class="col-6 pb-2 pb-md-0">
+            <a class="navbar-brand swap-image" href="index.html">
+              <img src="assets/img/logo_crimson.png" class="swap-to" width="80">
+              <div class="swap-from">
+                <img src="assets/img/logo_black.png" class="d-dark-mode-none" width="80">
+                <img src="assets/img/logo_dark_gray.png" class="d-none d-dark-mode-block" width="80">
+              </div>
+            </a>
+            <p class="fs-lg pt-4 py-2">옛이음은 옛날과 오늘날을 잇는, 문화와 이야기가 깃든 플랫폼입니다.</p>
+          </div>
+          <div class="col-2">
+            <h3 class="h6 d-none d-md-block">페이지</h3><a class="btn-more h6 mb-1  text-decoration-none d-flex align-items-center collapsed d-md-none" href="#useful" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="useful" data-show-label="Useful links" data-hide-label="Useful links"></a>
+            <div class="collapse d-md-block" id="useful" data-bs-parent="#links">
+              <div class="row">
+                <div class="col-6">
+                  <ul class="nav flex-column pb-2 pb-md-0">
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">회원가입</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">문화재</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">행사일정</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">온라인 전시</a></li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <ul class="nav flex-column pb-2 pb-md-0">
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">로그인</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">박물관</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">투어</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">쇼핑몰</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-xl-2 pb-2 pb-md-0">
+            <h3 class="h6  d-none d-md-block">커뮤니티</h3><a class="btn-more h6 mb-1  text-decoration-none d-flex align-items-center collapsed d-md-none" href="#decors" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="decors" data-show-label="Decors" data-hide-label="Decors"></a>
+            <div class="collapse d-md-block" id="decors" data-bs-parent="#links">
+              <ul class="nav flex-column pb-2 pb-md-0">
+                <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">자유게시판</a></li>
+                <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">문화소식</a></li>
+                <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">포토게시판</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3 col-xl-2 pb-2 pb-md-0">
+            <h3 class="h6  d-none d-md-block">개발자</h3><a class="btn-more h6 mb-1  text-decoration-none d-flex align-items-center collapsed d-md-none" href="#categories" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="categories" data-show-label="Categories" data-hide-label="Categories"></a>
+            <div class="collapse d-md-block" id="categories" data-bs-parent="#links">
+              <div class="row">
+                <div class="col-6">
+                  <ul class="nav flex-column pb-2 pb-md-0">
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">김상혁</span></li>
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">정희선</span></li>
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">차용택</span></li>
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">함지우</span></li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <ul class="nav flex-column pb-2 pb-md-0">
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">봉홍석</span></li>
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">지석환</span></li>
+                    <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">추정빈</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br><hr>
+        <!-- Logo + Socials + Cards-->
+        <div class="d-sm-flex align-items-center pt-4 row">
+          <div class="d-sm-flex align-items-center pe-sm-2 col-4">
+            <div class="text-nowrap mb-4 mb-sm-0"><a class="btn btn-icon btn-sm btn-secondary btn-telegram rounded-circle mx-2 ms-sm-0 me-sm-3" href="#"><i class="ai-telegram"></i></a><a class="btn btn-icon btn-sm btn-secondary btn-instagram rounded-circle mx-2 ms-sm-0 me-sm-3" href="#"><i class="ai-instagram"></i></a><a class="btn btn-icon btn-sm btn-secondary btn-facebook rounded-circle mx-2 ms-sm-0 me-sm-3" href="#"><i class="ai-facebook"></i></a><a class="btn btn-icon btn-sm btn-secondary btn-pinterest rounded-circle mx-2 ms-sm-0 me-sm-3" href="#"><i class="ai-pinterest"></i></a></div>
+          </div>
+          <div class="col-4 text-center">
+            © 2023. 옛이음. All rights reserved.
+          </div>
+          <div class="col-4 text-end">
+            <img class="ms-sm-auto" src="assets/img/shop/footer-cards.png" width="187" alt="Accepted cards">
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Back to top button--><a class="btn-scroll-top" href="#top" data-scroll>
+      <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
+      </svg><i class="ai-arrow-up"></i></a>
+    <!-- Vendor scripts: js libraries and plugins-->
+    <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+    <script src="assets/vendor/cleave.js/dist/cleave.min.js"></script>
+    <!-- Main theme script-->
+    <script src="assets/js/theme.min.js"></script>
+  </body>
+</html>

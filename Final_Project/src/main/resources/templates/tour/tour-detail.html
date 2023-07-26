@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+  <!-- Vendor styles-->
+  <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/flatpickr/dist/flatpickr.min.css}" />
+  <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/fullcalendar/main.min.css}" />
+  
+  <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
+  
+  <!-- Body-->
+  <body>
+    <!-- Page loading spinner-->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div>
+        <span>Loading...</span>
+      </div>
+    </div>
+    <!-- Page wrapper-->
+    <main class="page-wrapper">
+      <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
+      <header th:replace="~{common/layout :: #header}"></header>
+  
+      <!-- Hero-->
+      <section>
+        <div class="jarallax bg-dark py-5" data-jarallax data-type="scroll-opacity" data-speed="0.7" style="height: 50vh !important">
+          <div class="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-60"></div>
+          <div
+            class="jarallax-img"
+            style="
+              background-image: url(https://lh3.googleusercontent.com/TLyo276022O-OJKi4OGaQngAE_fI7ROyLiiudbdVY-trPGInygNw-mYkuxzUjMM7NvA5cytHw6IOqdw4HgtKy46-nHjyqeFQv_BxhZgWIQhGURctI8l8Yg=s0);
+            "></div>
+          <div class="container position-relative zindex-5">
+            <!-- Text + button-->
+            <div class="row pt-lg-2 py-xl-4 py-xxl-5 mb-md-4 mb-lg-5">
+              <div class="col-md-10 col-lg-9 col-xl-8 col-xxl-7 pt-5 mb-5">
+                <h1 class="display-2 text-light pb-sm-2 pb-md-3">투어</h1>
+                <h5 class="fs-4 text-light pb-sm-2 pb-md-3">
+                  나만의 투어플랜을 만들고
+                  <br />
+                  함께 할 친구를 모집해 보세요
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Page content-->
+      <div class="container mt-5">
+        <!-- Breadcrumb-->
+        <nav aria-label="breadcrumb">
+          <ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">홈</a></li>
+            <li class="breadcrumb-item"><a href="tour.html">투어</a></li>
+            <li class="breadcrumb-item active" aria-current="page">투어플랜 만들기</li>
+          </ol>
+        </nav>
+        <div class="row mb-md-2 mb-xl-4">
+          <!-- Post title + post meta-->
+          <h1 class="pb-2 pb-lg-3">
+            같이 경주 둘러보실 분
+            <span class="badge bg-primary fs-sm ms-1">문화재</span>
+          </h1>
+          <div class="d-flex flex-wrap align-items-center justify-content-between border-bottom mb-4">
+            <div class="d-flex align-items-center mb-4 me-4">
+              <img th:src="@{/assets/img/avatar/01.jpg}" class="rounded-circle" style="height: 50px" />
+              <span class="fw-bold ms-3">투어 마니아</span>
+            </div>
+          </div>
+          <!-- Post content-->
+          <h2 class="h4">지역</h2>
+          <p class="fs-lg mb-5">대구/경북</p>
+          <h2 class="h4">일정</h2>
+          <p class="fs-lg mb-5">07-01 ~ 07-02 | 1박 2일</p>
+          <h2 class="h4">모집인원</h2>
+          <p class="fs-lg mb-5">2명</p>
+          <p class="fs-lg mb-5">경주에 관심 있는 분들과 함께 둘러보고 싶어요!</p>
+          <div class="rounded-1" id="map" style="width: 100%; height: 600px"></div>
+          <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b405a10ab3aef9b7d1801f29c81327a2"></script>
+          <div id="calendar" class="mt-4"></div>
+          <div class="row mt-4">
+            <div class="col-6">
+              <a href="#" class="btn btn-success me-2">마감</a>
+              <a href="#" class="btn btn-warning">수정</a>
+            </div>
+            <div class="col-6 text-end">
+              <a href="#" class="btn btn-danger">삭제</a>
+            </div>
+          </div>
+          <!-- Comments-->
+          <div class="mt-5" id="comments">
+            <h2 class="h1 py-lg-1 py-xl-3">댓글</h2>
+            <hr />
+            <!-- Comment-->
+            <div class="border-bottom py-4 mt-2 mb-4">
+              <div class="d-flex align-items-center pb-1 mb-3">
+                <img class="rounded-circle" th:src="@{/assets/img/avatar/08.jpg}" width="48" alt="Comment author" />
+                <div class="ps-3">
+                  <h6 class="mb-0">Albert Flores</h6>
+                  <span class="fs-sm text-muted">5 hours ago</span>
+                </div>
+              </div>
+              <p class="pb-2 mb-0">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tellus lectus, tempus eu urna eu, imperdiet dignissim augue. Aliquam fermentum est a ligula bibendum, ac gravida ipsum
+                dictum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur suscipit quam ut velit condimentum, nec mollis risus semper. Curabitur
+                quis mauris eget ligula tincidunt venenatis. Sed congue pulvinar hendrerit.
+              </p>
+              <button class="nav-link fs-sm fw-semibold px-0 py-2" type="button">
+                Reply
+                <i class="ai-redo fs-xl ms-2"></i>
+              </button>
+            </div>
+            <!-- Comment-->
+            <div class="border-bottom pt-2 pb-4">
+              <div class="d-flex align-items-center pb-1 mb-3">
+                <img class="rounded-circle" th:src="@{/assets/img/avatar/11.jpg}" width="48" alt="Comment author" />
+                <div class="ps-3">
+                  <h6 class="mb-0">Jenny Wilson</h6>
+                  <span class="fs-sm text-muted">2 days ago at 9:20</span>
+                </div>
+              </div>
+              <p class="pb-2 mb-0">
+                Pellentesque urna pharetra, quis maecenas. Sit dolor amet nulla aenean eu, ac. Nisl mi tempus, iaculis viverra vestibulum scelerisque imperdiet montes mauris massa elit pretium
+                elementum eget tortor quis
+              </p>
+              <button class="nav-link fs-sm fw-semibold px-0 py-2" type="button">
+                Reply
+                <i class="ai-redo fs-xl ms-2"></i>
+              </button>
+              <!-- Comment reply-->
+              <div class="card card-body border-0 bg-secondary mt-4">
+                <div class="d-flex align-items-center pb-1 mb-3">
+                  <img class="rounded-circle" th:src="@{/assets/img/avatar/10.jpg}" width="48" alt="Comment author" />
+                  <div class="ps-3">
+                    <h6 class="mb-0">Ralph Edwards</h6>
+                    <span class="fs-sm text-muted">2 days ago at 11:45</span>
+                  </div>
+                </div>
+                <p class="mb-0">
+                  <a class="fw-bold text-decoration-none" href="#">@Jenny Wilson</a>
+                  Massa morbi duis et ornare urna dictum vestibulum pulvinar nunc facilisis ornare id at at ut arcu integer tristique placerat non turpis nibh turpis ullamcorper est porttitor.
+                </p>
+              </div>
+            </div>
+            <!-- Comment-->
+            <div class="border-bottom py-4 mt-2 mb-4">
+              <div class="d-flex align-items-center pb-1 mb-3">
+                <img class="rounded-circle" th:src="@{/assets/img/avatar/07.jpg}" width="48" alt="Comment author" />
+                <div class="ps-3">
+                  <h6 class="mb-0">Esther Howard</h6>
+                  <span class="fs-sm text-muted">May 19, 2022</span>
+                </div>
+              </div>
+              <p class="pb-2 mb-0">
+                Donec et sollicitudin tellus. Duis maximus, dui eget egestas mattis, purus ex tempor nulla, quis tempor sapien neque at nisl. Aliquam eu nisi ut nisl ultrices posuere. Praesent
+                dignissim efficitur nisi, a hendrerit ipsum elementum sit amet. Vivamus non ante nisl. Nunc faucibus velit at eros mollis semper.
+              </p>
+              <button class="nav-link fs-sm fw-semibold px-0 py-2" type="button">
+                Reply
+                <i class="ai-redo fs-xl ms-2"></i>
+              </button>
+            </div>
+            <!-- All comments button-->
+            <div class="text-end pb-5 mb-lg-1 mb-xl-3">
+              <a class="btn btn-link px-0" href="#">
+                모든 댓글 확인
+                <i class="ai-chevron-right fs-lg ms-1"></i>
+              </a>
+            </div>
+            <!-- Comment form-->
+            <div class="card border-0 bg-secondary pt-2 p-md-2 p-xl-3 p-xxl-4 mt-n3 mt-md-0">
+              <div class="card-body">
+                <h2 class="pb-2 pb-lg-3 pb-xl-4">댓글 작성</h2>
+                <form class="row needs-validation g-4" novalidate>
+                  <div class="col-12">
+                    <textarea class="form-control bg-white" rows="4" placeholder="댓글을 통해 투어 동행을 신청해 보세요." required id="c-comment"></textarea>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-warning" type="submit">등록하기</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Footer-->
+    <footer th:replace="~{common/layout :: #footer}"></footer>
+	
+    <!-- Back to top button-->
+    <a class="btn-scroll-top" href="#top" data-scroll>
+      <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
+      </svg>
+      <i class="ai-arrow-up"></i>
+    </a>
+    <!-- Vendor scripts: js libraries and plugins-->
+    <script th:src="@{/assets/vendor/bootstrap/dist/js/bootstrap.bundle.js}"></script>
+    <script th:src="@{/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.js}"></script>
+    <script th:src="@{/assets/vendor/jarallax/dist/jarallax.min.js}"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script th:src="@{/assets/vendor/fullcalendar/main.min.js}"></script>
+    <!-- Main theme script-->
+    <script th:src="@{/assets/js/theme.js}"></script>
+
+    <script>
+      var tourSchedules = [
+        {
+          name: "첨성대",
+          la: 35.835116,
+          lo: 129.219503,
+          startTime: new Date("2023-07-26T12:00"),
+          endTime: new Date("2023-07-26T13:00"),
+        },
+        {
+          name: "첨성대2",
+          la: 36.835116,
+          lo: 128.219503,
+          startTime: new Date("2023-07-26T13:00"),
+          endTime: new Date("2023-07-26T14:00"),
+        },
+      ];
+
+      var mapContainer = document.getElementById("map"); // 지도를 표시할 div
+      var mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 10, // 지도의 확대 레벨
+      };
+      // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+      var map = new kakao.maps.Map(mapContainer, mapOption);
+
+      var calendar = function (userOptions) {
+        // forEach function
+        var forEach = function forEach(array, callback, scope) {
+          for (var i = 0; i < array.length; i++) {
+            callback.call(scope, i, array[i]); // passes back stuff we need
+          }
+        }; // Calendar initialisation
+
+        var calendars = document.querySelectorAll(".calendar");
+        forEach(calendars, function (index, value) {
+          var options = _objectSpread(
+            {
+              themeSystem: "bootstrap5",
+            },
+            userOptions
+          );
+
+          var calendarInstance = new FullCalendar.Calendar(value, options);
+          calendarInstance.render();
+        });
+      };
+
+      var initOptions = {
+        locale: "ko",
+        headerToolbar: {
+          left: "prev,next today",
+          center: "",
+          right: "dayGridMonth,timeGridWeek,listWeek",
+        },
+        initialView: "timeGridWeek",
+        eventTimeFormat: {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        },
+        events: [],
+      };
+
+      var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+      var markers = [];
+      function addMarker(name, la, lo) {
+        var imageSize = new kakao.maps.Size(24, 35);
+        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+        var marker = new kakao.maps.Marker({
+          map: map,
+          position: new kakao.maps.LatLng(la, lo),
+          title: name,
+          image: markerImage,
+        });
+        markers.push(marker);
+      }
+
+      $(document).ready(function () {
+        $("#calendar").addClass("calendar");
+        for (var i = 0; i < tourSchedules.length; i++) {
+          var newEvent = {
+            title: tourSchedules[i].name,
+            start: tourSchedules[i].startTime,
+            end: tourSchedules[i].endTime,
+            classNames: ["event-custom-style", "bg-light", "text-nav", "border-0", "rounded-1", "p-1", "ps-3", "border-start", "border-5", "border-purple"],
+          };
+          initOptions.events.push(newEvent);
+
+          addMarker(tourSchedules[i].name, tourSchedules[i].la, tourSchedules[i].lo);
+        }
+        calendar(initOptions);
+        var moveLocation = new kakao.maps.LatLng(tourSchedules[tourSchedules.length - 1].la, tourSchedules[tourSchedules.length - 1].lo);
+        map.panTo(moveLocation);
+      });
+    </script>
+  </body>
+</html>
