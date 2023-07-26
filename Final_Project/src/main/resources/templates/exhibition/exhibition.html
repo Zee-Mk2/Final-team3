@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	
 	<!-- Vendor styles-->
-    <link rel="stylesheet" media="screen" href="assets/vendor/aos/dist/aos.css"/>
+    <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/aos/dist/aos.css}"/>
     <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
     
   <!-- Body-->
@@ -235,12 +235,12 @@
       <i class="ai-arrow-up"></i>
     </a>
     <!-- Vendor scripts: js libraries and plugins-->
-    <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-    <script src="assets/vendor/aos/dist/aos.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/jarallax/dist/jarallax.min.js"></script>
+    <script th:src="@{assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js}"></script>
+    <script th:src="@{assets/vendor/aos/dist/aos.js}"></script>
+    <script th:src="@{assets/vendor/swiper/swiper-bundle.min.js}"></script>
+    <script th:src="@{assets/vendor/jarallax/dist/jarallax.min.js}"></script>
     <!-- Main theme script-->
-    <script src="assets/js/theme.js"></script>
+    <script th:src="@{assets/js/theme.js}"></script>
   </body>
 </html>

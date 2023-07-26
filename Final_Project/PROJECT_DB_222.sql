@@ -4,6 +4,31 @@ USE final_db;
 
 
 ------------------------------------------------
+--------------- EXHIBITION 관련 테이블 ------------------
+------------------------------------------------
+
+
+DROP TABLE EXHIBITION;
+
+CREATE TABLE EXHIBITION(
+	exno INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(100),
+    sumary VARCHAR(1000),
+    museum VARCHAR(100),
+    gallery VARCHAR(100),
+    url VARCHAR(1000),
+    img VARCHAR(1000),
+    mediaType VARCHAR(20)
+    );
+    
+COMMIT;
+    
+SELECT * FROM EXHIBITION;
+
+
+
+
+------------------------------------------------
 --------------- museum 관련 테이블 ------------------
 ------------------------------------------------
 
@@ -91,7 +116,7 @@ COMMIT;
 SELECT * FROM PRODUCT;
 
 
---------------- 박물관 INCERT ------------------
+--------------- 박물관 INSERT ------------------
 
 INSERT INTO museum (musNo, name, summary, viewHours, fee, tel, img, sumImg, la, lo, ProgramImg, address) 
 VALUES (DEFAULT, "국립중앙박물관", "시대와 주제별로 제시된 6개의 상설전시관, 다양한 내용을 선보이는 특별전시관, 관람의 이해를 돕는 전시해설 프로그램, 오감으로 즐기고 배우는 어린이박물관, 다채로운 교육 프로그램, 첨단기술을 활용한 실감콘텐츠 등을 마음껏 누리고 즐기실 수 있습니다.", "월, 화, 목, 금, 일요일: 10:00am ~ 18:00pm (입장 마감: 17:30) / 수, 토요일: 10:00am ~ 21:00pm (입장 마감: 20:30)", "무료", "02-2077-9000", 
@@ -196,6 +221,25 @@ SELECT * FROM museum;
 
 
 
+
+--------------- 전시 INSERT ------------------
+
+INSERT INTO EXHIBITION (exno, title, sumary, museum, gallery, url, img, mediaType) VALUES (DEFAULT, '도자기에 담긴 동서교류 600년', '세계도자실은 특정 지역 문화를 소개하는 것을 넘어 세계 여러 문화가 만나고 발전하는 과정을 동서교류의 대표적인 산물인 도자기를 매개로 보여주기 위해 마련하였다.', '국립중앙박물관', '세계문화관 세계도자실', 'https://my.matterport.com/show/?m=tLzw9A4Bvp9', 'assets/img/exhibition/national_museum_of_korea/relic1.png', 'VR 전시');
+INSERT INTO EXHIBITION (exno, title, sumary, museum, gallery, url, img, mediaType) VALUES (DEFAULT, '삶, 죽음, 부활의 이야기', '세계 4대 문명 가운데 하나로 꼽히는 이집트 문명은 기원전 3천년경 나일강 하구에서 시작되었다. 나일강은 매년 범람하여 이집트 사람들에게 비옥한 토지를 선물하였고, 홍수를 극복하려는 노력에서 천문학과 수학, 달력이 생겨났다. 또 상형문자를 이용한 기록 문화가 발달하여 이집트 역사는 오늘날까지 생생하게 전한다.', '국립중앙박물관', '세계문화관 이집트실', 'https://my.matterport.com/show/?m=hLX8yBzeh2p', 'assets/img/exhibition/national_museum_of_korea/relic2.png', 'VR 전시');
+INSERT INTO EXHIBITION (exno, title, sumary, museum, gallery, url, img, mediaType) VALUES (DEFAULT, '금강산에 오르다','백옥같이 우뚝 선 일만 이천 봉우리, 신비한 금강산 조선시대 사람들 누구나 꿈꿨던 금강산 여행. 지금은 쉽게 갈 수 없는 금강산의 사계를 감상하며 잠시나마 편안한 치유의 시간을 보내시기 바랍니다.', '국립중앙박물관', '디지털실감영상관 실감콘텐츠', 'https://www.youtube.com/watch?v=b8TsnrZZeAs&t=328s', 'assets/img/exhibition/national_museum_of_korea/relic3.png', '360° 영상');
+INSERT INTO EXHIBITION (exno, title, sumary, museum, gallery, url, img, mediaType) VALUES (DEFAULT, '왕의 행차, 백성과 함께하다', '1795년 8일간의 정조와 어머니 혜경궁의 화성행차, 1796년의 화성 낙성연. 조선시대 궁궐 밖으로 나선 왕의 행차는 왕의 위엄을 상징하는 의례이면서 백성들의 큰 볼거리였습니다. 성대하면서도 흥겨운 왕의 행차, 춤과 음악이 어우러진 잔치, 군사훈련을 축제의 이미지로 재구성한 200여년 전 그날로 함께 가볼까요?', '국립중앙박물관', '디지털실감영상관 실감콘텐츠', 'https://www.youtube.com/watch?v=dg-ytQzgkJ0&t=30s', 'assets/img/exhibition/national_museum_of_korea/relic4.png', '360° 영상');
+INSERT INTO EXHIBITION (exno, title, sumary, museum, gallery, url, img, mediaType) VALUES (DEFAULT,	'공간으로 보는 한국현대사, 광화문', '이번 특별전을 통해 대한민국의 대표적 상징공간인 광화문 거리가 한국 현대사의 주요한 현장이었음을 재발견하고, 공간 변천에 따라 한국인들의 기억에 각인된 다양한 의미를 되새겨 광화문 공간의 미래를 전망해 보는 기회가 되기를 바랍니다.', '대한민국역사박물관',	'온라인 박물관', 'https://www.much.go.kr/online_exhi/gwangHwamun_VR/index.htm', 'https://www.much.go.kr/cmm/fms/getOrgImage.do?atchFileId=FILE_000000000014707&fileSn=1', 'VR 전시');
+INSERT INTO EXHIBITION (exno, title, sumary, museum, gallery, url, img, mediaType) VALUES (DEFAULT,	'구 상설전시실', '대한민국의 태동 - 대한민국의 기초확립 - 대한민국의 성장과 발전 - 대한민국의 선진화, 세계로의 도약', '대한민국역사박물관', '온라인 박물관', 'https://www.much.go.kr/online_exhi/sangsulJunsi/index.html', 'http://www.junglim.co.kr/upload/works/201801/496/worksViewHorizontal/20180112171224433/20180112171224433.jpg_1920.jpg', 'VR 전시');
+INSERT INTO EXHIBITION (exno, title, sumary, museum, gallery, url, img, mediaType) VALUES (DEFAULT,	'대한민국 역사꿈마을', '그때 그 시절 꿈마을 - 우리나라 대한민국 - 지구촌 여러 나라 - 그때 그 시절 장난감 - 우리나라의 미래 나의 꿈', '대한민국역사박물관', '어린이 박물관', 'https://www.much.go.kr/online_exhi/childMuseum/index.html', 'https://www.much.go.kr/cmm/fms/getOrgImage.do?atchFileId=FILE_000000000014639&fileSn=1', 'VR 전시');
+INSERT INTO EXHIBITION (exno, title, sumary, museum, gallery, url, img, mediaType) VALUES (DEFAULT, '우리 모두 어린이', '노 키즈존이 유행하고, 초유의 저출산 시대를 맞이하며 우리 시대의 어린이는 과연 어떤 존재인가 다시 한 번 묻게 됩니다. 다소 투박할 수 있지만, 전시에서 생각해 본 어린이와 우리의 모습을 언어를 뛰어넘어 그려보기 바랍니다.', '대한민국역사박물관', '기획전시실', 'https://look360.kr/vr/much_2022_special_exhibition/much_2022_special_exhibition/29221', 'https://www.much.go.kr/cmm/fms/getOrgImage.do?atchFileId=FILE_000000000016475&fileSn=1', 'VR 전시');
+INSERT INTO EXHIBITION (exno, title, sumary, museum, gallery, url, img, mediaType) VALUES (DEFAULT, '시민이 만든 박물관', '시민들로부터 기증받은 주요 유물을 한자리에서 펼쳐 보이는 개관 20주년 기증유물특별전을 엽니다. 지금까지 개최하였던 기증유물특별전을 중심으로 기증유물에 스며있는 기증자의 소중한 기억과 삶의 흔적을 시민들과 나누고 공감하고자 합니다.', '서울역사박물관', '기획전시실', 'https://museum.seoul.go.kr:8088/ARCHIVE_DATA/vr/the_museum_loved_by_seoul_citizens/index.html', 'https://museum.seoul.go.kr/upload/bbs/2023/6/13/c66c08b0-239d-4bc0-8bf9-99edebeba16e.jpg', 'VR 전시');
+INSERT INTO EXHIBITION (exno, title, sumary, museum, gallery, url, img, mediaType) VALUES (DEFAULT,	'명품도시 한양', '개관 20주년 특별전으로 조선 왕실과 한양 양반의 고급스러운 취향을 담아 전국 각지에서 생산되고 한양에서 소비되었던 명품들을 감상하시면서, 우리 조상의 지혜와 솜씨를 엿볼 수 있는 자리가 되기를 바라며 시민의 자산인 박물관의 소장품에 대해서도 이해를 높이는 기회가 되기를 바랍니다.', '서울역사박물관', '기획전시실', 'https://museum.seoul.go.kr/CHM_HOME/jsp/MM03/vr/treasures_of_hanyang/index.html', 'https://museum.seoul.go.kr/upload/bbs/2022/10/19/8b60a42e-e23b-42ac-84c7-caf3266d1710.jpg', 'VR 전시');
+INSERT INTO EXHIBITION (exno, title, sumary, museum, gallery, url, img, mediaType) VALUES (DEFAULT,	'서울 책방거리', '서울의 대표적인 책방거리인 청계천 대학천 책방거리의 형성과 변화를 살펴보며 현대 서울의 도시화 과정에서 대학천, 청계천 책방거리가 갖는 시대적인 의미를 되새겨 보고, 다양한 책들을 통해 잊혀졌던 꿈과 추억을 회상하는 기회가 되시길 기대합니다.', '서울역사박물관', '기획전시실', 'https://museum.seoul.go.kr:8088/ARCHIVE_DATA/vr/seoul_book_streets/index.html', 'https://museum.seoul.go.kr/upload/bbs/2023/5/4/0fc44317-1d49-4f8f-8ac6-f73ea6bd8231.jpg', 'VR 전시');
+INSERT INTO EXHIBITION (exno, title, sumary, museum, gallery, url, img, mediaType) VALUES (DEFAULT,	'그날, 혜화문에서는 무슨 일이 있었던 걸까', '지금으로부터 500여 년 전, 혜화문을 관리하는 과정에서 있었던 몇 가지 일화들을 소개합니다. 수도 한양의 출입구를 지키고 방비하는 과정에서 있었던 사건, 사고를 통해 옛 혜화문의 모습을 떠올려보는 기회가 되시길 바랍니다.', '서울역사박물관', '기획전시실', 'https://museum.seoul.go.kr:8088/ARCHIVE_DATA/vr/what_happened_at_hyehwamun_that_day/index.html', 'https://museum.seoul.go.kr/upload/bbs/2023/5/4/6f70587b-a145-4f16-b1b1-2e2329557abe.jpg', 'VR 전시');
+INSERT INTO EXHIBITION (exno, title, sumary, museum, gallery, url, img, mediaType) VALUES (DEFAULT, '국립고궁박물관 투어', '조선의 국왕 - 조선의 궁궐 - 왕실의 생활 - 대한제국 - 어차 - 궁중서화 - 왕실의례 - 과학문화 - 고궁배움터', '국립고궁박물관', '온라인박물관', 'https://www.gogung.go.kr/VR/index.html', 'https://www.m-i.kr/news/photo/202012/772354_550181_132.jpg', 'VR 전시');
+
+
+SELECT * FROM EXHIBITION;
 
 
 
