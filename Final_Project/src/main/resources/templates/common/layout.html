@@ -163,8 +163,8 @@
         <a class="nav-link position-relative fs-4 p-2" href="#cartOffcanvas" data-bs-toggle="offcanvas">
           <i class="ai-cart"></i>
         </a>
-        <a class="nav-link fs-4 p-2 mx-sm-1 d-none d-sm-flex" href="account-signin.html">
-          <i class="ai-user"></i>
+        <a class="nav-link fs-4 p-2 mx-sm-1 d-none d-sm-flex" th:href="@{sign-in}">
+          <i class="ai-login"></i>
         </a>
       </div>
       <button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
@@ -183,7 +183,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle fw-bold" th:href="@{tour}" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">투어</a>
             <ul class="dropdown-menu">
-              <li class="dropdown"><a class="dropdown-item" href="#">나의 투어플랜 만들기</a></li>
+              <li class="dropdown"><a class="dropdown-item" th:href="@{tour/post}">나의 투어플랜 만들기</a></li>
               <li class="dropdown"><a class="dropdown-item" th:href="@{tour}" >투어 인원 모집</a></li>
             </ul>
           </li>
@@ -195,19 +195,7 @@
               <li class="dropdown"><a class="dropdown-item" href="#">포토게시판</a></li>
             </ul>
           </li>
-          <li class="nav-item border-top mt-2 py-2 d-sm-none">
-            <a class="nav-link" href="account-signin.html">
-              <i class="ai-user fs-lg me-2"></i>
-              Sign In
-            </a>
-          </li>
         </ul>
-        <div class="d-sm-none p-3 mt-n3">
-          <a class="btn btn-primary w-100 mb-1" href="https://themes.getbootstrap.com/product/around-multipurpose-template-ui-kit/" target="_blank" rel="noopener">
-            <i class="ai-cart fs-xl me-2 ms-n1"></i>
-            Buy now
-          </a>
-        </div>
       </nav>
     </div>
   </header>
