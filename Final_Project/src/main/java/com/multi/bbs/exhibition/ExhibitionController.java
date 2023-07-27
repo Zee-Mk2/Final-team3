@@ -10,4 +10,9 @@ public class ExhibitionController {
 	public String exhibitionPage(Model model) {
 		return "/exhibition/exhibition";
 	}
+	
+	@GetMapping("/exhibitionDetail")
+	public String exhibitionDetailPage(Model model) {
+		return "/exhibition/exhibitionDetail";
+	}
 }
