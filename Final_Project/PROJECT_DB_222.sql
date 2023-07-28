@@ -7,7 +7,6 @@ USE final_db;
 --------------- EXHIBITION 관련 테이블 ------------------
 ------------------------------------------------
 
-
 DROP TABLE EXHIBITION;
 
 CREATE TABLE EXHIBITION(
@@ -24,8 +23,6 @@ CREATE TABLE EXHIBITION(
 COMMIT;
     
 SELECT * FROM EXHIBITION;
-
-
 
 
 ------------------------------------------------
@@ -53,8 +50,6 @@ CREATE TABLE museum (
 COMMIT;
 
 SELECT * FROM museum;
-
-
 
 
 ------------------------------------------------
@@ -90,7 +85,6 @@ COMMIT;
 SELECT * FROM HERITAGE;
 
 
-
 ------------------------------------------------
 --------------- PRODUCT 관련 테이블 ------------------
 ------------------------------------------------
@@ -114,6 +108,26 @@ CREATE TABLE PRODUCT (
 COMMIT;
 
 SELECT * FROM PRODUCT;
+
+
+------------------------------------------------
+--------------- MEMBER 관련 테이블 ------------------
+------------------------------------------------
+
+CREATE TABLE MEMBER (
+    MNO      INT  PRIMARY KEY AUTO_INCREMENT,
+    ROLE 	 VARCHAR(10) DEFAULT 'ROLE_USER',
+    NAME 	 VARCHAR(15),
+    EMAIL 	 VARCHAR(100) NOT NULL,
+    PASSWORD VARCHAR(100) NOT NULL,
+    PHONE 	 VARCHAR(13),
+    STATE 	 VARCHAR(1) DEFAULT 'Y' CHECK(STATE IN('Y', 'N')),
+    ENROLL_DATE DATETIME  DEFAULT CURRENT_TIMESTAMP
+);
+
+COMMIT;
+
+SELECT * FROM SPRING.MEMBER;
 
 
 --------------- 박물관 INSERT ------------------
@@ -216,10 +230,7 @@ VALUES (DEFAULT, "국립세계문자박물관", "문자에서 태동한 역사�
 "https://www.mow.or.kr/thumbnail/appnCrlts/AC_20230718173715080Qd80.jpg", "22004 인천광역시 센트럴로 217(송도동 24-8) 국립세계문자박물관");
 
 
-
 SELECT * FROM museum;
-
-
 
 
 --------------- 전시 INSERT ------------------

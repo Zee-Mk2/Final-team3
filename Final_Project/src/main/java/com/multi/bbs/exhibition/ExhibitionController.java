@@ -15,4 +15,5 @@ public class ExhibitionController {
 	public String exhibitionDetailPage(Model model) {
 		return "/exhibition/exhibitionDetail";
 	}
+	
 }
