@@ -127,7 +127,7 @@ CREATE TABLE MEMBER (
 
 COMMIT;
 
-SELECT * FROM SPRING.MEMBER;
+SELECT * FROM MEMBER;
 
 
 --------------- 박물관 INSERT ------------------

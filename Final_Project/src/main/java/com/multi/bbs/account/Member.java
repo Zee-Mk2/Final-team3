@@ -17,5 +17,5 @@ public class Member {
 	private String password;
 	private String phone;
 	private String state;
-	private Date enrollDate;
+	private Date enroll_date;
 }

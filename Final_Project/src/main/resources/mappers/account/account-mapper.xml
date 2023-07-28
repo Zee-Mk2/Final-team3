@@ -10,31 +10,20 @@
 		FROM MEMBER
 	</sql>
 	
-	<resultMap type="Member" id="memberResultMap">
-		<id 	property="mno" 		column="MNO" />
-		<result property="role" 	column="ROLE" />
-		<result property="name" 	column="NAME" />
-		<result property="email" 	column="EMAIL" />
-		<result property="password" column="PASSWORD" />
-		<result property="phone" 	column="PHONE" />
-		<result property="state" 	column="STATE" />
-		<result property="enrollDate" column="ENROLL_DATE" />
-	</resultMap>
-	
 	<select id="selectCount" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
 	</select>
 	
-	<select id="selectAll" resultMap="memberResultMap">
+	<select id="selectAll" resultType="com.multi.bbs.account.Member">
 		<include refid="selectMemberSql"/>
 	</select>
 	
-	<select id="selectMember" parameterType="string" resultMap="memberResultMap">
+	<select id="selectMember" parameterType="string" resultType="com.multi.bbs.account.Member">
 		<include refid="selectMemberSql"/>
-		WHERE ID = #{id} AND STATUS = 'Y'
+		WHERE EMAIL = #{email} AND STATE = 'Y'
 	</select>	
 	
-	<insert id="insertMember" parameterType="Member">
+	<insert id="insertMember" parameterType="com.multi.bbs.account.Member">
 		INSERT INTO MEMBER(
 			MNO, ROLE, NAME, 	
 			EMAIL, PASSWORD, PHONE,
@@ -42,7 +31,7 @@
 		) VALUES (
 			 0, default, #{name},
 			 #{email}, #{password}, #{phone}, 
-			 #{state}, DEFAULT
+			 'Y', DEFAULT
 		)
 	</insert>
 	
