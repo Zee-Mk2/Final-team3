@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ShopController {
 	@GetMapping("/shop/catalog")
 	public String tourPage(Model model) {
-		return "shop/shop-catalog";
+		return "shop/shopCatalog";
 	}
 	
 	@GetMapping("/shop/detail")
 	public String tourDetailPage() {
-		return "shop/shop-detail";
+		return "shop/shopDetail";
 	}
 	
 	@GetMapping("/shop/checkout")
 	public String tourPostPage() {
-		return "shop/shop-checkout";
+		return "shop/shopCheckout";
 	}
 }
