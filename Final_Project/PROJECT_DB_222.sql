@@ -7,7 +7,7 @@ USE final_db;
 --------------- EXHIBITION 관련 테이블 ------------------
 ------------------------------------------------
 
-DROP TABLE EXHIBITION;
+DROP TABLE if exists EXHIBITION;
 
 CREATE TABLE EXHIBITION(
 	exno INT PRIMARY KEY AUTO_INCREMENT,
@@ -29,7 +29,7 @@ SELECT * FROM EXHIBITION;
 --------------- museum 관련 테이블 ------------------
 ------------------------------------------------
 
-DROP TABLE museum;
+DROP TABLE if exists museum;
 
 CREATE TABLE museum (
 	musNo INT, 
@@ -57,7 +57,7 @@ SELECT * FROM museum;
 ------------------------------------------------
 
 
-DROP TABLE HERITAGE;
+DROP TABLE if exists HERITAGE;
 
 CREATE TABLE HERITAGE (
 	hNo INT PRIMARY KEY,
@@ -90,7 +90,7 @@ SELECT * FROM HERITAGE;
 ------------------------------------------------
 
 
-DROP TABLE PRODUCT;
+DROP TABLE if exists PRODUCT;
 
 CREATE TABLE PRODUCT (
     PRODUCTID VARCHAR(100) PRIMARY KEY,

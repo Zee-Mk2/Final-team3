@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	
+  <!-- Vendor styles-->
+  <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}" />
+  <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/lightgallery/css/lightgallery-bundle.min.css}" />
+  <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
+
+<!-- Body-->
+<body>
+  <!-- Page loading spinner-->
+  <div class="page-loading active">
+    <div class="page-loading-inner">
+      <div class="page-spinner"></div>
+      <span>Loading...</span>
+    </div>
+  </div>
+  <!-- Page wrapper-->
+  <main class="page-wrapper">
+    <!-- 헤더 시작 -->
+      <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
+      <header th:replace="~{common/layout :: #header}"></header>
+
+    <section>
+    </section>
+
+    <!-- Page content-->
+    <section class="container mt-5">
+      <!-- Title + price shown on screens < 768px-->
+      <div class="row ms-5 mt-3">
+        <!-- Gallery-->
+        <div class="col-md-6 gallery">
+          <!-- Item-->
+          <a class="d-block gallery-item card-hover zoom-effect mb-4"
+            href="https://shopping-phinf.pstatic.net/main_8562371/85623719626.3.jpg">
+            <div
+              class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 rounded-1 overflow-hidden zindex-2 opacity-0">
+              <i class="ai-zoom-in fs-2 text-white position-relative zindex-2"></i>
+              <div class="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-20"></div>
+            </div>
+            <div class="zoom-effect-wrapper rounded-1">
+              <div class="zoom-effect-img">
+                <img class="d-block w-100" src="https://shopping-phinf.pstatic.net/main_8562371/85623719626.3.jpg" />
+              </div>
+            </div>
+          </a>
+        </div>
+        <!-- Product details-->
+        <div class="col-md-6 col-xl-5 offset-xl-1">
+          <div class="position-md-sticky top-0 ">
+            <div class="d-none d-md-block" style="padding-top: 90px"></div>
+            <h2 class="d-none d-md-inline-block pb-1 mb-2">전통 한국 자개볼펜 기념품</h2><br>
+            <h4 class="d-none d-md-inline-block pb-1 mb-2 mt-3">13,900원</h4>
+            <br><br><br>
+            <!-- Action buttons-->
+            <div class="span">Mall : <span class="text-muted fw-normal ms-1" id="colorOption">따숨방</span></div>
+            <div class="span">Category : <span class="text-muted fw-normal ms-1" id="colorOption">전통공예소품</span></div>
+            <div class="d-sm-flex d-md-block d-lg-flex py-4 py-md-5 my-3 my-md-0 mt-lg-0 mb-lg-1">
+              <div class="count-input bg-gray rounded-3 me-4 mb-3 mb-sm-0 mb-md-3 mb-lg-0">
+                <button class="btn btn-icon btn-lg fs-xl" type="button" data-decrement>-</button>
+                <input class="form-control" type="number" value="1" readonly>
+                <button class="btn btn-icon btn-lg fs-xl" type="button" data-increment>+</button>
+              </div>
+              <div class="d-flex align-items-center">
+                <button class="btn btn-lg btn-warning w-100 w-lg-auto me-2" type="button"><i class="ai-cart me-2 ms-n1"></i>Add to cart</button>
+              </div>
+            </div>
+            <!-- Sharing-->
+            <div class="d-flex align-items-center">
+              <h4 class="h6 me-4">공유하기 :</h4>
+              <a class="btn btn-secondary btn-icon btn-sm btn-telegram rounded-circle me-3 mb-3" href="#">
+                <i class="ai-telegram"></i>
+              </a>
+              <a class="btn btn-secondary btn-icon btn-sm btn-instagram rounded-circle me-3 mb-3" href="#">
+                <i class="ai-instagram"></i>
+              </a>
+              <a class="btn btn-secondary btn-icon btn-sm btn-facebook rounded-circle mb-3" href="#">
+                <i class="ai-facebook"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 후기 -->
+    <section class="pt-0 pt-md-5">
+      <div class="container">
+        <div class="row g-4 g-md-5">
+          <!-- Tabs Content START -->
+          <div class="col-xl-8">
+            <!-- Outer tabs contents START -->
+            <div class="tab-content" id="tour-pills-tabContent">
+              <!-- Content item START -->
+              <div class="tab-pane fade show active ms-xxl-5" id="tour-pills-tab1" role="tabpanel" aria-labelledby="tour-pills-tab-1">
+                <h2 class="h2 py-lg-1 py-xl-3 border-bottom">상품 후기</h2>
+                <!-- Comment-->
+                <div class="border-bottom py-4 mt-2 mb-4">
+                  <div class="d-flex align-items-center pb-1 mb-3">
+                    <img class="rounded-circle" th:src="@{/assets/img/avatar/08.jpg}" width="48" alt="Comment author" />
+                    <div class="ps-3">
+                      <h6 class="mb-0">테스트계정</h6>
+                      <span class="fs-sm text-muted">5시간 전</span>
+                    </div>
+                  </div>
+                  <p class="pb-2 mb-0">후기테스트 후기테스트 후기테스트 후기테스트 후기테스트 후기테스트 후기테스트</p>
+                  <button class="nav-link fs-sm fw-semibold px-0 py-2" type="button">
+                    댓글
+                    <i class="ai-redo fs-xl ms-2"></i>
+                  </button>
+                </div>
+                <!-- Comment-->
+                <div class="border-bottom pt-2 pb-4">
+                  <div class="d-flex align-items-center pb-1 mb-3">
+                    <img class="rounded-circle" th:src="@{/assets/img/avatar/11.jpg}" width="48" alt="Comment author" />
+                    <div class="ps-3">
+                      <h6 class="mb-0">테스트계정</h6>
+                      <span class="fs-sm text-muted">5시간 전</span>
+                    </div>
+                  </div>
+                  <p class="pb-2 mb-0">후기테스트 후기테스트 후기테스트 후기테스트 후기테스트 후기테스트 후기테스트</p>
+                  <button class="nav-link fs-sm fw-semibold px-0 py-2" type="button">
+                    댓글
+                    <i class="ai-redo fs-xl ms-2"></i>
+                  </button>
+                  <!-- 후기 댓글-->
+                  <div class="card card-body border-0 bg-secondary mt-4">
+                    <div class="d-flex align-items-center pb-1 mb-3">
+                      <img class="rounded-circle" th:src="@{/assets/img/avatar/10.jpg}" width="48" alt="Comment author" />
+                      <div class="ps-3">
+                        <h6 class="mb-0">테스트계정</h6>
+                        <span class="fs-sm text-muted">5시간 전</span>
+                      </div>
+                    </div>
+                    <p class="mb-0">
+                      <a class="fw-bold text-decoration-none text-warning" href="#">@테스트계정</a>
+                      후기테스트 후기테스트 후기테스트 후기테스트 후기테스트 후기테스트 후기테스트
+                    </p>
+                  </div>
+                </div>
+                <!-- All comments button-->
+                <div class="text-end pb-5 mb-lg-1 mb-xl-3">
+                  <a class="btn btn-link px-0 text-warning" href="#">
+                    후기 모두 보기
+                    <i class="ai-chevron-right fs-lg ms-1"></i>
+                  </a>
+                </div>
+              </div>
+              <!-- Content item END -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Dscription section -->
+    <section class="container pb-5 mb-sm-2 mb-lg-3 mb-xl-4 mb-xxl-5">
+      <div class="row align-items-center mx-5">
+        <!-- 후기-->
+        <div class="pt-4" id="comments">
+          <!-- Comment form-->
+          <div class="card border-0 bg-secondary p-md-2 p-xl-3 p-xxl-4">
+            <div class="card-body">
+              <h2 class="pb-2 pb-lg-3 pb-xl-4">후기 남기기</h2>
+              <form class="row needs-validation g-4" novalidate>
+                <div class="col-12">
+                  <textarea class="form-control" rows="4" placeholder="후기를 입력하세요." required id="c-comment"></textarea>
+                </div>
+                <div class="col-12">
+                  <button class="btn btn-warning" type="submit">등록하기</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Trending products (carousel)-->
+    <section class="container pb-5 mb-lg-3 mb-xl-4 mb-xxl-5">
+      <div class="d-flex align-items-center justify-content-between pb-4 mb-2 mb-md-3">
+        <h2 class="h2 pt-1 mb-0">관련 상품</h2>
+        <!-- Slider prev/next buttons-->
+        <div class="d-flex">
+          <button class="btn btn-prev btn-icon btn-sm btn-outline-warning rounded-circle ms-3" type="button"
+            id="trending-prev">
+            <i class="ai-arrow-left"></i>
+          </button>
+          <button class="btn btn-next btn-icon btn-sm btn-outline-warning rounded-circle ms-3" type="button"
+            id="trending-next">
+            <i class="ai-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+      <!-- Slider (popular items)-->
+      <div class="swiper" data-swiper-options='{
+          "slidesPerView": 1,
+          "spaceBetween": 24,
+          "loop": true,
+          "navigation": {
+            "prevEl": "#trending-prev",
+            "nextEl": "#trending-next"
+          },
+          "breakpoints": {
+            "500": {
+              "slidesPerView": 2
+            },
+            "768": {
+              "slidesPerView": 3
+            },
+            "1000": {
+              "slidesPerView": 4
+            }
+          }
+        }'>
+        <div class="swiper-wrapper">
+          <!-- Item-->
+          <div class="swiper-slide">
+            <div class="card-hover position-relative rounded-1 p-3 mb-0">
+              <a class="d-block p-2 p-xl-4" href="#">
+                <div class="ratio-container" style="padding-bottom: 100%">
+                  <img class="d-block position-absolute top-0 start-0 bottom-0 end-0 mx-auto"
+                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fshop1.phinf.naver.net%2F20230224_207%2F1677227722531WbFtH_JPEG%2F4530406396492439_610146554.JPG&type=sc960_832" alt="Product"
+                    style="border-radius: 20px" />
+                </div>
+              </a>
+            </div>
+            <div class="d-flex mb-1">
+              <h3 class="h5 mb-1 mt-3">
+                <a href="#">나전칠기 꽃나비함</a>
+              </h3>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+              <span class="me-2">35900원</span>
+            </div>
+          </div><div class="swiper-slide">
+            <div class="card-hover position-relative rounded-1 p-3 mb-0">
+              <a class="d-block p-2 p-xl-4" href="#">
+                <div class="ratio-container" style="padding-bottom: 100%">
+                  <img class="d-block position-absolute top-0 start-0 bottom-0 end-0 mx-auto"
+                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fshop1.phinf.naver.net%2F20230224_207%2F1677227722531WbFtH_JPEG%2F4530406396492439_610146554.JPG&type=sc960_832" alt="Product"
+                    style="border-radius: 20px" />
+                </div>
+              </a>
+            </div>
+            <div class="d-flex mb-1">
+              <h3 class="h5 mb-1 mt-3">
+                <a href="#">나전칠기 꽃나비함</a>
+              </h3>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+              <span class="me-2">35900원</span>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="card-hover position-relative rounded-1 p-3 mb-0">
+              <a class="d-block p-2 p-xl-4" href="#">
+                <div class="ratio-container" style="padding-bottom: 100%">
+                  <img class="d-block position-absolute top-0 start-0 bottom-0 end-0 mx-auto"
+                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fshop1.phinf.naver.net%2F20230224_207%2F1677227722531WbFtH_JPEG%2F4530406396492439_610146554.JPG&type=sc960_832" alt="Product"
+                    style="border-radius: 20px" />
+                </div>
+              </a>
+            </div>
+            <div class="d-flex mb-1">
+              <h3 class="h5 mb-1 mt-3">
+                <a href="#">나전칠기 꽃나비함</a>
+              </h3>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+              <span class="me-2">35900원</span>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="card-hover position-relative rounded-1 p-3 mb-0">
+              <a class="d-block p-2 p-xl-4" href="#">
+                <div class="ratio-container" style="padding-bottom: 100%">
+                  <img class="d-block position-absolute top-0 start-0 bottom-0 end-0 mx-auto"
+                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fshop1.phinf.naver.net%2F20230224_207%2F1677227722531WbFtH_JPEG%2F4530406396492439_610146554.JPG&type=sc960_832" alt="Product"
+                    style="border-radius: 20px" />
+                </div>
+              </a>
+            </div>
+            <div class="d-flex mb-1">
+              <h3 class="h5 mb-1 mt-3">
+                <a href="#">나전칠기 꽃나비함</a>
+              </h3>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+              <span class="me-2">35900원</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer-->
+  <footer th:replace="~{common/layout :: #footer}"></footer>
+  
+  <!-- Back to top button-->
+  <a class="btn-scroll-top" href="#top" data-scroll>
+    <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10">
+      </circle>
+    </svg>
+    <i class="ai-arrow-up"></i>
+  </a>
+  <!-- Vendor scripts: js libraries and plugins-->
+  <script th:src="@{/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js}"></script>
+  <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+  <script th:src="@{/assets/vendor/lightgallery/lightgallery.min.js}"></script>
+  <script th:src="@{/assets/vendor/lightgallery/plugins/fullscreen/lg-fullscreen.min.js}"></script>
+  <script th:src="@{/assets/vendor/lightgallery/plugins/zoom/lg-zoom.min.js}"></script>
+  <script th:src="@{/assets/vendor/lightgallery/plugins/thumbnail/lg-thumbnail.min.js}"></script>
+  <!-- Main theme script-->
+  <script th:src="@{/assets/js/theme.min.js}"></script>
+</body>
+
+</html>

@@ -1,0 +1,931 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	
+	<!-- Vendor styles-->
+    <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/nouislider/dist/nouislider.min.css}" />
+    <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}" />
+    <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
+    
+  <!-- Body-->
+  <body>
+    <!-- Page loading spinner-->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div>
+        <span>불러오고 있습니다. 잠시만 기다려 주세요.</span>
+      </div>
+    </div>
+    <!-- Page wrapper-->
+    <main class="page-wrapper">
+      <!-- Search modal-->
+      <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" data-focus-input="#search">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-header d-block position-relative border-0 pb-3">
+              <form class="position-relative w-100 mt-2 mb-4">
+                <button class="btn-close position-absolute top-50 end-0 translate-middle-y m-0 me-n1" type="reset" data-bs-dismiss="modal"></button>
+                <i class="ai-search fs-xl position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                <input class="form-control form-control-lg px-5" type="search" placeholder="Type to search" data-focus-on-open='["modal", "#searchModal"]' />
+              </form>
+              <div class="fs-xs fw-medium text-muted text-uppercase">Suggestions</div>
+            </div>
+            <div class="modal-body pt-3">
+              <div class="d-flex align-items-center border-bottom pb-4 mb-4">
+                <a class="position-relative d-inline-block flex-shrink-0 bg-secondary rounded-1" href="shop-single.html">
+                  <span class="badge bg-success position-absolute top-0 start-100 translate-middle ms-n1">Shop</span>
+                  <img th:src="@{/assets/img/shop/cart/01.png}" width="90" alt="Product" />
+                </a>
+                <div class="ps-3">
+                  <h4 class="h6 mb-2"><a href="shop-single.html">Candle in concrete bowl</a></h4>
+                  <span class="mb-0 me-2">$11.00</span>
+                  <del class="fs-sm text-muted ms-auto">$15.00</del>
+                </div>
+              </div>
+              <div class="d-flex align-items-center border-bottom pb-4 mb-4">
+                <a class="position-relative d-inline-block flex-shrink-0" href="#">
+                  <span class="badge bg-info position-absolute top-0 start-100 translate-middle ms-n1">Blog</span>
+                  <img class="rounded-1" th:src="@{/assets/img/landing/shop/instagram/02.jpg}" width="90" alt="Post" />
+                </a>
+                <div class="ps-3">
+                  <h4 class="h6 mb-0"><a href="#">Bedroom decoration explained. Tips &amp; tricks from the field experts.</a></h4>
+                </div>
+              </div>
+              <div class="d-flex align-items-center">
+                <a class="position-relative d-inline-block flex-shrink-0 bg-secondary rounded-1" href="shop-single.html">
+                  <span class="badge bg-success position-absolute top-0 start-100 translate-middle ms-n1">Shop</span>
+                  <img th:src="@{/assets/img/shop/cart/02.png}" width="90" alt="Product" />
+                </a>
+                <div class="ps-3">
+                  <h4 class="h6 mb-2"><a href="shop-single.html">Exquisite glass vase</a></h4>
+                  <span class="mb-0 me-2">$23.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Cart offcanvas-->
+      <div class="offcanvas offcanvas-end py-2 p-sm-4 p-md-5" id="cartOffcanvas" style="width: 680px">
+        <!-- Title-->
+        <div class="px-4 pt-3">
+          <div class="d-flex justify-content-between align-items-center border-bottom pb-3 pb-sm-4">
+            <h2 class="offcanvas-title d-flex align-items-center mb-1">
+              Your cart
+              <span class="fs-base fw-normal text-muted ms-3">(3 items)</span>
+            </h2>
+            <button class="btn-close mb-1 me-n1" type="button" data-bs-dismiss="offcanvas" data-bs-target="#cartOffcanvas"></button>
+          </div>
+        </div>
+        <div class="offcanvas-body">
+          <!-- Item-->
+          <div class="d-sm-flex align-items-center pb-4">
+            <a class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-sm-2 p-md-3 mb-2 mb-sm-0" href="shop-single.html"><img th:src="@{/assets/img/shop/cart/01.png}" width="110" alt="Product" /></a>
+            <div class="w-100 pt-1 ps-sm-4">
+              <div class="d-flex">
+                <div class="me-3">
+                  <h3 class="h5 mb-2"><a href="shop-single.html">Candle in concrete bowl</a></h3>
+                  <div class="d-flex flex-wrap">
+                    <div class="text-muted fs-sm me-3">
+                      Color:
+                      <span class="text-dark fw-medium">Gray night</span>
+                    </div>
+                    <div class="text-muted fs-sm me-3">
+                      Weight:
+                      <span class="text-dark fw-medium">140g</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-end ms-auto">
+                  <div class="fs-5 mb-2">$11.00</div>
+                  <del class="text-muted ms-auto">$15.00</del>
+                </div>
+              </div>
+              <div class="count-input ms-n3">
+                <button class="btn btn-icon fs-xl" type="button" data-decrement>-</button>
+                <input class="form-control" type="number" value="2" readonly />
+                <button class="btn btn-icon fs-xl" type="button" data-increment>+</button>
+              </div>
+              <div class="nav justify-content-end mt-n5 mt-sm-n3">
+                <a class="nav-link fs-xl p-2" href="#" data-bs-toggle="tooltip" title="Remove"><i class="ai-trash"></i></a>
+              </div>
+            </div>
+          </div>
+          <!-- Item-->
+          <div class="d-sm-flex align-items-center border-top py-4">
+            <a class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-sm-2 p-md-3 mb-2 mb-sm-0" href="shop-single.html"><img th:src="@{/assets/img/shop/cart/02.png}" width="110" alt="Product" /></a>
+            <div class="w-100 pt-1 ps-sm-4">
+              <div class="d-flex">
+                <div class="me-3">
+                  <h3 class="h5 mb-2"><a href="shop-single.html">Exquisite glass vase</a></h3>
+                </div>
+                <div class="text-end ms-auto">
+                  <div class="fs-5 mb-2">$23.00</div>
+                </div>
+              </div>
+              <div class="count-input ms-n3">
+                <button class="btn btn-icon fs-xl" type="button" data-decrement>-</button>
+                <input class="form-control" type="number" value="1" readonly />
+                <button class="btn btn-icon fs-xl" type="button" data-increment>+</button>
+              </div>
+              <div class="nav justify-content-end mt-n5 mt-sm-n3">
+                <a class="nav-link fs-xl p-2" href="#" data-bs-toggle="tooltip" title="Remove"><i class="ai-trash"></i></a>
+              </div>
+            </div>
+          </div>
+          <!-- Item-->
+          <div class="d-sm-flex align-items-center border-top pt-4">
+            <a class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-sm-2 p-md-3 mb-2 mb-sm-0" href="shop-single.html"><img th:src="@{/assets/img/shop/cart/03.png}" width="110" alt="Product" /></a>
+            <div class="w-100 pt-1 ps-sm-4">
+              <div class="d-flex">
+                <div class="me-3">
+                  <h3 class="h5 mb-2"><a href="shop-single.html">Set for a dinner party of 7 items</a></h3>
+                </div>
+                <div class="text-end ms-auto">
+                  <div class="fs-5 mb-2">$47.00</div>
+                </div>
+              </div>
+              <div class="count-input ms-n3">
+                <button class="btn btn-icon fs-xl" type="button" data-decrement>-</button>
+                <input class="form-control" type="number" value="1" readonly />
+                <button class="btn btn-icon fs-xl" type="button" data-increment>+</button>
+              </div>
+              <div class="nav justify-content-end mt-n5 mt-sm-n3">
+                <a class="nav-link fs-xl p-2" href="#" data-bs-toggle="tooltip" title="Remove"><i class="ai-trash"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Coupon input + total-->
+        <div class="px-4 pb-3 pb-sm-4 pb-sm-5">
+          <div class="d-sm-flex align-items-center border-top pt-4">
+            <div class="input-group input-group-sm border-dashed mb-3 mb-sm-0 me-sm-4 me-md-5">
+              <input class="form-control text-uppercase" type="text" placeholder="Your coupon code" />
+              <button class="btn btn-secondary" type="button">Apply coupon</button>
+            </div>
+            <div class="d-flex align-items-center justify-content-center">
+              <span class="fs-xl me-3">Total:</span>
+              <span class="h3 mb-0">$92.00</span>
+            </div>
+          </div>
+        </div>
+        <!-- Action buttons-->
+        <div class="d-flex align-items-center justify-content-between px-4 pb-3">
+          <div class="nav d-none d-sm-block">
+            <a class="nav-link fw-semibold px-0" href="#cartOffcanvas" data-bs-dismiss="offcanvas">
+              <i class="ai-chevron-left fs-xl me-2"></i>
+              Back to shop
+            </a>
+          </div>
+          <a class="btn btn-lg btn-primary w-100 w-sm-auto" href="shop-checkout.html">
+            Proceed to checkout
+            <i class="ai-chevron-right ms-2 me-n1"></i>
+          </a>
+        </div>
+      </div>
+      
+      <!-- 헤더 시작 -->
+      <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
+      <header th:replace="~{common/layout :: #header}"></header>
+
+      <!-- Page content-->
+      <div class="container py-3 mt-3 mb-lg-4 mb-xl-5">
+
+        <!-- Breadcrumb-->
+        <nav aria-label="breadcrumb">
+          <ol class="mt-5 pt-lg-3 pb-md-1 pb-lg-3 breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">처음</a></li>
+            <li class="breadcrumb-item active" aria-current="page">상점</li>
+          </ol>
+        </nav>
+
+        <!-- Banner-->
+        <div class="ignore-dark-mode rounded-1 overflow-hidden mb-5" style="background-color: #e3e5e9">
+          <div class="row align-items-center g-0">
+            <div class="col-md-6 offset-xl-1 text-center text-md-center">검색창 자리</div>
+            <div class="col-md-6 col-xl-5 d-flex justify-content-end"><img th:src="@{/assets/img/shop/banner.jpg}" width="491" alt="Banner" /></div>
+          </div>
+        </div>
+
+        <!-- Page title-->
+        <div class="row pt-xl-3 mt-n1 mt-sm-0">
+          <div class="col-lg-9 offset-lg-3 pt-lg-3">
+            <h1 class="pb-2 pb-sm-3">신규 상품</h1>
+            <!-- Active filters + Sorting-->
+            <div class="d-flex align-items-center flex-shrink-0 mb-2 w-25 float-end">
+              <span class="text-muted text-nowrap fs-sm">정렬 기준:</span>
+              <select class="form-select form-select-flush py-0">
+                <option value="popular">인기순</option>
+                <option value="low-high">저가순</option>
+                <option value="high-low">고가순</option>
+                <option value="az">상품명 오름차순</option>
+                <option value="za">상품명 내림차순</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row pb-2 pb-sm-4">
+          <!-- Sidebar (offcanvas on sreens < 992px)-->
+          <aside class="col-lg-3">
+            <div class="offcanvas-lg offcanvas-start" id="shopSidebar">
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title">Filters</h5>
+                <button class="btn-close" type="button" data-bs-dismiss="offcanvas" data-bs-target="#shopSidebar"></button>
+              </div>
+
+              <form>
+                <div class="offcanvas-body pt-2 pt-lg-0 pe-lg-4">
+                  <div class="position-relative mb-4 mb-lg-5">
+                    <button type="submit" class="btn btn-link ai-search position-absolute top-50 start-0 translate-middle-y ms-3 px-1" style="color: #202020"></button>
+                    <input class="form-control ps-5" type="search" placeholder="키워드로 검색" />
+                  </div>
+                  <!-- Categories (accordion with checkboxes)-->
+                  <h3 class="h5">카테고리</h3>
+                  <div class="accordion accordion-alt pb-2 mb-4" id="shopCategories">
+                    <div class="accordion-item mb-0">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="lr-all" />
+                        <label class="form-check-label d-flex align-items-center" for="lr-all">
+                          <span class="text-nav fw-medium">전체</span>
+                          <span class="fs-xs text-muted ms-auto">(697)</span>
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" checked id="lr-vases" />
+                        <label class="form-check-label d-flex align-items-center" for="lr-vases">
+                          <span class="text-nav fw-medium">주방/생활</span>
+                          <span class="fs-xs text-muted ms-auto">(234)</span>
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="lr-mirrors" />
+                        <label class="form-check-label d-flex align-items-center" for="lr-mirrors">
+                          <span class="text-nav fw-medium">문구/사무</span>
+                          <span class="fs-xs text-muted ms-auto">(182)</span>
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="lr-paintings" />
+                        <label class="form-check-label d-flex align-items-center" for="lr-paintings">
+                          <span class="text-nav fw-medium">어린이</span>
+                          <span class="fs-xs text-muted ms-auto">(133)</span>
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="lr-furniture" />
+                        <label class="form-check-label d-flex align-items-center" for="lr-furniture">
+                          <span class="text-nav fw-medium">패션/잡화</span>
+                          <span class="fs-xs text-muted ms-auto">(24)</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Price (range slider + inputs)-->
+                  <h3 class="h5">가격</h3>
+                  <div class="range-slider pb-3 mb-4" data-start-min="5000" data-start-max="48000" data-min="0" data-max="100000" data-step="1000">
+                    <div class="range-slider-ui"></div>
+                    <div class="d-flex">
+                      <div class="d-flex align-items-center w-50">
+                        <label class="form-label fs-xs me-2 mb-0" for="price-min">최저</label>
+                        <input class="form-control form-control-sm range-slider-value-min" type="number" style="max-width: 6rem" id="price-min" />
+                      </div>
+                      <div class="d-flex align-items-center justify-content-end w-50">
+                        <label class="form-label fs-xs me-2 mb-0" for="price-max">최고</label>
+                        <input class="form-control form-control-sm range-slider-value-max" type="number" style="max-width: 6rem" id="price-max" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </aside>
+
+          <!-- Product grid-->
+
+          <div class="col-lg-9">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+              <!-- Item-->
+              <div class="col pb-2 pb-sm-3">
+                <div class="card-hover position-relative bg-secondary rounded-1 p-3 mb-4">
+                  <span class="badge bg-faded-danger text-danger position-absolute top-0 start-0 mt-3 ms-3">Sale</span>
+                  <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
+                    <i class="ai-heart fs-xl d-dark-mode-none"></i>
+                    <i class="ai-heart text-nav fs-xl d-none d-dark-mode-block"></i>
+                  </button>
+                  <div class="swiper swiper-nav-onhover" data-swiper-options='{"loop": true, "navigation": {"prevEl": ".btn-prev", "nextEl": ".btn-next"}}'>
+                    <a class="swiper-wrapper" href="shop-single.html">
+                      <div class="swiper-slide p-2 p-xl-4"><img class="d-block mx-auto" th:src="@{/assets/img/shop/products/01.png}" width="226" alt="Product" /></div>
+                    </a>
+                    <button class="btn btn-prev btn-icon btn-sm btn-light bg-light border-0 rounded-circle start-0" type="button">
+                      <i class="ai-chevron-left fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-left text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                    <button class="btn btn-next btn-icon btn-sm btn-light bg-light border-0 rounded-circle end-0" type="button">
+                      <i class="ai-chevron-right fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-right text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="d-flex mb-1">
+                  <h3 class="h6 mb-0"><a href="shop-single.html">Loft style lamp</a></h3>
+                  <div class="d-flex ps-2 mt-n1 ms-auto">
+                    <div class="ms-1">
+                      <input class="btn-check" type="radio" name="color1" value="Dark gray" checked id="color1-1" />
+                      <label class="btn btn-icon btn-xs btn-outline-secondary rounded-circle" for="color1-1">
+                        <span class="d-block rounded-circle" style="width: 0.625rem; height: 0.625rem; background-color: #576071"></span>
+                      </label>
+                    </div>
+                    <div class="ms-1">
+                      <input class="btn-check" type="radio" name="color1" value="Light gray" id="color1-2" />
+                      <label class="btn btn-icon btn-xs btn-outline-secondary rounded-circle" for="color1-2">
+                        <span class="d-block rounded-circle" style="width: 0.625rem; height: 0.625rem; background-color: #d5d4d3"></span>
+                      </label>
+                    </div>
+                    <div class="ms-1">
+                      <input class="btn-check" type="radio" name="color1" value="Blue" id="color1-3" />
+                      <label class="btn btn-icon btn-xs btn-outline-secondary rounded-circle" for="color1-3">
+                        <span class="d-block rounded-circle" style="width: 0.625rem; height: 0.625rem; background-color: #a1b7d9"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="me-2">$21.00</span>
+                  <del class="fs-sm text-muted">$35.00</del>
+                  <div
+                    class="nav ms-auto"
+                    data-bs-toggle="tooltip"
+                    data-bs-template='&lt;div class="tooltip fs-xs" role="tooltip"&gt;&lt;div class="tooltip-inner bg-light text-muted p-0"&gt;&lt;/div&gt;&lt;/div&gt;'
+                    data-bs-placement="left"
+                    title="Add to cart"
+                  >
+                    <a class="nav-link fs-lg py-2 px-1" href="#"><i class="ai-cart"></i></a>
+                  </div>
+                </div>
+              </div>
+              <!-- Item-->
+              <div class="col pb-2 pb-sm-3">
+                <div class="card-hover position-relative bg-secondary rounded-1 p-3 mb-4">
+                  <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
+                    <i class="ai-heart fs-xl d-dark-mode-none"></i>
+                    <i class="ai-heart text-nav fs-xl d-none d-dark-mode-block"></i>
+                  </button>
+                  <div class="swiper swiper-nav-onhover" data-swiper-options='{"loop": true, "navigation": {"prevEl": ".btn-prev", "nextEl": ".btn-next"}}'>
+                    <a class="swiper-wrapper" href="shop-single.html">
+                      <div class="swiper-slide p-2 p-xl-4"><img class="d-block mx-auto" th:src="@{/assets/img/shop/products/02.png}" width="226" alt="Product" /></div>
+                    </a>
+                    <button class="btn btn-prev btn-icon btn-sm btn-light bg-light border-0 rounded-circle start-0" type="button">
+                      <i class="ai-chevron-left fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-left text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                    <button class="btn btn-next btn-icon btn-sm btn-light bg-light border-0 rounded-circle end-0" type="button">
+                      <i class="ai-chevron-right fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-right text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="d-flex mb-1">
+                  <h3 class="h6 mb-0"><a href="shop-single.html">Dispenser for soap</a></h3>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="me-2">$16.00</span>
+                  <div
+                    class="nav ms-auto"
+                    data-bs-toggle="tooltip"
+                    data-bs-template='&lt;div class="tooltip fs-xs" role="tooltip"&gt;&lt;div class="tooltip-inner bg-light text-muted p-0"&gt;&lt;/div&gt;&lt;/div&gt;'
+                    data-bs-placement="left"
+                    title="Add to cart"
+                  >
+                    <a class="nav-link fs-lg py-2 px-1" href="#"><i class="ai-cart"></i></a>
+                  </div>
+                </div>
+              </div>
+              <!-- Item-->
+              <div class="col pb-2 pb-sm-3">
+                <div class="card-hover position-relative bg-secondary rounded-1 p-3 mb-4">
+                  <span class="badge bg-faded-danger text-danger position-absolute top-0 start-0 mt-3 ms-3">Sale</span>
+                  <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
+                    <i class="ai-heart fs-xl d-dark-mode-none"></i>
+                    <i class="ai-heart text-nav fs-xl d-none d-dark-mode-block"></i>
+                  </button>
+                  <div class="swiper swiper-nav-onhover" data-swiper-options='{"loop": true, "navigation": {"prevEl": ".btn-prev", "nextEl": ".btn-next"}}'>
+                    <a class="swiper-wrapper" href="shop-single.html">
+                      <div class="swiper-slide p-2 p-xl-4"><img class="d-block mx-auto" th:src="@{/assets/img/shop/products/03.png}" width="226" alt="Product" /></div>
+                    </a>
+                    <button class="btn btn-prev btn-icon btn-sm btn-light bg-light border-0 rounded-circle start-0" type="button">
+                      <i class="ai-chevron-left fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-left text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                    <button class="btn btn-next btn-icon btn-sm btn-light bg-light border-0 rounded-circle end-0" type="button">
+                      <i class="ai-chevron-right fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-right text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="d-flex mb-1">
+                  <h3 class="h6 mb-0"><a href="shop-single.html">Glossy round vase</a></h3>
+                  <div class="d-flex ps-2 mt-n1 ms-auto">
+                    <div class="ms-1">
+                      <input class="btn-check" type="radio" name="color2" value="Light gray" checked id="color2-1" />
+                      <label class="btn btn-icon btn-xs btn-outline-secondary rounded-circle" for="color2-1">
+                        <span class="d-block rounded-circle" style="width: 0.625rem; height: 0.625rem; background-color: #d5d4d3"></span>
+                      </label>
+                    </div>
+                    <div class="ms-1">
+                      <input class="btn-check" type="radio" name="color2" value="Dark gray" id="color2-2" />
+                      <label class="btn btn-icon btn-xs btn-outline-secondary rounded-circle" for="color2-2">
+                        <span class="d-block rounded-circle" style="width: 0.625rem; height: 0.625rem; background-color: #576071"></span>
+                      </label>
+                    </div>
+                    <div class="ms-1">
+                      <input class="btn-check" type="radio" name="color2" value="Blue" id="color2-3" />
+                      <label class="btn btn-icon btn-xs btn-outline-secondary rounded-circle" for="color2-3">
+                        <span class="d-block rounded-circle" style="width: 0.625rem; height: 0.625rem; background-color: #a1b7d9"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="me-2">$11.00</span>
+                  <del class="fs-sm text-muted">$15.00</del>
+                  <div
+                    class="nav ms-auto"
+                    data-bs-toggle="tooltip"
+                    data-bs-template='&lt;div class="tooltip fs-xs" role="tooltip"&gt;&lt;div class="tooltip-inner bg-light text-muted p-0"&gt;&lt;/div&gt;&lt;/div&gt;'
+                    data-bs-placement="left"
+                    title="Add to cart"
+                  >
+                    <a class="nav-link fs-lg py-2 px-1" href="#"><i class="ai-cart"></i></a>
+                  </div>
+                </div>
+              </div>
+              <!-- Item-->
+              <div class="col pb-2 pb-sm-3">
+                <div class="card-hover position-relative bg-secondary rounded-1 p-3 mb-4">
+                  <span class="badge bg-faded-primary text-primary position-absolute top-0 start-0 mt-3 ms-3">New</span>
+                  <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
+                    <i class="ai-heart fs-xl d-dark-mode-none"></i>
+                    <i class="ai-heart text-nav fs-xl d-none d-dark-mode-block"></i>
+                  </button>
+                  <div class="swiper swiper-nav-onhover" data-swiper-options='{"loop": true, "navigation": {"prevEl": ".btn-prev", "nextEl": ".btn-next"}}'>
+                    <a class="swiper-wrapper" href="shop-single.html">
+                      <div class="swiper-slide p-2 p-xl-4"><img class="d-block mx-auto" th:src="@{/assets/img/shop/products/04.png}" width="226" alt="Product" /></div>
+                    </a>
+                    <button class="btn btn-prev btn-icon btn-sm btn-light bg-light border-0 rounded-circle start-0" type="button">
+                      <i class="ai-chevron-left fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-left text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                    <button class="btn btn-next btn-icon btn-sm btn-light bg-light border-0 rounded-circle end-0" type="button">
+                      <i class="ai-chevron-right fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-right text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="d-flex mb-1">
+                  <h3 class="h6 mb-0"><a href="shop-single.html">Ceramic flower pot</a></h3>
+                  <div class="d-flex ps-2 mt-n1 ms-auto">
+                    <div class="ms-1">
+                      <input class="btn-check" type="radio" name="color3" value="Gray concrete" checked id="color3-1" />
+                      <label class="btn btn-icon btn-xs btn-outline-secondary rounded-circle" for="color3-1">
+                        <span
+                          class="d-block bg-size-cover bg-position-center rounded-circle"
+                          style="width: 0.625rem; height: 0.625rem; background-color: #c0c0c0; background-image: url(assets/img/shop/pattern/marble.jpg)"
+                        ></span>
+                      </label>
+                    </div>
+                    <div class="ms-1">
+                      <input class="btn-check" type="radio" name="color3" value="Beige" id="color3-2" />
+                      <label class="btn btn-icon btn-xs btn-outline-secondary rounded-circle" for="color3-2">
+                        <span class="d-block rounded-circle" style="width: 0.625rem; height: 0.625rem; background-color: #d9c9a1"></span>
+                      </label>
+                    </div>
+                    <div class="ms-1">
+                      <input class="btn-check" type="radio" name="color3" value="Blue" id="color3-3" />
+                      <label class="btn btn-icon btn-xs btn-outline-secondary rounded-circle" for="color3-3">
+                        <span class="d-block rounded-circle" style="width: 0.625rem; height: 0.625rem; background-color: #a1b7d9"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="me-2">$19.00</span>
+                  <div
+                    class="nav ms-auto"
+                    data-bs-toggle="tooltip"
+                    data-bs-template='&lt;div class="tooltip fs-xs" role="tooltip"&gt;&lt;div class="tooltip-inner bg-light text-muted p-0"&gt;&lt;/div&gt;&lt;/div&gt;'
+                    data-bs-placement="left"
+                    title="Add to cart"
+                  >
+                    <a class="nav-link fs-lg py-2 px-1" href="#"><i class="ai-cart"></i></a>
+                  </div>
+                </div>
+              </div>
+              <!-- Item-->
+              <div class="col pb-2 pb-sm-3">
+                <div class="card-hover position-relative bg-secondary rounded-1 p-3 mb-4">
+                  <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
+                    <i class="ai-heart fs-xl d-dark-mode-none"></i>
+                    <i class="ai-heart text-nav fs-xl d-none d-dark-mode-block"></i>
+                  </button>
+                  <div class="swiper swiper-nav-onhover" data-swiper-options='{"loop": true, "navigation": {"prevEl": ".btn-prev", "nextEl": ".btn-next"}}'>
+                    <a class="swiper-wrapper" href="shop-single.html">
+                      <div class="swiper-slide p-2 p-xl-4"><img class="d-block mx-auto" th:src="@{/assets/img/shop/products/05.png}" width="226" alt="Product" /></div>
+                    </a>
+                    <button class="btn btn-prev btn-icon btn-sm btn-light bg-light border-0 rounded-circle start-0" type="button">
+                      <i class="ai-chevron-left fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-left text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                    <button class="btn btn-next btn-icon btn-sm btn-light bg-light border-0 rounded-circle end-0" type="button">
+                      <i class="ai-chevron-right fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-right text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="d-flex mb-1">
+                  <h3 class="h6 mb-0"><a href="shop-single.html">Pendant lamp</a></h3>
+                  <div class="d-flex ps-2 mt-n1 ms-auto">
+                    <div class="ms-1">
+                      <input class="btn-check" type="radio" name="color4" value="Gray" checked id="color4-1" />
+                      <label class="btn btn-icon btn-xs btn-outline-secondary rounded-circle" for="color4-1">
+                        <span class="d-block rounded-circle" style="width: 0.625rem; height: 0.625rem; background-color: #bab8b7"></span>
+                      </label>
+                    </div>
+                    <div class="ms-1">
+                      <input class="btn-check" type="radio" name="color4" value="Woody brown" id="color4-2" />
+                      <label class="btn btn-icon btn-xs btn-outline-secondary rounded-circle" for="color4-2">
+                        <span
+                          class="d-block bg-size-cover bg-position-center rounded-circle"
+                          style="width: 0.625rem; height: 0.625rem; background-color: #c0c0c0; background-image: url(assets/img/shop/pattern/wood.jpg)"
+                        ></span>
+                      </label>
+                    </div>
+                    <div class="ms-1">
+                      <input class="btn-check" type="radio" name="color4" value="Gray marble" id="color4-3" />
+                      <label class="btn btn-icon btn-xs btn-outline-secondary rounded-circle" for="color4-3">
+                        <span
+                          class="d-block bg-size-cover bg-position-center rounded-circle"
+                          style="width: 0.625rem; height: 0.625rem; background-color: #c0c0c0; background-image: url(assets/img/shop/pattern/marble.jpg)"
+                        ></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="me-2">$22.00</span>
+                  <div
+                    class="nav ms-auto"
+                    data-bs-toggle="tooltip"
+                    data-bs-template='&lt;div class="tooltip fs-xs" role="tooltip"&gt;&lt;div class="tooltip-inner bg-light text-muted p-0"&gt;&lt;/div&gt;&lt;/div&gt;'
+                    data-bs-placement="left"
+                    title="Add to cart"
+                  >
+                    <a class="nav-link fs-lg py-2 px-1" href="#"><i class="ai-cart"></i></a>
+                  </div>
+                </div>
+              </div>
+              <!-- Item-->
+              <div class="col pb-2 pb-sm-3">
+                <div class="card-hover position-relative bg-secondary rounded-1 p-3 mb-4">
+                  <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
+                    <i class="ai-heart fs-xl d-dark-mode-none"></i>
+                    <i class="ai-heart text-nav fs-xl d-none d-dark-mode-block"></i>
+                  </button>
+                  <div class="swiper swiper-nav-onhover" data-swiper-options='{"loop": true, "navigation": {"prevEl": ".btn-prev", "nextEl": ".btn-next"}}'>
+                    <a class="swiper-wrapper" href="shop-single.html">
+                      <div class="swiper-slide p-2 p-xl-4"><img class="d-block mx-auto" th:src="@{/assets/img/shop/products/06.png}" width="226" alt="Product" /></div>
+                    </a>
+                    <button class="btn btn-prev btn-icon btn-sm btn-light bg-light border-0 rounded-circle start-0" type="button">
+                      <i class="ai-chevron-left fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-left text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                    <button class="btn btn-next btn-icon btn-sm btn-light bg-light border-0 rounded-circle end-0" type="button">
+                      <i class="ai-chevron-right fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-right text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="d-flex mb-1">
+                  <h3 class="h6 mb-0"><a href="shop-single.html">Living room table</a></h3>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="me-2">$46.00</span>
+                  <div
+                    class="nav ms-auto"
+                    data-bs-toggle="tooltip"
+                    data-bs-template='&lt;div class="tooltip fs-xs" role="tooltip"&gt;&lt;div class="tooltip-inner bg-light text-muted p-0"&gt;&lt;/div&gt;&lt;/div&gt;'
+                    data-bs-placement="left"
+                    title="Add to cart"
+                  >
+                    <a class="nav-link fs-lg py-2 px-1" href="#"><i class="ai-cart"></i></a>
+                  </div>
+                </div>
+              </div>
+              <!-- Item-->
+              <div class="col pb-2 pb-sm-3">
+                <div class="card-hover position-relative bg-secondary rounded-1 p-3 mb-4">
+                  <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
+                    <i class="ai-heart fs-xl d-dark-mode-none"></i>
+                    <i class="ai-heart text-nav fs-xl d-none d-dark-mode-block"></i>
+                  </button>
+                  <div class="swiper swiper-nav-onhover" data-swiper-options='{"loop": true, "navigation": {"prevEl": ".btn-prev", "nextEl": ".btn-next"}}'>
+                    <a class="swiper-wrapper" href="shop-single.html">
+                      <div class="swiper-slide p-2 p-xl-4"><img class="d-block mx-auto" th:src="@{/assets/img/shop/products/07.png}" width="226" alt="Product" /></div>
+                    </a>
+                    <button class="btn btn-prev btn-icon btn-sm btn-light bg-light border-0 rounded-circle start-0" type="button">
+                      <i class="ai-chevron-left fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-left text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                    <button class="btn btn-next btn-icon btn-sm btn-light bg-light border-0 rounded-circle end-0" type="button">
+                      <i class="ai-chevron-right fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-right text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="d-flex mb-1">
+                  <h3 class="h6 mb-0"><a href="shop-single.html">Teapot for hot drinks</a></h3>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="me-2">$17.00</span>
+                  <div
+                    class="nav ms-auto"
+                    data-bs-toggle="tooltip"
+                    data-bs-template='&lt;div class="tooltip fs-xs" role="tooltip"&gt;&lt;div class="tooltip-inner bg-light text-muted p-0"&gt;&lt;/div&gt;&lt;/div&gt;'
+                    data-bs-placement="left"
+                    title="Add to cart"
+                  >
+                    <a class="nav-link fs-lg py-2 px-1" href="#"><i class="ai-cart"></i></a>
+                  </div>
+                </div>
+              </div>
+              <!-- Item-->
+              <div class="col pb-2 pb-sm-3">
+                <div class="card-hover position-relative bg-secondary rounded-1 p-3 mb-4">
+                  <span class="badge bg-faded-primary text-primary position-absolute top-0 start-0 mt-3 ms-3">New</span>
+                  <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
+                    <i class="ai-heart fs-xl d-dark-mode-none"></i>
+                    <i class="ai-heart text-nav fs-xl d-none d-dark-mode-block"></i>
+                  </button>
+                  <div class="swiper swiper-nav-onhover" data-swiper-options='{"loop": true, "navigation": {"prevEl": ".btn-prev", "nextEl": ".btn-next"}}'>
+                    <a class="swiper-wrapper" href="shop-single.html">
+                      <div class="swiper-slide p-2 p-xl-4"><img class="d-block mx-auto" th:src="@{/assets/img/shop/products/08.png}" width="226" alt="Product" /></div>
+                    </a>
+                    <button class="btn btn-prev btn-icon btn-sm btn-light bg-light border-0 rounded-circle start-0" type="button">
+                      <i class="ai-chevron-left fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-left text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                    <button class="btn btn-next btn-icon btn-sm btn-light bg-light border-0 rounded-circle end-0" type="button">
+                      <i class="ai-chevron-right fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-right text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="d-flex mb-1">
+                  <h3 class="h6 mb-0"><a href="shop-single.html">Analogue wall clock</a></h3>
+                  <div class="d-flex ps-2 mt-n1 ms-auto">
+                    <div class="ms-1">
+                      <input class="btn-check" type="radio" name="color5" value="Turquoise" checked id="color5-1" />
+                      <label class="btn btn-icon btn-xs btn-outline-secondary rounded-circle" for="color5-1">
+                        <span class="d-block rounded-circle" style="width: 0.625rem; height: 0.625rem; background-color: #a8c2c0"></span>
+                      </label>
+                    </div>
+                    <div class="ms-1">
+                      <input class="btn-check" type="radio" name="color5" value="Lilac" id="color5-2" />
+                      <label class="btn btn-icon btn-xs btn-outline-secondary rounded-circle" for="color5-2">
+                        <span class="d-block rounded-circle" style="width: 0.625rem; height: 0.625rem; background-color: #b4a9c3"></span>
+                      </label>
+                    </div>
+                    <div class="ms-1">
+                      <input class="btn-check" type="radio" name="color5" value="Blue" id="color5-3" />
+                      <label class="btn btn-icon btn-xs btn-outline-secondary rounded-circle" for="color5-3">
+                        <span class="d-block rounded-circle" style="width: 0.625rem; height: 0.625rem; background-color: #a1b7d9"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="me-2">$25.00</span>
+                  <div
+                    class="nav ms-auto"
+                    data-bs-toggle="tooltip"
+                    data-bs-template='&lt;div class="tooltip fs-xs" role="tooltip"&gt;&lt;div class="tooltip-inner bg-light text-muted p-0"&gt;&lt;/div&gt;&lt;/div&gt;'
+                    data-bs-placement="left"
+                    title="Add to cart"
+                  >
+                    <a class="nav-link fs-lg py-2 px-1" href="#"><i class="ai-cart"></i></a>
+                  </div>
+                </div>
+              </div>
+              <!-- Item-->
+              <div class="col pb-2 pb-sm-3">
+                <div class="card-hover position-relative bg-secondary rounded-1 p-3 mb-4">
+                  <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
+                    <i class="ai-heart fs-xl d-dark-mode-none"></i>
+                    <i class="ai-heart text-nav fs-xl d-none d-dark-mode-block"></i>
+                  </button>
+                  <div class="swiper swiper-nav-onhover" data-swiper-options='{"loop": true, "navigation": {"prevEl": ".btn-prev", "nextEl": ".btn-next"}}'>
+                    <a class="swiper-wrapper" href="shop-single.html">
+                      <div class="swiper-slide p-2 p-xl-4"><img class="d-block mx-auto" th:src="@{/assets/img/shop/products/09.png}" width="226" alt="Product" /></div>
+                    </a>
+                    <button class="btn btn-prev btn-icon btn-sm btn-light bg-light border-0 rounded-circle start-0" type="button">
+                      <i class="ai-chevron-left fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-left text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                    <button class="btn btn-next btn-icon btn-sm btn-light bg-light border-0 rounded-circle end-0" type="button">
+                      <i class="ai-chevron-right fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-right text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="d-flex mb-1">
+                  <h3 class="h6 mb-0"><a href="shop-single.html">Scented candle</a></h3>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="me-2">$13.00</span>
+                  <div
+                    class="nav ms-auto"
+                    data-bs-toggle="tooltip"
+                    data-bs-template='&lt;div class="tooltip fs-xs" role="tooltip"&gt;&lt;div class="tooltip-inner bg-light text-muted p-0"&gt;&lt;/div&gt;&lt;/div&gt;'
+                    data-bs-placement="left"
+                    title="Add to cart"
+                  >
+                    <a class="nav-link fs-lg py-2 px-1" href="#"><i class="ai-cart"></i></a>
+                  </div>
+                </div>
+              </div>
+              <!-- Item-->
+              <div class="col pb-2 pb-sm-3">
+                <div class="card-hover position-relative bg-secondary rounded-1 p-3 mb-4">
+                  <span class="badge bg-faded-danger text-danger position-absolute top-0 start-0 mt-3 ms-3">Sale</span>
+                  <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
+                    <i class="ai-heart fs-xl d-dark-mode-none"></i>
+                    <i class="ai-heart text-nav fs-xl d-none d-dark-mode-block"></i>
+                  </button>
+                  <div class="swiper swiper-nav-onhover" data-swiper-options='{"loop": true, "navigation": {"prevEl": ".btn-prev", "nextEl": ".btn-next"}}'>
+                    <a class="swiper-wrapper" href="shop-single.html">
+                      <div class="swiper-slide p-2 p-xl-4"><img class="d-block mx-auto" th:src="@{/assets/img/shop/products/10.png}" width="226" alt="Product" /></div>
+                    </a>
+                    <button class="btn btn-prev btn-icon btn-sm btn-light bg-light border-0 rounded-circle start-0" type="button">
+                      <i class="ai-chevron-left fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-left text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                    <button class="btn btn-next btn-icon btn-sm btn-light bg-light border-0 rounded-circle end-0" type="button">
+                      <i class="ai-chevron-right fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-right text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="d-flex mb-1">
+                  <h3 class="h6 mb-0"><a href="shop-single.html">Matte color pitcher</a></h3>
+                  <div class="d-flex ps-2 mt-n1 ms-auto">
+                    <div class="ms-1">
+                      <input class="btn-check" type="radio" name="color6" value="Light brown" checked id="color6-1" />
+                      <label class="btn btn-icon btn-xs btn-outline-secondary rounded-circle" for="color6-1">
+                        <span class="d-block rounded-circle" style="width: 0.625rem; height: 0.625rem; background-color: #aea6a6"></span>
+                      </label>
+                    </div>
+                    <div class="ms-1">
+                      <input class="btn-check" type="radio" name="color6" value="Beige" id="color6-2" />
+                      <label class="btn btn-icon btn-xs btn-outline-secondary rounded-circle" for="color6-2">
+                        <span class="d-block rounded-circle" style="width: 0.625rem; height: 0.625rem; background-color: #d9c9a1"></span>
+                      </label>
+                    </div>
+                    <div class="ms-1">
+                      <input class="btn-check" type="radio" name="color6" value="Blue" id="color6-3" />
+                      <label class="btn btn-icon btn-xs btn-outline-secondary rounded-circle" for="color6-3">
+                        <span class="d-block rounded-circle" style="width: 0.625rem; height: 0.625rem; background-color: #a1b7d9"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="me-2">$11.00</span>
+                  <del class="fs-sm text-muted">$15.00</del>
+                  <div
+                    class="nav ms-auto"
+                    data-bs-toggle="tooltip"
+                    data-bs-template='&lt;div class="tooltip fs-xs" role="tooltip"&gt;&lt;div class="tooltip-inner bg-light text-muted p-0"&gt;&lt;/div&gt;&lt;/div&gt;'
+                    data-bs-placement="left"
+                    title="Add to cart"
+                  >
+                    <a class="nav-link fs-lg py-2 px-1" href="#"><i class="ai-cart"></i></a>
+                  </div>
+                </div>
+              </div>
+              <!-- Item-->
+              <div class="col pb-2 pb-sm-3">
+                <div class="card-hover position-relative bg-secondary rounded-1 p-3 mb-4">
+                  <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
+                    <i class="ai-heart fs-xl d-dark-mode-none"></i>
+                    <i class="ai-heart text-nav fs-xl d-none d-dark-mode-block"></i>
+                  </button>
+                  <div class="swiper swiper-nav-onhover" data-swiper-options='{"loop": true, "navigation": {"prevEl": ".btn-prev", "nextEl": ".btn-next"}}'>
+                    <a class="swiper-wrapper" href="shop-single.html">
+                      <div class="swiper-slide p-2 p-xl-4"><img class="d-block mx-auto" th:src="@{/assets/img/shop/products/11.png}" width="226" alt="Product" /></div>
+                    </a>
+                    <button class="btn btn-prev btn-icon btn-sm btn-light bg-light border-0 rounded-circle start-0" type="button">
+                      <i class="ai-chevron-left fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-left text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                    <button class="btn btn-next btn-icon btn-sm btn-light bg-light border-0 rounded-circle end-0" type="button">
+                      <i class="ai-chevron-right fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-right text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="d-flex mb-1">
+                  <h3 class="h6 mb-0"><a href="shop-single.html">Plate with granite print</a></h3>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="me-2">$9.00</span>
+                  <div
+                    class="nav ms-auto"
+                    data-bs-toggle="tooltip"
+                    data-bs-template='&lt;div class="tooltip fs-xs" role="tooltip"&gt;&lt;div class="tooltip-inner bg-light text-muted p-0"&gt;&lt;/div&gt;&lt;/div&gt;'
+                    data-bs-placement="left"
+                    title="Add to cart"
+                  >
+                    <a class="nav-link fs-lg py-2 px-1" href="#"><i class="ai-cart"></i></a>
+                  </div>
+                </div>
+              </div>
+              <!-- Item-->
+              <div class="col pb-2 pb-sm-3">
+                <div class="card-hover position-relative bg-secondary rounded-1 p-3 mb-4">
+                  <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
+                    <i class="ai-heart fs-xl d-dark-mode-none"></i>
+                    <i class="ai-heart text-nav fs-xl d-none d-dark-mode-block"></i>
+                  </button>
+                  <div class="swiper swiper-nav-onhover" data-swiper-options='{"loop": true, "navigation": {"prevEl": ".btn-prev", "nextEl": ".btn-next"}}'>
+                    <a class="swiper-wrapper" href="shop-single.html">
+                      <div class="swiper-slide p-2 p-xl-4"><img class="d-block mx-auto" th:src="@{/assets/img/shop/products/12.png}" width="226" alt="Product" /></div>
+                    </a>
+                    <button class="btn btn-prev btn-icon btn-sm btn-light bg-light border-0 rounded-circle start-0" type="button">
+                      <i class="ai-chevron-left fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-left text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                    <button class="btn btn-next btn-icon btn-sm btn-light bg-light border-0 rounded-circle end-0" type="button">
+                      <i class="ai-chevron-right fs-xl d-dark-mode-none"></i>
+                      <i class="ai-chevron-right text-nav fs-xl d-none d-dark-mode-block"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="d-flex mb-1">
+                  <h3 class="h6 mb-0"><a href="shop-single.html">Exquisite glass vase</a></h3>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="me-2">$23.00</span>
+                  <div
+                    class="nav ms-auto"
+                    data-bs-toggle="tooltip"
+                    data-bs-template='&lt;div class="tooltip fs-xs" role="tooltip"&gt;&lt;div class="tooltip-inner bg-light text-muted p-0"&gt;&lt;/div&gt;&lt;/div&gt;'
+                    data-bs-placement="left"
+                    title="Add to cart"
+                  >
+                    <a class="nav-link fs-lg py-2 px-1" href="#"><i class="ai-cart"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col col-md-4 col-12 order-md-2 order-3 text-center"></div>
+              <div class="col col-md-4 col-6 order-md-3 order-2">
+                <nav aria-label="Page navigation">
+                  <ul class="pagination pagination-sm justify-content-center">
+                    <li class="page-item active" aria-current="page">
+                      <span class="page-link">
+                        1
+                        <span class="visually-hidden">(current)</span>
+                      </span>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <!-- Footer-->
+	<footer th:replace="~{common/layout :: #footer}"></footer>
+	
+    <!-- Back to top button-->
+    <a class="btn-scroll-top" href="#top" data-scroll>
+      <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
+      </svg>
+      <i class="ai-arrow-up"></i>
+    </a>
+    <!-- Vendor scripts: js libraries and plugins-->
+    <script th:src="@{/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js}"></script>
+    <script th:src="@{/assets/vendor/nouislider/dist/nouislider.min.js}"></script>
+    <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+    <!-- Main theme script-->
+    <script th:src="@{/assets/js/theme.min.js}"></script>
+  </body>
+</html>
