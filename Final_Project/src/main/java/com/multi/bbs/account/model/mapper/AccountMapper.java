@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.multi.bbs.account.model.vo.Member;
+
 @Mapper
 public interface AccountMapper {
 	int selectCount();

@@ -3,7 +3,7 @@
 
 
 <!-- 향후 Mapper interface가 정의 될 위치 -->
-<mapper namespace="com.multi.bbs.account.AccountMapper">
+<mapper namespace="com.multi.bbs.account.model.mapper.AccountMapper">
 	<sql id="selectMemberSql">
 		SELECT 	
 			MNO, ROLE, NAME, EMAIL, PASSWORD, PHONE, STATE, ENROLL_DATE
@@ -14,24 +14,24 @@
 		SELECT COUNT(*) FROM MEMBER
 	</select>
 	
-	<select id="selectAll" resultType="com.multi.bbs.account.Member">
+	<select id="selectAll" resultType="com.multi.bbs.account.model.vo.Member">
 		<include refid="selectMemberSql"/>
 	</select>
 	
-	<select id="selectMember" parameterType="string" resultType="com.multi.bbs.account.Member">
+	<select id="selectMember" parameterType="string" resultType="com.multi.bbs.account.model.vo.Member">
 		<include refid="selectMemberSql"/>
 		WHERE EMAIL = #{email} AND STATE = 'Y'
 	</select>	
 	
-	<insert id="insertMember" parameterType="com.multi.bbs.account.Member">
+	<insert id="insertMember" parameterType="com.multi.bbs.account.model.vo.Member">
 		INSERT INTO MEMBER(
 			MNO, ROLE, NAME, 	
 			EMAIL, PASSWORD, PHONE,
 			STATE, ENROLL_DATE
 		) VALUES (
-			 0, default, #{name},
+			 0, DEFAULT, #{name},
 			 #{email}, #{password}, #{phone}, 
-			 'Y', DEFAULT
+			 DEFAULT, DEFAULT
 		)
 	</insert>
 	

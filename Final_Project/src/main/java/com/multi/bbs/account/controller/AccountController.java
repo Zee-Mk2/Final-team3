@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.multi.bbs.account.model.service.AccountService;
+import com.multi.bbs.account.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
