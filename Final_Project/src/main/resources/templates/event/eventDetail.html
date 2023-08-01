@@ -31,20 +31,17 @@
           </ol>
         </nav>
         <!-- Item-->
+        <th:block th:if="evntNo != null">
         <article class="row align-items-center pb-5 mb-md-2 mb-lg-3 mb-xl-4">
           <div class="col-md-6 offset-xxl-1 mb-4 mb-md-0">
-            <a href="#"><img class="rounded-5" src="assets\img\event\m_poster_2022.png" width="500" alt="Image" /></a>
+            <a href="#"><img class="rounded-5" th:src="${eventProgram.poster}" width="500" alt="Image" /></a>
           </div>
           <div class="col-md-5 col-xl-4">
             <div class="ms-md-4 ms-lg-5 ms-xxl-0">
-              <h2 class="mb-lg-5" style="width: 600px">
-                2023 피란수도 부산 문화재 야행
-                <br />
-                (부산에서 만난 우리들)
+              <h2 class="mb-lg-5" style="width: 600px" th:utext="${eventProgram.name.replaceAll('\n', '<br>')}">
               </h2>
               <p class="mb-0 mb-md-1">
-                대한민국의 '피란수도 부산'을 재발견하는 시간! 부산은 1,129일의 한국전쟁 기간 중 1,023일간 대한민국의 수도로서 다양한 역할을 수행하며 부산으로 내려온 피란민들을 품고 위기를 극복한
-                포용성과 개방성을 지닌 도시로, 지금까지도 도심 속 가까이에 살아있는 피란유산의 역사적 의미와 피란시절의 생활상을 전시, 공연, 체험 등을 통해 향유하는 프로그램
+              [[${eventProgram.summary}]]
               </p>
             </div>
             <a class="btn btn-primary w-100 w-sm-auto mt-5" href="#c-comment">후기 작성하기</a>
@@ -64,37 +61,37 @@
           <div class="gallery row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" data-thumbnails="true">
             <!-- Item -->
             <div class="col">
-              <a href="assets\img\event\1138.jpg" class="gallery-item d-block card-hover h-100">
+              <a th:href="${eventProgram.img1}" class="gallery-item d-block card-hover h-100">
                 <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 rounded-4 overflow-hidden zindex-2 opacity-0">
                   <i class="ai-zoom-in fs-2 text-white position-relative zindex-2"></i>
                   <div class="position-absolute bottom-0 start-0 w-100 text-center text-white fs-sm fw-medium zindex-2 pb-3">Image #1</div>
                   <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-40"></div>
                 </div>
-                <img src="assets\img\event\1138.jpg" class="d-block rounded-4 h-100" alt="Image #1" />
+                <img th:src="${eventProgram.img1}" class="d-block rounded-4 h-100" alt="Image #1" style="width: 100%; height: auto; max-width: 408px; max-height: 214.934px;" />
               </a>
             </div>
 
             <!-- Item -->
             <div class="col">
-              <a href="assets\img\event\1139.jpg" class="gallery-item d-block card-hover h-100">
+              <a th:href="${eventProgram.img2}" class="gallery-item d-block card-hover h-100">
                 <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 rounded-4 overflow-hidden zindex-2 opacity-0">
                   <i class="ai-zoom-in fs-2 text-white position-relative zindex-2"></i>
                   <div class="position-absolute bottom-0 start-0 w-100 text-center text-white fs-sm fw-medium zindex-2 pb-3">Image #2</div>
                   <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-40"></div>
                 </div>
-                <img src="assets\img\event\1139.jpg" class="d-block rounded-4 h-100" alt="Image #2" />
+                <img th:src="${eventProgram.img2}" class="d-block rounded-4 h-100" alt="Image #2" style="width: 100%; height: auto; max-width: 408px; max-height: 214.934px;" />
               </a>
             </div>
 
             <!-- Item -->
             <div class="col">
-              <a href="assets\img\event\1140.jpg" class="gallery-item d-block card-hover h-100">
+              <a th:href="${eventProgram.img3}" class="gallery-item d-block card-hover h-100">
                 <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 rounded-4 overflow-hidden zindex-2 opacity-0">
                   <i class="ai-zoom-in fs-2 text-white position-relative zindex-2"></i>
                   <div class="position-absolute bottom-0 start-0 w-100 text-center text-white fs-sm fw-medium zindex-2 pb-3">Image #3</div>
                   <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-40"></div>
                 </div>
-                <img src="assets\img\event\1140.jpg" class="d-block rounded-4 h-100" alt="Image #3" />
+                <img th:src="${eventProgram.img3}" class="d-block rounded-4 h-100" alt="Image #3" style="width: 100%; height: auto; max-width: 408px; max-height: 214.934px;" />
               </a>
             </div>
           </div>
@@ -106,15 +103,8 @@
                 <div class="card-body align">
                   <h2 class="card-title">야경 夜景</h2>
                   <p class="card-text" style="font-size: 20px; min-height: 100px">
-                    • 피란수도 부산의 여름밤
-                    <br />
-                    • 피란수도 부산의 기적
-                    <br />
-                    • 피란수도 부산으로 가는 길
-                    <br />
+                  <span th:utext="${eventProgram.view.replaceAll('\n', '<br>')}" />
                   </p>
-                  <h3>장소</h3>
-                  <p class="card-text" style="font-size: 20px">부산항 제1부두 등 서구 및 중구 일원 문화재</p>
                 </div>
               </div>
 
@@ -122,15 +112,9 @@
                 <div class="card-body">
                   <h2 class="card-title">야로 夜路</h2>
                   <p class="card-text" style="font-size: 20px">
-                    • 피란수도 드로잉 투어
-                    <br />
-                    • 뚜벅뚜벅 AR 챌린지
-                    <br />
-                    • 과거와 현재가 만나는 곳, 부산!
-                    <br />
+                    <p class="card-text" style="font-size: 20px; min-height: 100px">
+                    <span th:utext="${eventProgram.street.replaceAll('\n', '<br>')}" />
                   </p>
-                  <h3>장소</h3>
-                  <p class="card-text" style="font-size: 20px">피란수도 부산유산 유적지 일원</p>
                 </div>
               </div>
 
@@ -138,13 +122,8 @@
                 <div class="card-body align">
                   <h2 class="card-title">야설 夜設</h2>
                   <p class="card-text" style="font-size: 20px; min-height: 100px">
-                    • 피란수도 예술을 보여줘
-                    <br />
-                    • 피란의 기억을 되돌아보다
-                    <br />
+                  <span th:utext="${eventProgram.story.replaceAll('\n', '<br>')}" />
                   </p>
-                  <h3>장소</h3>
-                  <p class="card-text" style="font-size: 20px">부산항 제1부두</p>
                 </div>
               </div>
 
@@ -152,13 +131,8 @@
                 <div class="card-body">
                   <h2 class="card-title">야사 夜史</h2>
                   <p class="card-text" style="font-size: 20px; min-height: 100px">
-                    • 금순아 ~ 학교가자
-                    <br />
-                    • 1023 피란 LAND
-                    <br />
+                  <span th:utext="${eventProgram.history.replaceAll('\n', '<br>')}" />
                   </p>
-                  <h3>장소</h3>
-                  <p class="card-text" style="font-size: 20px">피란수도 부산유산 유적지 일원</p>
                 </div>
               </div>
 
@@ -166,15 +140,8 @@
                 <div class="card-body align">
                   <h2 class="card-title">야화 夜畵</h2>
                   <p class="card-text" style="font-size: 20px; min-height: 100px">
-                    • 피란수도 그림엽서 공모전
-                    <br />
-                    • 금순이가 본 피란수도 이야기
-                    <br />
-                    • 피란수도 부산으로 가는 길
-                    <br />
+                  <span th:utext="${eventProgram.picture.replaceAll('\n', '<br>')}" />
                   </p>
-                  <h3>장소</h3>
-                  <p class="card-text" style="font-size: 20px">구 동양척식주식회사 부산지점 일원 등</p>
                 </div>
               </div>
 
@@ -182,13 +149,8 @@
                 <div class="card-body">
                   <h2 class="card-title">야시 夜市</h2>
                   <p class="card-text" style="font-size: 20px; min-height: 100px">
-                    • 웰컴 투 피란촌
-                    <br />
-                    • 그땐 그랬지, 피란 장터
-                    <br />
+                  <span th:utext="${eventProgram.market.replaceAll('\n', '<br>')}" />
                   </p>
-                  <h3>장소</h3>
-                  <p class="card-text" style="font-size: 20px">부산항 제1부두</p>
                 </div>
               </div>
 
@@ -196,13 +158,8 @@
                 <div class="card-body align">
                   <h2 class="card-title">야식 夜食</h2>
                   <p class="card-text" style="font-size: 20px; min-height: 100px">
-                    • 피란시장 맛탐방
-                    <br />
-                    • 내가 만든 피란음식
-                    <br />
+                  <span th:utext="${eventProgram.food.replaceAll('\n', '<br>')}" />
                   </p>
-                  <h3>장소</h3>
-                  <p class="card-text" style="font-size: 20px">부산항 제1부두</p>
                 </div>
               </div>
 
@@ -210,11 +167,8 @@
                 <div class="card-body">
                   <h2 class="card-title">야숙 夜宿</h2>
                   <p class="card-text" style="font-size: 20px; min-height: 100px">
-                    • 금동이의 하루
-                    <br />
+                  <span th:utext="${eventProgram.sleep.replaceAll('\n', '<br>')}" />
                   </p>
-                  <h3>장소</h3>
-                  <p class="card-text" style="font-size: 20px">피란수도 부산 유산 일원</p>
                 </div>
               </div>
             </div>
