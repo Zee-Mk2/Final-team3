@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<!-- 향후 Mapper interface가 정의 될 위치 -->
+<mapper namespace="com.multi.bbs.shop.ProductMapper">
+	<sql id="selectProductSql">
+		SELECT 	
+			PRODUCTID, PRODUCTTYPE, TITLE, IMAGE, LPRICE, CATEGORY1, CATEGORY2, CATEGORY3, CATEGORY4, MALLNAME
+		FROM PRODUCT
+	</sql>
+	
+	<select id="selectCount" resultType="int">
+		SELECT COUNT(*) FROM PRODUCT
+	</select>
+	
+	<select id="selectAll" resultType="com.multi.bbs.shop.Product">
+		<include refid="selectProductSql"/>
+	</select>
+	
+	<select id="selectProduct" parameterType="string" resultType="com.multi.bbs.shop.Product">
+		<include refid="selectProductSql"/>
+	</select>	
+	
+	<insert id="insertProduct" parameterType="com.multi.bbs.shop.Product">
+		INSERT INTO PRODUCT(
+			PRODUCTID, PRODUCTTYPE, TITLE, 	
+			IMAGE, LPRICE,
+			CATEGORY1, CATEGORY2, CATEGORY3, CATEGORY4,
+			MALLNAME
+		) VALUES (
+			 #{productid}, #{producttype}, #{title},
+			 #{image}, 0,
+			 #{category1}, #{category2}, #{category3}, #{category4},
+			 #{mallname}
+		)
+	</insert>
+	
+	
+	
+</mapper>
