@@ -12,6 +12,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.multi.bbs.account.model.service.AccountService;
 import com.multi.bbs.account.model.vo.Member;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -39,26 +40,27 @@ public class AccountController {
 	}
 	
 	@PostMapping("/sign-in")
-	String login(Model model, String email, String password) {
+	String login(Model model, String email, String password, HttpSession session) {
 		System.out.println("email : " + email + ", password : " + password);
 		Member loginMember = accountService.login(email, password);
 		if(loginMember != null) { // 성공
 			model.addAttribute("loginMember", loginMember);
 			System.out.println("email : " + email + ", 로그인 성공!!");
-			return "index";
+			session.setAttribute("loginMember", loginMember);
+			return "redirect:/";
 		}else { // 실패
-			model.addAttribute("msg", "아이디 패스워드가 잘못되었습니다.");
-			model.addAttribute("location", "/");
+			model.addAttribute("msg", "아이디 또는 패스워드가 잘못되었습니다.");
+			model.addAttribute("location", "/sign-in");
 			System.out.println("email : " + email + ", 로그인 실패@@");
 			return "common/msg";
 		}
 	}
 	
 	@RequestMapping("/logout")
-	public String logout(SessionStatus status) { 
-		log.info("status : " + status.isComplete());
-		status.setComplete();
-		log.info("status : " + status.isComplete());
+	public String logout(HttpSession session) {
+		if (session != null) {
+			session.invalidate();
+		}
 		return "redirect:/";
 	}
 }
