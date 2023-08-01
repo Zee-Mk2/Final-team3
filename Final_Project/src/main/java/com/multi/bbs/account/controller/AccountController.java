@@ -1,4 +1,4 @@
-package com.multi.bbs.account;
+package com.multi.bbs.account.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
+
+import com.multi.bbs.account.model.service.AccountService;
 
 import lombok.extern.slf4j.Slf4j;
 

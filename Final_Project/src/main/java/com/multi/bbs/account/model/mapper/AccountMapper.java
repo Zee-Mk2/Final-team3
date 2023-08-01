@@ -1,4 +1,4 @@
-package com.multi.bbs.account;
+package com.multi.bbs.account.model.mapper;
 
 import java.util.List;
 
