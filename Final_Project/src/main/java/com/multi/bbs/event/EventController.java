@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.multi.bbs.event.model.service.EventService;
 import com.multi.bbs.event.model.vo.Event;
-import com.multi.bbs.event.model.vo.EventProgram;
+import com.multi.bbs.event.model.vo.EventImg;
+import com.multi.bbs.event.model.vo.EventProgramDTO;
 
 
 @Controller
@@ -37,13 +38,21 @@ public class EventController {
 	
 	@RequestMapping("/event/eventDetail")
 	public String eventDetailPage(Model model, @RequestParam("no") int no) {
-		EventProgram eventProgram = service.findByNo(no);
-		if(eventProgram == null) {
-			return "common/error";
-		}
-		
-		model.addAttribute("eventProgram", eventProgram);
-		System.out.println(eventProgram);
+		List<EventProgramDTO> eventProgramDTOList = service.findByNo(no);
+        if (eventProgramDTOList == null || eventProgramDTOList.isEmpty()) {
+            return "common/error";
+        }
+        
+        Event event = service.getEventByNo(no);
+        model.addAttribute("event", event);
+        System.out.println(event);
+        
+        List<EventImg> eventImages = service.getEventImagesByNo(no);
+        model.addAttribute("eventImages", eventImages);
+        System.out.println(eventImages);
+        
+		model.addAttribute("eventProgramList", eventProgramDTOList);
+		System.out.println(eventProgramDTOList);
 		
 		return "event/eventDetail";
 	}

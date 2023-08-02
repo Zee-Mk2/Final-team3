@@ -34,14 +34,14 @@
         <th:block th:if="evntNo != null">
         <article class="row align-items-center pb-5 mb-md-2 mb-lg-3 mb-xl-4">
           <div class="col-md-6 offset-xxl-1 mb-4 mb-md-0">
-            <a href="#"><img class="rounded-5" th:src="${eventProgram.poster}" width="500" alt="Image" /></a>
+            <a href="#"><img class="rounded-C5" th:src="${event.poster}" width="500" alt="Image" /></a>
           </div>
           <div class="col-md-5 col-xl-4">
             <div class="ms-md-4 ms-lg-5 ms-xxl-0">
-              <h2 class="mb-lg-5" style="width: 600px" th:utext="${eventProgram.name.replaceAll('\n', '<br>')}">
+              <h2 class="mb-lg-5" style="width: 600px" th:utext="${event.name.replaceAll('\n', '<br>')}">
               </h2>
               <p class="mb-0 mb-md-1">
-              [[${eventProgram.summary}]]
+              [[${event.summary}]]
               </p>
             </div>
             <a class="btn btn-primary w-100 w-sm-auto mt-5" href="#c-comment">후기 작성하기</a>
@@ -59,119 +59,91 @@
           </div>
           <!-- Gallery grid with enabled thumbnails -->
           <div class="gallery row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" data-thumbnails="true">
-            <!-- Item -->
-            <div class="col">
-              <a th:href="${eventProgram.img1}" class="gallery-item d-block card-hover h-100">
-                <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 rounded-4 overflow-hidden zindex-2 opacity-0">
-                  <i class="ai-zoom-in fs-2 text-white position-relative zindex-2"></i>
-                  <div class="position-absolute bottom-0 start-0 w-100 text-center text-white fs-sm fw-medium zindex-2 pb-3">Image #1</div>
-                  <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-40"></div>
-                </div>
-                <img th:src="${eventProgram.img1}" class="d-block rounded-4 h-100" alt="Image #1" style="width: 100%; height: auto; max-width: 408px; max-height: 214.934px;" />
-              </a>
-            </div>
-
-            <!-- Item -->
-            <div class="col">
-              <a th:href="${eventProgram.img2}" class="gallery-item d-block card-hover h-100">
-                <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 rounded-4 overflow-hidden zindex-2 opacity-0">
-                  <i class="ai-zoom-in fs-2 text-white position-relative zindex-2"></i>
-                  <div class="position-absolute bottom-0 start-0 w-100 text-center text-white fs-sm fw-medium zindex-2 pb-3">Image #2</div>
-                  <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-40"></div>
-                </div>
-                <img th:src="${eventProgram.img2}" class="d-block rounded-4 h-100" alt="Image #2" style="width: 100%; height: auto; max-width: 408px; max-height: 214.934px;" />
-              </a>
-            </div>
-
-            <!-- Item -->
-            <div class="col">
-              <a th:href="${eventProgram.img3}" class="gallery-item d-block card-hover h-100">
-                <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 rounded-4 overflow-hidden zindex-2 opacity-0">
-                  <i class="ai-zoom-in fs-2 text-white position-relative zindex-2"></i>
-                  <div class="position-absolute bottom-0 start-0 w-100 text-center text-white fs-sm fw-medium zindex-2 pb-3">Image #3</div>
-                  <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-40"></div>
-                </div>
-                <img th:src="${eventProgram.img3}" class="d-block rounded-4 h-100" alt="Image #3" style="width: 100%; height: auto; max-width: 408px; max-height: 214.934px;" />
-              </a>
-            </div>
-          </div>
+			  <div th:each="eventImg : ${eventImages}" class="col">
+			    <a th:href="${eventImg.url}" class="gallery-item d-block card-hover h-100">
+			      <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 rounded-4 overflow-hidden zindex-2 opacity-0">
+			        <i class="ai-zoom-in fs-2 text-white position-relative zindex-2"></i>
+			        <div class="position-absolute bottom-0 start-0 w-100 text-center text-white fs-sm fw-medium zindex-2 pb-3">Image</div>
+			        <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-40"></div>
+			      </div>
+			      <img th:src="${eventImg.url}" class="d-block rounded-4 h-100" alt="Image" style="width: 100%; height: auto; max-width: 408px; max-height: 214.934px;" />
+			    </a>
+			  </div>
+			</div>
 
           <div class="mt-xxl-4 row">
             <h1 class="mt-5 ms-5 ps-5 text-primary">주요프로그램</h1>
             <div class="col-lg-12 pe-lg-4 pe-xl-5 ms-5">
-              <div class="card ms-xxl-5 mt-5 mb-5" style="width: 450px; height: 400px; float: left">
-                <div class="card-body align">
-                  <h2 class="card-title">야경 夜景</h2>
-                  <p class="card-text" style="font-size: 20px; min-height: 100px">
-                  <span th:utext="${eventProgram.view.replaceAll('\n', '<br>')}" />
-                  </p>
-                </div>
-              </div>
-
-              <div class="card ms-xxl-5 mt-5 mb-5 me-5" style="width: 450px; height: 400px; float: right">
-                <div class="card-body">
-                  <h2 class="card-title">야로 夜路</h2>
-                  <p class="card-text" style="font-size: 20px">
-                    <p class="card-text" style="font-size: 20px; min-height: 100px">
-                    <span th:utext="${eventProgram.street.replaceAll('\n', '<br>')}" />
-                  </p>
-                </div>
-              </div>
-
-              <div class="card ms-xxl-5 mt-5 mb-5" style="width: 450px; height: 400px; float: left">
-                <div class="card-body align">
-                  <h2 class="card-title">야설 夜設</h2>
-                  <p class="card-text" style="font-size: 20px; min-height: 100px">
-                  <span th:utext="${eventProgram.story.replaceAll('\n', '<br>')}" />
-                  </p>
-                </div>
-              </div>
-
-              <div class="card ms-xxl-5 mt-5 mb-5 me-5" style="width: 450px; height: 400px; float: right">
-                <div class="card-body">
-                  <h2 class="card-title">야사 夜史</h2>
-                  <p class="card-text" style="font-size: 20px; min-height: 100px">
-                  <span th:utext="${eventProgram.history.replaceAll('\n', '<br>')}" />
-                  </p>
-                </div>
-              </div>
-
-              <div class="card ms-xxl-5 mt-5 mb-5" style="width: 450px; height: 400px; float: left">
-                <div class="card-body align">
-                  <h2 class="card-title">야화 夜畵</h2>
-                  <p class="card-text" style="font-size: 20px; min-height: 100px">
-                  <span th:utext="${eventProgram.picture.replaceAll('\n', '<br>')}" />
-                  </p>
-                </div>
-              </div>
-
-              <div class="card ms-xxl-5 mt-5 mb-5 me-5" style="width: 450px; height: 400px; float: right">
-                <div class="card-body">
-                  <h2 class="card-title">야시 夜市</h2>
-                  <p class="card-text" style="font-size: 20px; min-height: 100px">
-                  <span th:utext="${eventProgram.market.replaceAll('\n', '<br>')}" />
-                  </p>
-                </div>
-              </div>
-
-              <div class="card ms-xxl-5 mt-5 mb-5" style="width: 450px; height: 400px; float: left">
-                <div class="card-body align">
-                  <h2 class="card-title">야식 夜食</h2>
-                  <p class="card-text" style="font-size: 20px; min-height: 100px">
-                  <span th:utext="${eventProgram.food.replaceAll('\n', '<br>')}" />
-                  </p>
-                </div>
-              </div>
-
-              <div class="card ms-xxl-5 mt-5 mb-5 me-5" style="width: 450px; height: 400px; float: right">
-                <div class="card-body">
-                  <h2 class="card-title">야숙 夜宿</h2>
-                  <p class="card-text" style="font-size: 20px; min-height: 100px">
-                  <span th:utext="${eventProgram.sleep.replaceAll('\n', '<br>')}" />
-                  </p>
-                </div>
-              </div>
+              <div class="col-lg-12 pe-lg-4 pe-xl-5 ms-5">
+    <div th:each="eventProgramDTO : ${eventProgramList}">
+        <div class="card mt-5 mb-5 me-5" th:if="${eventProgramDTO.title == '야숙'}" style="width: 450px; height: 400px; float: right">
+            <div class="card-body">
+                <h2 class="card-title">야숙 夜宿</h2>
+                <p class="card-text" style="font-size: 20px; min-height: 100px" th:utext="${eventProgramDTO.content.replaceAll('\n', '<br>')}" />
+                <h3>장소</h3>
+                <p class="card-text" style="font-size: 20px" th:utext="${eventProgramDTO.location.replaceAll('\n', '<br>')}" />
             </div>
+        </div>
+        <div class="card mt-5 mb-5 ms-5" th:if="${eventProgramDTO.title == '야식'}" style="width: 450px; height: 400px; float: left">
+            <div class="card-body align">
+                <h2 class="card-title">야식 夜食</h2>
+                <p class="card-text" style="font-size: 20px; min-height: 100px" th:utext="${eventProgramDTO.content.replaceAll('\n', '<br>')}" />
+                <h3>장소</h3>
+                <p class="card-text" style="font-size: 20px" th:utext="${eventProgramDTO.location.replaceAll('\n', '<br>')}" />
+            </div>
+        </div>
+        <div class="card mt-5 mb-5 me-5" th:if="${eventProgramDTO.title == '야시'}" style="width: 450px; height: 400px; float: right">
+            <div class="card-body align">
+                <h2 class="card-title">야시 夜市</h2>
+                <p class="card-text" style="font-size: 20px; min-height: 100px" th:utext="${eventProgramDTO.content.replaceAll('\n', '<br>')}" />
+                <h3>장소</h3>
+                <p class="card-text" style="font-size: 20px" th:utext="${eventProgramDTO.location.replaceAll('\n', '<br>')}" />
+            </div>
+        </div>
+        <div class="card mt-5 mb-5 ms-5" th:if="${eventProgramDTO.title == '야화'}" style="width: 450px; height: 400px; float: left">
+            <div class="card-body align">
+                <h2 class="card-title">야화 夜畵</h2>
+                <p class="card-text" style="font-size: 20px; min-height: 100px" th:utext="${eventProgramDTO.content.replaceAll('\n', '<br>')}" />
+                <h3>장소</h3>
+                <p class="card-text" style="font-size: 20px" th:utext="${eventProgramDTO.location.replaceAll('\n', '<br>')}" />
+            </div>
+        </div>
+        <div class="card mt-5 mb-5 me-5" th:if="${eventProgramDTO.title == '야사'}" style="width: 450px; height: 400px; float: right">
+            <div class="card-body align">
+                <h2 class="card-title">야사 夜史</h2>
+                <p class="card-text" style="font-size: 20px; min-height: 100px" th:utext="${eventProgramDTO.content.replaceAll('\n', '<br>')}" />
+                <h3>장소</h3>
+                <p class="card-text" style="font-size: 20px" th:utext="${eventProgramDTO.location.replaceAll('\n', '<br>')}" />
+            </div>
+        </div>
+        <div class="card mt-5 mb-5 ms-5" th:if="${eventProgramDTO.title == '야설'}" style="width: 450px; height: 400px; float: left">
+            <div class="card-body align">
+                <h2 class="card-title">야설 夜設</h2>
+                <p class="card-text" style="font-size: 20px; min-height: 100px" th:utext="${eventProgramDTO.content.replaceAll('\n', '<br>')}" />
+                <h3>장소</h3>
+                <p class="card-text" style="font-size: 20px" th:utext="${eventProgramDTO.location.replaceAll('\n', '<br>')}" />
+            </div>
+        </div>
+        <div class="card mt-5 mb-5 me-5" th:if="${eventProgramDTO.title == '야로'}" style="width: 450px; height: 400px; float: right">
+            <div class="card-body align">
+                <h2 class="card-title">야로 夜路</h2>
+                <p class="card-text" style="font-size: 20px; min-height: 100px" th:utext="${eventProgramDTO.content.replaceAll('\n', '<br>')}" />
+                <h3>장소</h3>
+                <p class="card-text" style="font-size: 20px" th:utext="${eventProgramDTO.location.replaceAll('\n', '<br>')}" />
+            </div>
+        </div>
+        <div class="card mt-5 mb-5 ms-5" th:if="${eventProgramDTO.title == '야경'}" style="width: 450px; height: 400px; float: left">
+            <div class="card-body align">
+                <h2 class="card-title">야경 夜景</h2>
+                <p class="card-text" style="font-size: 20px; min-height: 100px" th:utext="${eventProgramDTO.content.replaceAll('\n', '<br>')}" />
+                <h3>장소</h3>
+                <p class="card-text" style="font-size: 20px" th:utext="${eventProgramDTO.location.replaceAll('\n', '<br>')}" />
+			            </div>
+			        </div>
+			    </div>
+			</div>
+		</div>
+	</div>
 
             <!-- Comment form-->
             <div class="border-0 col-lg-12 col-xl-10 pe-lg-4 pe-xl-0 align-items-center offset-1">
@@ -203,6 +175,7 @@
               </div>
             </div>
           </div>
+			</div>
         </article>
 
         <!-- Sidebar toggle button-->

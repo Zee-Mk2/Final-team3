@@ -36,14 +36,21 @@
 			</if>
 	</select>
 	
-	<select id="selectEventByNoWithEvent" parameterType="int" resultType="eventProgram">
+	<select id="selectEventByNoWithEventList" parameterType="int" resultType="eventProgram">
 	    SELECT  
 	        E.evntNo, E.name, E.summary, E.poster,
-	        P.view, P.street, P.story, P.history, P.picture, P.market, P.food, P.sleep, P.img1, P.img2, P.img3
+	        P.title, P.content, P.location
 	    FROM Event E
 	    JOIN EventProgram P ON(E.evntNo = P.evntNo)
-	    WHERE 1 = 1
-	    AND E.evntNo = #{evntNo}
+	    WHERE E.evntNo = #{evntNo}
+	</select>
+	
+	<select id="selectEventByNo" parameterType="int" resultType="event">
+	    SELECT * FROM Event WHERE evntNo = #{evntNo}
+	</select>
+
+	<select id="getEventImagesByNo" parameterType="int" resultType="eventImg">
+	    SELECT * FROM EventImg WHERE evntNO = #{evntNo}
 	</select>
 	
 	

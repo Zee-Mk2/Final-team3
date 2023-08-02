@@ -9,14 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class EventProgram {
+public class EventProgramDTO {
 	private int programNo;
 	private int evntNo;
 	private String title;
 	private String content;
 	private String location;
-	private String name;
-	private String poster;
-    private String summary;
-	
 }
