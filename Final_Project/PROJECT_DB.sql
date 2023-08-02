@@ -7,8 +7,8 @@ USE final_db;
 --------------- EXHIBITION 관련 테이블 ------------------
 ------------------------------------------------
 
-DROP TABLE if exists EXHIBITION;
-CREATE TABLE EXHIBITION(
+DROP TABLE if exists Exhibition;
+CREATE TABLE Exhibition(
 	exno INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(100),
     sumary VARCHAR(1000),
@@ -19,16 +19,16 @@ CREATE TABLE EXHIBITION(
     mediaType VARCHAR(20)
     );
 
-SELECT * FROM EXHIBITION;
+SELECT * FROM Exhibition;
 
 
 ------------------------------------------------
 --------------- museum 관련 테이블 ------------------
 ------------------------------------------------
 
-DROP TABLE if exists museum;
-CREATE TABLE museum (
-	musNo INT, 
+DROP TABLE if exists Museum;
+CREATE TABLE Museum (
+	musNo INT PRIMARY KEY AUTO_INCREMENT, 
 	name VARCHAR(100), 
 	summary VARCHAR(1000), 
 	viewHours VARCHAR(100), 
@@ -36,13 +36,13 @@ CREATE TABLE museum (
 	tel VARCHAR(100), 
 	img VARCHAR(1000), 
 	sumImg VARCHAR(1000), 
-	la INT, 
-	lo INT, 
+	la DOUBLE, 
+	lo DOUBLE, 
 	ProgramImg VARCHAR(1000), 
 	address VARCHAR(100)
 );
 
-SELECT * FROM museum;
+SELECT * FROM Museum;
 
 
 ------------------------------------------------
@@ -50,29 +50,29 @@ SELECT * FROM museum;
 ------------------------------------------------
 
 
-DROP TABLE if exists HERITAGE;
-CREATE TABLE HERITAGE (
+DROP TABLE if exists Heritage;
+CREATE TABLE Heritage (
 	hNo INT PRIMARY KEY,
-    KIND VARCHAR(100),
-    NAME VARCHAR(100),
-    NAME2 VARCHAR(100),
-    KINDCODE VARCHAR(100),
-    CITYCODE VARCHAR(100),
-    CCBAASNO VARCHAR(100),
-    LO DOUBLE,
-    LA DOUBLE,
-    GCODENAME VARCHAR(100),
-    BCODENAME VARCHAR(100),
-    MCODENAME VARCHAR(100),
-    SCODENAME VARCHAR(100),
-    ASDATE DATETIME,
-    LOCATION VARCHAR(1000),
-    ERA VARCHAR(100),
-    IMG VARCHAR(3000),
-    CONTENT VARCHAR(3000)
+    kind VARCHAR(100),
+    name VARCHAR(100),
+    name2 VARCHAR(100),
+    kindCode VARCHAR(100),
+    cityCode VARCHAR(100),
+    ccbaAsNo VARCHAR(100),
+    lo DOUBLE,
+    la DOUBLE,
+    gcodeName VARCHAR(100),
+    bcodeName VARCHAR(100),
+    mcodeName VARCHAR(100),
+    scodeName VARCHAR(100),
+    asDate DATETIME,
+    location VARCHAR(1000),
+    era VARCHAR(100),
+    img VARCHAR(3000),
+    content VARCHAR(3000)
 );
 
-SELECT * FROM HERITAGE;
+SELECT * FROM Heritage;
 
 
 ------------------------------------------------
@@ -80,40 +80,67 @@ SELECT * FROM HERITAGE;
 ------------------------------------------------
 
 
-DROP TABLE if exists PRODUCT;
-CREATE TABLE PRODUCT (
-    PRODUCTID VARCHAR(100) PRIMARY KEY,
-    PRODUCTTYPE VARCHAR(100),
-    TITLE VARCHAR(100),
-    IMAGE VARCHAR(3000),
-    LPRICE INT,
-    CATEGORY1 VARCHAR(100),
-    CATEGORY2 VARCHAR(100),
-    CATEGORY3 VARCHAR(100),
-    CATEGORY4 VARCHAR(100),
-    MALLNAME VARCHAR(100)
+DROP TABLE if exists Product;
+CREATE TABLE Product (
+    productId VARCHAR(100) PRIMARY KEY,
+    productType VARCHAR(100),
+    title VARCHAR(100),
+    image VARCHAR(3000),
+    lPrice INT,
+    category1 VARCHAR(100),
+    category2 VARCHAR(100),
+    category3 VARCHAR(100),
+    category4 VARCHAR(100),
+    mallName VARCHAR(100)
 );
 
-SELECT * FROM PRODUCT;
+SELECT * FROM Product;
 
 
 ------------------------------------------------
 --------------- MEMBER 관련 테이블 ------------------
 ------------------------------------------------
 
-DROP TABLE MEMBER;
-CREATE TABLE MEMBER (
-    MNO      INT  PRIMARY KEY AUTO_INCREMENT,
-    ROLE 	 VARCHAR(10) DEFAULT 'ROLE_USER',
-    NAME 	 VARCHAR(15),
-    EMAIL 	 VARCHAR(100) NOT NULL,
-    PASSWORD VARCHAR(100) NOT NULL,
-    PHONE 	 VARCHAR(13),
-    STATE 	 VARCHAR(1) DEFAULT 'Y' CHECK(STATE IN('Y', 'N')),
-    ENROLL_DATE DATETIME  DEFAULT CURRENT_TIMESTAMP
+DROP TABLE Member;
+CREATE TABLE Member (
+    mno      INT  PRIMARY KEY AUTO_INCREMENT,
+    role 	 VARCHAR(10) DEFAULT 'ROLE_USER',
+    name 	 VARCHAR(15),
+    email 	 VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    phone 	 VARCHAR(13),
+    state 	 VARCHAR(1) DEFAULT 'Y' CHECK(STATE IN('Y', 'N')),
+    enrollDate DATETIME  DEFAULT CURRENT_TIMESTAMP
 );
 
-SELECT * FROM MEMBER;
+SELECT * FROM Member;
+
+
+------------------------------------------------
+--------------- PRODUCT 관련 테이블 ------------------
+------------------------------------------------
+
+DROP TABLE Tour;
+CREATE TABLE Tour (
+	tno 		INT PRIMARY KEY AUTO_INCREMENT,
+    mno 		INT,
+    name		VARCHAR(20),
+    state		VARCHAR(10),
+    title		VARCHAR(100),
+    region		VARCHAR(100),
+    numOfPeople	INT,
+    startDate	DATETIME,
+    endDate		DATETIME,
+    duration	DATETIME,
+    category	VARCHAR(20),
+    content		VARCHAR(4000),
+    fileName	VARCHAR(1000),
+    reFileName	VARCHAR(1000),
+    FOREIGN KEY (mno) REFERENCES Member(mno) ON DELETE SET NULL
+);
+
+SELECT * FROM Tour;
+
 
 
 --------------- 박물관 INSERT ------------------
