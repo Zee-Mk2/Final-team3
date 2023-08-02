@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	
+	<!-- Vendor styles-->
+	<link rel="stylesheet" media="screen" th:href="@{/assets/vendor/flatpickr/dist/flatpickr.min.css}" />
+    <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
+    
+<!-- Body-->
+<body>
+  <!-- Page loading spinner-->
+  <div class="page-loading active">
+    <div class="page-loading-inner">
+      <div class="page-spinner"></div><span>Loading...</span>
+    </div>
+  </div>
+  <!-- Page wrapper-->
+  <main class="page-wrapper">
+    <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
+    <header th:replace="~{common/layout :: #header}"></header>
+
+    <section>
+      <div class="jarallax bg-dark py-5" data-jarallax data-type="scroll-opacity" data-speed="0.7"
+        style="height: 70vh !important;">
+        <div class="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-60"></div>
+        <div class="jarallax-img"
+          style="background-image: url(https://plus.unsplash.com/premium_photo-1661948404806-391a240d6d40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fCVFQSVCMiVCRCVFQiVCMyVCNSVFQSVCNiU4MXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80);">
+        </div>
+        <div class="container position-relative zindex-5">
+          <!-- Text + button-->
+          <div class="row pt-lg-2 py-xl-4 py-xxl-5 mb-md-4 mb-lg-5">
+            <div class="col-md-10 col-lg-9 col-xl-8 col-xxl-7 pt-5 mb-5 mb-lg-5">
+              <h4 class="display-5 text-light pb-sm-2 pb-md-3 mb-lg-5">커뮤니티</h4>
+              <br><br><br><br><br>
+            </div>
+            <form class="row g-3 bg-white rounded-pill align-items-center">
+              <div class="col-2 my-1">
+                <select class="form-select" style="border: none;">
+                  <option selected>자유게시판</option>
+                  <option>문화소식</option>
+                  <option>포토게시판</option>
+                </select>
+              </div>
+              <div class="col-9 my-1">
+                <input type="text" class="form-control" style="border: none;" placeholder="키워드로 검색">
+              </div>
+              <div class="col-1 my-1">
+                <button type="submit" class="btn py-2 ms-3"><i class='ai-search'
+                    style="font-size: 26px; color: #202020;"></i></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container py-3 mt-3 mb-lg-4 mb-xl-5">
+      <!-- Breadcrumb-->
+      <nav aria-label="breadcrumb">
+        <ol class="pb-md-1 pb-lg-3 breadcrumb">
+          <li class="breadcrumb-item"><a href="#">홈</a></li>
+          <li class="breadcrumb-item active" aria-current="page">커뮤니티</li>
+        </ol>
+      </nav>
+    </div>
+    
+    <!--자유게시판 카드-->
+    <div class="container mb-lg-5 mb-5">
+      <p class="h3 mt-5 mb-4">자유게시판</p>
+      <div class="mt-n5 mb-3" style="text-align: right;">
+        <a href="#">
+          <button type="button" class="btn text-white" style="background-color: #E8AE50;">더보기</button>
+        </a>
+      </div>
+      <table class="table">
+        <tbody>
+          <tr>
+            <div>
+              <div class="row">
+                <td><a class="nav-link fw-normal" href="#">[돈의문박물관마을]2023 하반기 체험강좌 '예술가의 시간' 운영파트너 추가 ...</a></td>
+              </div>
+              <div class="row">
+                <td>관리자</td>
+                <td>2023-06-13</td>
+                <td>1764</td>
+              </div>
+            </div>
+          </tr>
+
+          <tr>
+            <div>
+              <div class="row">
+                <td><a class="nav-link fw-normal" href="#">[고용노동부 주최] 2023 소셜벤처 경연대회</a></td>
+              </div>
+              <div class="row">
+                <td>관리자</td>
+                <td>2023-06-22</td>
+                <td>6</td>
+              </div>
+            </div>
+          </tr>
+          
+          <tr>
+            <div>
+              <div class="row">
+                <td><a class="nav-link fw-normal" href="#">[서울시청 문화제관리과] 한양도성 수도성곽 국제학술대회</a></td>
+              </div>
+              <div class="row">
+                <td>관리자</td>
+                <td>2023-06-19</td>
+                <td>372</td>
+              </div>
+            </div>
+          </tr>
+
+          <tr>
+            <div>
+              <div class="row">
+                <td><a class="nav-link fw-normal" href="#">[노원문화원] 제 2회 노원구 민간기록물 수집 공모전</a></td>
+              </div>
+              <div class="row">
+                <td>관리자</td>
+                <td>2023-05-30</td>
+                <td>1478</td>
+              </div>
+            </div>
+          </tr>
+
+          <tr>
+            <div>
+              <div class="row">
+                <td><a class="nav-link fw-normal" href="#">강연 2023년 청운문학도서관 길 위의 인문학 '종로 모던, 그 맛과 글'</a></td>
+              </div>
+              <div class="row">
+                <td>관리자</td>
+                <td>2023-04-28</td>
+                <td>1426</td>
+              </div>
+            </div>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!--문화소식 카드-->
+    <div class="container mb-lg-5 mb-5">
+      <p class="h3 mt-5 mb-4">문화소식</p>
+      <div class="mt-n5 mb-3" style="text-align: right;">
+        <a href="#">
+          <button type="button" class="btn text-white" style="background-color: #E8AE50;">더보기</button>
+        </a>
+      </div>
+      <div class="row">
+        <div class="card col">
+          <div class="card-body">
+            <a class="nav-link fw-normal pb-3" href="#">2023년 국립중앙박물관 식음료매장 및 운영시간 안내</a>
+            <p class="card-text">2023-01-30 조회수 739</p>
+          </div>
+        </div>
+        <div class="card col">
+          <div class="card-body">
+            <a class="nav-link fw-normal pb-3" href="#">2023년 하반기 뮷즈 공모 안내</a>
+            <p class="card-text"> 2023-06-13 조화수 1764</p>
+          </div>
+        </div>
+        <div class="card col">
+          <div class="card-body">
+            <a class="nav-link fw-normal pb-3" href="#">국립중앙박물관 특별전 영원한 여정 특별한 동행 운영인력 추가모집(마감)</a>
+            <p class="card-text">2023-06-19 조회수 372</p>
+          </div>
+        </div>
+        <div class="card col">
+          <div class="card-body">
+            <a class="nav-link fw-normal pb-3" href="#">2023 하반기 뮷즈 공모 안내</a>
+            <p class="card-text">2023-06-13 조회수 1764</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!--포토게시판 카드-->
+    <div class="container mb-lg-5 mb-5">
+      <article>
+        <p class="h3 mt-5 mb-4">포토게시판</p>
+      <div class="mt-n5 mb-3" style="text-align: right;">
+        <a href="#">
+          <button type="button" class="btn text-white" style="background-color: #E8AE50;">더보기</button>
+        </a>
+      </div>
+        <div class="row">
+          <a class="col" href="#">
+            <img style="height: 230px;" src="https://gongju.museum.go.kr/_prog/download/?site_dvs_cd=gongju&func_gbn_cd=main_visual&mng_no=68" class="rounded" alt="...">
+          </a>
+          <a class="col" href="#">
+            <img style="height: 230px;" src="https://img.hankyung.com/photo/202112/AKR20211203068300005_01_i_P4.jpg" class="rounded" alt="...">
+          </a>
+          <a class="col" href="#">
+            <img style="height: 230px;" src="https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=f52c4e00-e91a-4f21-b97f-777203d04ca1" class="rounded" alt="...">
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <!-- Sidebar toggle button-->
+    <button class="d-lg-none btn btn-sm fs-sm btn-primary w-100 rounded-0 fixed-bottom" data-bs-toggle="offcanvas"
+      data-bs-target="#sidebarBlog"><i class="ai-layout-column me-2"></i>Sidebar</button>
+  </main>
+
+  <!-- Footer-->
+  <footer th:replace="~{common/layout :: #footer}"></footer>
+	
+  <!-- Back to top button--><a class="btn-scroll-top" href="#top" data-scroll>
+    <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10">
+      </circle>
+    </svg><i class="ai-arrow-up"></i></a>
+  <!-- Vendor scripts: js libraries and plugins-->
+  <script th:src="@{/assets/vendor/bootstrap/dist/js/bootstrap.bundle.js}"></script>
+  <script th:src="@{/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.js}"></script>
+  <script th:src="@{/assets/vendor/jarallax/dist/jarallax.min.js}"></script>
+  <script th:src="@{/assets/vendor/flatpickr/dist/flatpickr.min.js}"></script>
+  <script th:src="@{/assets/vendor/flatpickr/dist/plugins/rangePlugin.js}"></script>
+  <!-- Main theme script-->
+  <script th:src="@{/assets/js/theme.js}"></script>
+</body>
+
+</html>
