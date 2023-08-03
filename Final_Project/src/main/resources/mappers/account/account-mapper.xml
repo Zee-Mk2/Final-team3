@@ -6,7 +6,7 @@
 <mapper namespace="com.multi.bbs.account.model.mapper.AccountMapper">
 	<sql id="selectMemberSql">
 		SELECT 	
-			MNO, ROLE, NAME, EMAIL, PASSWORD, PHONE, STATE, ENROLL_DATE
+			MNO, ROLE, NAME, EMAIL, PASSWORD, PHONE, STATE, enrollDate
 		FROM MEMBER
 	</sql>
 	
@@ -27,7 +27,7 @@
 		INSERT INTO MEMBER(
 			MNO, ROLE, NAME, 	
 			EMAIL, PASSWORD, PHONE,
-			STATE, ENROLL_DATE
+			STATE, enrollDate
 		) VALUES (
 			 0, DEFAULT, #{name},
 			 #{email}, #{password}, #{phone}, 
