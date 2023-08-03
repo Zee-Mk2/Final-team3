@@ -869,7 +869,7 @@ insert into EventProgram (programNo, evntNo, title, content, location) values (
     
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 24, '야경', '고창읍성 달빛산책', '고창읍성(사적145호)');
-insert into EvntProgram (programNo, evntNo, title, content, location) values (
+insert into eventProgram (programNo, evntNo, title, content, location) values (
 	default, 24, '야로', '달빛공양 로수와 치성', '고창읍 일원');
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 24, '야설', '고창읍성축성재현 기원의 거울 opertta', '고창읍성 광장');
@@ -886,7 +886,7 @@ insert into EventProgram (programNo, evntNo, title, content, location) values (
     
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 25, '야경', '진남관 스페셜 투어', '여수시 진남관 일원');
-insert into EvntProgram (programNo, evntNo, title, content, location) values (
+insert into eventProgram (programNo, evntNo, title, content, location) values (
 	default, 25, '야로', '문화재 뺏지를 찾아라', '여수시 진남관 일원');
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 25, '야설', 'LED 문화재 스트링아트 체험 외 15가지 문화재 활용 체험', '여수시 진남관 일원');
@@ -903,7 +903,7 @@ insert into EventProgram (programNo, evntNo, title, content, location) values (
     
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 26, '야경', '순천문화재탐방 문화재보물찾기', '팔마비, 행동 푸조나무, 순천시 청소년수련관, 한옥글방 등');
-insert into EvntProgram (programNo, evntNo, title, content, location) values (
+insert into eventProgram (programNo, evntNo, title, content, location) values (
 	default, 26, '야로', '순천문화재LED거리', '서문안내소 옥천서원, 문화의 거리');
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 26, '야설', '순천문화재 역사 체험', '팔마비, 행동 푸조나무, 순천시 청소년수련관, 한옥글방 등');
@@ -920,7 +920,7 @@ insert into EventProgram (programNo, evntNo, title, content, location) values (
     
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 27, '야경', '빛보다 아름다운 나주의 夜', '목사내아, 금성관길');
-insert into EvntProgram (programNo, evntNo, title, content, location) values (
+insert into eventProgram (programNo, evntNo, title, content, location) values (
 	default, 27, '야로', '천년, 과거로의 타임슬립', '금성관');
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 27, '야설', '나주의 천년 야사', '목사내아');
@@ -937,7 +937,7 @@ insert into EventProgram (programNo, evntNo, title, content, location) values (
     
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 28, '야경', '보성문화재 야간탐방, 보성문화재 스탬프 투어', '보성향교, 보성 충의당, 보성읍 성지 등 10곳');
-insert into EvntProgram (programNo, evntNo, title, content, location) values (
+insert into eventProgram (programNo, evntNo, title, content, location) values (
 	default, 28, '야로', '보성야로, 열선루 포토촌, 내삼문 포토존', '보성향교, 보성 충의당, 보성읍 성지 등 10곳');
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 28, '야설', '장계만들기 체험 등 26개 프로그램', '열선루, 보성향교, 오청사 등');
@@ -954,7 +954,7 @@ insert into EventProgram (programNo, evntNo, title, content, location) values (
     
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 29, '야경', '목포 환타지 로드', '목포근대역사 문화공간');
-insert into EvntProgram (programNo, evntNo, title, content, location) values (
+insert into eventProgram (programNo, evntNo, title, content, location) values (
 	default, 29, '야로', '夜한 워킹스트리트', '목포 근대역사 문화공간');
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 29, '야설', '1897 목포문화재 투어', '목포근대역사 문화공간');
@@ -971,7 +971,7 @@ insert into EventProgram (programNo, evntNo, title, content, location) values (
     
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 30, '야경', '문화재 밤을 잉태하다', '경주일원 문화재');
-insert into EvntProgram (programNo, evntNo, title, content, location) values (
+insert into eventProgram (programNo, evntNo, title, content, location) values (
 	default, 30, '야로', '경주 교촌 달빛 story 답사', '경주교촌 일원');
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 30, '야설', '전통민속놀이 \n 남천 유등 띄우기 \n 십이지 소원지 달기', '경주 교촌 일원');
@@ -988,7 +988,7 @@ insert into EventProgram (programNo, evntNo, title, content, location) values (
     
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 31, '야경', '월영교 등간, 빛 정원', '월영교 일원');
-insert into EvntProgram (programNo, evntNo, title, content, location) values (
+insert into eventProgram (programNo, evntNo, title, content, location) values (
 	default, 31, '야로', '달달애 투어 걷기, 빛 로드', '월영교 일원');
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 31, '야설', '해설사와 함께 듣는 문화유산이야기', '월영교 일원');
@@ -1005,7 +1005,7 @@ insert into EventProgram (programNo, evntNo, title, content, location) values (
     
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 32, '야경', '지산동고분군 \n 대가야역사테마관광지', '지산동고분군, 대가야역사테마관광지');
-insert into EvntProgram (programNo, evntNo, title, content, location) values (
+insert into eventProgram (programNo, evntNo, title, content, location) values (
 	default, 32, '야로', '달빛 고분산책 \n 달빛소리', '지산동고분군');
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 32, '야설', '가야금 소리마당 \n 왜 순장을 했을꼬?', '대가야문화누리 야외공연장, 지산동고분군');
@@ -1022,7 +1022,7 @@ insert into EventProgram (programNo, evntNo, title, content, location) values (
     
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 33, '야경', '통제공, 납시오! \n 나도 삼도수군통제사', '통제영 세병관');
-insert into EvntProgram (programNo, evntNo, title, content, location) values (
+insert into eventProgram (programNo, evntNo, title, content, location) values (
 	default, 33, '야로', '신임통제사도임참배길 따라가기', '통제영~충렬사');
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 33, '야설', '조선수군 알아보기 \n 조선시대 화폐만들기', '통제영 12공방, 주전소');
@@ -1039,7 +1039,7 @@ insert into EventProgram (programNo, evntNo, title, content, location) values (
     
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 34, '야경', '가야하늘에 6개의 달이 뜨다 \n 가야 초롱길', '수로왕릉');
-insert into EvntProgram (programNo, evntNo, title, content, location) values (
+insert into eventProgram (programNo, evntNo, title, content, location) values (
 	default, 34, '야로', '가야 달빛탐방 \n 가야 후원을 거닐다', '가야유적지 일원, 수로왕릉 후원');
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 34, '야설', '가아 톡 \n 가야 유물 찾기 \n 수로왕릉 바로알기', '수로왕릉');
@@ -1056,7 +1056,7 @@ insert into EventProgram (programNo, evntNo, title, content, location) values (
     
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 35, '야경', '응천강 어화를 밝히다', '응천강 일원');
-insert into EvntProgram (programNo, evntNo, title, content, location) values (
+insert into eventProgram (programNo, evntNo, title, content, location) values (
 	default, 35, '야로', '밀양도호부 옛 길 따라...', '밀양 읍성길, 성당, 박물관, 향교');
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 35, '야설', '길 위의 인문학', '영남루, 밀양관아, 아랑각, 약전골목, 천진궁');
@@ -1073,7 +1073,7 @@ insert into EventProgram (programNo, evntNo, title, content, location) values (
     
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 36, '야경', '무병장수의 별 老人星을 보라', '남성대, 자구리공원');
-insert into EvntProgram (programNo, evntNo, title, content, location) values (
+insert into eventProgram (programNo, evntNo, title, content, location) values (
 	default, 36, '야로', '시간여행그날(시민 참여배우 사전접수)', '서귀포시청-초원사거리-매일시장입구-솔동산입구-서귀진지');
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 36, '야설', '300여년전의 비밀을 푼다', '서귀본향당-이중섭거리-소암전시관-서복전시관-자구리공원-서귀진지 일원');
@@ -1087,3 +1087,363 @@ insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 36, '야식', '해녀밥상 경연대회', '서귀진지');
 insert into EventProgram (programNo, evntNo, title, content, location) values (
 	default, 36, '야숙', '야호! 서귀포문화재 야행!', '서귀진지');
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 1, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1124.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 1, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1129.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 1, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1127.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 2, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1130.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 2, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1131.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 2, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1134.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 3, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1136.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 3, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1140.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 3, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1139.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 4, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1144.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 4, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1143.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 4, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1147.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 5, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1149.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 5, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1150.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 5, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1151.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 6, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1153.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 6, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1152.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 6, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1156.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 7, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1160.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 7, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1159.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 7, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1161.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 8, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1166.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 8, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1168.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 8, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1167.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 9, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1172.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 9, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1173.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 9, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1174.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 10, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1177.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 10, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1180.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 10, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1178.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 11, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_1.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 11, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_2.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 11, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_3.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 12, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1182.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 12, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1181.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 12, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1183.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 13, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_6.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 13, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_7.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 13, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_8.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 14, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_16.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 14, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_17.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 14, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_18.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 15, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_22.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 15, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_23.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 15, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_24.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 16, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_27.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 16, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_26.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 16, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_30.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 17, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_34.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 17, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_35.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 17, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_36.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 18, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_39.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 18, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_40.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 18, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_41.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 19, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_45.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 19, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_46.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 19, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_47.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 20, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_50.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 20, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_51.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 20, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_52.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 21, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_53.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 21, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_54.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 21, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_55.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 22, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1187.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 22, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1185.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 22, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1188.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 23, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_58.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 23, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_59.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 23, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_60.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 24, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1189.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 24, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1190.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 24, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1191.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 25, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_65.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 25, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_66.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 25, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_67.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 26, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_72.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 26, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_73.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 26, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_74.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 27, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_76.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 27, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_77.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 27, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_79.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 28, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_80.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 28, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_81.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 28, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_82.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 29, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_87.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 29, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_85.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 29, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_88.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 30, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_95.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 30, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_96.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 30, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_97.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 31, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_101.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 31, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_102.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 31, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_103.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 32, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_109.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 32, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1194.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 32, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1193.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 33, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_111.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 33, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_112.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 33, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_113.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 34, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_116.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 34, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_117.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 34, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_118.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 35, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_122.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 35, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_123.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 35, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_124.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 36, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_131.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 36, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_130.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 36, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_133.png'
+);

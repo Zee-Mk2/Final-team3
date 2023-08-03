@@ -53,7 +53,22 @@
 	    SELECT * FROM EventImg WHERE evntNO = #{evntNo}
 	</select>
 	
+	<select id="selectEventReviewsWithMemberByNo" parameterType="int" resultType="eventReview">
+        SELECT ER.evntReviewNo, ER.evntNo, ER.Mno, ER.content, ER.rating, ER.writeTime,
+               M.role, M.name
+        FROM EventReview ER
+        JOIN Member M ON ER.Mno = M.Mno
+        WHERE ER.evntNo = #{no}
+    </select>
 	
+	<insert id="insertEventReview" parameterType="eventReview">
+	    INSERT INTO EventReview (evntReviewNo, evntNo, Mno, content, rating, writeTime)
+	    VALUES (#{evntReviewNo}, #{evntNo}, #{Mno}, #{content}, #{rating}, #{writeTime})
+	</insert>
+	
+	<delete id="deleteEventReview" parameterType="int">
+    DELETE FROM EventReview WHERE evntReviewNo = #{evntReviewNo}
+</delete>
 	
 	
 	
