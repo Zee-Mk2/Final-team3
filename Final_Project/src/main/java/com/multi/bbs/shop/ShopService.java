@@ -1,4 +1,4 @@
-package com.multi.bbs.shop.model.service;
+package com.multi.bbs.shop;
 
 import java.util.List;
 

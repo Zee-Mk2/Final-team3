@@ -1,10 +1,8 @@
-package com.multi.bbs.shop.model.mapper;
+package com.multi.bbs.shop;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-
-import com.multi.bbs.shop.model.vo.Product;
 
 @Mapper
 public interface ProductMapper {

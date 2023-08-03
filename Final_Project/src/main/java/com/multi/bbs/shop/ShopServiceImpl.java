@@ -1,4 +1,4 @@
-package com.multi.bbs.shop.model.service;
+package com.multi.bbs.shop;
 
 import java.util.Collections;
 import java.util.List;
@@ -6,8 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.multi.bbs.shop.Product;
-import com.multi.bbs.shop.ProductMapper;
 
 @Service
 public class ShopServiceImpl implements ShopService {
@@ -35,11 +33,12 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public List<Product> getBoardList() {
 		List<Product> boardList = Collections.emptyList();
+		int count;
 		
 		int goodsTotalCount = productMapper.selectTotalCount();
 		
 		if (goodsTotalCount > 0) {
-			boardList = productMapper.selectCount();
+			count = productMapper.selectCount();
 		}
 		
 		return boardList;

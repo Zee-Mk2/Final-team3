@@ -1,4 +1,4 @@
-package com.multi.bbs.shop.model.vo;
+package com.multi.bbs.shop;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
