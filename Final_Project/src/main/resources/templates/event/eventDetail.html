@@ -5,6 +5,8 @@
  	<!-- Vendor styles-->
     <link rel="stylesheet" media="screen" href="assets/vendor/lightgallery/css/lightgallery-bundle.min.css" />
     <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
+  
+    
 
   <!-- Body-->
   <body>
@@ -84,7 +86,7 @@
                 <p class="card-text" style="font-size: 20px" th:utext="${eventProgramDTO.location.replaceAll('\n', '<br>')}" />
             </div>
         </div>
-        <div class="card mt-5 mb-5 ms-5" th:if="${eventProgramDTO.title == '야식'}" style="width: 450px; height: 400px; float: left">
+        <div class="card mt-5 mb-5" th:if="${eventProgramDTO.title == '야식'}" style="width: 450px; height: 400px; float: left">
             <div class="card-body align">
                 <h2 class="card-title">야식 夜食</h2>
                 <p class="card-text" style="font-size: 20px; min-height: 100px" th:utext="${eventProgramDTO.content.replaceAll('\n', '<br>')}" />
@@ -100,7 +102,7 @@
                 <p class="card-text" style="font-size: 20px" th:utext="${eventProgramDTO.location.replaceAll('\n', '<br>')}" />
             </div>
         </div>
-        <div class="card mt-5 mb-5 ms-5" th:if="${eventProgramDTO.title == '야화'}" style="width: 450px; height: 400px; float: left">
+        <div class="card mt-5 mb-5" th:if="${eventProgramDTO.title == '야화'}" style="width: 450px; height: 400px; float: left">
             <div class="card-body align">
                 <h2 class="card-title">야화 夜畵</h2>
                 <p class="card-text" style="font-size: 20px; min-height: 100px" th:utext="${eventProgramDTO.content.replaceAll('\n', '<br>')}" />
@@ -116,7 +118,7 @@
                 <p class="card-text" style="font-size: 20px" th:utext="${eventProgramDTO.location.replaceAll('\n', '<br>')}" />
             </div>
         </div>
-        <div class="card mt-5 mb-5 ms-5" th:if="${eventProgramDTO.title == '야설'}" style="width: 450px; height: 400px; float: left">
+        <div class="card mt-5 mb-5" th:if="${eventProgramDTO.title == '야설'}" style="width: 450px; height: 400px; float: left">
             <div class="card-body align">
                 <h2 class="card-title">야설 夜設</h2>
                 <p class="card-text" style="font-size: 20px; min-height: 100px" th:utext="${eventProgramDTO.content.replaceAll('\n', '<br>')}" />
@@ -132,7 +134,7 @@
                 <p class="card-text" style="font-size: 20px" th:utext="${eventProgramDTO.location.replaceAll('\n', '<br>')}" />
             </div>
         </div>
-        <div class="card mt-5 mb-5 ms-5" th:if="${eventProgramDTO.title == '야경'}" style="width: 450px; height: 400px; float: left">
+        <div class="card mt-5 mb-5" th:if="${eventProgramDTO.title == '야경'}" style="width: 450px; height: 400px; float: left">
             <div class="card-body align">
                 <h2 class="card-title">야경 夜景</h2>
                 <p class="card-text" style="font-size: 20px; min-height: 100px" th:utext="${eventProgramDTO.content.replaceAll('\n', '<br>')}" />
@@ -146,33 +148,64 @@
 	</div>
 
             <!-- Comment form-->
-            <div class="border-0 col-lg-12 col-xl-10 pe-lg-4 pe-xl-0 align-items-center offset-1">
-              <div class="border-bottom py-4 mt-2 mb-4">
-                <div class="d-flex align-items-center pb-1 mb-3">
-                  <img class="rounded-circle" src="assets/img/avatar/07.jpg" width="48" alt="Comment author" />
-                  <div class="ps-3">
-                    <h6 class="mb-0">후기 작성자</h6>
-                    <span class="fs-sm text-muted">xxxx.xx.xx</span>
-                  </div>
-                </div>
-                <p class="pb-2 mb-0">후기 작성 테스트</p>
-              </div>
-              <div id="comment"></div>
+            <h2 class="pb-2 pb-lg-3 pb-xl-4">후기 목록</h2>
+				<div th:each="review : ${eventReviews}">
+				    <div class="border-bottom py-4 mt-2 mb-4">
+				        <div class="d-flex align-items-center pb-1 mb-3">
+				            <img class="rounded-circle" th:src="@{/assets/img/avatar/07.jpg}" width="48" alt="Comment author" />
+				            <div class="ps-3">
+				                <h6 class="mb-0" th:text="${review.name}"></h6>
+				                <span th:if="${review.rating == 1}"><i class="ai-star-filled text-warning"></i></span>
+							    <span th:if="${review.rating == 2}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i></span>
+							    <span th:if="${review.rating == 3}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i></span>
+							    <span th:if="${review.rating == 4}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i></span>
+							    <span th:if="${review.rating == 5}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i></span>
+				                <span class="fs-sm text-muted" th:text="${#temporals.format(review.writeTime, 'yyyy.MM.dd')}"></span>
+				            </div>
+				        </div>
+				        <p class="pb-2 mb-0" th:text="${review.content}"></p>
+				        <form th:action="@{/replyDel}" method="post">
+				            <input type="hidden" name="evntReviewNo" th:value="${review.evntReviewNo}" />
+				            <input type="hidden" name="evntNo" th:value="${review.evntNo}" />
+				            <button type="submit" class="btn btn-sm btn-danger offset-11" >삭제</button>
+				        </form>
+				    </div>
+				</div>
 
-              <!-- 후기 작성-->
-              <div class="card-body">
-                <h2 class="pb-2 pb-lg-3 pb-xl-4">후기 작성</h2>
-                <form class="row needs-validation g-4" novalidate>
-                  <div class="col-12">
-                    <label class="form-label" for="c-comment">내용</label>
-                    <textarea class="form-control" rows="4" placeholder="후기를 작성해 주세요..." required id="c-comment"></textarea>
-                  </div>
-                  <div class="col-12"></div>
-                  <div class="col-12">
-                    <button class="btn btn-primary" type="submit" style="float: right">후기 남기기</button>
-                  </div>
-                </form>
-              </div>
+              <!-- 후기 작성 -->
+				<div class="card-body">
+				  <h2 class="pb-2 pb-lg-3 pb-xl-4">후기 작성</h2>
+				  <form class="row needs-validation g-4" action="/reply" method="post" id="eventReviewForm">
+				    <div class="col-12">
+				      <label class="form-label">내용</label>
+				      <textarea class="form-control" rows="4" placeholder="후기를 작성해 주세요..." name="content"></textarea>
+				    </div>
+				    <div class="col-12"></div>
+				    <input type="hidden" name="evntNo" th:value="${event.evntNo}">
+				    <input type="hidden" name="writeTime" id="writeTime" value="">
+				     <div class="col-12">
+                  <div class="card card-body bg-light">
+                    <div class="fw-bold text-center fs-2 pb-3" style="color: #780422;">별점 남기기</div>
+                    <hr>
+                      <div class="align-items-center text-center text-warning pt-4" id="starFormat">
+                        <input type="radio" name="rating" id="1star" value="1" style="opacity: 0;" th:checked="${ratingValue == 1}" >
+                        <label class="ai-star fs-2" for="1star" id="1starLabel"></label>
+                        <input type="radio" name="rating" id="2star" value="2" style="opacity: 0;" th:checked="${ratingValue == 2}" >
+                        <label class="ai-star fs-2" for="2star" id="2starLabel"></label>
+                        <input type="radio" name="rating" id="3star" value="3" style="opacity: 0;" th:checked="${ratingValue == 3}">
+                        <label class="ai-star fs-2" for="3star" id="3starLabel"></label>
+                        <input type="radio" name="rating" id="4star" value="4" style="opacity: 0;" th:checked="${ratingValue == 4}">
+                        <label class="ai-star fs-2" for="4star" id="4starLabel"></label>
+                        <input type="radio" name="rating" id="5star" value="5" style="opacity: 0;" th:checked="${ratingValue == 5}">
+                        <label class="ai-star fs-2" for="5star" id="5starLabel"></label>
+                      </div>
+                    </div>
+				    
+				    <div class="col-12"  style="padding-top: 20px;">
+				      <button class="btn btn-primary" type="submit" style="float: right" form="eventReviewForm">후기 남기기</button>
+				    </div>
+				  </form>
+				</div>
             </div>
           </div>
 			</div>
@@ -196,6 +229,81 @@
       </svg>
       <i class="ai-arrow-up"></i>
     </a>
+    
+    <script>
+    function setWriteTime() {
+        const writeTimeField = document.getElementById("writeTime");
+        const now = new Date();
+        const isoString = now.toISOString(); // ISO 8601 형식의 시간으로 변환
+        writeTimeField.value = isoString;
+    }
+
+    // 페이지가 로드될 때 작성 시간을 설정합니다.
+    document.addEventListener("DOMContentLoaded", function () {
+        setWriteTime();
+    });
+</script>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+                    <script>
+                      $(document).ready(function() {
+                        $('#starFormat label').each(function() {
+                          var icon = $(this);
+                          icon.hover(function() {
+                            var num = parseInt($(this).attr('id').charAt(0), 10);
+                            for (var i = 1; i <= 5; i++) {
+                              var id = '#' + i + 'starLabel';
+                              if (i <= num) {
+                                $(id).removeClass('ai-star');
+                                $(id).addClass('ai-star-filled');
+                              } else {
+                                $(id).addClass('ai-star');
+                                $(id).removeClass('ai-star-filled');
+                              }
+                            }
+                          });
+                        });
+                        $('#starFormat input').each(function() {
+                          var button = $(this);
+                          button.change(function () {
+                            var score = button.val();
+                          });
+                        });
+                      });
+                    </script>
+                      <style>
+                        .star-rating {
+                          display: flex;
+                          flex-direction: row-reverse;
+                          font-size: 2.25rem;
+                          line-height: 2.5rem;
+                          justify-content: space-around;
+                          padding: 0 0.2em;
+                          text-align: center;
+                          width: 5em;
+                        }
+                        
+                        .star-rating input {
+                          display: none;
+                        }
+                        
+                        .star-rating label {
+                          -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+                          -webkit-text-stroke-width: 2.3px;
+                          -webkit-text-stroke-color: #2b2a29;
+                          cursor: pointer;
+                        }
+                        
+                        .star-rating :checked ~ label {
+                          -webkit-text-fill-color: gold;
+                        }
+                        
+                        .star-rating label:hover,
+                        .star-rating label:hover ~ label {
+                          -webkit-text-fill-color: #fff58c;
+                        }
+                      </style>
+                    </div>
     <!-- Vendor scripts: js libraries and plugins-->
     <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.js"></script>

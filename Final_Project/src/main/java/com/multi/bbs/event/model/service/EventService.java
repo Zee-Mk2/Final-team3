@@ -14,6 +14,7 @@ import com.multi.bbs.event.model.vo.Event;
 import com.multi.bbs.event.model.vo.EventImg;
 import com.multi.bbs.event.model.vo.EventProgram;
 import com.multi.bbs.event.model.vo.EventProgramDTO;
+import com.multi.bbs.event.model.vo.EventReview;
 
 
 @Service
@@ -53,7 +54,25 @@ public class EventService {
 	public List<EventImg> getEventImagesByNo(int no) {
         return mapper.getEventImagesByNo(no);
     }
-	
+
+
+	public List<EventReview> getEventReviewsWithMemberByNo(int no) {
+		return mapper.selectEventReviewsWithMemberByNo(no);
+	}
+
+
+	@Transactional(rollbackFor = Exception.class)
+    public int saveReply(EventReview eventReview) {
+        return mapper.insertEventReview(eventReview);
+    }
+
+
+	@Transactional(rollbackFor = Exception.class)
+	public int deleteReply(int eventReviewNo) {
+		return mapper.deleteEventReview(eventReviewNo);
+	}
+
+
 	
 
 }

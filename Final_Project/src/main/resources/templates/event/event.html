@@ -121,37 +121,37 @@
           <FORM action="@{/event}" method="get" name="event">
         <ul class="nav nav-tabs d-flex justify-content-between" role="tablist">
           <li class="nav-item">
-            <a href="?startDate=1월" class="nav-link" type="submit">
+            <a href="?startDate=1월" class="nav-link" type="submit" th:value="${startDate}">
               01월
             </a>
           </li>
           <li class="nav-item">
-            <a href="?startDate=2월" class="nav-link" type="submit">
+            <a href="?startDate=2월" class="nav-link" type="submit" th:value="${startDate}">
               02월
             </a>
           </li>
           <li class="nav-item">
-            <a href="?startDate=3월" class="nav-link" type="submit">
+            <a href="?startDate=3월" class="nav-link" type="submit" th:value="${startDate}">
               03월
             </a>
           </li>
           <li class="nav-item">
-            <a href="?startDate=4월" class="nav-link" type="submit">
+            <a href="?startDate=4월" class="nav-link" type="submit" th:value="${startDate}">
               04월
             </a>
           </li>
           <li class="nav-item">
-            <a href="?startDate=5월" class="nav-link" type="submit">
+            <a href="?startDate=5월" class="nav-link" type="submit" th:value="${startDate}">
               05월
             </a>
           </li>
           <li class="nav-item">
-            <a href="?startDate=6월" class="nav-link" type="submit" th:selected="${param.startDate == '6월'} ? 'selected' : null ">
+            <a href="?startDate=6월" class="nav-link" type="submit" th:value="${startDate}">
               06월
             </a>
           </li>
           <li class="nav-item">
-            <a href="?startDate=7월" class="nav-link" type="submit">
+            <a href="?startDate=7월" class="nav-link" type="submit" th:value="${startDate}">
               07월
             </a>
           </li>
@@ -166,17 +166,17 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="?startDate=10월" class="nav-link" type="submit">
+            <a href="?startDate=10월" class="nav-link" type="submit" th:value="${startDate}">
               10월
             </a>
           </li>
           <li class="nav-item">
-            <a href="?startDate=11월" class="nav-link" type="submit">
+            <a href="?startDate=11월" class="nav-link" type="submit" th:value="${startDate}">
               11월
             </a>
           </li>
           <li class="nav-item">
-            <a href="?startDate=12월" class="nav-link" type="submit">
+            <a href="?startDate=12월" class="nav-link" type="submit" th:value="${startDate}">
               12월
             </a>
           </li>
@@ -215,6 +215,32 @@
 		</script>
 
         <!-- card -->
+        <th:block th:if="${list.isEmpty()}">
+        	<div class="row align-items-center pt-xl-2 pb-5 mb-lg-2 mb-xl-3 mb-xxl-4">
+          <div class="col-4" >
+          </div>
+          <div class="col-8 px-5">
+            <div class="ps-md-3 ps-lg-0">
+              <div class="ps-md-3 ps-lg-0">
+                <h2 class="h2 pt-5">진행중인 행사가 없습니다.</h2>
+                <div class="row row-cols-2 g-4 pb-2 pb-xl-0 mb-4 mb-xl-5">
+                  <div class="col">
+                  </div>
+                  <div class="col">
+                  </div>
+                  <div class="col">
+                  </div>
+                  <div class="col">
+                  </div>
+                  <div class="d-flex align-items-center pt-2 pt-lg-3 mt-3">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </th:block>
+        
             <th:block th:if="startDate != null">
         <div class="div" th:each="event : ${list}">
           <div class="div" th:if="${event.startDate.contains(startDate)}">
