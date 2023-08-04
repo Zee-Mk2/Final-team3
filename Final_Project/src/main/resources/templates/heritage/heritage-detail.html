@@ -27,9 +27,9 @@
         <!-- Breadcrumb-->
         <nav aria-label="breadcrumb">
           <ol class="pt-lg-3 pb-2 pb-md-4 breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">홈</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/index.html}">홈</a></li>
             <li class="breadcrumb-item">
-              <a href="culturalheritage.html">문화재</a>
+              <a th:href="@{/heritage-list.html}">문화재</a>
             </li>
             <li class="breadcrumb-item">
               <a href="heritage-detail.html" style="color: #e39d2c">문화재 상세</a>
@@ -41,14 +41,14 @@
           <!-- Gallery-->
           <div class="col-md-6 gallery mb-3 mb-md-0">
             <!-- Item-->
-            <a class="d-block gallery-item card-hover zoom-effect mb-4" href="https://www.heritage.go.kr/unisearch/images/national_treasure/thumb/2021042017434700.JPG?time=1689852106599">
+            <a class="d-block gallery-item card-hover zoom-effect mb-4" th:href="${item.img}">
               <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 rounded-1 overflow-hidden zindex-2 opacity-0">
                 <i class="ai-zoom-in fs-2 text-white position-relative zindex-2"></i>
                 <div class="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-20"></div>
               </div>
               <div class="zoom-effect-wrapper rounded-1">
                 <div class="zoom-effect-img">
-                  <img class="d-block w-100" src="https://www.heritage.go.kr/unisearch/images/national_treasure/thumb/2021042017434700.JPG?time=1689852106599" />
+                  <img class="d-block w-100" th:src="${item.img}" />
                 </div>
               </div>
             </a>
@@ -57,7 +57,7 @@
             <div class="d-none d-md-block"></div>
             <div class="top-0 ps-md-4 ps-lg-5 ps-xl-0">
               <div class="d-none d-md-block" style="padding-top: 90px"></div>
-              <div class="h3 my-card-title" style="font-size: 40px; font-weight: bold;">숭례문(崇禮門)</div>
+              <div class="h3 my-card-title" style="font-size: 40px; font-weight: bold;"> [[${item.name}]]([[${item.name2}]]) </div>
               <!-- Action buttons-->
               <div class="d-sm-flex d-md-block d-lg-flex py-4 py-md-5 my-3 my-md-0 mt-lg-0 mb-lg-1">
                 <div class="align-items-center">
@@ -110,31 +110,42 @@
                     <h3 class="mb-0 title fs-2">문화재 설명</h3>
                   </div>
                   <div class="p-0 pt-3 text-black mb-5">
-                    <p class="mb-1">조선시대 한양도성의 정문으로 남쪽에 있다고 해서 남대문이라고도 불렀다. 현재 서울에 남아 있는 목조 건물 중 가장 오래된 것으로 태조 5년(1396)에 짓기 시작하여 태조 7년(1398)에 완성하였다. 
-                      이 건물은 세종 30년(1448)에 고쳐 지은 것인데 1961∼1963년 해체·수리 때 성종 10년(1479)에도 큰 공사가 있었다는 사실이 밝혀졌다.
-                       이후, 2008년 2월 10일 숭례문 방화 화재로 누각 2층 지붕이 붕괴되고 1층 지붕도 일부 소실되는 등 큰 피해를 입었으며, 5년 2개월에 걸친 복원공사 끝에 2013년 5월 4일 준공되어 일반에 공개되고 있다.</p>
-                    <p class="mb-1">
-                      이 문은 돌을 높이 쌓아 만든 석축 가운데에 무지개 모양의 홍예문을 두고, 그 위에 앞면 5칸·옆면 2칸 크기로 지은 누각형 2층 건물이다. 지붕은 앞면에서 볼 때 사다리꼴 형태를 하고 있는데, 이러한 지붕을 우진각지붕이라 한다. 
-                      지붕 처마를 받치기 위해 기둥 위부분에 장식하여 짠 구조가 기둥 위뿐만 아니라 기둥 사이에도 있는 다포 양식으로, 그 형태가 곡이 심하지 않고 짜임도 건실해 조선 전기의 특징을 잘 보여주고 있다.</p>
+                    <p class="mb-1">[[${item.content}]]</p>
                   </div>
-                  <h2 class="h2 py-lg-1 py-xl-3 border-bottom">후기</h2>
-                  <!-- Comment-->
+                  
                   <div class="border-bottom py-4 mt-2 mb-4">
+                  <h2 class="h2 py-lg-1 py-xl-3 border-bottom">댓글</h2>
+                  <th:block th:if="${replies != null}">
+                  	<th:block  th:each="reply : ${replies}"> 
+                  <!-- Comment-->
                     <div class="d-flex align-items-center pb-1 mb-3">
                       <img class="rounded-circle" th:src="@{/assets/img/avatar/08.jpg}" width="48" alt="Comment author" />
                       <div class="ps-3">
-                        <h6 class="mb-0">테스트계정</h6>
-                        <span class="fs-sm text-muted">5시간 전</span>
+                        <h6 class="mb-0" th:text="${reply.name}"></h6>
+                        <span class="fs-sm text-muted" th:text="${#dates.format(reply.enroll_Date, 'yyyy-MM-dd HH:mm')}"></span>
                       </div>
                     </div>
-                    <p class="pb-2 mb-0">후기테스트 후기테스트 후기테스트 후기테스트 후기테스트 후기테스트 후기테스트</p>
+                    <p class="pb-2 mb-0" th:text="${reply.content}"></p>
                     <button class="nav-link fs-sm fw-semibold px-0 py-2" type="button">
                       댓글
                       <i class="ai-redo fs-xl ms-2"></i>
                     </button>
+                    
+					<!-- 	<th:block th:if="${session.loginMember != null && 
+							(session.loginMember.id == reply.id || session.loginMember.role == 'ROLE_ADMIN')}">
+							<button class="btn-delete" th:onclick="|deleteReply(${reply.rNo},${heritage.hNo});|" >삭제</button>
+						</th:block> -->
+					
+                  	</th:block>
+                  </th:block>
+                  	<th:block th:if="${replies == null}">
+					<tr>
+						<td colspan="3" style="text-align: center;">등록된 댓글이 없습니다.</td>
+					</tr>
+				</th:block>
                   </div>
                   <!-- Comment-->
-                  <div class="border-bottom pt-2 pb-4">
+            <!--       <div class="border-bottom pt-2 pb-4">
                     <div class="d-flex align-items-center pb-1 mb-3">
                       <img class="rounded-circle" th:src="@{/assets/img/avatar/11.jpg}" width="48" alt="Comment author" />
                       <div class="ps-3">
@@ -147,7 +158,7 @@
                       댓글
                       <i class="ai-redo fs-xl ms-2"></i>
                     </button>
-                    <!-- 후기 댓글-->
+                    후기 댓글
                     <div class="card card-body border-0 bg-secondary mt-4">
                       <div class="d-flex align-items-center pb-1 mb-3">
                         <img class="rounded-circle" th:src="@{/assets/img/avatar/10.jpg}" width="48" alt="Comment author" />
@@ -162,13 +173,13 @@
                       </p>
                     </div>
                   </div>
-                  <!-- All comments button-->
+                  All comments button
                   <div class="text-end pb-5 mb-lg-1 mb-xl-3">
                     <a class="btn btn-link px-0 text-warning" href="#">
                       후기 모두 보기
                       <i class="ai-chevron-right fs-lg ms-1"></i>
                     </a>
-                  </div>
+                  </div> -->
                 </div>
                 <!-- Content item END -->
               </div>
@@ -191,28 +202,28 @@
                           <i class="far fa-address-book text-primary"></i>
                           분류
                         </td>
-                        <td>유적건조물 / 정치국방 / 성 / 성곽시설</td>
+                        <td> [[${item.gcodeName}]]   / [[${item.bcodeName}]]   / [[${item.mcodeName}]]   / [[${item.scodeName}]]  </td>
                       </tr>
                       <tr>
                         <td class="fw-bold text-black" style="white-space: nowrap">
                           <i class="fas fa-phone text-primary"></i>
                           시대
                         </td>
-                        <td>조선 태조 7년(1398)</td>
+                        <td>[[${item.era}]] </td>
                       </tr>
                       <tr>
                         <td class="fw-bold text-black" style="white-space: nowrap">
                           <i class="far fa-calendar text-primary"></i>
                           지정일
                         </td>
-                        <td>1962-12-20</td>
+                        <td>[[${#dates.format(item.asDate, 'yyyy-MM-dd')}]]</td>
                       </tr>
                       <tr>
                         <td class="fw-bold text-black" style="white-space: nowrap; border-bottom: none">
                           <i class="fas fa-calendar-day text-primary"></i>
                           소재지
                         </td>
-                        <td style="border-bottom: none">서울 중구 세종대로 40 (남대문로4가)</td>
+                        <td style="border-bottom: none" th:text="${item.location}"> </td>
                       </tr>
                     </table>
                   </div>
@@ -224,17 +235,19 @@
                   <div class="card">
                     <div id="map" style="border-radius: 1rem; width: 100%; height: 300px"></div>
                     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b405a10ab3aef9b7d1801f29c81327a2"></script>
-                    <script>
+                    <script th:inline="javascript">
+                      var la = [[${item.la}]]
+                      var lo = [[${item.lo}]]
                       var container = document.getElementById("map"); // 지도를 표시할 div
                       var options = {
-                        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                        center: new kakao.maps.LatLng(la, lo), // 지도의 중심좌표
                         level: 3, // 지도의 확대 레벨
                       };
 
                       var map = new kakao.maps.Map(container, options); // 지도를 생성합니다
 
                       // 마커가 표시될 위치입니다
-                      var markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+                      var markerPosition = new kakao.maps.LatLng(la, lo);
 
                       // 마커를 생성합니다
                       var marker = new kakao.maps.Marker({
@@ -340,15 +353,17 @@
       <!-- Dscription section -->
       <section class="container pb-5 mb-sm-2 mb-lg-3 mb-xl-4 mb-xxl-5">
         <div class="row align-items-center pb-md-3">
-          <!-- 후기-->
+          <!-- 댓글-->
           <div class="pt-4 pt-xl-5 mt-4" id="comments">
             <!-- Comment form-->
             <div class="card border-0 bg-secondary pt-2 p-md-2 p-xl-3 p-xxl-4 mt-n3 mt-md-0">
               <div class="card-body">
-                <h2 class="pb-2 pb-lg-3 pb-xl-4">후기 남기기</h2>
-                <form class="row needs-validation g-4" novalidate>
+                <h2 class="pb-2 pb-lg-3 pb-xl-4">댓글 남기기</h2>
+                <form class="row needs-validation g-4" novalidate action="/heritage/reply" method="post">
+              <!-- <input type="hidden" name="name" th:value="${item.name}" />  -->  
+               	 <input type="hidden" name="hNo" th:value="${item.hNo}" />
                   <div class="col-12">
-                    <textarea class="form-control" rows="4" placeholder="후기를 입력하세요." required id="c-comment"></textarea>
+                    <textarea class="form-control" rows="4" placeholder="댓글을 작성해주세요." required id="content" name="content"></textarea>
                   </div>
                   <div class="col-12">
                     <button class="btn btn-warning" type="submit">등록하기</button>

@@ -63,6 +63,17 @@ public class AccountController {
 		}
 		return "redirect:/";
 	}
+	
+	@GetMapping("/mypage/bookmark")
+	public String bookMarkPage(Model model, HttpSession session) {
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		if (loginMember == null) {
+			model.addAttribute("msg", "잘못된 접근입니다.");
+			model.addAttribute("location", "/sign-in");
+			return "common/msg";
+		}
+		return "account/account-bookMark";
+	}
 }
 
 
