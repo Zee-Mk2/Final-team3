@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
   <!-- Vendor styles-->
-  <link rel="stylesheet" media="screen" href="assets/vendor/flatpickr/dist/flatpickr.min.css"/>
+  <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/flatpickr/dist/flatpickr.min.css}"/>
   <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
   
   <!-- Body-->
@@ -43,7 +43,7 @@
         <!-- Breadcrumb-->
         <nav aria-label="breadcrumb">
           <ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">홈</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/}">홈</a></li>
             <li class="breadcrumb-item active" aria-current="page">투어</li>
           </ol>
         </nav>
@@ -51,87 +51,18 @@
           <!-- Blog posts-->
           <div class="col-lg-9 pe-lg-4 pe-xl-5">
             <h1 class="pb-3 pb-lg-4">투어 모집</h1>
+            
             <!-- Post-->
-            <article class="row g-0 border-0 mb-4"><a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" href="blog-single-v1.html" style="background-image: url(assets/img/blog/list/01.jpg); min-height: 14rem"></a>
+            <article class="row g-0 border-0 mb-4" th:each="tour: ${tours}"><a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" href="blog-single-v1.html" style="background-image: url(assets/img/blog/list/01.jpg); min-height: 14rem"></a>
               <div class="col-sm-7">
                 <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
-                  <h3><a href="blog-single-v1.html">같이 경주 둘러보실 분</a></h3>
+                  <h3><a href="blog-single-v1.html" th:text="${tour.title}"></a></h3>
                   <p class="d-sm-none d-md-block">
-                    <span class="text-body fw-bold me-2">지역</span>대구/경북 <br>
-                    <span class="text-body fw-bold me-2">일정</span>07-01 ~ 07-02 | 1박 2일 <br>
-                    <span class="text-body fw-bold me-2">인원</span>2명 <br>
+                    <span class="text-body fw-bold me-2">지역</span>[[${tour.region}]] <br>
+                    <span class="text-body fw-bold me-2">일정</span>[[${tour.startDate}]] ~ [[${tour.endDate}]] | [[${tour.duration}]]박 [[${tour.duration + 1}]]일 <br>
+                    <span class="text-body fw-bold me-2">인원</span>[[${tour.numOfPeople}]]명 <br>
                   </p>
-                  <div class="d-flex flex-wrap align-items-center mt-n2"><a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#"><i class="ai-message fs-lg me-1"></i>12</a><span class="fs-xs opacity-20 mt-2 mx-3">|</span><span class="fs-sm text-muted mt-2">8시간 전</span><span class="fs-xs opacity-20 mt-2 mx-3">|</span><a class="badge text-nav fs-xs border mt-2" href="#">문화재</a></div>
-                </div>
-              </div>
-            </article>
-            <!-- Post-->
-            <article class="row g-0 border-0 pt-3 pt-sm-0 mb-4"><a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" href="blog-single-v2.html" style="background-image: url(assets/img/blog/list/02.jpg); min-height: 14rem"></a>
-              <div class="col-sm-7">
-                <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
-                  <h3><a href="blog-single-v1.html">한글박물관 같이 가요</a></h3>
-                  <p class="d-sm-none d-md-block">
-                    <span class="text-body fw-bold me-2">지역</span>서울/인천/경기 <br>
-                    <span class="text-body fw-bold me-2">일정</span>07-01 ~ 07-01 | 당일 <br>
-                    <span class="text-body fw-bold me-2">인원</span>2명 <br>
-                  </p>
-                  <div class="d-flex flex-wrap align-items-center mt-n2"><a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#"><i class="ai-message fs-lg me-1"></i>12</a><span class="fs-xs opacity-20 mt-2 mx-3">|</span><span class="fs-sm text-muted mt-2">8시간 전</span><span class="fs-xs opacity-20 mt-2 mx-3">|</span><a class="badge text-nav fs-xs border mt-2" href="#">박물관</a></div>
-                </div>
-              </div>
-            </article>
-            <!-- Post-->
-            <article class="row g-0 border-0 mb-4"><a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" href="blog-single-v1.html" style="background-image: url(assets/img/blog/list/01.jpg); min-height: 14rem"></a>
-              <div class="col-sm-7">
-                <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
-                  <h3><a href="blog-single-v1.html">같이 경주 둘러보실 분</a></h3>
-                  <p class="d-sm-none d-md-block">
-                    <span class="text-body fw-bold me-2">지역</span>대구/경북 <br>
-                    <span class="text-body fw-bold me-2">일정</span>07-01 ~ 07-02 | 1박 2일 <br>
-                    <span class="text-body fw-bold me-2">인원</span>2명 <br>
-                  </p>
-                  <div class="d-flex flex-wrap align-items-center mt-n2"><a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#"><i class="ai-message fs-lg me-1"></i>12</a><span class="fs-xs opacity-20 mt-2 mx-3">|</span><span class="fs-sm text-muted mt-2">8시간 전</span><span class="fs-xs opacity-20 mt-2 mx-3">|</span><a class="badge text-nav fs-xs border mt-2" href="#">문화재</a></div>
-                </div>
-              </div>
-            </article>
-            <!-- Post-->
-            <article class="row g-0 border-0 pt-3 pt-sm-0 mb-4"><a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" href="blog-single-v2.html" style="background-image: url(assets/img/blog/list/02.jpg); min-height: 14rem"></a>
-              <div class="col-sm-7">
-                <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
-                  <h3><a href="blog-single-v1.html">한글박물관 같이 가요</a></h3>
-                  <p class="d-sm-none d-md-block">
-                    <span class="text-body fw-bold me-2">지역</span>서울/인천/경기 <br>
-                    <span class="text-body fw-bold me-2">일정</span>07-01 ~ 07-01 | 당일 <br>
-                    <span class="text-body fw-bold me-2">인원</span>2명 <br>
-                  </p>
-                  <div class="d-flex flex-wrap align-items-center mt-n2"><a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#"><i class="ai-message fs-lg me-1"></i>12</a><span class="fs-xs opacity-20 mt-2 mx-3">|</span><span class="fs-sm text-muted mt-2">8시간 전</span><span class="fs-xs opacity-20 mt-2 mx-3">|</span><a class="badge text-nav fs-xs border mt-2" href="#">박물관</a></div>
-                </div>
-              </div>
-            </article>
-            <!-- Post-->
-            <article class="row g-0 border-0 mb-4"><a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" href="blog-single-v1.html" style="background-image: url(assets/img/blog/list/01.jpg); min-height: 14rem"></a>
-              <div class="col-sm-7">
-                <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
-                  <h3><a href="blog-single-v1.html">같이 경주 둘러보실 분</a></h3>
-                  <p class="d-sm-none d-md-block">
-                    <span class="text-body fw-bold me-2">지역</span>대구/경북 <br>
-                    <span class="text-body fw-bold me-2">일정</span>07-01 ~ 07-02 | 1박 2일 <br>
-                    <span class="text-body fw-bold me-2">인원</span>2명 <br>
-                  </p>
-                  <div class="d-flex flex-wrap align-items-center mt-n2"><a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#"><i class="ai-message fs-lg me-1"></i>12</a><span class="fs-xs opacity-20 mt-2 mx-3">|</span><span class="fs-sm text-muted mt-2">8시간 전</span><span class="fs-xs opacity-20 mt-2 mx-3">|</span><a class="badge text-nav fs-xs border mt-2" href="#">문화재</a></div>
-                </div>
-              </div>
-            </article>
-            <!-- Post-->
-            <article class="row g-0 border-0 pt-3 pt-sm-0 mb-4"><a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" href="blog-single-v2.html" style="background-image: url(assets/img/blog/list/02.jpg); min-height: 14rem"></a>
-              <div class="col-sm-7">
-                <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
-                  <h3><a href="blog-single-v1.html">한글박물관 같이 가요</a></h3>
-                  <p class="d-sm-none d-md-block">
-                    <span class="text-body fw-bold me-2">지역</span>서울/인천/경기 <br>
-                    <span class="text-body fw-bold me-2">일정</span>07-01 ~ 07-01 | 당일 <br>
-                    <span class="text-body fw-bold me-2">인원</span>2명 <br>
-                  </p>
-                  <div class="d-flex flex-wrap align-items-center mt-n2"><a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#"><i class="ai-message fs-lg me-1"></i>12</a><span class="fs-xs opacity-20 mt-2 mx-3">|</span><span class="fs-sm text-muted mt-2">8시간 전</span><span class="fs-xs opacity-20 mt-2 mx-3">|</span><a class="badge text-nav fs-xs border mt-2" href="#">박물관</a></div>
+                  <div class="d-flex flex-wrap align-items-center mt-n2"><a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#"><i class="ai-message fs-lg me-1"></i>12</a><span class="fs-xs opacity-20 mt-2 mx-3">|</span><span class="fs-sm text-muted mt-2">[[${tour.timeDiff}]]</span><span class="fs-xs opacity-20 mt-2 mx-3">|</span><a class="badge text-nav fs-xs border mt-2" href="#">[[${tour.category}]]</a></div>
                 </div>
               </div>
             </article>
@@ -176,22 +107,22 @@
                 <button class="btn-close ms-auto" type="button" data-bs-dismiss="offcanvas" data-bs-target="#sidebarBlog"></button>
               </div>
               <div class="offcanvas-body">
-                <button type="button" class="btn btn-secondary w-100 mb-5">내 투어플랜 만들기</button>
+                <a type="button" class="btn btn-secondary w-100 mb-5" th:href="@{/tour/post}">내 투어플랜 만들기</a>
                 <!-- Search box-->
-                <form>
+                <form method="get" th:action="@{/tour}">
                   <div class="position-relative mb-4 mb-lg-5">
                     <button type="submit" class="btn btn-link ai-search position-absolute top-50 start-0 translate-middle-y ms-3 px-1" style="color: #202020;"></button>
-                    <input class="form-control ps-5" type="search" placeholder="키워드로 검색">
+                    <input class="form-control ps-5" type="search" placeholder="키워드로 검색" name="keyword" th:value="${param.keyword}">
                   </div>
                   <!-- 구분 -->
                   <div class="pb-4">
                     <h4>구분</h4>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="ex-check-4" checked>
+                      <input class="form-check-input" type="checkbox" id="ex-check-4" name="heritage" th:checked="${#strings.equals(param.heritage, 'on')} ? true : null">
                       <label class="form-check-label" for="ex-check-4">문화재</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="ex-check-5" checked>
+                      <input class="form-check-input" type="checkbox" id="ex-check-5" name="museum" th:checked="${#strings.equals(param.museum, 'on')} ? true : null">
                       <label class="form-check-label" for="ex-check-5">박물관</label>
                     </div>
                   </div>
@@ -202,24 +133,44 @@
                       <span class="input-group-text">
                         <i class="ai-calendar"></i>
                       </span>
-                      <input class="form-control date-picker date-range" type="text" placeholder="시작 날짜" data-datepicker-options='{"altInput": true, "altFormat": "Y-m-d", "dateFormat": "Y-m-d"}' data-linked-input="#end-date">
+                      <script th:inline="javascript">
+                      	var dateRange = [[${param.startDate}]];
+                      	dateRange = dateRange[0].split(" to ");
+                      	var startDate = [];
+                      	for (var i = 0; i < dateRange.length; i++) {
+                      		startDate.push(new Date(dateRange[i]));
+                      	}
+                      	console.log(startDate);
+                        document.addEventListener('DOMContentLoaded', function() {
+                            var datePickerOptions = {
+                                altInput: true,
+                                altFormat: 'Y-m-d',
+                                dateFormat: 'Y-m-d',
+                                defaultDate: startDate,
+                                mode: 'range'
+                            };
+                            var datePickerInput = document.querySelector('.date-picker');
+                            flatpickr(datePickerInput, datePickerOptions);
+                        });
+                      </script>
+                      <input value="${param.startDate}" class="form-control date-picker date-range" type="text" placeholder="시작 날짜" data-linked-input="#end-date" name="startDate" id="startDate">
                       <span class="border-end border-input"></span>
-                      <input class="form-control date-picker" type="text" placeholder="끝 날짜" data-datepicker-options='{"altInput": true, "altFormat": "Y-m-d", "dateFormat": "Y-m-d"}' id="end-date">
+                      <input class="form-control date-picker" type="text" placeholder="끝 날짜" data-datepicker-options='{"altInput": true, "altFormat": "Y-m-d", "dateFormat": "Y-m-d"}' id="end-date" name="endDate">
                     </div>
                   </div>
                   <!-- 지역 -->
                   <div class="pb-4">
                     <h4>지역</h4>
-                    <select id="select-md" class="form-select">
-                      <option>지역 선택</option>
-                      <option>서울/인천/경기</option>
-                      <option>강원</option>
-                      <option>대전/충청</option>
-                      <option>대구/경북</option>
-                      <option>부산/울산/경남</option>
-                      <option>전북</option>
-                      <option>광주/전남</option>
-                      <option>제주</option>
+                    <select id="select-md" class="form-select" name="region">
+                      <option value="">지역 선택</option>
+                      <option value="서울/인천/경기" th:selected="${#strings.equals(param.region, '서울/인천/경기')} ? true : null">서울/인천/경기</option>
+                      <option value="강원" th:selected="${#strings.equals(param.region, '강원')} ? true : null">강원</option>
+                      <option value="대전/충청" th:selected="${#strings.equals(param.region, '대전/충청')} ? true : null">대전/충청</option>
+                      <option value="대구/경북" th:selected="${#strings.equals(param.region, '대구/경북')} ? true : null">대구/경북</option>
+                      <option value="부산/울산/경남" th:selected="${#strings.equals(param.region, '부산/울산/경남')} ? true : null">부산/울산/경남</option>
+                      <option value="전북" th:selected="${#strings.equals(param.region, '전북')} ? true : null">전북</option>
+                      <option value="광주/전남" th:selected="${#strings.equals(param.region, '광주/전남')} ? true : null">광주/전남</option>
+                      <option value="제주" th:selected="${#strings.equals(param.region, '제주')} ? true : null">제주</option>
                     </select>
                   </div>
                 </form>
@@ -240,12 +191,12 @@
         <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
       </svg><i class="ai-arrow-up"></i></a>
     <!-- Vendor scripts: js libraries and plugins-->
-    <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.js"></script>
-    <script src="assets/vendor/jarallax/dist/jarallax.min.js"></script>
-    <script src="assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
-    <script src="assets/vendor/flatpickr/dist/plugins/rangePlugin.js"></script>
+    <script th:src="@{/assets/vendor/bootstrap/dist/js/bootstrap.bundle.js}"></script>
+    <script th:src="@{/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.js}"></script>
+    <script th:src="@{/assets/vendor/jarallax/dist/jarallax.min.js}"></script>
+    <script th:src="@{/assets/vendor/flatpickr/dist/flatpickr.min.js}"></script>
+    <script th:src="@{/assets/vendor/flatpickr/dist/plugins/rangePlugin.js}"></script>
     <!-- Main theme script-->
-    <script src="assets/js/theme.js"></script>
+    <script th:src="@{/assets/js/theme.js}"></script>
   </body>
 </html>

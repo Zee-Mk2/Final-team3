@@ -1,4 +1,4 @@
-package com.multi.bbs.account.model.vo;
+package com.multi.bbs.tour;
 
 import java.util.Date;
 
@@ -9,13 +9,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member {
+public class TourSchedule {
+	private int tsno;
+	private int tno;
 	private int mno;
-	private String role;
 	private String name;
-	private String email;
-	private String password;
-	private String phone;
-	private String state;
-	private Date enrollDate;
+	private double la;
+	private double lo;
+	private Date startTime;
+	private Date endTime;
+	private String type;
 }

@@ -202,7 +202,6 @@
         <!-- Banner-->
         <div class="ignore-dark-mode rounded-1 overflow-hidden mb-5" style="background-color: #e3e5e9">
           <div class="row align-items-center g-0">
-            <div class="col-md-6 offset-xl-1 text-center text-md-center">검색창 자리</div>
             <div class="col-md-6 col-xl-5 d-flex justify-content-end"><img th:src="@{/assets/img/shop/banner.jpg}" width="491" alt="Banner" /></div>
           </div>
         </div>
@@ -234,11 +233,11 @@
                 <button class="btn-close" type="button" data-bs-dismiss="offcanvas" data-bs-target="#shopSidebar"></button>
               </div>
 
-              <form>
+              <form method="get" th:action="@{/shop}">
                 <div class="offcanvas-body pt-2 pt-lg-0 pe-lg-4">
                   <div class="position-relative mb-4 mb-lg-5">
                     <button type="submit" class="btn btn-link ai-search position-absolute top-50 start-0 translate-middle-y ms-3 px-1" style="color: #202020"></button>
-                    <input class="form-control ps-5" type="search" placeholder="키워드로 검색" />
+                    <input class="form-control ps-5" type="search" placeholder="키워드로 검색" name="keyword" th:value="${keyword}"/>
                   </div>
                   <!-- Categories (accordion with checkboxes)-->
                   <h3 class="h5">카테고리</h3>
@@ -306,7 +305,7 @@
           <div class="col-lg-9">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
               <!-- Item-->
-              <div class="col pb-2 pb-sm-3">
+              <div class="col pb-2 pb-sm-3" th:each="item: ${products}">
                 <div class="card-hover position-relative bg-secondary rounded-1 p-3 mb-4">
                   <span class="badge bg-faded-danger text-danger position-absolute top-0 start-0 mt-3 ms-3">Sale</span>
                   <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
@@ -315,7 +314,7 @@
                   </button>
                   <div class="swiper swiper-nav-onhover" data-swiper-options='{"loop": true, "navigation": {"prevEl": ".btn-prev", "nextEl": ".btn-next"}}'>
                     <a class="swiper-wrapper" href="shop-single.html">
-                      <div class="swiper-slide p-2 p-xl-4"><img class="d-block mx-auto" th:src="@{/assets/img/shop/products/01.png}" width="226" alt="Product" /></div>
+                      <div class="swiper-slide p-2 p-xl-4"><img class="d-block mx-auto" th:src="${item.image}" width="226" alt="Product" /></div>
                     </a>
                     <button class="btn btn-prev btn-icon btn-sm btn-light bg-light border-0 rounded-circle start-0" type="button">
                       <i class="ai-chevron-left fs-xl d-dark-mode-none"></i>
@@ -328,7 +327,7 @@
                   </div>
                 </div>
                 <div class="d-flex mb-1">
-                  <h3 class="h6 mb-0"><a href="shop-single.html">Loft style lamp</a></h3>
+                  <h3 class="h6 mb-0"><a href="shop-single.html">[[${item.title}]]</a></h3>
                   <div class="d-flex ps-2 mt-n1 ms-auto">
                     <div class="ms-1">
                       <input class="btn-check" type="radio" name="color1" value="Dark gray" checked id="color1-1" />
@@ -351,8 +350,7 @@
                   </div>
                 </div>
                 <div class="d-flex align-items-center">
-                  <span class="me-2">$21.00</span>
-                  <del class="fs-sm text-muted">$35.00</del>
+                  <span class="me-2">₩ [[${item.lprice}]]</span>
                   <div
                     class="nav ms-auto"
                     data-bs-toggle="tooltip"

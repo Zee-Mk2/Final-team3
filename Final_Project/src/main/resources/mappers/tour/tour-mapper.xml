@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.multi.bbs.tour.TourMapper">
+	<select id="getMuseumList" parameterType="String" resultType="com.multi.bbs.tour.TourList">
+		SELECT name AS title, address, la, lo FROM Museum
+	</select>
+	
+	<select id="getHeritageList" parameterType="String" resultType="com.multi.bbs.tour.TourList">
+		SELECT name AS title, location AS address, la, lo FROM Heritage
+	</select>
+	
+	<insert id="insertTour" parameterType="com.multi.bbs.tour.Tour">
+		<selectKey keyProperty="tno" resultType="int" order="AFTER">
+			SELECT @@IDENTITY AS tno
+		</selectKey>
+		INSERT INTO Tour (tno, mno, name, state, title, region, numOfPeople, startDate, endDate, duration, category, content, fileName, reFileName, writeTime)
+			VALUES (DEFAULT, #{mno}, #{name}, DEFAULT, #{title}, #{region}, 2, #{startDate}, #{endDate}, DEFAULT, #{category}, #{content}, null, null, DEFAULT)
+	</insert>
+	
+	<insert id="insertTourSchedule" parameterType="com.multi.bbs.tour.TourSchedule">
+		INSERT INTO TourSchedule (tsno, tno, mno, name, la, lo, startTime, endTime, type)
+			VALUES (DEFAULT, #{tno}, #{mno}, #{name}, #{la}, #{lo}, #{startTime}, #{endTime}, #{type})
+	</insert>
+	
+	<select id="getTourList" resultType="com.multi.bbs.tour.Tour">
+		SELECT tno, title, region, startDate, endDate, duration, numOfPeople, writeTime, reFileName, category
+			FROM Tour
+			ORDER BY writeTime DESC
+	</select>
+</mapper>

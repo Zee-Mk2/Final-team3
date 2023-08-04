@@ -117,7 +117,7 @@ SELECT * FROM Member;
 
 
 ------------------------------------------------
---------------- PRODUCT 관련 테이블 ------------------
+--------------- Tour 관련 테이블 ------------------
 ------------------------------------------------
 
 DROP TABLE Tour;
@@ -136,19 +136,19 @@ CREATE TABLE Tour (
     content		VARCHAR(4000),
     fileName	VARCHAR(1000),
     reFileName	VARCHAR(1000),
+    writeTime	DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (mno) REFERENCES Member(mno) ON DELETE SET NULL
 );
 
 SELECT * FROM Tour;
 
-
 ------------------------------------------------
 --------------- Event 관련 테이블 ------------------
 ------------------------------------------------
 
-DROP TABLE Event;
+DROP table Event;
 CREATE TABLE Event (
-	evntNo INT PRIMARY KEY,
+evntNo INT PRIMARY KEY,
     name VARCHAR(100),
     summary VARCHAR(1000),
     startDate VARCHAR(100),
@@ -161,25 +161,27 @@ CREATE TABLE Event (
 
 SELECT * FROM Event;
 
-Drop TABLE EventProgram;
-
+DROP table EventProgram;
 CREATE TABLE EventProgram (
-	programNo INT PRIMARY KEY,
+	programNo INT PRIMARY KEY auto_increment,
     evntNo INT,
-    view VARCHAR(100),
-    street VARCHAR(1000),
-    story VARCHAR(1000),
-    history VARCHAR(1000),
-    picture VARCHAR(1000),
-    market VARCHAR(1000),
-    food VARCHAR(1000),
-    sleep VARCHAR(1000),
-    img1 VARCHAR(1000),
-    img2 VARCHAR(1000),
-    img3 VARCHAR(1000),
-    FOREIGN KEY (evntNo) REFERENCES Event(evntNo)
+    title VARCHAR(100),
+    content VARCHAR(1000),
+    location VARCHAR(1000),
+    FOREIGN KEY (evntNo) REFERENCES Event(evntNo) ON DELETE CASCADE
 );
 
+SELECT * FROM EventProgram;
+
+DROP table EventImg;
+CREATE TABLE EventImg(
+	imgNo INT PRIMARY KEY AUTO_INCREMENT,
+    evntNO INT,
+    url varchar(1000),
+    FOREIGN KEY (evntNo) REFERENCES Event(evntNo) ON DELETE CASCADE
+);
+
+SELECT * FROM EventImg;
 
 --------------- 박물관 INSERT ------------------
 
@@ -303,7 +305,6 @@ INSERT INTO EXHIBITION (exno, title, sumary, museum, gallery, url, img, mediaTyp
 
 SELECT * FROM EXHIBITION;
 
-
 --------------- 행사 INSERT ------------------
 
 insert into event values(1, '서울문화재야행
@@ -386,719 +387,980 @@ insert into event values(36, '서귀포문화재야행
 
 
 
-INSERT INTO eventProgram VALUES(1 ,1 , '반딧불 정원
-돌담길 미디어아
-그림자 포토존
-장소
-덕수궁 돌담길 일원 ', '다같이 돌자 정동 한바퀴
-재미있는 정동기행
-대한제구그이 길 역사탐방
-장소
-덕수궁 일원 ', '돌담길 역사체험
-장소
-덕수궁 등 ', '고궁음악회
-황제 고종을 이야기하다
-역사특강
-장소
-덕수궁 일원 ', '궁(宮)민들 퍼포먼스
-곡호대 퍼레이드
-근대인물 석고마임
-장소
-덕수궁 돌담길 일원 ', '예술장터
-한복대여
-장소
-정동길 일원 ', '푸드코트
-한컵마트
-장소
-정동길 일원 ', '아직 준비중입니다. ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1124.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1129.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1127.jpg ');
-INSERT INTO eventProgram VALUES(2 ,2 , '문화재 야간 개방
-장소
-최순우옛집, 이종석 별장 등 ', '성북전차
-장소
-성북동 문화재 야행 메인거리 ~ 문화재 및 문화시설 ', '해설야행
-장소
-최순우 옛집, 이종석 별장 등 ', '문화시설 야간개방
-장소
-성북구립미술관, 성북선잠박물관 등 ', '성북 명인 열전
-성북동 콘서트
-문화시설 공연
-장소
-메인거리 및 문화시설 ', '체험프로그램
-장소
-메인거리 및 문화시설 ', '성북동 일번 맛집
-장소
-메인거리 일대 ', '성북동에 머무는 밤
-장소
-성북동 일대 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1130.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1131.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1134.jpg ');
-INSERT INTO eventProgram VALUES(3 ,3 , '피란수도 별빛거리
-장소
-임시수도 기념거리 일원 등 ', '피란길을 따라 걷는 역사이야기
-장소
-임시수도 기념거리 일원 ', '피란역사 이야기 마을
-장소
-임시수도 기념거리 일원 ', '피란벽화마을
-장소
-임시수도정부청사 외 2 ', '피란수도 문화 1번지
-장소
-임시수도 기념거리 일원 ', '국제야시장
-장소
-임시수도 정부청사 외 1 ', '피란먹거리촌
-장소
-임시수도정부청사, 중구 일원 ', '문화재에서 특별한 하룻밤
-장소
-대한성공회 부산주교좌 성당 일원 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1136.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1140.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1139.jpg ');
-INSERT INTO eventProgram VALUES(4 ,4 , '근대로의여행 오픈하우스
-장소
-근대골목, 청라언덕 ', '근대로 걷다
-장소
-근대골목, 청라언덕 ', '근대골목 이야기
-장소
-근대골목, 청라언덕 ', '근대를 보다
-장소
-근대골목, 청라언덕 ', '근대음악
-장소
-구대구제일교회, 근대근대골목, 청라언덕 ', '근대로 상회
-장소
-근대골목 ', '근대로 상회
-장소
-근대골목 ', '문화재에서 하룻밤
-장소
-근대골목 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1144.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1143.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1147.jpg ');
-INSERT INTO eventProgram VALUES(5 ,5 , '문화재 숲 정원
-장소
-광주읍성유허 ', '명인과의 특별한 만남
-장소
-광주읍성유허 ', '동구 이야기꾼의 문화재 산책
-장소
-옛 전남도청, 광주읍성유허, 재먹석등, 서석초등학교 등 ', '문화재 밤 마실
-장소
-옛 전남도청, 서석초등학교 ', '미디어 퍼포먼스 4개의 문(門)이 열린다
-장소
-광주읍성유허 ', '동구 사회적경제마켓 가치 가게
-장소
-옛 전남도청(518민주광장) ', '허백련 춘설헌 달빛다회
-열혈 청년 야행 맛집
-장소
-광주읍성유허 ', '코레일과 함께하는 광주문화재 야행열차 달빛 걸음
-장소
-동구 일원 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1149.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1150.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1151.jpg ');
-INSERT INTO eventProgram VALUES(6 ,6 , '문화재를 빛으로 밝히다
-장소
-개항장문화지구 일원 ', '문화재야행 스탬프 투어
-장소
-개항장문화지구 일원 ', '문화재에서 즐기는 개항장 체험
-장소
-개항장문화지구 일원 ', '문화재 야간 개방
-장소
-개항장문화지구 일원 ', '스토리텔링 도보탐방
-장소
-개항장문화지구 일원 ', '저잣거리
-장소
-개항장문화지구 일원 ', '개항장 문화마실
-장소
-개항장문화지구 일원 ', '야(夜)한밤
-장소
-하버파크 호텔 등 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1153.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1152.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1156.jpg ');
-INSERT INTO eventProgram VALUES(7 ,7 , '고려의 밤길
-장소
-용흥궁, 성공회강화성당, 고려궁지 ', '문화재야행을 알리는 길거리 퍼레이드 공연
-장소
-김상용순절비, 용흥궁공원 일대 ', '스토리텔러와 함께한 보도투어
-고려의 밤, 별자리 관측
-장소
-용흥궁, 성공회강화성당, 고려궁지 ', '강화문화재 SNS 사진전시
-강화 과거이야기 사진전시
-장소
-강화초등학교 ', '개박실 및 초청공연, 고려궁지 버스킹, 마당놀이
-장소
-고려궁지, 용흥궁공원 일원 ', '강화지역 먹거리부스
-장소
-용흥궁공원 일원 ', '강화문화체험 부스
-강화로컬마켓 부스
-장소
-강화소창, 고려문양, 화문석, 기념품 공모 ', '강화에서 하룻밤
-장소
-연계한 홍보 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1160.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1159.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1161.jpg ');
-INSERT INTO eventProgram VALUES(8 ,8 , '성안 문화재
-장소
-수원화성 화성행궁 등 ', '성안 길따라
-장소
-화성행궁 일원 ', '성안 사람들 이야기
-장소
-화성행궁, 궁방거리, 생태교통마을 등 ', '밤빛 풍경
-장소
-화성행궁, 공방거리 등 ', '한바탕 놀음
-장소
-화성행궁 공방거리, 생태교통마을, 남문로데오거리 등 ', '성안장터
-성안 먹거리
-장소
-공방거리, 생태교통마을, 수원화성박물관 ', '성안 먹기리
-장소
-공방거리, 남문로데오거리, 통닭거리 등 ', '성안에서 하룻밤
-장소
-수원화성 일원 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1166.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1168.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1167.jpg ');
-INSERT INTO eventProgram VALUES(9 ,9 , '양주고나아 달빛속으로
-장소
-양주관아지 일원 ', '양주목의 정취를 찾아서
-오감만족 양주목
-장소
-양주관아지 일원, 양주향교 ', '정조, 관민동락을 꿈꾸다
-장소
-양주관아지 일원 ', '호시탐탐 양주목
-장소
-양주관아지 일원 ', '양주목,歌와 舞를 通하다
-장소
-별산대놀이 공연장, 무형문화재 통합공연장 ', '저자거리 한마당
-장소
-무형문화재 통합공연장 ', '버들찻집
-장소
-양주관아 내아 ', '문화재에서 하룻밤
-장소
-양주 관아지 일원 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1172.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1173.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1174.jpg ');
-INSERT INTO eventProgram VALUES(10 ,10 , '장군바위에서 비경
-장소
-독산성 ', '나라를 지키는 호국의 길
-장소
-독산성, 유엔군 초전기념관 ', '문화재의 역사속으로
-장소
-독산성, 궐리사, 유엔군 초전기념관 ', '독산성 전투 샌드아트
-장소
-독산성 세마대지 ', '궐리사 성적도 가치재조명
-장소
-궐리사 ', '도시를 깨우는 비사량
-장소
-고인돌공원 ', '독산성 음식문화거리 체험과 힐링
-장소
-독산성 음식문화거리 ', '독산성 운주당의 밤
-행단에서 꾸는 꿈
-장소
-궐리사 행단, 독산성 세마대지 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1177.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1180.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1178.jpg ');
-INSERT INTO eventProgram VALUES(11 ,11 , '강원도 무형문화재 소개마당
-장소
-강원감영 ', '관찰사의 오색지령
-아카데미로의 초대
-장소
-강원감영, 구아카데미극장 ', '달빛과거시험
-김금원 금강기행
-장소
-강원감영 ', '원주문화재 시각작품 전시회
-장소
-원주문화원 ', '개막축하연주회
-장소
-강원감영, 문화의거리 상설공연장 ', '감영의 은행나무 공방교실
-옻칠전시회
-달빛사랑장터
-장소
-문화의거리 ', '야식
-선화당 찻자리
-푸드바이크 음식거리
-장소
-강원감영, 문화의 거리 ', '아직 준비중입니다. ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_1.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_2.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_3.png ');
-INSERT INTO eventProgram VALUES(12 ,12 , '빛으로 만나는 천년의 관아
-장소
-아문 ', '신나는 서부마당
-달밤 愛 버스킹
-장소
-강릉 서부시장 ', '달빛 따라 걷는 강릉대도호부관아
-강릉대도호부관아 수문장 교대식
-장소
-동헌 ', '강릉문화재야행 설치미술전
-강릉 장인 학교
-장소
-문화마당 ', '강릉대도호부관아 의복 패션쇼
-강릉대도호부사 주제 연희극 3탄
-장소
-관아마당 ', '저잣거리
-달달한 서부시장 4色4味
-장소
-토성로, 강릉서부시장 ', '먹어야행 : 강릉문화재 푸드트럭
-마셔야행 : 달빛아래 다도풍정
-장소
-의운루. 동대청 ', '강릉문화재야행 달밤 스테이
-장소
-선교장, 오죽헌 마을 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1182.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1181.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1183.jpg ');
-INSERT INTO eventProgram VALUES(13 ,13 , '옛 청주읍성과 달빛 산책
-장소
-원도심 일대 ', '조선넘어 근대로
-장소
-원도심 일대 ', '명장의 손끝을 잇다
-장소
-중앙공원 광장 ', '천년의 기적, 망선루미디어 아트 퍼포먼스
-장소
-중앙공원, 망선루 ', '만담강자, 청주이야기꾼
-장소
-북문로 일대 ', '성안길 예술점포
-장소
-성안길 일대 ', '청주읍성 식도락 야행
-장소
-원도심일대 ', '아직 준비중입니다. ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_6.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_7.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_8.png ');
-INSERT INTO eventProgram VALUES(14 ,14 , '달빛 아래서 지나간 세월을 추억하다
-장소
-옥천향교 외 6개소 ', '달빛 따라, 별빛 따라 스탬프 투어
-장소
-옥천향교 외 6개소 ', '딛고 있는 이 땅위에 살았던 옛 사람 이야기
-장소
-옥천향교 외 6개소 ', '사진으로 만나는 옥천의 문화유산 이야기
-장소
-전통문화 체험관 ', '금강보고 옥천의 흥
-장소
-전통문화 체험관 ', '이야기가 있는 구읍 시장
-개장! 옥천 특산품 한마당
-장소
-문화재야행 거리 일원 ', '맛과 멋이 함께하는 구읍 거리
-장소
-문화재야행 거리 일원 ', '청청 옥천, 별빛 가득 담은 한오게서
-장소
-전통문화 체험관 숙박등 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_16.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_17.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_18.png ');
-INSERT INTO eventProgram VALUES(15 ,15 , '제민천 별빛 음악회
-월야장천(月夜長川) - 제민천에 달이 뜨다 -
-장소
-제민천 일원, 반죽동 역사공원 ', '모던 딴스구락부
-제민천 인력거
-원도심 견학단
-장소
-공주원도심 일원 ', '엽서로 보는 공주의 근대 풍경
-박물관 앞
-장소
-공주역사영상관, 공주제일교회 등 ', '근대 아틀리에
-색 그리고 빛
-장소
-공주우체국길, 제민천 일원 ', '근대 톡톡(talk)터지다
-무형문화재 공연
-장소
-공주하숙마을, 반죽동 역사공원 ', '예술가의 거리
-달밤 낭만 장터
-장소
-제민천변 하상길, 감영길 일원 ', '제민천 면(麵) 서다
-근대 먹거리
-공주 밤마실 야시장
-장소
-산성시장 문화공원, 제민천변 ', '기억의 공간, 공주하숙마을
-장소
-공주하숙마을 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_22.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_23.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_24.png ');
-INSERT INTO eventProgram VALUES(16 ,16 , '강경 노을빛으로 물들다
-장소
-옥녀봉 강경읍 일원 ', '옛 강경을 걷다
-장소
-강경읍 일원 ', '그땐 그랬지
-장소
-강경노동조합 ', '노을 담은 강경
-장소
-강경구락부 ', '한밤의 오락실
-장소
-ㄱ자최초침례교예배지 ', '강경진상품 유료
-장소
-강경성결교회 ', '금강의 멋과 맛 유료
-장소
-근대문화거리 ', '강경구락부에서 하룻밤
-장소
-옥녀봉 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_27.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_26.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_30.png ');
-INSERT INTO eventProgram VALUES(17 ,17 , '스탬프 투어 10개소
-부여문화재 전문가와 함께하는 야행투어
-장소
-부여문화원, 부여향고 정림사지 오층석탑 등 ', '백제야행길(전둥)
-백제포토존
-장소
-관북리유적, 미성삼거리~의혈로 입구 ', '백제체험 프로그램
-장소
-정림사지 일원 ', '세계유산 사진전
-세계문화유산 특별 전시전
-장소
-국립부여박물관 ', '문화재명사 해설투어
-백제역사퀴즈
-장소
-정림사지오층석탑 ', '백제저잣거리
-장소
-미성삼거리~의열로 입구 ', '백제의 맛을 찾아라!
-장소
-미성삼거리~의열로 입구 ', '부여문화재 야행과 함께하는 야숙
-장소
-부여군 관내 게스트하우스 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_34.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_35.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_36.png ');
-INSERT INTO eventProgram VALUES(18 ,18 , '홍주의병 다시 깨어나다
-홍성의 위인과 만나다
-장소
-조양문, 홍화문 ', '홍주성 천년여행길 등불을 밝혀라
-천주교 순례길을 걷다
-장소
-홍주읍성 ', '나라사랑 영화제
-역사거리 퍼포먼스
-장소
-홍주의사총
-홍주읍성 ', '홍주읍성의 밤, 색을 입히다
-홍성 옛사진 전시회
-장소
-홍주읍성 ', '홍주성탈환 재현극 그날의 함성이여!
-장소
-홍주읍성 ', '홍성저잣거리 야시장
-장소
-홍주읍성 ', '홍성저잣거리 야시장
-장소
-홍주읍성 ', '1박2일, 홍주목사 체험학교
-장소
-안회당 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_39.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_40.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_41.png ');
-INSERT INTO eventProgram VALUES(19 ,19 , '빛의 술사들
-내용
-빛으로 문화재를 밝히다
-한지등 만들기 체험 ', '문화재 술사들
-내용
-왕과의 산책
-경기전 좀비 실록 ', '이야기 술사들
-내용
-이야기술사의 버스킹담화
-국보를 찾아라 ', '그림 술사들
-내용
-거리의 화공
-임금님, 용포를 입히다
-뿌리 깊은 나무 ', '공연 술사들
-내용
-개(폐)막 공연
-지역청년 예술가무대 동문 서문
-문화재 극장 ', '흥정 술사들
-내용
-경기단길 청년 프리마켓
-추억의 야행 문방구
-뉴트로 야행 카페 ', '음식 술사들
-내용
-문화재 고물상
-달빛 차회
-한밤의계이득 ', '여행 술사들
-내용
-문활탄(문화재 활용가의 탄생)
-야행을 품다! 아프리카BJ 탐방대 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_45.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_46.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_47.png ');
-INSERT INTO eventProgram VALUES(20 ,20 , '밤에 비춰보는 아름다운 문화유산
-장소
-군산 내항 역사문화공간 및 원도심 일원 ', '밤에 걷는 문화유산의 qc의 거리
-장소
-군산 내항 역사문화공간 및 원도심 일원 ', '몸과 마음으로 느끼는 역사
-장소
-군산 내항 역사문화공간 및 원도심 일원 ', '한 여름밤에 보는 문화유산의 정취
-장소
-군산 내항 역사문화공간 및 원도심 일원 ', '밤에 펼쳐지는 문화공원
-장소
-군산 내항 역사문화공간 및 원도심 일원 ', '근대역사가 살아있는 문화장처
-장소
-군산 내항 역사문화공간 및 원도심 일원 ', '밤에 즐기는 맛의 거리
-장소
-군산 내항 역사문화공간 및 원도심 일원 ', '군산 역사이야기 속 하룻밤
-장소
-군산 내항 역사문화공간 및 원도심 일원 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_50.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_51.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_52.png ');
-INSERT INTO eventProgram VALUES(21 ,21 , '당신을 기다리며 천년을 서 있었네
-내용
-백제왕궁 달빛기원, 천년기원을 담은 탑돌이, 천년사랑의 소원 남기기, 내 손에서 피어나는 꽃등 만들기, 백제왕궁 소원연등 띄우기, 구르미 그린 달빛 포토존, 아닌밤중에 백제놀이터, 너랑 나랑 사랑팔찌 만들기, 백발백중 백제궁사, 퍼즐로 다시 쌓는 백제왕궁 ', '천녀의 길, 천 걸음
-내용
-어화등등 유등산책!, 백제왕궁 후원산책, 구르미 그린 달빛 포토존, 미션! 무왕을 따르라, 백제서예관(가훈써주기), 문화유산 스템프투어, 별빛 가득 청사초롱길을 걷다 ', '재미있게 백제 이야기
-내용
-별궁 달궁 모래동화, 석불연인의 사랑이야기, 왕궁에서 즐기는 공방체험, 누가 여기에 똥쌌어?, 아닌 밤중에 백제놀이터, 백제를 말하다 : 이야기꾼, 야(夜)심한 밤별여행, 봄바람 부는 백제의 선율 ', '아는 만큼 보인다
-내용
-탱화장과 풀어보는 탱화의 비밀, 문화유산 VR체험, 탑리갤러리, 헤리티지 페이스페인팅, 왕궁 수묵화교실, 백제 어라하의 초대, 헤리티지 홀로그램 ', '백제양궁 야연
-내용
-금마저, 무왕의 시대를 열다, 무형문화재와 어울림 한마당, 백제왕궁에 울리는 풍류, 탑리 버스킹 공연, 무왕의 호위무사 ', '탑리장터
-내용
-탑리 야시장(로컬푸드), 청년무왕의 프리마켓 ', '백제무왕의 야식
-내용
-무왕의 야식체험, 어머니의 손맛, 왕과 차, 무형문화재 전통주 체험, 백제 채소 악단 ', '한옥에서의 하룻밤
-내용
-한옥에서의 하룻밤(금마, 함라한옥 연계 체험) ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_53.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_54.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_55.png ');
-INSERT INTO eventProgram VALUES(22 ,22 , '그네
-월매집
-오작교
-장소
-광한루원 ', '향토 박물관
-춘향테마파크
-천문대
-장소
-향토박물관,춘향테마파크,천문대 ', '광한루
-완월정
-방장정
-장소
-광한루원, 관서당남성재 ', '아! 정겨운 남원의 정취
-장소
-심수관도예전시관, 시립김병종미술관, 남원 다움관 ', '예술공연
-심야버스킹
-장소
-광한루원 ', '게을러스 죄송해요!
-푸드트럭 거리조성
-장소
-예촌문화마당 ', '장터 공연
-장소
-예촌문화마당 ', '소리체험관(한옥)
-예촌(한옥호텔)
-장소
-함파우소리체험관, 한옥호텔예촌 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1187.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1185.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1188.jpg ');
-INSERT INTO eventProgram VALUES(23 ,23 , '김제를 밝히는 나무등불 청사초롱길 금의환향길
-장소
-김제 관아와 향교 일원 ', '선비의 길, 관직의 길 과거에서온 문화해설사
-장소
-김제 관아와 향교 일원 ', '김제사또 부임행차 김제관아 민원상황극
-장소
-김제 관아와 향교 일원 ', '김제문화재 바로알기
-장소
-김제 관아와 향교 일원 ', '시와 풍류가 있는 음풍영월 성산 별빛 버스킹
-장소
-김제 관아와 향교 일원 ', '백투더 1960
-장소
-김제 관아와 향교 일원 ', '김제 전통 음식마당
-장소
-김제 관아와 향교 일원 ', '김제의 대표문화재에서의 하룻밤
-장소
-김제 관아와 향교 일원 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_58.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_59.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_60.png ');
-INSERT INTO eventProgram VALUES(24 ,24 , '고창읍성 달빛산책
-장소
-고창읍성(사적145호) ', '달빛공양 로수와 치성
-장소
-고창읍 일원 ', '고창읍성축성재현 기원의 거울 opertta
-장소
-고창읍성 광장 ', '고창 문화유산 길거리갤러리
-고창문화재승경도
-장소
-문화체험거리 ', '도리화가
-양머리 버스킹
-플레시몹
-장소
-신재효고택, 문화체험거리 ', '지역 공방체험
-장소
-문화체험거리 ', '고창의 속 깊은 맛
-산, 들, 바다에서 차린 고창 밥상
-장소
-고창읍 일원 ', '책마을 해리, 챗 짓는 하루
-양반 잠으로 한옥호텔 하룻밤
-장소
-고창읍성 한옥마을, 북스테이 책마을해리 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1189.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1190.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1191.jpg ');
-INSERT INTO eventProgram VALUES(25 ,25 , '진남관 스페셜 투어
-장소
-여수시 진남관 일원 ', '문화재 뺏지를 찾아라
-장소
-여수시 진남관 일원 ', 'LED 문화재 스트링아트 체험 외 15가지 문화재 활용 체험
-장소
-여수시 진남관 일원  ', '특별상영 여수, 시민의 삶과 모습
-장소
-여수시 진남관 일원 ', '좌수영 수군 야간 출정식
-장소
-여수시 진남관 일원 ', '내례포 장터
-장소
-이순신광장 ', '수군 주먹밥
-장소
-여수시 진남관 일원 ', '여수 게스트 하우스 연계프로그램
-장소
-여수시 일원 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_65.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_66.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_67.png ');
-INSERT INTO eventProgram VALUES(26 ,26 , '순천문화재탐방 문화재보물찾기
-장소
-팔마비, 행동 푸조나무, 순천시 청소년수련관, 한옥글방 등 ', '순천문화재LED거리
-장소
-서문안내소 옥천서원, 문화의 거리 ', '순천문화재 역사 체험
-장소
-팔마비, 행동 푸조나무, 순천시 청소년수련관, 한옥글방 등 ', '그림과 사진으로 보는 순천문화재
-장소
-순천향교 ', '문화재 공연
-장소
-옥천서원, 기독교역사박물관, 서문안내소, 한옥글방 ', '순천야행 장터
-공방체험
-장소
-문화의 거리 ', '순천야식(주전부리)
-장소
-문화의 거리, 향교 장터길, 서문안내소 ', '야행패키지 순천만 별보기
-장소
-순천시 일원 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_72.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_73.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_74.png ');
-INSERT INTO eventProgram VALUES(27 ,27 , '빛보다 아름다운 나주의 夜
-장소
-목사내아, 금성관길 ', '천년, 과거로의 타임슬립
-장소
-금성관 ', '나주의 천년 야사
-장소
-목사내아 ', '청출어람 천연염색(천연염색 패션쇼)
-장소
-서성문 ', '천년의 樂, 나주 풍류열전(나주시립국악단 공연)
-장소
-금성관 ', '오감만족 야시장
-야간 플리마켓
-장소
-향교길 ', '夜한 식사
-나주 전통먹거리 체험
-장소
-향교길 ', '나주에서 하룻밤
-나주목사내아 숙박체험
-장소
-목사내아 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_76.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_77.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_79.png ');
-INSERT INTO eventProgram VALUES(28 ,28 , '보성문화재 야간탐방, 보성문화재 스탬프 투어
-장소
-보성향교, 보성 충의당, 보성읍 성지 등 10곳 ', '보성야로, 열선루 포토촌, 내삼문 포토존
-장소
-보성향교, 보성 충의당, 보성읍 성지 등 10곳 ', '장계만들기 체험 등 26개 프로그램
-장소
-열선루, 보성향교, 오청사 등 ', '보성충효전시회, 보성문화재 사진전시회, 보성무형문화재전시회
-장소
-보성향교, 보성군청, 방진관 ', '열선루 공연, 보성향교 무대공연, 보성군청 무대공여느 방진관 마당극, 5인의 전설
-장소
-열선루, 보성향교, 보성군청, 방진관, 오충사 ', '보성야행장터(아트마켓)
-장소
-보성읍성공원 ', '보성향교 다도체험, 보성수군감자 주먹밥 체험, 강하주시음과 향연
-장소
-보셩향교, 보성읍성공원 ', '보성야행 숙박 패키지, 보성하룻밤(야영체험)
-장소
-보성읍성공원 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_80.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_81.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_82.png ');
-INSERT INTO eventProgram VALUES(29 ,29 , '목포 환타지 로드
-장소
-목포근대역사 문화공간 ', '夜한 워킹스트리트
-장소
-목포 근대역사 문화공간 ', '1897 목포문화재 투어
-장소
-목포근대역사 문화공간 ', '문화재 어닝아트
-장소
-목포근대역사 문화공간 ', '근대가요콘서트 청춘연가
-장소
-목포근대역사 문화공간 ', '1897 플리마켓
-장소
-목포근대역사 문화공간 ', '맛의 도시 백년 맛집
-장소
-목포근대역사 문화공간 ', '코레일 내일로 근대역사 체험단
-장소
-목포근대역사 문화공간 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_87.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_85.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_88.png ');
-INSERT INTO eventProgram VALUES(30 ,30 , '문화재 밤을 잉태하다
-장소
-경주일원 문화재 ', '경주 교촌 달빛 story 답사
-장소
-경주교촌 일원 ', '전통민속놀이
-남천 유등 띄우기
-십이지 소원지 달기
-장소
-경주 교촌 일원 ', '경주세계문화유산 사진전
-신라의 밤 천체관측
-장소
-경주 교촌 일원 ', '셔블밝긔대라 탈놀이 가자
-신라설화 인형극
-장소
-장소
-경주 교촌 일원 ', '교촌 아트마켓
-장소
-경주 교촌 일원 ', '교촌 먹거리
-최부자의 인심을 맛보다
-장소
-경주 교촌 일원 ', '아직 준비중입니다. ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_95.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_96.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_97.png ');
-INSERT INTO eventProgram VALUES(31 ,31 , '월영교 등간, 빛 정원
-장소
-월영교 일원 ', '달달애 투어 걷기, 빛 로드
-장소
-월영교 일원 ', '해설사와 함께 듣는 문화유산이야기
-장소
-월영교 일원 ', '하회탈 특별전시, 안동문화재 그림 및 사진전시
-장소
-월영교 일원 ', '관객과 함께하는 오픈라디오, 문화공연
-장소
-월영교 일원 ', '월영장터 푸드트럭
-장소
-월영교 일원 ', '종가 음식 및 안동의제사 체험
-장소
-월영교 일원 ', '고택체험프로그램, 한옥리조트
-장소
-구름에리조트, 임청각 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_101.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_102.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_103.png ');
-INSERT INTO eventProgram VALUES(32 ,32 , '지산동고분군
-대가야역사테마관광지
-장소
-지산동고분군, 대가야역사테마관광지 ', '달빛 고분산책
-달빛소리
-장소
-지산동고분군 ', '가야금 소리마당
-왜 순장을 했을꼬?
-장소
-대가야문화누리 야외공연장, 지산동고분군 ', '고령갤러리
-세계유산 등재기원 사진전
-장소
-인진관, 디지털 관광홍보관 ', '왕들의 초대
-현의 노래
-달빛 환타지아
-장소
-대가야역사테마관관광지 ', '夜한 포토샵
-고관점 방문기
-대가야 夜시장
-장소
-대가야역사테마관광지 ', '야행도시락
-감자39전
-장소
-대가야역사테마관광지 ', '월하야숙
-별 헤는 달빛캠핑
-장소
-대가야생활촌, 체험캠프 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_109.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1194.jpg ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1193.jpg ');
-INSERT INTO eventProgram VALUES(33 ,33 , '통제공, 납시오!
-나도 삼도수군통제사
-장소
-통제영 세병관 ', '신임통제사도임참배길 따라가기
-장소
-통제영~충렬사 ', '조선수군 알아보기
-조선시대 화폐만들기
-장소
-통제영 12공방, 주전소 ', '명조팔사품 및 수조도 그리기
-장소
-통제영 12공방 ', '개막식 및 폐막식
-통제영 일원 ', '함께 해요! 프리마켓
-장소
-통제영 ~ 문화원 ', '양로연
-제례음식 맛보기
-장소
-통제영 백화당,통영 충렬사 ', '통제사 내아 엿보기
-장소
-통제영 내아 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_111.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_112.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_113.png ');
-INSERT INTO eventProgram VALUES(34 ,34 , '가야하늘에 6개의 달이 뜨다
-가야 초롱길
-장소
-수로왕릉 ', '가야 달빛탐방
-가야 후원을 거닐다
-장소
-가야유적지 일원, 수로왕릉 후원 ', '가아 톡
-가야 유물 찾기
-수로왕릉 바로알기
-장소
-수로왕릉 ', '가야를 보다
-가야 의상실
-장소
-수로왕릉 ', '가야의 불을 밝히다
-가야 작은극장
-장소
-수로왕릉 ', '가야 놀이터
-가야 장터
-가야 문화 만들기 체험
-장소
-수로왕릉 ', '가야구경도 식후경
-가야살롱
-장소
-수로왕릉 ', '가야에서 하룻밤
-장소
-김해한옥체험관 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_116.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_117.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_118.png ');
-INSERT INTO eventProgram VALUES(35 ,35 , '응천강 어화를 밝히다
-장소
-응천강 일원 ', '밀양도호부 옛 길 따라...
-장소
-밀양 읍성길, 성당, 박물관, 향교 ', '길 위의 인문학
-장소
-영남루, 밀양관아, 아랑각, 약전골목, 천진궁 ', '영남루 밝은 달빛아래 보다
-장소
-영남루, 천진궁 ', '공연으로 만나는 밀양읍성이야기
-장소
-영남루, 밀양관아, 아랑각, 천진궁 ', '야(夜)한 장시
-장소
-밀양관아, 천진궁 ', '야(夜)한 다리껄 식당
-장소
-전통시장, 남천교 다리위 ', '아랑사또와 취침하로 가세! 사전신청
-장소
-관아, 향교, 교동손씨 고가 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_122.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_123.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_124.png ');
-INSERT INTO eventProgram VALUES(35 ,35 , '무병장수의 별 老人星을 보라
-장소
-남성대, 자구리공원 ', '시간여행그날(시민 참여배우 사전접수)
-장소
-서귀포시청-초원사거리-매일시장입구-솔동산입구-서귀진지 ', '300여년전의 비밀을 푼다
-장소
-서귀본향당-이중섭거리-소암전시관-서복전시관-자구리공원-서귀진지 일원 ', '코노래가 흥얼흥얼
-장소
-서귀진지 ', '모다들엉 놀아봅주
-장소
-서귀포 일원 ', '서귀포문화재 야행 유유자적
-장소
-서귀진지 일원 ', '해녀밥상 경연대회
-장소
-서귀진지 ', '야호! 서귀포문화재 야행!
-장소
-서귀진지 ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_131.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_130.png ', 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_133.png ');
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 1, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1124.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 1, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1129.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 1, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1127.jpg'
+);
 
-select * from eventprogram;
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 2, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1130.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 2, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1131.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 2, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1134.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 3, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1136.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 3, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1140.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 3, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1139.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 4, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1144.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 4, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1143.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 4, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1147.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 5, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1149.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 5, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1150.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 5, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1151.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 6, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1153.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 6, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1152.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 6, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1156.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 7, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1160.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 7, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1159.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 7, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1161.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 8, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1166.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 8, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1168.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 8, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1167.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 9, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1172.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 9, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1173.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 9, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1174.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 10, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1177.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 10, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1180.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 10, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1178.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 11, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_1.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 11, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_2.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 11, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_3.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 12, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1182.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 12, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1181.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 12, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1183.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 13, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_6.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 13, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_7.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 13, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_8.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 14, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_16.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 14, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_17.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 14, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_18.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 15, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_22.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 15, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_23.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 15, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_24.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 16, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_27.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 16, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_26.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 16, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_30.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 17, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_34.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 17, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_35.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 17, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_36.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 18, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_39.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 18, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_40.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 18, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_41.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 19, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_45.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 19, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_46.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 19, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_47.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 20, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_50.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 20, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_51.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 20, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_52.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 21, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_53.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 21, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_54.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 21, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_55.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 22, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1187.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 22, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1185.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 22, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1188.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 23, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_58.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 23, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_59.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 23, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_60.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 24, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1189.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 24, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1190.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 24, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1191.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 25, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_65.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 25, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_66.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 25, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_67.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 26, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_72.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 26, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_73.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 26, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_74.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 27, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_76.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 27, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_77.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 27, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_79.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 28, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_80.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 28, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_81.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 28, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_82.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 29, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_87.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 29, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_85.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 29, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_88.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 30, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_95.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 30, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_96.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 30, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_97.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 31, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_101.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 31, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_102.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 31, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_103.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 32, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_109.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 32, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1194.jpg'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 32, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/1193.jpg'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 33, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_111.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 33, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_112.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 33, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_113.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 34, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_116.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 34, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_117.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 34, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_118.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 35, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_122.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 35, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_123.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 35, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_124.png'
+);
+
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 36, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_131.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 36, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_130.png'
+);
+insert into EventImg(imgNo, evntNo, url) values (
+	default, 36, 'https://www.cha.go.kr/html/yuyu2020/nightTrip/images/sub/c_133.png'
+);
+
+
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 1, '야경', '반딧불 정원 \n 돌담길 \n 미디어아그림자 포토존', '덕수궁 돌담길 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 1, '야로', '다같이 돌자 정동 한바퀴 \n 재미있는 정동기행 \n 대한제국의 길 역사 탐방', '덕수궁 돌담길 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 1, '야설', '돌담길 역사체험', '덕수궁 등');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 1, '야사', '고궁음악회 \n 화제 고종을 이야기하다 \n 역사특상', '덕수궁 돌담길 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 1, '야화', '궁(宮)민들 퍼포먼스 \n 곡호대 퍼레이드 \n 근대인물 석고마임', '덕수궁 돌담길 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 1, '야시', '예술장터 \n 한복대여 \n 근대인물 석고마임', '덕수궁 돌담길 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 1, '야식', '푸드코트 \n 한컵마트 \n 근대인물 석고마임', '덕수궁 돌담길 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 1, '야숙', '아직 준비중입니다.', '');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 2, '야경', '문화재 야간 개방', '최순우옛집, 이종석 별장 등');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 2, '야로', '성북전차', '성북동 문화재 야행 메인거리 ~ 문화재 및 문화시설');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 2, '야설', '해설야행', '최순우 옛집, 이종석 별장 등');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 2, '야사', '문화시설 야간개방', '성북구립미술관, 성북선잠박물관 등');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 2, '야화', '성북 명인 열전 \n 성북동 콘서트 \n 문화시설 공연', '메인거리 및 문화시설');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 2, '야시', '체험프로그램', '메인거리 및 문화시설');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 2, '야식', '성북동 일번 맛집', '메인거리 일대');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 2, '야숙', '성북동에 머무는 밤', '성북동 일대');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 3, '야경', '피란수도 부산의 여름밤 \n 피란수도 부산의 기적 \n 피란수도 부산으로 가는 길', '부산항 제1부두 등 서구 및 중구 일원 문화재');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 3, '야로', '피란수도 드로잉 투어 \n 뚜벅뚜벅 AR 챌린지 \n 과거와 현재가 만나는 곳, 부산!', '피란수도 부산유산 유적지 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 3, '야설', '피란수도 예술을 보여줘 \n 피란의 기억을 되돌아보다', '부산항 제1부두');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 3, '야사', '금순아 ~ 학교가자 \n 1023 피란 LAND', '피란수도 부산유산 유적지 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 3, '야화', '피란수도 그림엽서 공모전 \n 금순이가 본 피란수도 이야기 \n 피란수도 부산으로 가는 길', '구 동양척식주식회사 부산지점 일원 등');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 3, '야시', '웰컴 투 피란촌 \n 그땐 그랬지, 피란 장터', '부산항 제1부두');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 3, '야식', '피란시장 맛탐방 \n  내가 만든 피란음식', '부산항 제1부두');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 3, '야숙', '금동이의 하루', '피란수도 부산 유산 일원');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 4, '야경', '근대로의여행 오픈하우스', '근대골목, 청라언덕');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 4, '야로', '근대로 걷다', '근대골목, 청라언덕');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 4, '야설', '근대골목 이야기', '근대골목, 청라언덕');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 4, '야사', '근대를 보다', '근대골목, 청라언덕');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 4, '야화', '근대음악', '구대구제일교회, 근대근대골목, 청라언덕');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 4, '야시', '근대로 상회', '근대골목');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 4, '야식', '근대로 상회', '근대골목');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 4, '야숙', '문화재에서 하룻밤', '근대골목');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 5, '야경', '문화재 숲 정원', '광주읍성유허');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 5, '야로', '명인과의 특별한 만남', '광주읍성유허');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 5, '야설', '동구 이야기꾼의 문화재 산책', '옛 전남도청, 광주읍성유허, 재먹석등, 서석초등학교 등');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 5, '야사', '문화재 밤 마실', '옛 전남도청, 서석초등학교');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 5, '야화', '미디어 퍼포먼스 4개의 문(門)이 열린다', '광주읍성유허');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 5, '야시', '동구 사회적경제마켓 가치 가게', '옛 전남도청(518민주광장)');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 5, '야식', '허백련 춘설헌 달빛다회 \n 열혈 청년 야행 맛집', '광주읍성유허');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 5, '야숙', '코레일과 함께하는 광주문화재 야행열차 달빛 걸음', '동구 일원');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 6, '야경', '문화재를 빛으로 밝히다', '개항장문화지구 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 6, '야로', '문화재야행 스탬프 투어', '개항장문화지구 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 6, '야설', '문화재에서 즐기는 개항장 체험', '개항장문화지구 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 6, '야사', '문화재 야간 개방', '개항장문화지구 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 6, '야화', '스토리텔링 도보탐방', '개항장문화지구 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 6, '야시', '저잣거리', '개항장문화지구 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 6, '야식', '개항장 문화마실', '개항장문화지구 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 6, '야숙', '야(夜)한밤', '하버파크 호텔 등');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 7, '야경', '고려의 밤길', '용흥궁, 성공회강화성당, 고려궁지');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 7, '야로', '문화재야행을 알리는 길거리 퍼레이드 공연', '김상용순절비, 용흥궁공원 일대');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 7, '야설', '스토리텔러와 함께한 보도투어 \n 고려의 밤, 별자리 관측', '용흥궁, 성공회강화성당, 고려궁지');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 7, '야사', '강화문화재 SNS 사진전시 \n 강화 과거이야기 사진전시', '강화초등학교');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 7, '야화', '개박실 및 초청공연 \n 고려궁지 버스킹 \n 마당놀이', '고려궁지, 용흥궁공원 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 7, '야시', '강화지역 먹거리부스', '용흥궁공원 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 7, '야식', '강화문화체험 부스 \n 강화로컬마켓 부스', '강화소창, 고려문양, 화문석, 기념품 공모');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 7, '야숙', '강화에서 하룻밤', '연계한 홍보');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 8, '야경', '성안 문화재', '수원화성 화성행궁 등');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 8, '야로', '성안 길따라', '화성행궁 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 8, '야설', '성안 사람들 이야기', '화성행궁, 궁방거리, 생태교통마을 등');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 8, '야사', '밤빛 풍경', '화성행궁, 공방거리 등');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 8, '야화', '한바탕 놀음', '화성행궁 공방거리, 생태교통마을, 남문로데오거리 등');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 8, '야시', '성안장터 \n 성안 먹거리', '공방거리, 생태교통마을, 수원화성박물관');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 8, '야식', '성안 먹기리', '공방거리, 남문로데오거리, 통닭거리 등');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 8, '야숙', '성안에서 하룻밤', '수원화성 일원');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 9, '야경', '양주고나아 달빛속으로', '양주관아지 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 9, '야로', '양주목의 정취를 찾아서 \n 오감만족 양주목', '양주관아지 일원, 양주향교');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 9, '야설', '정조, 관민동락을 꿈꾸다', '양주관아지 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 9, '야사', '호시탐탐 양주목', '양주관아지 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 9, '야화', '양주목,歌와 舞를 通하다', '별산대놀이 공연장, 무형문화재 통합공연장');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 9, '야시', '저자거리 한마당', '무형문화재 통합공연장');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 9, '야식', '버들찻집', '양주관아 내아');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 9, '야숙', '문화재에서 하룻밤', '양주 관아지 일원');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 10, '야경', '장군바위에서 비경', '독산성');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 10, '야로', '나라를 지키는 호국의 길', '독산성, 유엔군 초전기념관');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 10, '야설', '문화재의 역사속으로', '독산성, 궐리사, 유엔군 초전기념관');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 10, '야사', '독산성 전투 샌드아트', '양독산성 세마대지');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 10, '야화', '궐리사 성적도 가치재조명', '궐리사');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 10, '야시', '도시를 깨우는 비사량', '고인돌공원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 10, '야식', '독산성 음식문화거리 체험과 힐링', '독산성 음식문화거리');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 10, '야숙', '독산성 운주당의 밤 \n 독산성 운주당의 밤', '궐리사 행단, 독산성 세마대지');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 11, '야경', '강원도 무형문화재 소개마당', '강원감영');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 11, '야로', '관찰사의 오색지령 \n 아카데미로의 초대', '강원감영, 구아카데미극장');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 11, '야설', '달빛과거시험 \n 김금원 금강기행', '강원감영');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 11, '야사', '원주문화재 시각작품 전시회', '원주문화원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 11, '야화', '개막축하연주회', '강원감영, 문화의거리 상설공연장');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 11, '야시', '감영의 은행나무 공방교실 \n 옻칠전시회 \n 달빛사랑장터', '문화의거리');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 11, '야식', '선화당 찻자리 \n 푸드바이크 음식거리', '강원감영, 문화의 거리');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 11, '야숙', '아직 준비중입니다.', '');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 12, '야경', '빛으로 만나는 천년의 관아', '아문');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 12, '야로', '신나는 서부마당 \n 달밤 愛 버스킹', '강릉 서부시장');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 12, '야설', '달빛 따라 걷는 강릉대도호부관아 \n 강릉대도호부관아 수문장 교대식', '동헌');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 12, '야사', '강릉문화재야행 설치미술전 \n 강릉 장인 학교', '문화마당');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 12, '야화', '강릉대도호부관아 의복 패션쇼 \n 강릉대도호부사 주제 연희극 3탄', '관아마당');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 12, '야시', '저잣거리 \n 달달한 서부시장 4色4味', '토성로, 강릉서부시장');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 12, '야식', '먹어야행 : 강릉문화재 푸드트럭 \n 마셔야행 : 달빛아래 다도풍정', '의운루, 동대청');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 12, '야숙', '강릉문화재야행 달밤 스테이', '선교장, 오죽헌 마을');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 13, '야경', '옛 청주읍성과 달빛 산책', '원도심 일대');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 13, '야로', '조선넘어 근대로', '원도심 일대');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 13, '야설', '명장의 손끝을 잇다', '중앙공원 광장');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 13, '야사', '천년의 기적, 망선루미디어 아트 퍼포먼스', '중앙공원, 망선루');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 13, '야화', '만담강자, 청주이야기꾼', '북문로 일대');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 13, '야시', '성안길 예술점포', '성안길 일대');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 13, '야식', '청주읍성 식도락 야행', '원도심일대');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 13, '야숙', '아직 준비중입니다.', '');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 14, '야경', '달빛 아래서 지나간 세월을 추억하다', '옥천향교 외 6개소');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 14, '야로', '달빛 따라, 별빛 따라 스탬프 투어', '옥천향교 외 6개소');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 14, '야설', '딛고 있는 이 땅위에 살았던 옛 사람 이야기', '옥천향교 외 6개소');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 14, '야사', '사진으로 만나는 옥천의 문화유산 이야기', '전통문화 체험관');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 14, '야화', '금강보고 옥천의 흥', '전통문화 체험관');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 14, '야시', '이야기가 있는 구읍 시장 \n 개장! 옥천 특산품 한마당', '문화재야행 거리 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 14, '야식', '맛과 멋이 함께하는 구읍 거리', '문화재야행 거리 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 14, '야숙', '청청 옥천, 별빛 가득 담은 한오게서', '전통문화 체험관 숙박등');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 15, '야경', '제민천 별빛 음악회 \n 월야장천(月夜長川) - 제민천에 달이 뜨다 -', '제민천 일원, 반죽동 역사공원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 15, '야로', '모던 딴스구락부 \n 제민천 인력거 \n 원도심 견학단', '공주원도심 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 15, '야설', '엽서로 보는 공주의 근대 풍경 \n 박물관 앞', '공주역사영상관, 공주제일교회 등');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 15, '야사', '근대 아틀리에 \n 색 그리고 빛', '공주우체국길, 제민천 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 15, '야화', '근대 톡톡(talk)터지다 \n 무형문화재 공연', '공주하숙마을, 반죽동 역사공원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 15, '야시', '예술가의 거리 \n 달밤 낭만 장터', '제민천변 하상길, 감영길 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 15, '야식', '제민천 면(麵) 서다 \n 근대 먹거리 \n 공주 밤마실 야시장', '산성시장 문화공원, 제민천변');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 15, '야숙', '기억의 공간, 공주하숙마을', '공주하숙마을');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 16, '야경', '강경 노을빛으로 물들다', '옥녀봉 강경읍 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 16, '야로', '옛 강경을 걷다', '강경읍 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 16, '야설', '그땐 그랬지', '강경노동조합');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 16, '야사', '노을 담은 강경', '강경구락부');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 16, '야화', '한밤의 오락실', 'ㄱ자최초침례교예배지');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 16, '야시', '강경진상품 (유료)', '강경성결교회');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 16, '야식', '금강의 멋과 맛 (유료)', '근대문화거리');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 16, '야숙', '강경구락부에서 하룻밤', '옥녀봉');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 17, '야경', '스탬프 투어 10개소 \n 부여문화재 전문가와 함께하는 야행투어', '부여문화원, 부여향고 정림사지 오층석탑 등');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 17, '야로', '백제야행길(전둥) \n 백제포토존', '관북리유적, 미성삼거리~의혈로 입구');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 17, '야설', '백제체험 프로그램', '정림사지 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 17, '야사', '세계유산 사진전 \n 세계문화유산 특별 전시전', '국립부여박물관');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 17, '야화', '문화재명사 해설투어 \n 백제역사퀴즈', '정림사지오층석탑');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 17, '야시', '백제저잣거리', '미성삼거리~의열로 입구');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 17, '야식', '백제의 맛을 찾아라!', '미성삼거리~의열로 입구');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 17, '야숙', '부여문화재 야행과 함께하는 야숙', '부여군 관내 게스트하우스');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 18, '야경', '홍주의병 다시 깨어나다 \n 홍성의 위인과 만나다', '조양문, 홍화문');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 18, '야로', '홍주성 천년여행길 등불을 밝혀라 \n 천주교 순례길을 걷다', '홍주읍성');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 18, '야설', '나라사랑 영화제 \n 역사거리 퍼포먼스', '홍주의사총, 홍주읍성');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 18, '야사', '홍주읍성의 밤, 색을 입히다 \n 홍성 옛사진 전시회', '홍주읍성');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 18, '야화', '홍주성탈환 재현극 그날의 함성이여!', '홍주읍성');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 18, '야시', '홍성저잣거리 야시장', '홍주읍성');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 18, '야식', '홍성저잣거리 야시장', '홍주읍성');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 18, '야숙', '1박2일, 홍주목사 체험학교', '안회당');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 19, '야경', '빛의 술사들 \n 내용 \n 빛으로 문화재를 밝히다 \n 한지등 만들기 체험', '');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 19, '야로', '문화재 술사들 \n 내용 \n 왕과의 산책 \n 경기전 좀비 실록', '');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 19, '야설', '이야기 술사들 \n 내용 \n 이야기술사의 버스킹담화 \n 국보를 찾아라', '');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 19, '야사', '그림 술사들 \n 내용 \n 거리의 화공 \n 임금님, 용포를 입히다 \n 뿌리 깊은 나무', '');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 19, '야화', '공연 술사들 \n 내용 \n 개(폐)막 공연 \n 지역청년 예술가무대 동문 서문 \n 문화재 극장', '');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 19, '야시', '흥정 술사들 \n 내용 \n 경기단길 청년 프리마켓 \n 추억의 야행 문방구 \n 뉴트로 야행 카페', '');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 19, '야식', '음식 술사들 \n 내용 \n 문화재 고물상 \n 달빛 차회 \n 한밤의계이득', '');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 19, '야숙', '여행 술사들 \n 내용 \n 문활탄(문화재 활용가의 탄생) \n 야행을 품다! 아프리카BJ 탐방대', '');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 20, '야경', '밤에 비춰보는 아름다운 문화유산', '군산 내항 역사문화공간 및 원도심 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 20, '야로', '밤에 걷는 문화유산의 qc의 거리', '군산 내항 역사문화공간 및 원도심 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 20, '야설', '몸과 마음으로 느끼는 역사', '군산 내항 역사문화공간 및 원도심 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 20, '야사', '한 여름밤에 보는 문화유산의 정취', '군산 내항 역사문화공간 및 원도심 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 20, '야화', '밤에 펼쳐지는 문화공원', '군산 내항 역사문화공간 및 원도심 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 20, '야시', '근대역사가 살아있는 문화장처', '군산 내항 역사문화공간 및 원도심 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 20, '야식', '밤에 즐기는 맛의 거리', '군산 내항 역사문화공간 및 원도심 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 20, '야숙', '군산 역사이야기 속 하룻밤', '군산 내항 역사문화공간 및 원도심 일원');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 21, '야경', '당신을 기다리며 천년을 서 있었네 \n 백제왕궁 달빛기원, 천년기원을 담은 탑돌이, 천년사랑의 소원 남기기, 내 손에서 피어나는 꽃등 만들기 등', '');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 21, '야로', '천녀의 길, 천 걸음 \n 어화등등 유등산책!, 백제왕궁 후원산책, 구르미 그린 달빛 포토존, 미션! 무왕을 따르라 등', '');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 21, '야설', '재미있게 백제 이야기 \n 별궁 달궁 모래동화, 석불연인의 사랑이야기, 왕궁에서 즐기는 공방체험, 누가 여기에 똥쌌어?, 아닌 밤중에 백제놀이터, 백제를 말하다 : 이야기꾼, 야(夜)심한 밤별여행, 봄바람 부는 백제의 선율', '');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 21, '야사', '아는 만큼 보인다 \n 탱화장과 풀어보는 탱화의 비밀, 문화유산 VR체험, 탑리갤러리, 헤리티지 페이스페인팅, 왕궁 수묵화교실, 백제 어라하의 초대, 헤리티지 홀로그램', '');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 21, '야화', '백제양궁 야연 \n 금마저, 무왕의 시대를 열다, 무형문화재와 어울림 한마당, 백제왕궁에 울리는 풍류, 탑리 버스킹 공연, 무왕의 호위무사', '');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 21, '야시', '탑리장터 \n 탑리 야시장(로컬푸드), 청년무왕의 프리마켓', '');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 21, '야식', '백제무왕의 야식 \n 무왕의 야식체험, 어머니의 손맛, 왕과 차, 무형문화재 전통주 체험, 백제 채소 악단', '');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 21, '야숙', '한옥에서의 하룻밤 \n 한옥에서의 하룻밤(금마, 함라한옥 연계 체험)', '');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 22, '야경', '그네 \n 월매집 \n 오작교', '광한루원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 22, '야로', '향토 박물관 \n 춘향테마파크 \n 천문대', '향토박물관,춘향테마파크,천문대');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 22, '야설', '광한루 \n 완월정 \n 방장정', '광한루원, 관서당남성재');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 22, '야사', '아! 정겨운 남원의 정취', '심수관도예전시관, 시립김병종미술관, 남원 다움관');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 22, '야화', '예술공연 \n 심야버스킹', '광한루원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 22, '야시', '게을러스 죄송해요! \n 푸드트럭 거리조성', '예촌문화마당');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 22, '야식', '장터 공연', '예촌문화마당');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 22, '야숙', '소리체험관(한옥) \n 예촌(한옥호텔)', '함파우소리체험관, 한옥호텔예촌');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 23, '야경', '김제를 밝히는 나무등불 청사초롱길 금의환향길', '김제 관아와 향교 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 23, '야로', '선비의 길, 관직의 길 과거에서온 문화해설사', '김제 관아와 향교 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 23, '야설', '김제사또 부임행차 김제관아 민원상황극', '김제 관아와 향교 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 23, '야사', '김제문화재 바로알기', '김제 관아와 향교 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 23, '야화', '시와 풍류가 있는 음풍영월 성산 별빛 버스킹', '김제 관아와 향교 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 23, '야시', '백투더 1960', '김제 관아와 향교 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 23, '야식', '김제 전통 음식마당');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 23, '야숙', '김제의 대표문화재에서의 하룻밤', '김제 관아와 향교 일원');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 24, '야경', '고창읍성 달빛산책', '고창읍성(사적145호)');
+insert into EvntProgram (programNo, evntNo, title, content, location) values (
+	default, 24, '야로', '달빛공양 로수와 치성', '고창읍 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 24, '야설', '고창읍성축성재현 기원의 거울 opertta', '고창읍성 광장');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 24, '야사', '고창 문화유산 길거리갤러리 \n 고창문화재승경도', '문화체험거리');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 24, '야화', '도리화가 \n 양머리 버스킹 \n 플레시몹', '신재효고택, 문화체험거리');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 24, '야시', '지역 공방체험', '문화체험거리');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 24, '야식', '고창의 속 깊은 맛 \n 산, 들, 바다에서 차린 고창 밥상', '고창읍 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 24, '야숙', '책마을 해리, 챗 짓는 하루 \n 양반 잠으로 한옥호텔 하룻밤', '고창읍성 한옥마을, 북스테이 책마을해리');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 25, '야경', '진남관 스페셜 투어', '여수시 진남관 일원');
+insert into EvntProgram (programNo, evntNo, title, content, location) values (
+	default, 25, '야로', '문화재 뺏지를 찾아라', '여수시 진남관 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 25, '야설', 'LED 문화재 스트링아트 체험 외 15가지 문화재 활용 체험', '여수시 진남관 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 25, '야사', '특별상영 여수, 시민의 삶과 모습', '여수시 진남관 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 25, '야화', '좌수영 수군 야간 출정식', '여수시 진남관 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 25, '야시', '내례포 장터', '이순신광장');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 25, '야식', '수군 주먹밥', '여수시 진남관 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 25, '야숙', '여수 게스트 하우스 연계프로그램', '여수시 일원');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 26, '야경', '순천문화재탐방 문화재보물찾기', '팔마비, 행동 푸조나무, 순천시 청소년수련관, 한옥글방 등');
+insert into EvntProgram (programNo, evntNo, title, content, location) values (
+	default, 26, '야로', '순천문화재LED거리', '서문안내소 옥천서원, 문화의 거리');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 26, '야설', '순천문화재 역사 체험', '팔마비, 행동 푸조나무, 순천시 청소년수련관, 한옥글방 등');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 26, '야사', '그림과 사진으로 보는 순천문화재', '순천향교');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 26, '야화', '문화재 공연', '옥천서원, 기독교역사박물관, 서문안내소, 한옥글방');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 26, '야시', '순천야행 장터 \n 공방체험', '문화의 거리');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 26, '야식', '순천야식(주전부리)', '문화의 거리, 향교 장터길, 서문안내소');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 26, '야숙', '야행패키지 순천만 별보기', '순천시 일원');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 27, '야경', '빛보다 아름다운 나주의 夜', '목사내아, 금성관길');
+insert into EvntProgram (programNo, evntNo, title, content, location) values (
+	default, 27, '야로', '천년, 과거로의 타임슬립', '금성관');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 27, '야설', '나주의 천년 야사', '목사내아');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 27, '야사', '청출어람 천연염색(천연염색 패션쇼)', '서성문');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 27, '야화', '천년의 樂, 나주 풍류열전(나주시립국악단 공연)', '금성관');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 27, '야시', '오감만족 야시장 \n 야간 플리마켓', '향교길');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 27, '야식', '夜한 식사 \n 나주 전통먹거리 체험', '향교길');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 27, '야숙', '나주에서 하룻밤 \n 나주목사내아 숙박체험', '목사내아');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 28, '야경', '보성문화재 야간탐방, 보성문화재 스탬프 투어', '보성향교, 보성 충의당, 보성읍 성지 등 10곳');
+insert into EvntProgram (programNo, evntNo, title, content, location) values (
+	default, 28, '야로', '보성야로, 열선루 포토촌, 내삼문 포토존', '보성향교, 보성 충의당, 보성읍 성지 등 10곳');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 28, '야설', '장계만들기 체험 등 26개 프로그램', '열선루, 보성향교, 오청사 등');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 28, '야사', '보성충효전시회, 보성문화재 사진전시회, 보성무형문화재전시회', '보성향교, 보성군청, 방진관');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 28, '야화', '열선루 공연, 보성향교 무대공연, 보성군청 무대공여느 방진관 마당극, 5인의 전설', '열선루, 보성향교, 보성군청, 방진관, 오충사');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 28, '야시', '보성야행장터(아트마켓)', '보성읍성공원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 28, '야식', '보성향교 다도체험, 보성수군감자 주먹밥 체험, 강하주시음과 향연', '보셩향교, 보성읍성공원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 28, '야숙', '보성야행 숙박 패키지, 보성하룻밤(야영체험)', '보성읍성공원');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 29, '야경', '목포 환타지 로드', '목포근대역사 문화공간');
+insert into EvntProgram (programNo, evntNo, title, content, location) values (
+	default, 29, '야로', '夜한 워킹스트리트', '목포 근대역사 문화공간');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 29, '야설', '1897 목포문화재 투어', '목포근대역사 문화공간');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 29, '야사', '문화재 어닝아트', '목포근대역사 문화공간');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 29, '야화', '근대가요콘서트 청춘연가', '목포근대역사 문화공간');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 29, '야시', '1897 플리마켓', '목포근대역사 문화공간');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 29, '야식', '맛의 도시 백년 맛집', '목포근대역사 문화공간');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 29, '야숙', '코레일 내일로 근대역사 체험단', '목포근대역사 문화공간');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 30, '야경', '문화재 밤을 잉태하다', '경주일원 문화재');
+insert into EvntProgram (programNo, evntNo, title, content, location) values (
+	default, 30, '야로', '경주 교촌 달빛 story 답사', '경주교촌 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 30, '야설', '전통민속놀이 \n 남천 유등 띄우기 \n 십이지 소원지 달기', '경주 교촌 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 30, '야사', '경주세계문화유산 사진전 \n 신라의 밤 천체관측', '경주 교촌 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 30, '야화', '셔블밝긔대라 탈놀이 가자 \n 신라설화 인형극', '경주 교촌 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 30, '야시', '교촌 아트마켓', '경주 교촌 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 30, '야식', '교촌 먹거리 \n 최부자의 인심을 맛보다', '경주 교촌 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 30, '야숙', '아직 준비중입니다.', '');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 31, '야경', '월영교 등간, 빛 정원', '월영교 일원');
+insert into EvntProgram (programNo, evntNo, title, content, location) values (
+	default, 31, '야로', '달달애 투어 걷기, 빛 로드', '월영교 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 31, '야설', '해설사와 함께 듣는 문화유산이야기', '월영교 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 31, '야사', '하회탈 특별전시, 안동문화재 그림 및 사진전시', '월영교 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 31, '야화', '관객과 함께하는 오픈라디오, 문화공연', '월영교 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 31, '야시', '월영장터 푸드트럭', '월영교 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 31, '야식', '종가 음식 및 안동의제사 체험', '월영교 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 31, '야숙', '고택체험프로그램, 한옥리조트', '구름에리조트, 임청각');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 32, '야경', '지산동고분군 \n 대가야역사테마관광지', '지산동고분군, 대가야역사테마관광지');
+insert into EvntProgram (programNo, evntNo, title, content, location) values (
+	default, 32, '야로', '달빛 고분산책 \n 달빛소리', '지산동고분군');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 32, '야설', '가야금 소리마당 \n 왜 순장을 했을꼬?', '대가야문화누리 야외공연장, 지산동고분군');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 32, '야사', '고령갤러리 \n 세계유산 등재기원 사진전', '인진관, 디지털 관광홍보관');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 32, '야화', '왕들의 초대 \n 현의 노래 \n 달빛 환타지아', '대가야역사테마관관광지');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 32, '야시', '夜한 포토샵 \n 고관점 방문기 \n 대가야 夜시장', '대가야역사테마관광지');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 32, '야식', '야행도시락 \n 감자39전', '대가야역사테마관광지');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 32, '야숙', '월하야숙 \n 별 헤는 달빛캠핑', '대가야생활촌, 체험캠프');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 33, '야경', '통제공, 납시오! \n 나도 삼도수군통제사', '통제영 세병관');
+insert into EvntProgram (programNo, evntNo, title, content, location) values (
+	default, 33, '야로', '신임통제사도임참배길 따라가기', '통제영~충렬사');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 33, '야설', '조선수군 알아보기 \n 조선시대 화폐만들기', '통제영 12공방, 주전소');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 33, '야사', '명조팔사품 및 수조도 그리기', '통제영 12공방');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 33, '야화', '개막식 및 폐막식', '통제영 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 33, '야시', '함께 해요! 프리마켓', '통제영 ~ 문화원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 33, '야식', '양로연 \n 제례음식 맛보기', '통제영 백화당,통영 충렬사');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 33, '야숙', '통제사 내아 엿보기', '통제영 내아');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 34, '야경', '가야하늘에 6개의 달이 뜨다 \n 가야 초롱길', '수로왕릉');
+insert into EvntProgram (programNo, evntNo, title, content, location) values (
+	default, 34, '야로', '가야 달빛탐방 \n 가야 후원을 거닐다', '가야유적지 일원, 수로왕릉 후원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 34, '야설', '가아 톡 \n 가야 유물 찾기 \n 수로왕릉 바로알기', '수로왕릉');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 34, '야사', '가야를 보다 \n 가야 의상실', '수로왕릉');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 34, '야화', '가야의 불을 밝히다 \n 가야 작은극장', '수로왕릉');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 34, '야시', '가야 놀이터 \n 가야 장터 \n 가야 문화 만들기 체험', '수로왕릉');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 34, '야식', '가야구경도 식후경 \n 가야살롱', '수로왕릉');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 34, '야숙', '가야에서 하룻밤', '김해한옥체험관');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 35, '야경', '응천강 어화를 밝히다', '응천강 일원');
+insert into EvntProgram (programNo, evntNo, title, content, location) values (
+	default, 35, '야로', '밀양도호부 옛 길 따라...', '밀양 읍성길, 성당, 박물관, 향교');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 35, '야설', '길 위의 인문학', '영남루, 밀양관아, 아랑각, 약전골목, 천진궁');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 35, '야사', '영남루 밝은 달빛아래 보다', '영남루, 천진궁');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 35, '야화', '공연으로 만나는 밀양읍성이야기', '영남루, 밀양관아, 아랑각, 천진궁');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 35, '야시', '야(夜)한 장시', '밀양관아, 천진궁');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 35, '야식', '야(夜)한 다리껄 식당', '전통시장, 남천교 다리위');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 35, '야숙', '아랑사또와 취침하로 가세! 사전신청', '관아, 향교, 교동손씨 고가');
+    
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 36, '야경', '무병장수의 별 老人星을 보라', '남성대, 자구리공원');
+insert into EvntProgram (programNo, evntNo, title, content, location) values (
+	default, 36, '야로', '시간여행그날(시민 참여배우 사전접수)', '서귀포시청-초원사거리-매일시장입구-솔동산입구-서귀진지');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 36, '야설', '300여년전의 비밀을 푼다', '서귀본향당-이중섭거리-소암전시관-서복전시관-자구리공원-서귀진지 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 36, '야사', '코노래가 흥얼흥얼', '서귀진지');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 36, '야화', '모다들엉 놀아봅주', '서귀포 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 36, '야시', '서귀포문화재 야행 유유자적', '서귀진지 일원');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 36, '야식', '해녀밥상 경연대회', '서귀진지');
+insert into EventProgram (programNo, evntNo, title, content, location) values (
+	default, 36, '야숙', '야호! 서귀포문화재 야행!', '서귀진지');
+
+
 
 ---------
 

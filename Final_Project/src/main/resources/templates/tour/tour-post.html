@@ -58,7 +58,7 @@
         </nav>
         <div class="row mb-md-2 mb-xl-4">
           <!-- Tabs content -->
-          <form class="tab-content">
+          <form class="tab-content" id="myForm" method="post" th:action="@{/tour/post}">
             <!-- STEP1 -->
             <div class="tab-pane show active" id="step1" role="tabpanel">
               <div class="steps steps-horizontal-md steps-center">
@@ -92,7 +92,7 @@
                     <span class="text-danger">*</span>
                   </div>
                   <div class="col-md-10">
-                    <input class="form-control bg-white" type="text" id="title" placeholder="제목" />
+                    <input class="form-control bg-white" type="text" id="title" placeholder="제목" name="title" />
                   </div>
                 </div>
 
@@ -103,7 +103,7 @@
                     <span class="text-danger">*</span>
                   </div>
                   <div class="col-md-10">
-                    <select class="form-select bg-white" id="area">
+                    <select class="form-select bg-white" id="area" name="region">
                       <option>지역 선택</option>
                       <option>서울/인천/경기</option>
                       <option>강원</option>
@@ -124,7 +124,7 @@
                     <span class="text-danger">*</span>
                   </div>
                   <div class="col-md-10">
-                    <input class="form-control bg-white" type="number" id="numOfPeople" placeholder="본인을 포함한 인원수" />
+                    <input class="form-control bg-white" type="number" id="numOfPeople" placeholder="본인을 포함한 인원수" name="numOfPeople" />
                   </div>
                 </div>
 
@@ -143,6 +143,7 @@
                         class="form-control date-picker date-range"
                         type="text"
                         placeholder="시작 날짜"
+                        name="startDate"
                         data-datepicker-options='{"altInput": true, "altFormat": "Y-m-d", "dateFormat": "Y-m-d"}'
                         data-linked-input="#end-date" />
                       <span class="border-end border-input"></span>
@@ -150,6 +151,7 @@
                         class="form-control date-picker"
                         type="text"
                         placeholder="끝 날짜"
+                        name="endDate"
                         data-datepicker-options='{"altInput": true, "altFormat": "Y-m-d", "dateFormat": "Y-m-d"}'
                         id="end-date" />
                     </div>
@@ -164,11 +166,11 @@
                   </div>
                   <div class="col-md-10">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" id="heritage" name="category" />
+                      <input class="form-check-input" type="radio" id="heritage" name="category" value="heritage" />
                       <label class="form-check-label" for="heritage">문화재</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" id="museum" name="category" checked />
+                      <input class="form-check-input" type="radio" id="museum" name="category" value="museum" />
                       <label class="form-check-label" for="museum">박물관</label>
                     </div>
                   </div>
@@ -178,7 +180,7 @@
                 <div class="mb-2 mb-md-3 mt-n3 mt-md-0 row align-items-center">
                   <div class="col-md-2 col-form-label fs-5 fw-bold">내용</div>
                   <div class="col-md-10">
-                    <textarea class="form-control bg-white" id="content" rows="5" placeholder="내용"></textarea>
+                    <textarea class="form-control bg-white" id="content" rows="5" placeholder="내용" name="content"></textarea>
                   </div>
                 </div>
 
@@ -195,7 +197,7 @@
                   <a href="#" class="btn btn-danger">취소</a>
                 </div>
                 <div class="col-6 text-end">
-                  <button class="btn btn-primary" id="next-step" type="button" onclick="showSecond();">다음</button>
+                  <button class="btn btn-primary disabled" id="next-step" type="button" onclick="showSecond();">다음</button>
                 </div>
               </div>
             </div>
@@ -225,8 +227,8 @@
                 <div class="col-4 rounded-3 p-3" style="background-color: #f6f9fc">
                   <div action="">
                     <div class="position-relative mb-2">
-                      <button id="search-by-keyword" class="btn btn-link ai-search position-absolute top-50 start-0 translate-middle-y ms-3 px-1" style="color: #202020"></button>
-                      <input class="form-control ps-5 bg-white" type="search" placeholder="키워드로 검색" />
+                      <button id="search-by-keyword" class="btn btn-link ai-search position-absolute top-50 start-0 translate-middle-y ms-3 px-1" style="color: #202020" type="button"></button>
+                      <input class="form-control ps-5 bg-white" type="search" placeholder="키워드로 검색" id="search" />
                     </div>
                     <div class="position-relative mb-2">
                       <i class="ai-calendar position-absolute top-50 start-0 translate-middle-y ms-3 px-1"></i>
@@ -258,23 +260,7 @@
                           data-datepicker-options='{"noCalendar": true, "enableTime": true, "altInput": true, "altFormat": "H:i", "dateFormat": "H:i", "minuteIncrement": 30}' />
                       </div>
                     </div>
-                    <div class="overflow-scroll p-2" style="height: 300px">
-                      <button class="select-list highlight" type="button" data-item-name="첨성대" data-item-address="경상북도 경주시 인왕동 839-1" data-la="35.835116" data-lo="129.219503">
-                        <div class="text-dark fw-bold">첨성대</div>
-                        <div class="text-muted">경상북도 경주시 인왕동 839-1</div>
-                      </button>
-                      <button class="select-list highlight" type="button" data-item-name="첨성대2" data-item-address="경상북도 경주시 인왕동 839-12" data-la="35.135116" data-lo="129.119503">
-                        <div class="text-dark fw-bold">첨성대2</div>
-                        <div class="text-muted">경상북도 경주시 인왕동 839-12</div>
-                      </button>
-                      <button class="select-list highlight" type="button" data-item-name="첨성대3" data-item-address="경상북도 경주시 인왕동 839-13" data-la="35.235116" data-lo="129.319503">
-                        <div class="text-dark fw-bold">첨성대3</div>
-                        <div class="text-muted">경상북도 경주시 인왕동 839-13</div>
-                      </button>
-                      <button class="select-list highlight" type="button" data-item-name="첨성대4" data-item-address="경상북도 경주시 인왕동 839-14" data-la="35.335116" data-lo="129.419503">
-                        <div class="text-dark fw-bold">첨성대4</div>
-                        <div class="text-muted">경상북도 경주시 인왕동 839-14</div>
-                      </button>
+                    <div class="overflow-scroll p-2" style="height: 300px" id="tours-list">
                     </div>
                     <button class="btn btn-warning mt-3 w-100" type="button" id="undo">마지막에 추가한 일정 삭제</button>
                     <style>
@@ -312,13 +298,14 @@
                   </script> -->
                 </div>
                 <div id="calendar" class="mt-4"></div>
+                <input type="hidden" id="jsonData" name="jsonData" value=""></input>
               </div>
               <div class="row">
                 <div class="col-6">
                   <button class="btn btn-warning" id="prev-step" type="button" onclick="showFirst();">이전</button>
                 </div>
                 <div class="col-6 text-end">
-                  <button class="btn btn-primary" type="submit">작성</button>
+                  <button class="btn btn-primary" type="submit" id="submit">작성</button>
                 </div>
               </div>
             </div>
@@ -341,6 +328,7 @@
     <script th:src="@{/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.js}"></script>
     <script th:src="@{/assets/vendor/jarallax/dist/jarallax.min.js}"></script>
     <script th:src="@{/assets/vendor/flatpickr/dist/flatpickr.min.js}"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script>
     <script th:src="@{/assets/vendor/flatpickr/dist/plugins/rangePlugin.js}"></script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script th:src="@{/assets/vendor/cleave.js/dist/cleave.min.js}"></script>
@@ -348,7 +336,9 @@
     <!-- Main theme script-->
     <script th:src="@{/assets/js/theme.js}"></script>
 
-    <script>
+    <script th:inline="javascript">
+      var items;
+      var tourSchedules = [];
       var initOptions = {
         locale: "ko",
         headerToolbar: {
@@ -414,72 +404,85 @@
           calendarDiv.addClass("calendar");
           calendar(initOptions);
         }
+        initOptions.events = [];
+        calendar(initOptions);
+        for (var i = 0; i < markers.length; i++) {
+        	deleteMarker();
+        }
+        tourSchedules = [];
       }
+      var startPicker;
+      var endPicker;
+      var schedulePicker;
       $(document).ready(function () {
-        var schedulePicker = flatpickr("#schedule-date", {
+    	  flatpickr.localize(flatpickr.l10ns.ko);
+    	  flatpickr("mySelector");
+    	  
+        $("#myForm").on("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                return false;
+            }
+        });
+        $('#submit').on('click', function(event) {
+        	var sendData = '';
+        	for (var i = 0; i < tourSchedules.length; i++) {
+        		sendData += JSON.stringify(tourSchedules[i]) + '/';
+        	}
+        	$('#jsonData').val(sendData);
+        });
+          
+        schedulePicker = flatpickr("#schedule-date", {
           minDate: "today",
+          "locale": "ko"
         });
 
-        var startPicker = flatpickr("#start-time", {
+        startPicker = flatpickr("#start-time", {
           enableTime: true,
           noCalendar: true,
           altInput: true,
           altFormat: "H:i",
           dateFormat: "H:i",
           minuteIncrement: 30,
+          "locale": "ko"
         });
 
-        var endPicker = flatpickr("#end-time", {
+        endPicker = flatpickr("#end-time", {
           enableTime: true,
           noCalendar: true,
           altInput: true,
           altFormat: "H:i",
           dateFormat: "H:i",
           minuteIncrement: 30,
-        });
-
-        $(".select-list").click(function () {
-          var startTime = startPicker.selectedDates[0];
-          var endTime = endPicker.selectedDates[0];
-          var scheduleDate = schedulePicker.selectedDates[0];
-          if (startTime === undefined || endTime === undefined || scheduleDate === undefined) {
-            alert("날짜 혹은 시간이 입력되지 않았습니다.");
-            return false;
-          }
-          if (startTime >= endTime) {
-            alert("끝 시간이 시작 시간보다 빠르거나 같습니다.");
-            return false;
-          }
-
-          var date = $("#schedule-date").val();
-          var startTime = date + "T" + $("#start-time").val();
-          var endTime = date + "T" + $("#end-time").val();
-          console.log(startTime, endTime);
-          var name = $(this).data("item-name");
-          var newEvent = {
-            title: name,
-            start: startTime,
-            end: endTime,
-            classNames: ["event-custom-style", "bg-light", "text-nav", "border-0", "rounded-1", "p-1", "ps-3", "border-start", "border-5", "border-purple"],
-          };
-          initOptions.events.push(newEvent);
-
-          calendar(initOptions);
-          // schedulePicker.clear();
-          // startPicker.clear();
-          // endPicker.clear();
-          var lo = $(this).data("lo");
-          var la = $(this).data("la");
-          console.log(lo + ", " + la);
-          var moveLocation = new kakao.maps.LatLng(la, lo);
-          mapObj.panTo(moveLocation);
-          addMarker(name, la, lo);
+          "locale": "ko"
         });
 
         $("#undo").click(function () {
           initOptions.events.pop();
           calendar(initOptions);
           deleteMarker();
+          tourSchedules.pop();
+        });
+
+        $("#search").on("keyup", function () {
+          var keyword = $(this).val();
+          if (keyword == "") {
+            var html = '';
+            for (var i = 0; i < items.length; i++) {
+              html += parseList(items[i]);
+            }
+            $('#tours-list').html(html);
+            addEvent();
+          } else {
+            var html = '';
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].title.includes(keyword)) {
+                html += parseList(items[i]);
+              }
+            }
+            $('#tours-list').html(html);
+            addEvent();
+          }
         });
       });
 
@@ -501,6 +504,93 @@
         markers[markers.length - 1].setMap(null);
         markers.pop();
       }
+		
+      function addEvent() {
+          $('.select-list').click(function () {
+              var startTime = startPicker.selectedDates[0];
+              var endTime = endPicker.selectedDates[0];
+              var scheduleDate = schedulePicker.selectedDates[0];
+              if (startTime === undefined || endTime === undefined || scheduleDate === undefined) {
+                alert("날짜 혹은 시간이 입력되지 않았습니다.");
+                return false;
+              }
+              if (startTime >= endTime) {
+                alert("끝 시간이 시작 시간보다 빠르거나 같습니다.");
+                return false;
+              }
+
+              var date = $("#schedule-date").val();
+              var startTime = date + "T" + $("#start-time").val();
+              var endTime = date + "T" + $("#end-time").val();
+              console.log(startTime, endTime);
+              var name = $(this).attr("data-item-name");
+              var newEvent = {
+                title: name,
+                start: startTime,
+                end: endTime,
+                classNames: ["event-custom-style", "bg-light", "text-nav", "border-0", "rounded-1", "p-1", "ps-3", "border-start", "border-5", "border-purple"],
+              };
+              initOptions.events.push(newEvent);
+
+              calendar(initOptions);
+              schedulePicker.clear();
+              startPicker.clear();
+              endPicker.clear();
+              var lo = $(this).attr("data-lo");
+              var la = $(this).attr("data-la");
+              console.log(lo + ", " + la);
+              var moveLocation = new kakao.maps.LatLng(la, lo);
+              mapObj.panTo(moveLocation);
+              addMarker(name, la, lo);
+              
+              var mno = [[${loginMember.mno}]];
+              var type = $('input[name=category]:checked').val();
+              tourSchedules.push({
+            	  'mno': mno,
+            	  'name': name,
+            	  'la': la,
+            	  'lo': lo,
+            	  'startTime': startTime,
+            	  'endTime': endTime,
+            	  'type': type
+              });
+            });
+      }
+      
+      $("[name=category]").change(function () {
+          $("#next-step").removeClass("disabled");
+          var category = $(this).val();
+          searchList(category, null);
+        });
+      
+      function searchList(category) {
+          $.ajax({
+            url: "/tour/reqList?category=" + category,
+            type: "GET",
+            dataType: "JSON",
+            success: function (resp) {
+              items = resp;
+              var html = '';
+              for (var i = 0; i < resp.length; i++) {
+                html += parseList(resp[i]);
+              }
+              $('#tours-list').html(html);
+              addEvent();
+            },
+            error: function (xhr, status, error) {
+              console.error(xhr, status, error);
+            },
+          });
+      }
+
+        function parseList(param) {
+          var item = 
+          '<button class="select-list highlight" type="button" data-item-name="' + param.title + '" data-item-address="' + param.address + '" data-la="' + param.la + '" data-lo="' + param.lo + '">' +
+          '  <div class="text-dark fw-bold">' + param.title + '</div>' +
+          '  <div class="text-muted" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">' + param.address + '</div>' +
+          '</button>';
+          return item;
+        }
     </script>
   </body>
 </html>

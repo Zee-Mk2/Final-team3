@@ -180,9 +180,9 @@
         </a>
         <div class="dropdown nav d-none d-sm-block order-lg-3 ms-3" th:if="${loginMember != null}">
           <a class="nav-link d-flex align-items-center p-0" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-            <img class="border rounded-circle" src="assets/img/avatar/01.jpg" width="40" alt="Isabella Bocouse" />
+            <img class="border rounded-circle" th:src="@{/assets/img/avatar/01.jpg}" width="40" alt="Isabella Bocouse" />
             <div class="ps-2">
-              <div class="fs-sm dropdown-toggle fw-bold" th:text="${loginMember.name}">테스트계정</div>
+              <div class="fs-sm dropdown-toggle fw-bold" th:text="${loginMember.name}"></div>
             </div>
           </a>
           <div class="dropdown-menu dropdown-menu-end my-1">
