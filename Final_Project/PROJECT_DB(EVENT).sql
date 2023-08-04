@@ -33,6 +33,16 @@ CREATE TABLE EventImg(
     FOREIGN KEY (evntNo) REFERENCES Event(evntNo) ON DELETE CASCADE
 );
 
+DROP table eventReview;
+CREATE TABLE EventReview (
+	evntReviewNo INT PRIMARY KEY auto_increment,
+    evntNo INT,
+    Mno INT,
+    content VARCHAR(100),
+    rating INT,
+    writeTime DATETIME
+);
+
  -- --------------insert문-------------------------
 
 insert into event values(1, '서울문화재야행
