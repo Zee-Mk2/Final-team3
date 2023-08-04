@@ -24,7 +24,7 @@
       <!-- Hero-->
       <section>
         <div class="jarallax bg-dark py-5" data-jarallax data-type="scroll-opacity" data-speed="0.7" style="height:70vh !important">
-          <div class="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-60"></div>
+          <div class="position-absolute top-0 start-0 w-100 h-100  opacity-60"></div>
           <div
             class="jarallax-img zindex-1"
             style="background-image: url(http://t1.daumcdn.net/brunch/service/user/7YAa/image/NPsPJXoCTkYydCMCoeWf0O6v_Tw.jpg)"
@@ -44,7 +44,8 @@
           </div>
         </div>
         <div class="container position-relative zindex-5" style="margin-top: -10rem;">
-          <form>
+          <form name="searchForm" th:action="@{/heritage/list}" method="get">
+          <input type="hidden" name="page">
             <div class="row g-3 rounded-pill align-items-center border mb-3 bg-white">
               <div class="col-2 my-1">
                 <select class="form-select" style="border: none">
@@ -52,14 +53,14 @@
                 </select>
               </div>
               <div class="col-9 my-1">
-                <input type="text" class="form-control" style="border: none" placeholder="키워드로 검색" />
+                <input type="text" name="name" class="form-control" style="border: none" placeholder="키워드로 검색" th:value="${paramMap.name}" />
               </div>
               <div class="col-1 my-1">
                 <button type="submit" class="btn py-2 ms-3"><i class="ai-search" style="font-size: 26px; color: #202020"></i></button>
               </div>
             </div>
             <div class="border rounded-2 bg-white row">
-              <div class="range-slider col-6 p-4" data-start-min="250" data-start-max="680" data-min="0" data-max="1000" data-step="1" data-pips="true">
+               <div class="range-slider col-6 p-4" data-start-min="1960" data-start-max="2002" data-min="1939" data-max="2023" data-step="1" data-pips="true">
                 <div class="range-slider-ui"></div>
                 <div class="d-flex">
                   <div class="d-flex align-items-center w-50">
@@ -73,56 +74,56 @@
                 </div>
               </div>
               <div class="mb-3 col-6 p-4">
-                <label for="local" class="form-label">지역</label>
-                <select id="local" class="form-select">
-                  <option>지역을 선택해주세요</option>
-                  <option>서울특별시</option>
-                  <option>경기도</option>
-                  <option>대전광역시</option>
-                  <option>충청북도</option>
-                  <option>충청남도</option>
-                  <option>강원도</option>
-                  <option>전라북도</option>
-                  <option>전라남도</option>
-                  <option>광주광역시</option>
-                  <option>대구광역시</option>
-                  <option>경상북도</option>
-                  <option>경상남도</option>
-                  <option>부산광역시</option>
-                  <option>제주도</option>
+                <label for="address" class="form-label">지역</label>
+                <select id="address" name="address"  class="form-select" th:value="${paramMap.address}" >
+                  <option value=""> 지역을 선택해주세요</option>
+                  <option th:selected="${paramMap.address == '서울'} ? 'selected' : null ">서울</option>
+               	  <option th:selected="${paramMap.address == '경기도'} ? 'selected' : null ">경기도</option>
+                  <option th:selected="${paramMap.address == '대전광역시'} ? 'selected' : null ">대전광역시</option>
+                  <option th:selected="${paramMap.address == '충청북도'} ? 'selected' : null ">충청북도</option>
+                  <option th:selected="${paramMap.address == '충청남도'} ? 'selected' : null ">충청남도</option>
+                  <option th:selected="${paramMap.address == '강원도'} ? 'selected' : null ">강원도</option>
+                  <option th:selected="${paramMap.address == '전라북도'} ? 'selected' : null ">전라북도</option>
+                  <option th:selected="${paramMap.address == '전라남도'} ? 'selected' : null ">전라남도</option>
+                  <option th:selected="${paramMap.address == '광주광역시'} ? 'selected' : null ">광주광역시</option>
+                  <option th:selected="${paramMap.address == '대구광역시'} ? 'selected' : null ">대구광역시</option>
+                  <option th:selected="${paramMap.address == '경상북도'} ? 'selected' : null ">경상북도</option>
+                  <option th:selected="${paramMap.address == '경상남도'} ? 'selected' : null ">경상남도</option>
+                  <option th:selected="${paramMap.address == '부산광역시'} ? 'selected' : null ">부산광역시</option>
+                  <option th:selected="${paramMap.address == '제주도'} ? 'selected' : null ">제주도</option>  
                 </select>
               </div>
               <div class="mb-3 col-6 p-4">
                 <label for="era" class="form-label">시대</label>
-                <select id="era" class="form-select">
-                  <option>시대를 선택해주세요</option>
-                  <option>선사시대</option>
-                  <option>석기시대</option>
-                  <option>청동기시대</option>
-                  <option>철기시대</option>
-                  <option>삼한시대</option>
-                  <option>삼국시대</option>
-                  <option>삼국:고구려</option>
-                  <option>삼국:백제</option>
-                  <option>삼국:신라</option>
-                  <option>발해</option>
-                  <option>통일신라</option>
-                  <option>고려시대</option>
-                  <option>조선시대</option>
-                  <option>대한제국시대</option>
-                  <option>일제강점기</option>
+                <select id="era" name="era" class="form-select" th:value="${paramMap.era}">
+                  <option value="">시대를 선택해주세요</option>
+      			  <option th:selected="${paramMap.era == '선사시대'} ? 'selected' : null ">선사시대</option>
+                  <option th:selected="${paramMap.era == '석기시대'} ? 'selected' : null ">석기시대</option>
+                  <option th:selected="${paramMap.era == '청동기시대'} ? 'selected' : null ">청동기시대</option>
+                  <option th:selected="${paramMap.era == '철기시대'} ? 'selected' : null ">철기시대</option>
+                  <option th:selected="${paramMap.era == '삼한시대'} ? 'selected' : null ">삼한시대</option>
+                  <option th:selected="${paramMap.era == '삼국시대'} ? 'selected' : null ">삼국시대</option>
+                  <option th:selected="${paramMap.era == '삼국:고구려'} ? 'selected' : null ">삼국:고구려</option>
+                  <option th:selected="${paramMap.era == '삼국:백제'} ? 'selected' : null ">삼국:백제</option>
+                  <option th:selected="${paramMap.era == '삼국:신라'} ? 'selected' : null ">삼국:신라</option>
+                  <option th:selected="${paramMap.era == '발해'} ? 'selected' : null ">발해</option>
+                  <option th:selected="${paramMap.era == '통일신라'} ? 'selected' : null ">통일신라</option>
+                  <option th:selected="${paramMap.era == '고려시대'} ? 'selected' : null ">고려시대</option>
+                  <option th:selected="${paramMap.era == '조선시대'} ? 'selected' : null ">조선시대</option>
+                  <option th:selected="${paramMap.era == '대한제국시대'} ? 'selected' : null ">대한제국시대</option>
+                  <option th:selected="${paramMap.era == '일제강점기'} ? 'selected' : null ">일제강점기</option> 
                 </select>
               </div>
               <div class="mb-3 col-6 p-4">
                 <label for="type" class="form-label">유형</label>
-                <select id="type" class="form-select">
-                  <option>유형을 선택해주세요</option>
-                  <option>유적건조물</option>
-                  <option>기록유산</option>
-                  <option>자연유산</option>
-                  <option>무형문화재</option>
-                  <option>등록문화재</option>
-                  <option>유물</option>
+                <select id="type" name="type" class="form-select" th:value="${paramMap.type}">
+                  <option value="">유형을 선택해주세요</option>
+                  <option th:selected="${paramMap.type == '유적건조물'} ? 'selected' : null ">유적건조물</option>
+         	      <option th:selected="${paramMap.type == '기록유산'} ? 'selected' : null ">기록유산</option>
+                  <option th:selected="${paramMap.type == '자연유산'} ? 'selected' : null ">자연유산</option>
+                  <option th:selected="${paramMap.type == '무형문화재'} ? 'selected' : null ">무형문화재</option>
+                  <option th:selected="${paramMap.type == '등록문화재'} ? 'selected' : null ">등록문화재</option>
+                  <option th:selected="${paramMap.type == '유물'} ? 'selected' : null ">유물</option>
                 </select>
               </div>
             </div>
@@ -137,9 +138,9 @@
           <div class="col-6">
             <nav aria-label="breadcrumb">
               <ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">홈</a></li>
+                <li class="breadcrumb-item"><a th:href="@{/index.html}">홈</a></li>
                 <li class="breadcrumb-item">
-                  <a href="culturalheritage.html" style="color: #e39d2c">문화재</a>
+                  <a th:href="@{/heritage-list.html}" style="color: #e39d2c">문화재</a>
                 </li>
               </ol>
             </nav>
@@ -174,42 +175,46 @@
           }
         </style>
         <!-- ITEM -->
+        <th:block th:each="item : ${list}">
         <div class="row g-0 border-0 mb-4 align-items-center">
           <div class="card-hover position-relative bg-secondary rounded-1 mb-4 overflow-hidden col-4">
-            <!-- 뱃지 -->
+            <!-- 북마크 -->
             <!-- <span class="badge bg-faded-danger text-danger position-absolute top-0 start-0 mt-3 ms-3">Sale</span> -->
+            <th:block th:if="${loginMember != null}">
             <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
-              <i class="ai-bookmark fs-xl d-dark-mode-none"></i>
-              <i class="ai-bookmark text-nav fs-xl d-none d-dark-mode-block"></i>
+            <!--  <i class="ai-heart fs-xl" style="color: --ar-gray-500 "
+				                            th:onclick="addFavor(this, |${item.hNo}|, |${loginMember.mno}|)"></i>  -->
+               <i class="ai-bookmark fs-xl d-dark-mode-none" style="color: --ar-gray-500 " th:onclick="addFavor(this, ${item.hNo}, ${loginMember.mno})"></i>
+              <i class="ai-bookmark text-nav fs-xl d-none d-dark-mode-block"></i> 
             </button>
-            <a class="d-block" href="shop-single.html">
-              <img src="https://www.heritage.go.kr/unisearch/images/national_treasure/thumb/2021042017434700.JPG?time=1689852106599" class="rounded-4">
+            </th:block>
+            <a class="d-block" th:href="|/heritage/detail?no=${item.hNo}|">
+              <img th:src="${item.img}" class="rounded-4">
             </a>
           </div>
-          <!-- <a href="#" class="col-sm-5 col-lg-4 bg-repeat-0 bg-size-cover bg-position-center">
-            <img src="https://www.heritage.go.kr/unisearch/images/national_treasure/thumb/2021042017434700.JPG?time=1689852106599" class="rounded-4" />
-          </a> -->
           <div class="col-8">
             <div class="pb-sm-4 ps-sm-4 pe-lg-4" style="margin-left: 10%">
-              <a href="#" style="text-decoration: none">
-                <div class="h3 my-card-title">숭례문(崇禮門)</div>
+              <a th:href="|/heritage/detail?no=${item.hNo}|" style="text-decoration: none">
+                <div class="h3 my-card-title"> 
+                	[[${item.name}]]([[${item.name2}]])
+                </div>
               </a>
               <table class="table">
                 <tr>
                   <td class="fw-bold text-black" style="white-space: nowrap"><i class="far fa-address-book text-primary"></i>분류</td>
-                  <td>유적건조물 / 정치국방 / 성 / 성곽시설</td>
+                  <td> [[${item.gcodeName}]]   / [[${item.bcodeName}]]   / [[${item.mcodeName}]]   / [[${item.scodeName}]]  </td>
                 </tr>
                 <tr>
                   <td class="fw-bold text-black" style="white-space: nowrap"><i class="fas fa-phone text-primary"></i>시대</td>
-                  <td>조선 태조 7년(1398)</td>
+                  <td> [[${item.era}]] </td>
                 </tr>
                 <tr>
                   <td class="fw-bold text-black" style="white-space: nowrap"><i class="far fa-calendar text-primary"></i>지정일</td>
-                  <td>1962-12-20</td>
+                  <td>[[${#dates.format(item.asDate, 'yyyy-MM-dd')}]]</td>
                 </tr>
                 <tr>
                   <td class="fw-bold text-black" style="white-space: nowrap; border-bottom: none"><i class="fas fa-calendar-day text-primary"></i>소재지</td>
-                  <td style="border-bottom: none">서울 중구 세종대로 40 (남대문로4가)</td>
+                  <td style="border-bottom: none"> [[${item.location}]] </td>
                 </tr>
               </table>
               <div class="d-flex mt-1 ps-2">
@@ -224,198 +229,68 @@
             </div>
           </div>
         </div>
-        <!-- ITEM -->
-        <div class="row g-0 border-0 mb-4 align-items-center">
-          <div class="card-hover position-relative bg-secondary rounded-1 mb-4 overflow-hidden col-4">
-            <!-- 뱃지 -->
-            <!-- <span class="badge bg-faded-danger text-danger position-absolute top-0 start-0 mt-3 ms-3">Sale</span> -->
-            <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
-              <i class="ai-bookmark fs-xl d-dark-mode-none"></i>
-              <i class="ai-bookmark text-nav fs-xl d-none d-dark-mode-block"></i>
-            </button>
-            <a class="d-block" href="shop-single.html">
-              <img src="https://www.heritage.go.kr/unisearch/images/national_treasure/thumb/2021042017434700.JPG?time=1689852106599" class="rounded-4">
-            </a>
-          </div>
-          <!-- <a href="#" class="col-sm-5 col-lg-4 bg-repeat-0 bg-size-cover bg-position-center">
-            <img src="https://www.heritage.go.kr/unisearch/images/national_treasure/thumb/2021042017434700.JPG?time=1689852106599" class="rounded-4" />
-          </a> -->
-          <div class="col-8">
-            <div class="pb-sm-4 ps-sm-4 pe-lg-4" style="margin-left: 10%">
-              <a href="#" style="text-decoration: none">
-                <div class="h3 my-card-title">숭례문(崇禮門)</div>
-              </a>
-              <table class="table">
-                <tr>
-                  <td class="fw-bold text-black" style="white-space: nowrap"><i class="far fa-address-book text-primary"></i>분류</td>
-                  <td>유적건조물 / 정치국방 / 성 / 성곽시설</td>
-                </tr>
-                <tr>
-                  <td class="fw-bold text-black" style="white-space: nowrap"><i class="fas fa-phone text-primary"></i>시대</td>
-                  <td>조선 태조 7년(1398)</td>
-                </tr>
-                <tr>
-                  <td class="fw-bold text-black" style="white-space: nowrap"><i class="far fa-calendar text-primary"></i>지정일</td>
-                  <td>1962-12-20</td>
-                </tr>
-                <tr>
-                  <td class="fw-bold text-black" style="white-space: nowrap; border-bottom: none"><i class="fas fa-calendar-day text-primary"></i>소재지</td>
-                  <td style="border-bottom: none">서울 중구 세종대로 40 (남대문로4가)</td>
-                </tr>
-              </table>
-              <div class="d-flex mt-1 ps-2">
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-half text-warning"></i>
-                <i class="ai-star text-warning"></i>
-                <span class="text-warning fw-bold mt-n1 ms-2">3.5</span>
-                <span class="text-muted mt-n1 ms-2">(1,234)</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- ITEM -->
-        <div class="row g-0 border-0 mb-4 align-items-center">
-          <div class="card-hover position-relative bg-secondary rounded-1 mb-4 overflow-hidden col-4">
-            <!-- 뱃지 -->
-            <!-- <span class="badge bg-faded-danger text-danger position-absolute top-0 start-0 mt-3 ms-3">Sale</span> -->
-            <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
-              <i class="ai-bookmark fs-xl d-dark-mode-none"></i>
-              <i class="ai-bookmark text-nav fs-xl d-none d-dark-mode-block"></i>
-            </button>
-            <a class="d-block" href="shop-single.html">
-              <img src="https://www.heritage.go.kr/unisearch/images/national_treasure/thumb/2021042017434700.JPG?time=1689852106599" class="rounded-4">
-            </a>
-          </div>
-          <!-- <a href="#" class="col-sm-5 col-lg-4 bg-repeat-0 bg-size-cover bg-position-center">
-            <img src="https://www.heritage.go.kr/unisearch/images/national_treasure/thumb/2021042017434700.JPG?time=1689852106599" class="rounded-4" />
-          </a> -->
-          <div class="col-8">
-            <div class="pb-sm-4 ps-sm-4 pe-lg-4" style="margin-left: 10%">
-              <a href="#" style="text-decoration: none">
-                <div class="h3 my-card-title">숭례문(崇禮門)</div>
-              </a>
-              <table class="table">
-                <tr>
-                  <td class="fw-bold text-black" style="white-space: nowrap"><i class="far fa-address-book text-primary"></i>분류</td>
-                  <td>유적건조물 / 정치국방 / 성 / 성곽시설</td>
-                </tr>
-                <tr>
-                  <td class="fw-bold text-black" style="white-space: nowrap"><i class="fas fa-phone text-primary"></i>시대</td>
-                  <td>조선 태조 7년(1398)</td>
-                </tr>
-                <tr>
-                  <td class="fw-bold text-black" style="white-space: nowrap"><i class="far fa-calendar text-primary"></i>지정일</td>
-                  <td>1962-12-20</td>
-                </tr>
-                <tr>
-                  <td class="fw-bold text-black" style="white-space: nowrap; border-bottom: none"><i class="fas fa-calendar-day text-primary"></i>소재지</td>
-                  <td style="border-bottom: none">서울 중구 세종대로 40 (남대문로4가)</td>
-                </tr>
-              </table>
-              <div class="d-flex mt-1 ps-2">
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-half text-warning"></i>
-                <i class="ai-star text-warning"></i>
-                <span class="text-warning fw-bold mt-n1 ms-2">3.5</span>
-                <span class="text-muted mt-n1 ms-2">(1,234)</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- ITEM -->
-        <div class="row g-0 border-0 mb-4 align-items-center">
-          <div class="card-hover position-relative bg-secondary rounded-1 mb-4 overflow-hidden col-4">
-            <!-- 뱃지 -->
-            <!-- <span class="badge bg-faded-danger text-danger position-absolute top-0 start-0 mt-3 ms-3">Sale</span> -->
-            <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
-              <i class="ai-bookmark fs-xl d-dark-mode-none"></i>
-              <i class="ai-bookmark text-nav fs-xl d-none d-dark-mode-block"></i>
-            </button>
-            <a class="d-block" href="shop-single.html">
-              <img src="https://www.heritage.go.kr/unisearch/images/national_treasure/thumb/2021042017434700.JPG?time=1689852106599" class="rounded-4">
-            </a>
-          </div>
-          <!-- <a href="#" class="col-sm-5 col-lg-4 bg-repeat-0 bg-size-cover bg-position-center">
-            <img src="https://www.heritage.go.kr/unisearch/images/national_treasure/thumb/2021042017434700.JPG?time=1689852106599" class="rounded-4" />
-          </a> -->
-          <div class="col-8">
-            <div class="pb-sm-4 ps-sm-4 pe-lg-4" style="margin-left: 10%">
-              <a href="#" style="text-decoration: none">
-                <div class="h3 my-card-title">숭례문(崇禮門)</div>
-              </a>
-              <table class="table">
-                <tr>
-                  <td class="fw-bold text-black" style="white-space: nowrap"><i class="far fa-address-book text-primary"></i>분류</td>
-                  <td>유적건조물 / 정치국방 / 성 / 성곽시설</td>
-                </tr>
-                <tr>
-                  <td class="fw-bold text-black" style="white-space: nowrap"><i class="fas fa-phone text-primary"></i>시대</td>
-                  <td>조선 태조 7년(1398)</td>
-                </tr>
-                <tr>
-                  <td class="fw-bold text-black" style="white-space: nowrap"><i class="far fa-calendar text-primary"></i>지정일</td>
-                  <td>1962-12-20</td>
-                </tr>
-                <tr>
-                  <td class="fw-bold text-black" style="white-space: nowrap; border-bottom: none"><i class="fas fa-calendar-day text-primary"></i>소재지</td>
-                  <td style="border-bottom: none">서울 중구 세종대로 40 (남대문로4가)</td>
-                </tr>
-              </table>
-              <div class="d-flex mt-1 ps-2">
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-half text-warning"></i>
-                <i class="ai-star text-warning"></i>
-                <span class="text-warning fw-bold mt-n1 ms-2">3.5</span>
-                <span class="text-muted mt-n1 ms-2">(1,234)</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Pagination-->
-        <div class="row">
-          <div class="col-12">
-            <div class="row gy-3 align-items-center mt-lg-5 pt-2 pt-md-3 pt-lg-0 mb-md-2 mb-xl-4">
-              <div class="order-md-3 order-2">
-                <nav aria-label="Page navigation">
-                  <ul class="pagination pagination-sm justify-content-center">
-                    <li class="page-item active" aria-current="page">
-                      <span class="page-link" style="font-size: 1.2rem">1<span class="visually-hidden">(current)</span></span>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#" style="font-size: 1.2rem">2</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#" style="font-size: 1.2rem">3</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#" style="font-size: 1.2rem">4</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#" style="font-size: 1.2rem">5</a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        </th:block>
+
+		<!-- Pagination-->
+			<div class="row">
+				<div class="col-12">
+					<div class="row gy-3 align-items-center mt-lg-5 pt-2 pt-md-3 pt-lg-0 mb-md-2 mb-xl-4" align="center">
+						<div class="order-md-3 order-2">
+							<nav aria-label="Page navigation">
+								<ul class="pagination pagination-sm justify-content-center">
+									<th:block th:if="${list != null && #lists.size(list) != 0}">
+										
+										<!--이전 페이지 -->
+										<li class="page-item">
+											<a class="page-link" style="cursor:pointer;"
+												th:onclick="|movePage(${pageInfo.prevPage});|">
+												<i class="ai-arrow-left fs-xl"></i>
+											</a>
+										</li>
+										
+										<!-- 5개 페이지 -->
+										<th:block
+											th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+											<th:block th:if="${status.current == pageInfo.currentPage}">
+												<li class="page-item active" aria-current="page"><span
+													class="visually-hidden">(current)</span>
+													<button class="page-link" style="font-size: 1.2rem"
+														disabled>[[${status.current}]]</button></li>
+											</th:block>
+											
+											<th:block th:if="${status.current != pageInfo.currentPage}">
+												<button class="page-link" style="font-size: 1.2rem"
+													th:onclick="|movePage(${status.current});|">
+													[[${status.current}]]</button>
+											</th:block>
+										</th:block>
+										
+										<!--다음 페이지 -->
+										<li class="page-item">
+										<a class="page-link" style="cursor:pointer;"
+											th:onclick="|movePage(${pageInfo.nextPage});|">
+											<i class="ai-arrow-right fs-xl"></i>
+										</a>
+										</li>
+									</th:block>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
     </main>
     
     <!-- Footer-->
     <footer th:replace="~{common/layout :: #footer}"></footer>
     
-    <!-- Back to top button--><a class="btn-scroll-top" href="#top" data-scroll>
+    <!-- Back to top button-->
+    <a class="btn-scroll-top" href="#top" data-scroll>
       <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle></svg
-      ><i class="ai-arrow-up"></i
-    ></a>
+        <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle></svg>
+      	<i class="ai-arrow-up"></i>
+   	</a>
     <!-- Vendor scripts: js libraries and plugins-->
     <script th:src="@{/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/assets/vendor/nouislider/dist/nouislider.min.js}"></script>
@@ -423,5 +298,47 @@
     <script th:src="@{/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js}"></script>
     <!-- Main theme script-->
     <script th:src="@{/assets/js/theme.min.js}"></script>
-  </body>
+    <script type="text/javascript">
+		function movePage(page){
+			searchForm.page.value = page;
+			searchForm.submit();
+		}
+	</script>
+
+	<!-- 북마크  -->
+	<script>
+		function addFavor(heriBookmark, hNo, mNo) {
+			var $heriBookmark = $(heriBookmark);
+			$.ajax({
+				type : "POST",
+				url : "/heritage/addHeriBookmark",
+				data : JSON.stringify({
+					hNo : hNo,
+					mNo : mNo
+				}),
+				dataType : "json",
+				contentType : "application/json;charset=UTF-8",
+				success : function(response) {
+					alert(response.message);
+
+					if (response.message === "즐겨찾기에 추가되었습니다.") {
+						$heriBookmark.attr("class", "ai-bookmark-filled fs-xl d-dark-mode-none");
+						$heriBookmark.css("color", " --ar-warning ");
+					}
+					if (response.message === "이미 즐겨찾기에 추가되어 있습니다. 삭제합니다.") {
+						$heriBookmark.attr("class", "ai-bookmark fs-xl");
+						$heriBookmark.css("color", "d-dark-mode-none");
+					}
+				},
+				error : function(xhr, status, error) {
+					console.log("에러 발생:", error);
+				}
+			});
+		}
+	</script>
+
+
+</body>
 </html>
+ 
+

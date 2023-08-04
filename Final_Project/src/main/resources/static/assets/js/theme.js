@@ -509,7 +509,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         },
         format: {
           to: function to(value) {
-            return '$' + parseInt(value, 10);
+            return '' + parseInt(value, 10);
           },
           from: function from(value) {
             return Number(value);

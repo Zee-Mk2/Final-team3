@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.multi.bbs.heritage.model.mapper.HeritageMapper">
+	
+	<resultMap type="Heritage" id="heritageresultMap">
+		<result property="hNo"  	  column="hNo" />
+		<result property="kind"  	  column="KIND" />
+		<result property="name"  	  column="NAME" />
+		<result property="name2" 	  column="NAME2" />
+		<result property="kindCode"   column="KINDCODE" />
+		<result property="cityCode"   column="CITYCODE" />
+		<result property="ccbaAsno"   column="CCBAASNO" />
+		<result property="lo"  		  column="LO" />
+		<result property="la"  		  column="LA" />
+		<result property="gcodeName"  column="GCODENAME" />
+		<result property="bcodeName"  column="BCODENAME" />
+		<result property="mcodeName"  column="MCODENAME" />
+		<result property="scodeName"  column="SCODENAME" />
+		<result property="asDate"     column="ASDATE" />
+		<result property="location"   column="LOCATION" />
+		<result property="era"  	  column="ERA" />
+		<result property="img"  	  column="IMG" />
+		<result property="content"    column="CONTENT" />
+	</resultMap> 
+	
+	<resultMap type="Reply" id="heritageReplyResultMap">
+		<id 	property="rNo"			column="rNo"/>
+		<result property="hNo" 			column="hNo"/>
+		<result property="mNo" 			column="mNo"/>
+		<result property="name" 		column="NAME"/>
+		<result property="content" 		column="CONTENT"/>
+		<result property="enroll_Date" 	column="ENROLL_DATE"/>
+	</resultMap>
+	
+	
+	<select id="selectHeritageList" parameterType="map" resultMap="heritageresultMap">
+		SELECT * 
+		FROM HERITAGE
+		WHERE 1 = 1
+ 			<if test="name != null">
+				AND NAME LIKE '%${name}%' 
+			</if>
+ 			<if test="address != null">
+				AND LOCATION LIKE '%${address}%' 
+			</if>
+			<if test="era != null">
+				AND ERA LIKE '%${era}%' 
+			</if>
+			<if test="type != null">
+				AND GCODENAME LIKE '%${type}%' 
+			</if> 
+		LIMIT ${limit} OFFSET ${offset}
+	</select>
+	
+	<select id="selectHeritageCount" resultType="int" parameterType="map">
+		SELECT  
+			COUNT(*)
+		FROM HERITAGE
+		WHERE 1 = 1
+			<if test="name != null">
+				AND NAME LIKE '%${name}%' 
+			</if>
+ 			<if test="address != null">
+				AND LOCATION LIKE '%${address}%' 
+			</if>
+			<if test="era != null">
+				AND ERA LIKE '%${era}%' 
+			</if>
+			<if test="type != null">
+				AND GCODENAME LIKE '%${type}%' 
+			</if> 
+	</select>
+	
+	<select id="selectHeritageByNo" parameterType="int" resultMap="heritageresultMap">
+		SELECT 
+			*
+		FROM HERITAGE
+		WHERE 1=1
+		AND hNo = #{hNo}
+	</select>
+	
+	<insert id="insertReply" parameterType="Reply">
+		INSERT INTO REPLY(
+			RNO, HNO, MNO,
+			NAME, CONTENT, ENROLL_DATE)
+			VALUES(
+				0, #{hNo}, #{mNo}, 
+				#{name}, #{content}, DEFAULT
+			)
+	</insert>
+	
+	<select id="getRepliesList" parameterType="int" resultType="com.multi.bbs.heritage.model.vo.Reply">
+		SELECT * FROM REPLY 
+		WHERE hNo = #{hNo}
+	</select>
+
+	<select id="selectHeriBookmarkCount" resultType="int" parameterType="map">
+		SELECT
+			COUNT(*) FROM HERIBOOKMARK
+		WHERE 1 = 1
+		AND mNo = #{mNo}
+		AND hNo = #{hNO}		
+	</select>
+
+	<insert id="insertHeriBookmark" parameterType="map">
+		INSERT INTO HERIBOOKMARK(mNo, hNo) values(#{mNo}, #{hNO})
+	</insert>
+
+	<delete id="deleteHeriBookmark" parameterType="map">
+		DELETE FROM HERIBOOKMARK
+		WHERE 1 = 1
+		AND mNo = #{mNo}
+		AND hNo = #{hNO}
+	</delete>
+
+	<select id="selectHeriBookmarkList" parameterType="int" resultType="com.multi.bbs.heritage.model.vo.HeriBookmark">
+		SELECT * FROM HERIBOOKMARK 
+		INNER JOIN MEMBER ON HERIBOOKMARK.mNo = Member.mNo
+		INNER JOIN HERITAGE ON HERIBOOKMARK.hNo = HERITAGE.hNo
+		WHERE Member.mNo = #{mNo}	
+	</select>
+	
+	<select id="selectHeritageByHNo" parameterType="java.util.List" resultType="com.multi.bbs.heritage.model.vo.Heritage">
+		 SELECT * FROM HERITAGE WHERE hNo IN
+	    <foreach collection="list" item="hNo" open="(" close=")" separator=",">
+	        #{hNo}
+	    </foreach>
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
