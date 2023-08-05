@@ -125,13 +125,13 @@ CREATE TABLE Tour (
 	tno 		INT PRIMARY KEY AUTO_INCREMENT,
     mno 		INT,
     name		VARCHAR(20),
-    state		VARCHAR(10),
+    state		VARCHAR(10) DEFAULT 'Y',
     title		VARCHAR(100),
     region		VARCHAR(100),
     numOfPeople	INT,
     startDate	DATETIME,
     endDate		DATETIME,
-    duration	DATETIME,
+    duration	INT DEFAULT (TIMESTAMPDIFF(DAY, startDate, endDate)),
     category	VARCHAR(20),
     content		VARCHAR(4000),
     fileName	VARCHAR(1000),
@@ -141,6 +141,56 @@ CREATE TABLE Tour (
 );
 
 SELECT * FROM Tour;
+
+DROP TABLE TourSchedule;
+CREATE TABLE TourSchedule (
+	tsno		INT PRIMARY KEY AUTO_INCREMENT,
+    tno			INT,
+    mno			INT,
+    name		VARCHAR(100),
+    la			DOUBLE,
+    lo			DOUBLE,
+    startTime	DATETIME,
+    endTime		DATETIME,
+    type		VARCHAR(10)
+);
+
+SELECT * FROM TourSchedule;
+
+DROP TABLE TourComment;
+CREATE TABLE TourComment (
+	cno			INT PRIMARY KEY AUTO_INCREMENT,
+	tno			INT,
+	mno			INT,
+	name		VARCHAR(20),
+	state		VARCHAR(1) DEFAULT 'Y',
+	content		VARCHAR(1000),
+	writeTime	DATETIME DEFAULT CURRENT_TIMESTAMP,
+	isModified	VARCHAR(1) DEFAULT 'N',
+    FOREIGN KEY (tno) REFERENCES Tour(tno) ON DELETE CASCADE,
+    FOREIGN KEY (mno) REFERENCES Member(mno) ON DELETE CASCADE
+);
+
+SELECT * FROM TourComment;
+
+DROP TABLE TourReplyComment;
+CREATE TABLE TourReplyComment (
+	rcno		INT PRIMARY KEY AUTO_INCREMENT,
+    cno			INT,
+	tno			INT,
+	mno			INT,
+	name		VARCHAR(20),
+	state		VARCHAR(1) DEFAULT 'Y',
+	content		VARCHAR(1000),
+	writeTime	DATETIME DEFAULT CURRENT_TIMESTAMP,
+	isModified	VARCHAR(1) DEFAULT 'N',
+    isReply		VARCHAR(1) DEFAULT 'Y',
+    FOREIGN KEY (cno) REFERENCES TourComment(cno) ON DELETE CASCADE,
+    FOREIGN KEY (tno) REFERENCES Tour(tno) ON DELETE CASCADE,
+    FOREIGN KEY (mno) REFERENCES Member(mno) ON DELETE CASCADE
+);
+
+SELECT * FROM TourReplyComment;
 
 ------------------------------------------------
 --------------- Event 관련 테이블 ------------------
