@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.multi.bbs.account.model.vo.Member;
 import com.multi.bbs.common.util.CalcTime;
+import com.multi.bbs.common.util.PageInfo;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -29,13 +30,31 @@ public class TourController {
 	@Autowired
 	TourService service;
 	
+	CalcTime calcTime = new CalcTime();
+	
 	@GetMapping("/tour")
 	public String tourPage(Model model, HttpSession session, @RequestParam Map<String, String> param) {
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		model.addAttribute("loginMember", loginMember);
 		model.addAttribute("param", param);
-		System.out.println("ReqParam>> " + param);
-		List<Tour> tours = service.getTourList();
+		String startDate = param.get("startDate");
+		if (startDate != null && startDate != "") {
+			String[] dateRange = startDate.split(" to ");
+			param.put("endDate", dateRange[1]);
+			param.put("startDate", dateRange[0]);
+		}
+		if (param.get("museum") == null && param.get("heritage") != null) {
+			param.put("category", "heritage");
+		} else if (param.get("museum") != null && param.get("heritage") == null) {
+			param.put("category", "museum");
+		}
+		int page = 1;
+		if (param.get("page") != null) {
+			page = Integer.parseInt(param.get("page"));
+		}
+		int boardCount = service.getBoardCount(param);
+		PageInfo pageInfo = new PageInfo(page, 5, boardCount, 10);
+		List<Tour> tours = service.getTourList(param, pageInfo);
 		for (Tour tour : tours) {
 			tour.setStartDate(tour.getStartDate().split(" ")[0]);
 			tour.setEndDate(tour.getEndDate().split(" ")[0]);
@@ -45,15 +64,45 @@ public class TourController {
 			} else {
 				tour.setCategory("문화재");
 			}
-			CalcTime calcTime = new CalcTime();
 			tour.setTimeDiff(calcTime.getTimeDiff(tour.getWriteTime()));
 		}
+		for (Tour tour : tours) {
+			System.out.println(tour.toString());
+		}
 		model.addAttribute("tours", tours);
+		model.addAttribute("pageInfo", pageInfo);
 		return "tour/tour";
 	}
 	
 	@GetMapping("/tour/detail")
-	public String tourDetailPage() {
+	public String tourDetailPage(Model model, HttpSession session, int tno) {
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		model.addAttribute("loginMember", loginMember);
+		Tour tour = service.getTourByTno(tno);
+		if (tour.getState().equals("N")) {
+			model.addAttribute("msg", "이미 삭제된 투어입니다.");
+			model.addAttribute("location", "/tour");
+			return "common/msg";
+		}
+		List<TourSchedule> schedules = service.getSchedulsByTno(tno);
+		CalcTime calcTime = new CalcTime();
+		tour.setTimeDiff(calcTime.getTimeDiff(tour.getWriteTime()));
+		tour.setStartDate(tour.getStartDate().split(" ")[0]);
+		tour.setEndDate(tour.getEndDate().split(" ")[0]);
+		List<TourComment> comments = service.getComments(tno);
+		for (TourComment comment : comments) {
+			comment.setTimeDiff(calcTime.getTimeDiff(comment.getWriteTime()));
+		}
+		List<TourReplyComment> replies = service.getReply(tno);
+		for (TourReplyComment reply : replies) {
+			reply.setTimeDiff(calcTime.getTimeDiff(reply.getWriteTime()));
+		}
+		System.out.println(replies);
+		model.addAttribute("replies", replies);
+		model.addAttribute("comments", comments);
+		model.addAttribute("tour", tour);
+		model.addAttribute("schedules", schedules);
+		
 		return "tour/tour-detail";
 	}
 	
@@ -103,7 +152,7 @@ public class TourController {
 			service.insertTourSchedule(tourSchedule);
 		}
 		
-		return "tour/tour";
+		return "redirect:/tour";
 	}
 	
 	@GetMapping("/tour/reqList")
@@ -120,5 +169,96 @@ public class TourController {
 			return list;
 		}
 		return null;
+	}
+	
+	@PostMapping("/tour/comment")
+	public String postComment(String content, String tno, HttpSession session, Model model, String update) {
+		System.out.println("Tour Comment 작성 요청");
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		if (loginMember == null) {
+			model.addAttribute("msg", "잘못된 접근입니다.");
+			model.addAttribute("location", "/tour/detail?tno=" + tno);
+			return "common/msg";
+		}
+		TourComment comment = new TourComment();
+		comment.setContent(content);
+		comment.setTno(Integer.valueOf(tno));
+		comment.setMno(loginMember.getMno());
+		comment.setName(loginMember.getName());
+		int result = service.writeComment(comment, update);
+		if (result < 1) {
+			model.addAttribute("msg", "댓글 작성에 실패했습니다.");
+			model.addAttribute("location", "/tour/detail?tno=" + tno);
+			return "common/msg";
+		}
+		
+		return "redirect:/tour/detail?tno=" + tno;
+	}
+	
+	@GetMapping("/tour/comment/delete")
+	public String deleteComment(Model model, int cno, int tno) {
+		int result = service.deleteComment(cno);
+		String url = "/tour/detail?tno=" + tno;
+		if (result < 1) {
+			model.addAttribute("msg", "댓글 삭제에 실패했습니다.");
+			model.addAttribute("location", url);
+		} else {
+			model.addAttribute("msg", "댓글이 삭제되었습니다.");
+			model.addAttribute("location", url);
+		}
+		return "common/msg";
+	}
+	
+	@GetMapping("/tour/comment/deleteReply")
+	public String deleteReply(Model model, int rcno, int tno) {
+		String url = "/tour/detail?tno=" + tno;
+		int result = service.deleteReply(rcno);
+		if (result < 1) {
+			model.addAttribute("msg", "댓글 삭제에 실패했습니다.");
+			model.addAttribute("location", url);
+		} else {
+			model.addAttribute("msg", "댓글이 삭제되었습니다.");
+			model.addAttribute("location", url);
+		}
+		return "common/msg";
+	}
+	
+	@GetMapping("/tour/complete")
+	public String completeTour(Model model, int tno, String complete) {
+		String url = "/tour/detail?tno=" + tno;
+		int result = service.completeTour(tno, complete);
+		
+		if (complete.equals("false")) {
+			if (result < 1) {
+				model.addAttribute("msg", "모집 마감 요청 처리에 실패했습니다.");
+				model.addAttribute("location", url);
+			} else {
+				model.addAttribute("msg", "투어 모집이 마감되었습니다.");
+				model.addAttribute("location", url);
+			}
+		} else {
+			if (result < 1) {
+				model.addAttribute("msg", "모집 요청 처리에 실패했습니다.");
+				model.addAttribute("location", url);
+			} else {
+				model.addAttribute("msg", "투어 모집이 시작되었습니다.");
+				model.addAttribute("location", url);
+			}
+		}
+		return "common/msg";
+	}
+	
+	@GetMapping("/tour/delete")
+	public String deleteTour(Model model, int tno) {
+		String url = "/tour";
+		int result = service.deleteTour(tno);
+		if (result < 1) {
+			model.addAttribute("msg", "투어 삭제에 실패했습니다.");
+			model.addAttribute("location", url);
+		} else {
+			model.addAttribute("msg", "투어 모집이 삭제되었습니다.");
+			model.addAttribute("location", url);
+		}
+		return "common/msg";
 	}
 }

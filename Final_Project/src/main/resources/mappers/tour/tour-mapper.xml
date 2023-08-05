@@ -23,9 +23,98 @@
 			VALUES (DEFAULT, #{tno}, #{mno}, #{name}, #{la}, #{lo}, #{startTime}, #{endTime}, #{type})
 	</insert>
 	
-	<select id="getTourList" resultType="com.multi.bbs.tour.Tour">
-		SELECT tno, title, region, startDate, endDate, duration, numOfPeople, writeTime, reFileName, category
+	<select id="searchTourList" parameterType="Map" resultType="com.multi.bbs.tour.Tour">
+		SELECT tno, title, region, startDate, endDate, duration, numOfPeople, writeTime, reFileName, category, state
 			FROM Tour
-			ORDER BY writeTime DESC
+			WHERE (state = 'Y' OR state = 'C')
+			<if test="keyword != ''">
+				AND title LIKE '%${keyword}%'
+			</if>
+			<if test="startDate != ''">
+				AND startDate >= #{startDate}
+				AND endDate &lt;= #{endDate}
+			</if>
+			<if test="region != ''">
+				AND region = #{region}
+			</if>
+			<if test="category != null">
+				AND category = #{category}
+			</if>
+			ORDER BY writeTime DESC LIMIT ${limit} OFFSET ${offset}
 	</select>
+	
+	<select id="tourList" resultType="com.multi.bbs.tour.Tour">
+		SELECT tno, title, region, startDate, endDate, duration, numOfPeople, writeTime, reFileName, category, state FROM Tour
+			WHERE (state = 'Y' OR state = 'C')
+			ORDER BY writeTime DESC LIMIT ${limit} OFFSET ${offset}
+	</select>
+	
+	<select id="getBoardCount" parameterType="Map" resultType="int">
+		SELECT COUNT(tno)
+			FROM Tour
+			WHERE (state = 'Y' OR state = 'C')
+			<if test="keyword != ''">
+				AND title LIKE '%${keyword}%'
+			</if>
+			<if test="startDate != ''">
+				AND startDate >= #{startDate}
+				AND endDate &lt;= #{endDate}
+			</if>
+			<if test="region != ''">
+				AND region = #{region}
+			</if>
+			<if test="category != null">
+				AND category = #{category}
+			</if>
+	</select>
+	
+	<select id="allBoardCount" parameterType="Map" resultType="int">
+		SELECT COUNT(tno) FROM Tour
+	</select>
+	
+	<select id="getTourByTno" parameterType="int" resultType="com.multi.bbs.tour.Tour">
+		SELECT * FROM Tour WHERE tno = #{tno}
+	</select>
+	
+	<select id="getSchedulsByTno" parameterType="int" resultType="com.multi.bbs.tour.TourSchedule">
+		SELECT * FROM TourSchedule WHERE tno = #{tno}
+	</select>
+	
+	<insert id="insertComment" parameterType="com.multi.bbs.tour.TourComment">
+		INSERT INTO TourComment(cno, tno, mno, name, state, content, writeTime, isModified)
+			VALUES (DEFAULT, #{tno}, #{mno}, #{name}, DEFAULT, #{content}, DEFAULT, DEFAULT)
+	</insert>
+	
+	<select id="getComments" parameterType="int" resultType="com.multi.bbs.tour.TourComment">
+		SELECT * FROM TourComment WHERE state = 'Y' AND tno = #{tno}
+	</select>
+	
+	<update id="deleteComment" parameterType="int">
+		UPDATE TourComment SET state = 'N' WHERE cno = #{cno}
+	</update>
+	
+	<insert id="insertReplyComment" parameterType="com.multi.bbs.tour.TourComment">
+		INSERT INTO TourReplyComment(rcno, cno, tno, mno, name, state, content, writeTime, isModified, isReply)
+			VALUES (DEFAULT, #{cno}, #{tno}, #{mno}, #{name}, DEFAULT, #{content}, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	<select id="getReply" parameterType="int" resultType="com.multi.bbs.tour.TourReplyComment">
+		SELECT * FROM TourReplyComment WHERE state = 'Y' AND tno = #{tno}
+	</select>
+	
+	<update id="deleteReply" parameterType="int">
+		UPDATE TourReplyComment SET state = 'N' WHERE rcno = #{rcno}
+	</update>
+	
+	<update id="completeTour" parameterType="int">
+		UPDATE Tour SET state = 'C' WHERE tno = #{tno}
+	</update>
+	
+	<update id="recruitTour" parameterType="int">
+		UPDATE Tour SET state = 'Y' WHERE tno = #{tno}
+	</update>
+	
+	<update id="deleteTour" parameterType="int">
+		UPDATE Tour SET state = 'N' WHERE tno = #{tno}
+	</update>
 </mapper>

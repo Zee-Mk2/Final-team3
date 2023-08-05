@@ -51,130 +51,121 @@
         <!-- Breadcrumb-->
         <nav aria-label="breadcrumb">
           <ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">홈</a></li>
-            <li class="breadcrumb-item"><a href="tour.html">투어</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/}">홈</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/tour}">투어</a></li>
             <li class="breadcrumb-item active" aria-current="page">투어플랜 만들기</li>
           </ol>
         </nav>
         <div class="row mb-md-2 mb-xl-4">
           <!-- Post title + post meta-->
           <h1 class="pb-2 pb-lg-3">
-            같이 경주 둘러보실 분
-            <span class="badge bg-primary fs-sm ms-1">문화재</span>
+            [[${tour.title}]]
+            <span class="badge bg-primary fs-sm ms-1" th:if="${tour.category == 'heritage'}">문화재</span>
+            <span class="badge bg-secondary fs-sm ms-1" th:if="${tour.category == 'museum'}">박물관</span>
+            <span class="badge bg-success fs-sm ms-1" th:if="${tour.state == 'C'}">마감됨</span>
           </h1>
           <div class="d-flex flex-wrap align-items-center justify-content-between border-bottom mb-4">
             <div class="d-flex align-items-center mb-4 me-4">
               <img th:src="@{/assets/img/avatar/01.jpg}" class="rounded-circle" style="height: 50px" />
-              <span class="fw-bold ms-3">투어 마니아</span>
+              <span class="fw-bold ms-3">[[${tour.name}]]</span>
+              <span class="text-muted mx-3">|</span>
+              <span class="text-muted">[[${tour.timeDiff}]]</span>
             </div>
           </div>
           <!-- Post content-->
           <h2 class="h4">지역</h2>
-          <p class="fs-lg mb-5">대구/경북</p>
+          <p class="fs-lg mb-5">[[${tour.region}]]</p>
           <h2 class="h4">일정</h2>
-          <p class="fs-lg mb-5">07-01 ~ 07-02 | 1박 2일</p>
+          <p class="fs-lg mb-5">[[${tour.startDate}]] ~ [[${tour.endDate}]] | [[${tour.duration}]]박 [[${tour.duration + 1}]]일</p>
           <h2 class="h4">모집인원</h2>
-          <p class="fs-lg mb-5">2명</p>
-          <p class="fs-lg mb-5">경주에 관심 있는 분들과 함께 둘러보고 싶어요!</p>
+          <p class="fs-lg mb-5">[[${tour.numOfPeople}]]명</p>
+          <p class="fs-lg mb-5">[[${tour.content}]]</p>
           <div class="rounded-1" id="map" style="width: 100%; height: 600px"></div>
           <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b405a10ab3aef9b7d1801f29c81327a2"></script>
           <div id="calendar" class="mt-4"></div>
-          <div class="row mt-4">
-            <div class="col-6">
-              <a href="#" class="btn btn-success me-2">마감</a>
-              <a href="#" class="btn btn-warning">수정</a>
-            </div>
-            <div class="col-6 text-end">
-              <a href="#" class="btn btn-danger">삭제</a>
-            </div>
-          </div>
+          <th:block th:if="${loginMember != null}">
+	          <div class="row mt-4" th:if="${loginMember.mno == tour.mno}">
+	            <div class="col-6">
+	              <a th:href="@{/tour/complete(tno=${tour.tno}, complete='true')}" class="btn btn-success me-2" th:if="${tour.state == 'C'}">모집</a>
+	              <a th:href="@{/tour/complete(tno=${tour.tno}, complete='false')}" class="btn btn-success me-2" th:if="${tour.state == 'Y'}">마감</a>
+	              <a href="#" class="btn btn-warning">수정</a>
+	            </div>
+	            <div class="col-6 text-end">
+	              <a th:href="@{/tour/delete(tno=${tour.tno})}" class="btn btn-danger">삭제</a>
+	            </div>
+	          </div>
+          </th:block>
           <!-- Comments-->
           <div class="mt-5" id="comments">
             <h2 class="h1 py-lg-1 py-xl-3">댓글</h2>
             <hr />
             <!-- Comment-->
-            <div class="border-bottom py-4 mt-2 mb-4">
+            <div class="border-bottom py-4 mt-2 mb-4" th:each="comment: ${comments}">
               <div class="d-flex align-items-center pb-1 mb-3">
                 <img class="rounded-circle" th:src="@{/assets/img/avatar/08.jpg}" width="48" alt="Comment author" />
                 <div class="ps-3">
-                  <h6 class="mb-0">Albert Flores</h6>
-                  <span class="fs-sm text-muted">5 hours ago</span>
+                  <h6 class="mb-0">[[${comment.name}]]</h6>
+                  <span class="fs-sm text-muted">[[${comment.timeDiff}]]</span>
                 </div>
+                <th:block th:if="${loginMember != null}">
+                  <th:block th:if="${loginMember.mno == comment.mno}">
+	              	<a th:href="@{/tour/comment/delete(tno=${tour.tno}, cno=${comment.cno})}" class="btn btn-danger px-3 py-1 rounded-1 mt-0" style="margin-left: auto;">삭제</a>
+                  </th:block>
+                </th:block>
               </div>
               <p class="pb-2 mb-0">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tellus lectus, tempus eu urna eu, imperdiet dignissim augue. Aliquam fermentum est a ligula bibendum, ac gravida ipsum
-                dictum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur suscipit quam ut velit condimentum, nec mollis risus semper. Curabitur
-                quis mauris eget ligula tincidunt venenatis. Sed congue pulvinar hendrerit.
+                [[${comment.content}]]
               </p>
-              <button class="nav-link fs-sm fw-semibold px-0 py-2" type="button">
-                Reply
-                <i class="ai-redo fs-xl ms-2"></i>
-              </button>
-            </div>
-            <!-- Comment-->
-            <div class="border-bottom pt-2 pb-4">
-              <div class="d-flex align-items-center pb-1 mb-3">
-                <img class="rounded-circle" th:src="@{/assets/img/avatar/11.jpg}" width="48" alt="Comment author" />
-                <div class="ps-3">
-                  <h6 class="mb-0">Jenny Wilson</h6>
-                  <span class="fs-sm text-muted">2 days ago at 9:20</span>
-                </div>
-              </div>
-              <p class="pb-2 mb-0">
-                Pellentesque urna pharetra, quis maecenas. Sit dolor amet nulla aenean eu, ac. Nisl mi tempus, iaculis viverra vestibulum scelerisque imperdiet montes mauris massa elit pretium
-                elementum eget tortor quis
-              </p>
-              <button class="nav-link fs-sm fw-semibold px-0 py-2" type="button">
-                Reply
-                <i class="ai-redo fs-xl ms-2"></i>
-              </button>
-              <!-- Comment reply-->
-              <div class="card card-body border-0 bg-secondary mt-4">
-                <div class="d-flex align-items-center pb-1 mb-3">
-                  <img class="rounded-circle" th:src="@{/assets/img/avatar/10.jpg}" width="48" alt="Comment author" />
-                  <div class="ps-3">
-                    <h6 class="mb-0">Ralph Edwards</h6>
-                    <span class="fs-sm text-muted">2 days ago at 11:45</span>
-                  </div>
-                </div>
-                <p class="mb-0">
-                  <a class="fw-bold text-decoration-none" href="#">@Jenny Wilson</a>
-                  Massa morbi duis et ornare urna dictum vestibulum pulvinar nunc facilisis ornare id at at ut arcu integer tristique placerat non turpis nibh turpis ullamcorper est porttitor.
-                </p>
-              </div>
-            </div>
-            <!-- Comment-->
-            <div class="border-bottom py-4 mt-2 mb-4">
-              <div class="d-flex align-items-center pb-1 mb-3">
-                <img class="rounded-circle" th:src="@{/assets/img/avatar/07.jpg}" width="48" alt="Comment author" />
-                <div class="ps-3">
-                  <h6 class="mb-0">Esther Howard</h6>
-                  <span class="fs-sm text-muted">May 19, 2022</span>
-                </div>
-              </div>
-              <p class="pb-2 mb-0">
-                Donec et sollicitudin tellus. Duis maximus, dui eget egestas mattis, purus ex tempor nulla, quis tempor sapien neque at nisl. Aliquam eu nisi ut nisl ultrices posuere. Praesent
-                dignissim efficitur nisi, a hendrerit ipsum elementum sit amet. Vivamus non ante nisl. Nunc faucibus velit at eros mollis semper.
-              </p>
-              <button class="nav-link fs-sm fw-semibold px-0 py-2" type="button">
-                Reply
-                <i class="ai-redo fs-xl ms-2"></i>
-              </button>
-            </div>
-            <!-- All comments button-->
-            <div class="text-end pb-5 mb-lg-1 mb-xl-3">
-              <a class="btn btn-link px-0" href="#">
-                모든 댓글 확인
-                <i class="ai-chevron-right fs-lg ms-1"></i>
-              </a>
+              <div class="accordion-item" th:if="${loginMember != null}">
+			    <h3 class="accordion-header" th:id="${'heading' + comment.cno}">
+	              <button class="nav-link fs-sm fw-semibold px-0 py-2 accordion-button" type="button" data-bs-toggle="collapse" th:data-bs-target="${'#collapse' + comment.cno}" aria-expanded="true" aria-controls="collapseOne">
+	                대댓글
+	                <i class="ai-redo fs-xl ms-2"></i>
+	              </button>
+			    </h3>
+			    <div class="accordion-collapse collapse" th:id="${'collapse' + comment.cno}" th:aria-labelledby="${'heading' + comment.cno}" data-bs-parent="#accordionDefault">
+			      <div class="accordion-body fs-sm">
+                    <form class="row needs-validation g-4" method="post" th:action="@{/tour/comment(update=${comment.cno})}">
+	                  <input type="hidden" name="tno" th:value="${tour.tno}">
+	                  <div class="col-12">
+	                    <textarea class="form-control bg-white" rows="4" placeholder="댓글을 통해 투어 동행을 신청해 보세요." required id="c-comment" name="content"></textarea>
+	                  </div>
+	                  <div class="col-12">
+	                    <button class="btn btn-warning" type="submit">등록하기</button>
+	                  </div>
+	                </form>
+			      </div>
+			    </div>
+			  </div>
+			    <th:block th:each="reply: ${replies}">
+	              <!-- Comment reply-->
+	              <div class="card card-body border-0 bg-secondary mt-4" th:if="${comment.cno == reply.cno}">
+	                <div class="d-flex align-items-center pb-1 mb-3">
+	                  <img class="rounded-circle" th:src="@{/assets/img/avatar/10.jpg}" width="48" alt="Comment author" />
+	                  <div class="ps-3">
+	                    <h6 class="mb-0">[[${reply.name}]]</h6>
+	                    <span class="fs-sm text-muted">[[${reply.timeDiff}]]</span>
+	                  </div>
+		              <th:block th:if="${loginMember != null}">
+		                <th:block th:if="${loginMember.mno == reply.mno}">
+			              <a th:href="@{/tour/comment/deleteReply(tno=${tour.tno}, rcno=${reply.rcno})}" class="btn btn-danger px-3 py-1 rounded-1 mt-0" style="margin-left: auto;">삭제</a>
+		                </th:block>
+		              </th:block>
+	                </div>
+	                <p class="mb-0">
+	                  [[${reply.content}]]
+	                </p>
+	              </div>
+			    </th:block>
             </div>
             <!-- Comment form-->
-            <div class="card border-0 bg-secondary pt-2 p-md-2 p-xl-3 p-xxl-4 mt-n3 mt-md-0">
+            <div class="card border-0 bg-secondary pt-2 p-md-2 p-xl-3 p-xxl-4 mt-n3 mt-md-0" th:if="${loginMember != null}">
               <div class="card-body">
                 <h2 class="pb-2 pb-lg-3 pb-xl-4">댓글 작성</h2>
-                <form class="row needs-validation g-4" novalidate>
+                <form class="row needs-validation g-4" method="post" th:action="@{/tour/comment}">
+                  <input type="hidden" name="tno" th:value="${tour.tno}">
                   <div class="col-12">
-                    <textarea class="form-control bg-white" rows="4" placeholder="댓글을 통해 투어 동행을 신청해 보세요." required id="c-comment"></textarea>
+                    <textarea class="form-control bg-white" rows="4" placeholder="댓글을 통해 투어 동행을 신청해 보세요." required id="c-comment" name="content"></textarea>
                   </div>
                   <div class="col-12">
                     <button class="btn btn-warning" type="submit">등록하기</button>
@@ -205,28 +196,13 @@
     <!-- Main theme script-->
     <script th:src="@{/assets/js/theme.js}"></script>
 
-    <script>
-      var tourSchedules = [
-        {
-          name: "첨성대",
-          la: 35.835116,
-          lo: 129.219503,
-          startTime: new Date("2023-07-26T12:00"),
-          endTime: new Date("2023-07-26T13:00"),
-        },
-        {
-          name: "첨성대2",
-          la: 36.835116,
-          lo: 128.219503,
-          startTime: new Date("2023-07-26T13:00"),
-          endTime: new Date("2023-07-26T14:00"),
-        },
-      ];
+    <script th:inline="javascript">
+      var tourSchedules = [[${schedules}]];
 
       var mapContainer = document.getElementById("map"); // 지도를 표시할 div
       var mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 10, // 지도의 확대 레벨
+        level: 8, // 지도의 확대 레벨
       };
       // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
       var map = new kakao.maps.Map(mapContainer, mapOption);
