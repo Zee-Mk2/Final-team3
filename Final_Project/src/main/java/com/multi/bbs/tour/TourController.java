@@ -97,7 +97,6 @@ public class TourController {
 		for (TourReplyComment reply : replies) {
 			reply.setTimeDiff(calcTime.getTimeDiff(reply.getWriteTime()));
 		}
-		System.out.println(replies);
 		model.addAttribute("replies", replies);
 		model.addAttribute("comments", comments);
 		model.addAttribute("tour", tour);
