@@ -1,6 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 
   <!-- Vendor styles-->
     <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/nouislider/dist/nouislider.min.css}" />
@@ -54,13 +57,13 @@
         <nav aria-label="breadcrumb">
           <ol class="pb-md-1 pb-lg-3 breadcrumb">
             <li class="breadcrumb-item"><a href="#">커뮤니티</a></li>
-            <li class="breadcrumb-item active" aria-current="page">자유게시판</li>
+            <li class="breadcrumb-item active" aria-current="page">문화소식</li>
           </ol>
         </nav>
         <!-- Page title-->
         <div class="row mt-n1">
           <div class="col-lg-9 offset-lg-3">
-            <h2 style="color: #E8AE50;">자유게시판</h2>
+            <h2 style="color: #E8AE50;">문화소식</h2>
             <div style="text-align: right;">
               <a href="curltureboard_write.html"><button type="button" class="btn text-white"
                 style="background-color: #E8AE50;">글 작성하기</button>
@@ -87,7 +90,7 @@
 
           <div class="col-lg-9">
             <div class="row mt-5">
-              <table class="table">
+              <table class="table" id="table-board">
                 <tbody>
                   <tr>
                     <div>
@@ -103,6 +106,53 @@
                     </div>
                   </tr>
 
+
+				  <c:if test="${empty list}">
+				  	<tr>
+				  		<td>조회된 글이 없습니다.</td>
+				  	</tr>
+				  </c:if>
+				  
+				  <c:if test="${not empty list}">
+				  	<c:forEach var="item" items=${list}"/>
+				  	<tr>
+                    	<div>
+                      	<div class="row">
+                        	<td><c:out value="${item.bno}"</td>
+                        	<td><a class="nav-link fw-normal" href="${path}/board/view?/no=${item.bno}">
+                        			<c:out value="${item.title}"/>
+                        		</a>
+                        	</td>
+                      	</div>
+                      	<div class="row">
+                        	<td>관리자</td>
+                        	<td><fmt:formatDate type="date" value="${item.createDate}"/></td>
+                        	<td><c:out value="${item.readCount}"</td>
+                      	</div>
+                    	</div>
+                  	</tr>
+                  		</c:forEach>
+				  </c:if>	
+
+
+				  <tr>
+                    <div>
+                      <div class="row">
+                        <td>1</td>
+                        <td><a class="nav-link fw-normal" href="#">2023년 하반기 뮷즈 공모 안</a></td>
+                      </div>
+                      <div class="row">
+                        <td>관리자</td>
+                        <td>2023-06-13</td>
+                        <td>1764</td>
+                      </div>
+                    </div>
+                  </tr>
+				  
+				  
+				  
+				  
+				  
                   <tr>
                     <div>
                       <div class="row">
@@ -242,7 +292,7 @@
                       </div>
                     </div>
                   </tr>
-                </tbody>
+                </tbody> -->
               </table>
 
               <div class="col col-md-4 col-12 order-md-2 order-3 text-center"></div>

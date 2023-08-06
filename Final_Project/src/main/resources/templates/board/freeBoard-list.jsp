@@ -1,6 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 
   <!-- Vendor styles-->
     <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/nouislider/dist/nouislider.min.css}" />
@@ -54,13 +57,13 @@
         <nav aria-label="breadcrumb">
           <ol class="pb-md-1 pb-lg-3 breadcrumb">
             <li class="breadcrumb-item"><a href="#">커뮤니티</a></li>
-            <li class="breadcrumb-item active" aria-current="page">문화소식</li>
+            <li class="breadcrumb-item active" aria-current="page">자유게시판</li>
           </ol>
         </nav>
         <!-- Page title-->
         <div class="row mt-n1">
           <div class="col-lg-9 offset-lg-3">
-            <h2 style="color: #E8AE50;">문화소식</h2>
+            <h2 style="color: #E8AE50;">자유게시판</h2>
             <div style="text-align: right;">
               <a href="curltureboard_write.html"><button type="button" class="btn text-white"
                 style="background-color: #E8AE50;">글 작성하기</button>

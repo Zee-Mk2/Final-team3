@@ -1,6 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+tn<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 	
   <!-- Vendor styles-->
     <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/flatpickr/dist/flatpickr.min.css}"/>
@@ -87,37 +90,51 @@
                   <h3>국립중앙박물관 후기</h3>
                 </div>
                 <table class="table">
+                 
                   <tr>
                     <div class="row">
+                    
                     </div>
                     <div class="row">
                       <td><P style="color: #E8AE50;">작성자</P></td>
-                      <td>홍길동</td>
+                      <td><c:out vlaue=${board.name}"</td>
                       <td></td>
                       <td></td>
                       <td><p style="color: #E8AE50;">조회수</p></td>
-                      <td>35</td>
+                      <td><c:out value="${board.views}"</td>
                       <td></td>
                       <td></td>
                       <td><p style="color: #E8AE50;">등록일</p></td>
-                      <td>23-08-02</td>
+                      <td><fmt:formatDate type="both" vlaue="${board.writeTime}"/></td>
                       <td></td>
                       <td></td>
                     </div>    
                   </tr>
                   </table>
+                  
                 <div class="mb-lg-5">
                   <a>첨부파일&nbsp&nbsp&nbsp&nbsp</a>
-                  <a href="#" download="#">박물관 사진.jpg</a>
+                  <c:if test="${not empty board.fileName}">
+					<a href="javascript:fileDownload('${board.fileName}',
+																'${board.reFileName}');">
+						<c:out value="${board.reFileName}"></c:out>		
+					</a>
+				</c:if>
+				
+				<c:if test="${empty board.fileName}">
+					<span> - </span>
                 </div>
+                
                 <div>
-                  <p>Pellentesque urna pharetra, quis maecenas. Sit dolor amet nulla aenean eu, ac. Nisl mi tempus, iaculis viverra vestibulum scelerisque imperdiet montes mauris massa elit pretium elementum eget tortor quis
+                  <p> <c:out value="${board.content}"/>   
+                   <!-- Pellentesque urna pharetra, quis maecenas. Sit dolor amet nulla aenean eu, ac. Nisl mi tempus, iaculis viverra vestibulum scelerisque imperdiet montes mauris massa elit pretium elementum eget tortor quis
                     Pellentesque urna pharetra, quis maecenas. Sit dolor amet nulla aenean eu, ac. Nisl mi tempus, iaculis viverra vestibulum scelerisque imperdiet montes mauris massa elit pretium elementum eget tortor quis
                     Pellentesque urna pharetra, quis maecenas. Sit dolor amet nulla aenean eu, ac. Nisl mi tempus, iaculis viverra vestibulum scelerisque imperdiet montes mauris massa elit pretium elementum eget tortor quis
                     Pellentesque urna pharetra, quis maecenas. Sit dolor amet nulla aenean eu, ac. Nisl mi tempus, iaculis viverra vestibulum scelerisque imperdiet montes mauris massa elit pretium elementum eget tortor quis
                     Pellentesque urna pharetra, quis maecenas. Sit dolor amet nulla aenean eu, ac. Nisl mi tempus, iaculis viverra vestibulum scelerisque imperdiet montes mauris massa elit pretium elementum eget tortor quis
                     Pellentesque urna pharetra, quis maecenas. Sit dolor amet nulla aenean eu, ac. Nisl mi tempus, iaculis viverra vestibulum scelerisque imperdiet montes mauris massa elit pretium elementum eget tortor quis
-                    Pellentesque urna pharetra, quis maecenas. Sit dolor amet nulla aenean eu, ac. Nisl mi tempus, iaculis viverra vestibulum scelerisque imperdiet montes mauris massa elit pretium elementum eget tortor quis
+                    Pellentesque urna pharetra, quis maecenas. Sit dolor amet nulla aenean eu, ac. Nisl mi tempus, iaculis viverra vestibulum scelerisque imperdiet montes mauris massa elit pretium elementum eget tortor quis//
+                    --> 
                   </p>
                 </div>
               </div>
@@ -145,7 +162,7 @@
                 </div>
               </div>
               <!--댓글-->
-              <div class="container mt-4">
+              <div id="comment-container class="container mt-4">
                 <!--comments-->
                 <div class="border-bottom pb-4">
                   <div class="d-flex align-items-center pb-1 mb-3">
@@ -177,7 +194,7 @@
                   <div class="card border-0 bg-secondary">
                     <div class="card-body">
                       <h4 class="pb-2">댓글 남기기</h4>
-                      <form class="row needs-validation g-4" novalidate>
+                      <form class="row needs-validation g-4" novalidate action="${path}/templates.board.reply>
                         <div class="col-12">
                           <textarea class="form-control" rows="1" placeholder="댓글을 입력하세요." required id="c-comment"></textarea>
                         </div>
@@ -185,6 +202,24 @@
                           <button class="btn btn-primary" type="submit">등록하기</button>
                         </div>
                       </form>
+                      	<c:if test="${!empty replyList}">
+							<c:forEach var="reply" items="${replyList}">
+								<tr>
+									<td>
+										<sub class="comment-writer">${reply.id}</sub>
+										<sub class="comment-date"><fmt:formatDate type="both" value="${reply.createDate}"/></sub>	
+										<br>
+											<c:out value="${reply.content}"/>
+										</td>
+									<td>
+										<c:if test="${ !empty loginMember && (loginMember.id == reply.id 	|| loginMember.role == 'ROLE_ADMIN') }">
+										<button class="btn-delete" onclick="deleteReply('${reply.RNo}','${board.bno}');" >삭제</button>
+										</c:if>
+									</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+		
                     </div>
                   </div>
                 </div>
