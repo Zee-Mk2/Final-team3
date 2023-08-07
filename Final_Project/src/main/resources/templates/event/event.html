@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 	<!-- Vendor styles-->
-    <link rel="stylesheet" media="screen" href="assets/vendor/swiper/swiper-bundle.min.css" />
-    <link rel="stylesheet" media="screen" href="assets/vendor/aos/dist/aos.css" />
-    <link rel="stylesheet" media="screen" href="assets/vendor/lightgallery/css/lightgallery-bundle.min.css" />
+    <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}" />
+    <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/aos/dist/aos.css}" />
+    <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/lightgallery/css/lightgallery-bundle.min.css}" />
     <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
 
   <!-- Body-->
@@ -20,73 +20,8 @@
     <!-- Page wrapper-->
     <main class="page-wrapper">
       <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
-      <header class="navbar navbar-expand-lg fixed-top bg-light py-0 fs-5">
-        <div class="container">
-          <a class="navbar-brand p-2 swap-image" href="index.html">
-            <img src="assets/img/logo_crimson.png" class="swap-to" width="50" />
-            <div class="swap-from">
-              <img src="assets/img/logo_black.png" class="d-dark-mode-none" width="50" />
-              <img src="assets/img/logo_dark_gray.png" class="d-none d-dark-mode-block" width="50" />
-            </div>
-          </a>
-          <div class="form-check form-switch mode-switch order-lg-2 me-3 me-lg-4 ms-auto" data-bs-toggle="mode">
-            <input class="form-check-input" type="checkbox" id="theme-mode" />
-            <label class="form-check-label" for="theme-mode"><i class="ai-sun fs-lg"></i></label>
-            <label class="form-check-label" for="theme-mode"><i class="ai-moon fs-lg"></i></label>
-          </div>
-          <div class="nav align-items-center order-lg-3 ms-n1 me-3 me-sm-0">
-            <a class="nav-link position-relative fs-4 p-2" href="#cartOffcanvas" data-bs-toggle="offcanvas">
-              <i class="ai-cart"></i>
-            </a>
-            <a class="nav-link fs-4 p-2 mx-sm-1 d-none d-sm-flex" href="account-signin.html">
-              <i class="ai-user"></i>
-            </a>
-          </div>
-          <button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
-          <nav class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px">
-              <li class="nav-item"><a class="nav-link fw-bold" href="#">문화재</a></li>
-              <li class="nav-item"><a class="nav-link fw-bold" href="#">박물관</a></li>
-              <li class="nav-item"><a class="nav-link fw-bold" href="#">행사일정</a></li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">전시</a>
-                <ul class="dropdown-menu">
-                  <li class="dropdown"><a class="dropdown-item" href="#">박물관 전시</a></li>
-                  <li class="dropdown"><a class="dropdown-item" href="#">문화재 전시</a></li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">투어</a>
-                <ul class="dropdown-menu">
-                  <li class="dropdown"><a class="dropdown-item" href="#">나의 투어플랜 만들기</a></li>
-                  <li class="dropdown"><a class="dropdown-item" href="#">투어 인원 모집</a></li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">커뮤니티</a>
-                <ul class="dropdown-menu">
-                  <li class="dropdown"><a class="dropdown-item" href="#">문화 소식</a></li>
-                  <li class="dropdown"><a class="dropdown-item" href="#">자유게시판</a></li>
-                  <li class="dropdown"><a class="dropdown-item" href="#">포토게시판</a></li>
-                </ul>
-              </li>
-              <li class="nav-item border-top mt-2 py-2 d-sm-none">
-                <a class="nav-link" href="account-signin.html">
-                  <i class="ai-user fs-lg me-2"></i>
-                  Sign In
-                </a>
-              </li>
-            </ul>
-            <div class="d-sm-none p-3 mt-n3">
-              <a class="btn btn-primary w-100 mb-1" href="https://themes.getbootstrap.com/product/around-multipurpose-template-ui-kit/" target="_blank" rel="noopener">
-                <i class="ai-cart fs-xl me-2 ms-n1"></i>
-                Buy now
-              </a>
-            </div>
-          </nav>
-        </div>
-      </header>
-
+		<header th:replace="~{common/layout :: #header}"></header>
+	
       <!-- Hero-->
       <section>
         <div class="jarallax bg-dark py-5" data-jarallax data-type="scroll-opacity" data-speed="0.7" style="height: 50vh">
@@ -278,15 +213,22 @@
                     <h3 class="h6 mb-2">위치</h3>
                     <p class="fs-sm mb-0" th:text="${event.location}"></p>
                   </div>
+                  
                   <div class="d-flex align-items-center pt-2 pt-lg-3 mt-3">
-                    <a class="btn btn-primary mb-lg-5 mt-5 me-4" th:href="|/event/eventDetail?no=${event.evntNo}|">자세히 보기</a>
-                    <i class="ai-star-filled text-warning"></i>
-                    <i class="ai-star-filled text-warning"></i>
-                    <i class="ai-star-filled text-warning"></i>
-                    <i class="ai-star-half text-warning"></i>
-                    <i class="ai-star text-warning"></i>
-                    <span class="text-warning fw-bold mt-n1 ms-2">3.5</span>
-                    <span class="text-muted mt-n1 ms-2">(1,234)</span>
+                  <a class="btn btn-primary mb-lg-5 mt-5 me-4" th:href="|/event/eventDetail?no=${event.evntNo}|">자세히 보기</a>
+                    <span th:if="${event.eventStarsAverage == null or event.eventStarsAverage == 0}"><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i></span>
+					<span th:if="${event.eventStarsAverage == 0.5}"><i class="ai-star-half text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i></span>
+					<span th:if="${event.eventStarsAverage == 1}"><i class="ai-star-filled text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i></span>
+					<span th:if="${event.eventStarsAverage == 1.5}"><i class="ai-star-filled text-warning"></i><i class="ai-star-half text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i></span>
+				    <span th:if="${event.eventStarsAverage == 2}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i></span>
+				    <span th:if="${event.eventStarsAverage == 2.5}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-half text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i></span>
+				    <span th:if="${event.eventStarsAverage == 3}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i></span>
+				    <span th:if="${event.eventStarsAverage == 3.5}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-half text-warning"></i><i class="ai-star text-warning"></i></span>
+				    <span th:if="${event.eventStarsAverage == 4}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star text-warning"></i></span>
+				    <span th:if="${event.eventStarsAverage == 4.5}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-half text-warning"></i></span>
+				    <span th:if="${event.eventStarsAverage == 5}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i></span>
+                    <span class="text-warning fw-bold mt-n1 ms-2" th:text="'(' + ${event.eventStarsAverage} + ')'"></span>
+                    <span class="text-muted mt-n1 ms-2" th:text="'(' + ${event.reviewCount} + ')'"></span>
                   </div>
                 </div>
               </div>
@@ -309,22 +251,22 @@
         <i class="ai-arrow-up"></i>
       </a>
       <!-- Vendor scripts: js libraries and plugins-->
-      <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-      <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-      <script src="assets/vendor/jarallax/dist/jarallax.min.js"></script>
-      <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-      <script src="assets/vendor/timezz/dist/timezz.js"></script>
-      <script src="assets/vendor/@lottiefiles/lottie-player/dist/lottie-player.js"></script>
-      <script src="assets/vendor/aos/dist/aos.js"></script>
-      <script src="assets/vendor/lightgallery/lightgallery.min.js"></script>
-      <script src="assets/vendor/lightgallery/plugins/fullscreen/lg-fullscreen.min.js"></script>
-      <script src="assets/vendor/lightgallery/plugins/zoom/lg-zoom.min.js"></script>
-      <script src="assets/vendor/lightgallery/plugins/video/lg-video.min.js"></script>
-      <script src="assets/vendor/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script>
-      <script src="http://code.jquery.com/jquery-latest.js"></script>
-      <script src="assets/vendor/flatpickr/dist/plugins/rangePlugin.js"></script>
+      <script th:src="@{/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+      <script th:src="@{/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js}"></script>
+      <script th:src="@{/assets/vendor/jarallax/dist/jarallax.min.js}"></script>
+      <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+      <script th:src="@{/assets/vendor/timezz/dist/timezz.js}"></script>
+      <script th:src="@{/assets/vendor/@lottiefiles/lottie-player/dist/lottie-player.js}"></script>
+      <script th:src="@{/assets/vendor/aos/dist/aos.js}"></script>
+      <script th:src="@{/assets/vendor/lightgallery/lightgallery.min.js}"></script>
+      <script th:src="@{/assets/vendor/lightgallery/plugins/fullscreen/lg-fullscreen.min.js}"></script>
+      <script th:src="@{/assets/vendor/lightgallery/plugins/zoom/lg-zoom.min.js}"></script>
+      <script th:src="@{/assets/vendor/lightgallery/plugins/video/lg-video.min.js}"></script>
+      <script th:src="@{/assets/vendor/lightgallery/plugins/thumbnail/lg-thumbnail.min.js}"></script>
+      <script th:src="@{http://code.jquery.com/jquery-latest.js}"></script>
+      <script th:src="@{/assets/vendor/flatpickr/dist/plugins/rangePlugin.js}"></script>
       <!-- Main theme script-->
-      <script src="assets/js/theme.js"></script>
+      <script th:src="@{/assets/js/theme.js}"></script>
     </main>
   </body>
 </html>

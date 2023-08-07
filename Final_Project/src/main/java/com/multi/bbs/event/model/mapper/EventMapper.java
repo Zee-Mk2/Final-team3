@@ -10,6 +10,7 @@ import com.multi.bbs.event.model.vo.Event;
 import com.multi.bbs.event.model.vo.EventImg;
 import com.multi.bbs.event.model.vo.EventProgram;
 import com.multi.bbs.event.model.vo.EventReview;
+import com.multi.bbs.event.model.vo.EventStars;
 
 
 @Mapper
@@ -28,6 +29,13 @@ public interface EventMapper {
 	int insertEventReview(EventReview eventReview);
 
 	int deleteEventReview(int eventReviewNo);
+
+	List<EventStars> selectEventStarsByEventNo(int eventNo);
+
+	int selectReviewCountByEventNo(int no);
+
+	double selectEventStarsAverage(int no);
+
 
 
 

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
  	<!-- Vendor styles-->
-    <link rel="stylesheet" media="screen" href="assets/vendor/lightgallery/css/lightgallery-bundle.min.css" />
+    <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/nouislider/dist/nouislider.min.css}" />
     <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
   
     
@@ -27,8 +27,8 @@
         <!-- Breadcrumb-->
         <nav aria-label="breadcrumb">
           <ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">홈</a></li>
-            <li class="breadcrumb-item" aria-current="page">행사일정</li>
+            <li class="breadcrumb-item"><a th:href="@{/}">홈</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a th:href="@{/event}">행사일정</a></li>
             <li class="breadcrumb-item active" aria-current="page">상세보기</li>
           </ol>
         </nav>
@@ -48,14 +48,20 @@
             </div>
             <a class="btn btn-primary w-100 w-sm-auto mt-5" href="#content">후기 작성하기</a>
             <div class="d-flex align-items-center pt-2 pt-lg-3 mt-3">
-              <i class="ai-star-filled text-warning"></i>
-              <i class="ai-star-filled text-warning"></i>
-              <i class="ai-star-filled text-warning"></i>
-              <i class="ai-star-half text-warning"></i>
-              <i class="ai-star text-warning"></i>
-              <span class="text-warning fw-bold mt-n1 ms-2">3.5</span>
-              <span class="text-muted mt-n1 ms-2">(1,234)</span>
-            </div>
+				<span th:if="${eventStarsAverage == null or eventStarsAverage == 0}"><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i></span>
+				<span th:if="${eventStarsAverage == 0.5}"><i class="ai-star-half text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i></span>
+				<span th:if="${eventStarsAverage == 1}"><i class="ai-star-filled text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i></span>
+				<span th:if="${eventStarsAverage == 1.5}"><i class="ai-star-filled text-warning"></i><i class="ai-star-half text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i></span>
+			    <span th:if="${eventStarsAverage == 2}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i></span>
+			    <span th:if="${eventStarsAverage == 2.5}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-half text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i></span>
+			    <span th:if="${eventStarsAverage == 3}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i></span>
+			    <span th:if="${eventStarsAverage == 3.5}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-half text-warning"></i><i class="ai-star text-warning"></i></span>
+			    <span th:if="${eventStarsAverage == 4}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star text-warning"></i></span>
+			    <span th:if="${eventStarsAverage == 4.5}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-half text-warning"></i></span>
+			    <span th:if="${eventStarsAverage == 5}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i></span>
+			    <span class="text-warning fw-bold mt-n1 ms-2" th:text="${eventStarsAverage}"></span>
+			    <span class="text-muted mt-n1 ms-2" th:text=" '(' + ${reviewCount}  + ')'"></span>
+			</div>
             <div class="mt-5 h5"></div>
             <div class="h5"></div>
           </div>
@@ -149,6 +155,10 @@
 
             <!-- Comment form-->
             <h2 class="pb-2 pb-lg-3 pb-xl-4">후기 목록</h2>
+            <div class="pb-3 align-items-center" th:if="${eventReviews == null or eventReviews.isEmpty()}"
+            style="display: flex; justify-content: center; align-items: center; height: 200px;">
+			    <h2>남겨진 후기가 없습니다.</h2>
+			</div>
 				<div th:each="review : ${eventReviews}">
 				    <div class="border-bottom py-4 mt-2 mb-4">
 				        <div class="d-flex align-items-center pb-1 mb-3">
@@ -160,7 +170,7 @@
 							    <span th:if="${review.rating == 3}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i></span>
 							    <span th:if="${review.rating == 4}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i></span>
 							    <span th:if="${review.rating == 5}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i></span>
-				                <span class="fs-sm text-muted" th:text="${#temporals.format(review.writeTime, 'yyyy.MM.dd')}"></span>
+							    <span th:text="${review.timeDiff}"></span>
 				            </div>
 				        </div>
 				        <p class="pb-2 mb-0" th:text="${review.content}"></p>
@@ -173,21 +183,12 @@
 				</div>
 
               <!-- 후기 작성 -->
-				<div class="card-body">
+				<div class="card-body" id="content">
 				  <h2 class="pb-2 pb-lg-3 pb-xl-4">후기 작성</h2>
-				  <form class="row needs-validation g-4" action="/reply" method="post" id="eventReviewForm">
-				    <div class="col-12">
-				      <label class="form-label">내용</label>
-				      <textarea class="form-control" rows="4" placeholder="후기를 작성해 주세요..." name="content"></textarea>
-				    </div>
-				    <div class="col-12"></div>
-				    <input type="hidden" name="evntNo" th:value="${event.evntNo}">
-				    <input type="hidden" name="writeTime" id="writeTime" value="">
-				     <div class="col-12">
-                  <div class="card card-body bg-light">
-                    <div class="fw-bold text-center fs-2 pb-3" style="color: #780422;">별점 남기기</div>
-                    <hr>
-                      <div class="align-items-center text-center text-warning pt-4" id="starFormat">
+				  <form class="row needs-validation g-4" th:action="@{/reply}" method="post" id="eventReviewForm">
+				  <div class="row d-flex">
+				  <div class="fw-bold"><h4 style="color: #780422;">별점 남기기</h4></div>
+                      <div class="text-warning" id="starFormat">
                         <input type="radio" name="rating" id="1star" value="1" style="opacity: 0;" th:checked="${ratingValue == 1}" >
                         <label class="ai-star fs-2" for="1star" id="1starLabel"></label>
                         <input type="radio" name="rating" id="2star" value="2" style="opacity: 0;" th:checked="${ratingValue == 2}" >
@@ -199,7 +200,13 @@
                         <input type="radio" name="rating" id="5star" value="5" style="opacity: 0;" th:checked="${ratingValue == 5}">
                         <label class="ai-star fs-2" for="5star" id="5starLabel"></label>
                       </div>
-                    </div>
+                      </div>
+				    <div class="col-12">
+				      <label class="form-label"><h4 style="color: #780422;">내용</h4></label>
+				      <textarea class="form-control" rows="4" placeholder="후기를 작성해 주세요..." name="content"></textarea>
+				    </div>
+				    <div class="col-12"></div>
+				    <input type="hidden" name="evntNo" th:value="${event.evntNo}">
 				    
 				    <div class="col-12"  style="padding-top: 20px;">
 				      <button class="btn btn-primary" type="submit" style="float: right" form="eventReviewForm">후기 남기기</button>
@@ -207,16 +214,8 @@
 				  </form>
 				</div>
             </div>
-          </div>
-			</div>
         </article>
 
-        <!-- Sidebar toggle button-->
-        <button class="d-lg-none btn btn-sm fs-sm btn-primary w-100 rounded-0 fixed-bottom" data-bs-toggle="offcanvas" data-bs-target="#sidebarBlog">
-          <i class="ai-layout-column me-2"></i>
-          Sidebar
-        </button>
-      </div>
     </main>
     
     <!-- Footer-->
@@ -230,19 +229,6 @@
       <i class="ai-arrow-up"></i>
     </a>
     
-    <script>
-    function setWriteTime() {
-        const writeTimeField = document.getElementById("writeTime");
-        const now = new Date();
-        const isoString = now.toISOString(); // ISO 8601 형식의 시간으로 변환
-        writeTimeField.value = isoString;
-    }
-
-    // 페이지가 로드될 때 작성 시간을 설정합니다.
-    document.addEventListener("DOMContentLoaded", function () {
-        setWriteTime();
-    });
-</script>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
                     <script>
@@ -303,19 +289,19 @@
                           -webkit-text-fill-color: #fff58c;
                         }
                       </style>
+                      <div>
                     </div>
     <!-- Vendor scripts: js libraries and plugins-->
-    <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.js"></script>
-    <script src="assets/vendor/jarallax/dist/jarallax.min.js"></script>
-    <script src="assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
-    <script src="assets/vendor/flatpickr/dist/plugins/rangePlugin.js"></script>
-    <script src="assets/vendor/lightgallery/lightgallery.min.js"></script>
-    <script src="assets/vendor/lightgallery/plugins/fullscreen/lg-fullscreen.min.js"></script>
-    <script src="assets/vendor/lightgallery/plugins/zoom/lg-zoom.min.js"></script>
-    <script src="assets/vendor/lightgallery/plugins/video/lg-video.min.js"></script>
-    <script src="assets/vendor/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script>
+    <script th:src="@{/assets/vendor/bootstrap/dist/js/bootstrap.bundle.js}"></script>
+    <script th:src="@{/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.js}"></script>
+    <script th:src="@{/assets/vendor/jarallax/dist/jarallax.min.js}"></script>
+    <script th:src="@{/assets/vendor/flatpickr/dist/flatpickr.min.js}"></script>
+    <script th:src="@{/assets/vendor/flatpickr/dist/plugins/rangePlugin.js}"></script>
+    <script th:src="@{/assets/vendor/lightgallery/lightgallery.min.js}"></script>
+    <script th:src="@{/assets/vendor/lightgallery/plugins/fullscreen/lg-fullscreen.min.js}"></script>
+    <script th:src="@{/assets/vendor/lightgallery/plugins/zoom/lg-zoom.min.js}"></script>
+    <script th:src="@{/assets/vendor/lightgallery/plugins/video/lg-video.min.js}"></script>
+    <script th:src="@{/assets/vendor/lightgallery/plugins/thumbnail/lg-thumbnail.min.js}"></script>
     <!-- Main theme script-->
-    <script src="assets/js/theme.js"></script>
   </body>
 </html>

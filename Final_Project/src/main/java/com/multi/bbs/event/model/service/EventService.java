@@ -23,8 +23,16 @@ public class EventService {
 	private EventMapper mapper;
 
 	public List<Event> getEventList(Map<String, String> param) {
-		
-		return mapper.selectEventList(param);
+		List<Event> events = mapper.selectEventList(param);
+        for (Event event : events) {
+            int reviewCount = mapper.selectReviewCountByEventNo(event.getEvntNo());
+            event.setReviewCount(reviewCount);
+            
+            Double eventStarsAverageObj = mapper.selectEventStarsAverage(event.getEvntNo());
+            double eventStarsAverage = (eventStarsAverageObj != null) ? Math.round(eventStarsAverageObj * 2) / 2.0 : 0.0;
+            event.setEventStarsAverage(eventStarsAverage);
+        }
+        return events;
 	}
 
 
@@ -71,6 +79,28 @@ public class EventService {
 	public int deleteReply(int eventReviewNo) {
 		return mapper.deleteEventReview(eventReviewNo);
 	}
+
+
+	public int getEventStarsByEventNo(int no) {
+		return mapper.selectReviewCountByEventNo(no);
+	}
+
+
+	public int getReviewCountByEventNo(int no) {
+		return mapper.selectReviewCountByEventNo(no);
+	}
+
+
+	public Double getEventStarsAverage(int no) {
+	    return mapper.selectEventStarsAverage(no);
+	}
+
+
+
+
+
+
+
 
 
 	
