@@ -213,7 +213,9 @@
                     <h3 class="h6 mb-2">위치</h3>
                     <p class="fs-sm mb-0" th:text="${event.location}"></p>
                   </div>
+                  
                   <div class="d-flex align-items-center pt-2 pt-lg-3 mt-3">
+                  <a class="btn btn-primary mb-lg-5 mt-5 me-4" th:href="|/event/eventDetail?no=${event.evntNo}|">자세히 보기</a>
                     <span th:if="${event.eventStarsAverage == null or event.eventStarsAverage == 0}"><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i></span>
 					<span th:if="${event.eventStarsAverage == 0.5}"><i class="ai-star-half text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i></span>
 					<span th:if="${event.eventStarsAverage == 1}"><i class="ai-star-filled text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i><i class="ai-star text-warning"></i></span>
