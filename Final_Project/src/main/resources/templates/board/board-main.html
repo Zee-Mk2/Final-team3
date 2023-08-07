@@ -21,7 +21,7 @@
 
     <section>
       <div class="jarallax bg-dark py-5" data-jarallax data-type="scroll-opacity" data-speed="0.7"
-        style="height: 70vh !important;">
+        style="height: 50vh !important;">
         <div class="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-60"></div>
         <div class="jarallax-img"
           style="background-image: url(https://plus.unsplash.com/premium_photo-1661948404806-391a240d6d40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fCVFQSVCMiVCRCVFQiVCMyVCNSVFQSVCNiU4MXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80);">
@@ -33,22 +33,6 @@
               <h4 class="display-5 text-light pb-sm-2 pb-md-3 mb-lg-5">커뮤니티</h4>
               <br><br><br><br><br>
             </div>
-            <form class="row g-3 bg-white rounded-pill align-items-center">
-              <div class="col-2 my-1">
-                <select class="form-select" style="border: none;">
-                  <option selected>자유게시판</option>
-                  <option>문화소식</option>
-                  <option>포토게시판</option>
-                </select>
-              </div>
-              <div class="col-9 my-1">
-                <input type="text" class="form-control" style="border: none;" placeholder="키워드로 검색">
-              </div>
-              <div class="col-1 my-1">
-                <button type="submit" class="btn py-2 ms-3"><i class='ai-search'
-                    style="font-size: 26px; color: #202020;"></i></button>
-              </div>
-            </form>
           </div>
         </div>
       </div>
@@ -74,69 +58,14 @@
       </div>
       <table class="table">
         <tbody>
-          <tr>
-            <div>
-              <div class="row">
-                <td><a class="nav-link fw-normal" href="#">[돈의문박물관마을]2023 하반기 체험강좌 '예술가의 시간' 운영파트너 추가 ...</a></td>
-              </div>
-              <div class="row">
-                <td>관리자</td>
-                <td>2023-06-13</td>
-                <td>1764</td>
-              </div>
-            </div>
-          </tr>
-
-          <tr>
-            <div>
-              <div class="row">
-                <td><a class="nav-link fw-normal" href="#">[고용노동부 주최] 2023 소셜벤처 경연대회</a></td>
-              </div>
-              <div class="row">
-                <td>관리자</td>
-                <td>2023-06-22</td>
-                <td>6</td>
-              </div>
-            </div>
-          </tr>
-          
-          <tr>
-            <div>
-              <div class="row">
-                <td><a class="nav-link fw-normal" href="#">[서울시청 문화제관리과] 한양도성 수도성곽 국제학술대회</a></td>
-              </div>
-              <div class="row">
-                <td>관리자</td>
-                <td>2023-06-19</td>
-                <td>372</td>
-              </div>
-            </div>
-          </tr>
-
-          <tr>
-            <div>
-              <div class="row">
-                <td><a class="nav-link fw-normal" href="#">[노원문화원] 제 2회 노원구 민간기록물 수집 공모전</a></td>
-              </div>
-              <div class="row">
-                <td>관리자</td>
-                <td>2023-05-30</td>
-                <td>1478</td>
-              </div>
-            </div>
-          </tr>
-
-          <tr>
-            <div>
-              <div class="row">
-                <td><a class="nav-link fw-normal" href="#">강연 2023년 청운문학도서관 길 위의 인문학 '종로 모던, 그 맛과 글'</a></td>
-              </div>
-              <div class="row">
-                <td>관리자</td>
-                <td>2023-04-28</td>
-                <td>1426</td>
-              </div>
-            </div>
+          <div th:if="${#lists.isEmpty(freeList)}" class="text-center h4 text-muted">
+            게시글이 없습니다.
+          </div>
+          <tr th:if="${!#lists.isEmpty(freeList)}" th:each="item: ${freeList}" class="row">
+            <td class="col-8"><a class="nav-link fw-normal" th:href="@{/board/detail(bno=${item.bno})}">[[${item.title}]]</a></td>
+            <td class="col-2">[[${item.name}]]</td>
+            <td class="col-1">[[${item.timeDiff}]]</td>
+            <td class="col-1 text-center">[[${item.views}]]</td>
           </tr>
         </tbody>
       </table>
@@ -150,29 +79,12 @@
           <button type="button" class="btn text-white" style="background-color: #E8AE50;">더보기</button>
         </a>
       </div>
-      <div class="row g-5">
-        <div class="card col">
+      <div th:if="${#lists.isEmpty(notiList)}" class="text-center h3 text-muted">게시글이 없습니다.</div>
+      <div class="row g-4" th:if="${!#lists.isEmpty(notiList)}">
+        <div class="card col mx-2 p-0" th:each="item: ${notiList}">
           <div class="card-body">
-            <a class="nav-link fw-normal pb-3" href="#">2023년 국립중앙박물관 식음료매장 및 운영시간 안내</a>
-            <p class="card-text">2023-01-30 조회수 739</p>
-          </div>
-        </div>
-        <div class="card col">
-          <div class="card-body">
-            <a class="nav-link fw-normal pb-3" href="#">2023년 하반기 뮷즈 공모 안내</a>
-            <p class="card-text"> 2023-06-13 조화수 1764</p>
-          </div>
-        </div>
-        <div class="card col">
-          <div class="card-body">
-            <a class="nav-link fw-normal pb-3" href="#">국립중앙박물관 특별전 영원한 여정 특별한 동행 운영인력 추가모집(마감)</a>
-            <p class="card-text">2023-06-19 조회수 372</p>
-          </div>
-        </div>
-        <div class="card col">
-          <div class="card-body">
-            <a class="nav-link fw-normal pb-3" href="#">2023 하반기 뮷즈 공모 안내</a>
-            <p class="card-text">2023-06-13 조회수 1764</p>
+            <a class="nav-link fw-normal pb-3 fw-bold" th:href="@{/board/detail(bno=${item.bno})}">[[${item.title}]]</a>
+            <p class="card-text text-muted">[[${item.timeDiff}]] | 조회수 [[${item.views}]]</p>
           </div>
         </div>
       </div>
@@ -181,25 +93,22 @@
 
     <!--포토게시판 카드-->
     <div class="container mb-lg-5 mb-5">
-      <article>
+      <div class="row g-4">
         <p class="h3 mt-5 mb-4">포토게시판</p>
-      <div class="mt-n5 mb-3" style="text-align: right;">
-        <a th:href="@{/board/photo}">
-          <button type="button" class="btn text-white" style="background-color: #E8AE50;">더보기</button>
-        </a>
+	    <div class="mt-n5 mb-3" style="text-align: right;">
+	      <a th:href="@{/board/photo}">
+	        <button type="button" class="btn text-white" style="background-color: #E8AE50;">더보기</button>
+	      </a>
+	    </div>
+		<div th:if="${#lists.isEmpty(photoList)}" class="text-center h3 text-muted">게시글이 없습니다.</div>
+	    <div class="col card" th:if="${!#lists.isEmpty(photoList)}" th:each="item: ${photoList}" style="border: none !important;">
+	      <div class="card-body overflow-hidden rounded p-0" style="height: 234px;">
+		    <a th:href="@{/board/detail(bno=${item.bno})}">
+			  <img th:src="@{'/board/file/' + ${item.reFileName}}" name="thumbnail" />
+		    </a>
+	      </div>
+	    </div>
       </div>
-        <div class="row">
-          <a class="col" href="#">
-            <img style="height: 230px;" src="https://gongju.museum.go.kr/_prog/download/?site_dvs_cd=gongju&func_gbn_cd=main_visual&mng_no=68" class="rounded" alt="...">
-          </a>
-          <a class="col" href="#">
-            <img style="height: 230px;" src="https://img.hankyung.com/photo/202112/AKR20211203068300005_01_i_P4.jpg" class="rounded" alt="...">
-          </a>
-          <a class="col" href="#">
-            <img style="height: 230px;" src="https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=f52c4e00-e91a-4f21-b97f-777203d04ca1" class="rounded" alt="...">
-          </a>
-        </div>
-      </article>
     </div>
 
     <!-- Sidebar toggle button-->
@@ -221,8 +130,29 @@
   <script th:src="@{/assets/vendor/jarallax/dist/jarallax.min.js}"></script>
   <script th:src="@{/assets/vendor/flatpickr/dist/flatpickr.min.js}"></script>
   <script th:src="@{/assets/vendor/flatpickr/dist/plugins/rangePlugin.js}"></script>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
   <!-- Main theme script-->
   <script th:src="@{/assets/js/theme.js}"></script>
+  <script>
+	$(document).ready(function () {
+        $("[name=thumbnail]").each(function () {
+            var img = $(this);
+            var frame = $(this).parent().parent();
+            var width = parseInt(img.css("width"));
+            var ratio = parseInt(frame.css("height")) / parseInt(img.css("height"));
+
+            if (ratio > 1) {
+              img.css("max-width", "none");
+              img.css("width", width * ratio);
+              var translate = (parseInt(img.css("width")) - parseInt(frame.css("width"))) / 2;
+              img.css("position", "relative");
+              img.css("left", -translate + "px");
+            } else {
+              img.css("width", "100%");
+            }
+      	});
+	});
+  </script>
 </body>
 
 </html>

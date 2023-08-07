@@ -85,5 +85,17 @@ public class BoardService {
 	public int deleteComment(int cno) {
 		return mapper.deleteComment(cno);
 	}
+
+	public List<Board> getFreeListInMain() {
+		return mapper.getFreeListInMain();
+	}
+
+	public List<Board> getNotiListInMain() {
+		return mapper.getNotiListInMain();
+	}
+
+	public List<Board> getPhotoListInMain() {
+		return mapper.getPhotoListInMain();
+	}
 	
 }

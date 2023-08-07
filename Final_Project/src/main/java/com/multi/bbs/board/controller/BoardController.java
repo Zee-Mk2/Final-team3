@@ -37,6 +37,18 @@ public class BoardController {
 	public String boardMainPage(Model model, HttpSession session) {
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		model.addAttribute("loginMember", loginMember);
+		List<Board> freeList = service.getFreeListInMain();
+		List<Board> notiList = service.getNotiListInMain();
+		List<Board> photoList = service.getPhotoListInMain();
+		for (Board item : freeList) {
+			item.setTimeDiff(calcTime.getTimeDiff(item.getWriteTime()));
+		}
+		for (Board item : notiList) {
+			item.setTimeDiff(calcTime.getTimeDiff(item.getWriteTime()));
+		}
+		model.addAttribute("freeList", freeList);
+		model.addAttribute("notiList", notiList);
+		model.addAttribute("photoList", photoList);
 		
 		return "/board/board-main";
 	}

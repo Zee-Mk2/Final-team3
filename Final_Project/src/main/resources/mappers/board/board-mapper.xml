@@ -73,4 +73,29 @@
 		UPDATE Comment SET state = 'N' WHERE cno = #{cno}
 	</update>
 	
+	<select id="getFreeListInMain" resultType="com.multi.bbs.board.model.vo.Board">
+		SELECT title, name, writeTime, views, bno
+			FROM Board
+			WHERE state = 'Y' AND boardCat = 'free'
+			ORDER BY bno DESC
+			LIMIT 5
+	</select>
+	
+	<select id="getNotiListInMain" resultType="com.multi.bbs.board.model.vo.Board">
+		SELECT title, writeTime, views, bno
+			FROM Board
+			WHERE state = 'Y' AND boardCat = 'noti'
+			ORDER BY bno DESC
+			LIMIT 4
+	</select>
+	
+	<select id="getPhotoListInMain" resultType="com.multi.bbs.board.model.vo.Board">
+		SELECT title, reFileName, bno
+			FROM Board
+			WHERE state = 'Y' AND boardCat = 'photo'
+			ORDER BY bno DESC
+			LIMIT 3
+	</select>
+	
+	
 </mapper>

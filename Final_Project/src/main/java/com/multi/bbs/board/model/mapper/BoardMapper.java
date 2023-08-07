@@ -31,4 +31,10 @@ public interface BoardMapper {
 
 	int deleteComment(int cno);
 
+	List<Board> getFreeListInMain();
+
+	List<Board> getNotiListInMain();
+
+	List<Board> getPhotoListInMain();
+
 }
