@@ -19,5 +19,6 @@ public class Event {
 	private String fee;
 	private String location;
 	private String poster;
-
+	private int reviewCount;
+	private double eventStarsAverage;
 }

@@ -10,29 +10,8 @@
 		SELECT
 			* FROM EVENT
 			WHERE 1 = 1
-			<if test="name != null">
-				AND name LIKE '%${name}%'
-			</if>
-			<if test="summary != null">
-				AND summary LIKE '%${summary}%'
-			</if>
 			<if test="startDate != null">
 				AND startDate LIKE '%${startDate}%'
-			</if>
-			<if test="endDate != null">
-				AND endDate LIKE '%${endDate}%'
-			</if>
-			<if test="ageLimit != null">
-				AND ageLimit LIKE '%${ageLimit}%'
-			</if>
-			<if test="fee != null">
-				AND fee LIKE '%${fee}%'
-			</if>
-			<if test="location != null">
-				AND location LIKE '%${location}%'
-			</if>
-			<if test="poster != null">
-				AND poster LIKE '%${poster}%'
 			</if>
 	</select>
 	
@@ -63,17 +42,38 @@
 	
 	<insert id="insertEventReview" parameterType="eventReview">
 	    INSERT INTO EventReview (evntReviewNo, evntNo, Mno, content, rating, writeTime)
-	    VALUES (#{evntReviewNo}, #{evntNo}, #{Mno}, #{content}, #{rating}, #{writeTime})
+	    VALUES (#{evntReviewNo}, #{evntNo}, #{Mno}, #{content}, #{rating}, default)
 	</insert>
 	
 	<delete id="deleteEventReview" parameterType="int">
-    DELETE FROM EventReview WHERE evntReviewNo = #{evntReviewNo}
-</delete>
+    	DELETE FROM EventReview WHERE evntReviewNo = #{evntReviewNo}
+	</delete>
 	
+	<select id="selectEventReviewsByEventNo" resultType="eventReview" parameterType="int">
+	    SELECT ER.evntReviewNo, ER.evntNo, ER.Mno, ER.content, ER.rating, ER.writeTime,
+	           M.role, M.name
+	    FROM EventReview ER
+	    JOIN Member M ON ER.Mno = M.Mno
+	    WHERE ER.evntNo = #{evntNo}
+	</select>
 	
+	<select id="selectEventStarsByEventNo" resultType="eventStars" parameterType="int">
+	    SELECT S.mno, S.evntNo, S.rating
+	    FROM EventStars S
+	    WHERE S.evntNo = #{evntNo}
+	</select>
 	
+	<select id="selectReviewCountByEventNo" resultType="int" parameterType="int">
+	    SELECT COUNT(*) as reviewCount
+	    FROM EventReview
+	    WHERE evntNo = #{evntNo}
+	</select>
 	
-	
+	<select id="selectEventStarsAverage" resultType="Double" parameterType="int">
+	    SELECT IFNULL(AVG(rating), 0.0) as averageRating
+	    FROM EventReview
+	    WHERE evntNo = #{evntNo}
+	</select>
 	
 	
 </mapper>

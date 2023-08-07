@@ -1,7 +1,6 @@
 package com.multi.bbs.event;
 
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +23,7 @@ import com.multi.bbs.event.model.vo.EventReview;
 import lombok.extern.slf4j.Slf4j;
 
 import com.multi.bbs.account.model.vo.Member;
+import com.multi.bbs.common.util.CalcTime;
 
 @Slf4j
 @Controller
@@ -68,6 +68,24 @@ public class EventController {
 		model.addAttribute("eventProgramList", eventProgramDTOList);
 		System.out.println(eventProgramDTOList);
 		
+		CalcTime calcTime = new CalcTime();
+		for (EventReview review : eventReviewsWithMember) {
+	        String timeDiff = calcTime.getTimeDiff(review.getWriteTime());
+	        review.setTimeDiff(timeDiff);
+	    }
+		
+		int eventStars = service.getEventStarsByEventNo(no);
+		Double eventStarsAverageObj = service.getEventStarsAverage(no);
+		double eventStarsAverage = (eventStarsAverageObj != null) ? Math.round(eventStarsAverageObj * 2) / 2.0 : 0.0;
+
+	    int reviewCount = service.getReviewCountByEventNo(no);
+
+	    model.addAttribute("eventStars", eventStars);
+	    model.addAttribute("eventStarsAverage", eventStarsAverage);
+	    System.out.println(eventStarsAverage);
+	    model.addAttribute("reviewCount", reviewCount);
+	    System.out.println(reviewCount);
+		
 		return "event/eventDetail";
 	}
 	
@@ -78,8 +96,14 @@ public class EventController {
 	        @ModelAttribute EventReview eventReview
 	) {
 	    eventReview.setMno(loginMember.getMno());
-	    eventReview.setWriteTime(ZonedDateTime.now(ZoneId.of("Asia/Seoul"))); // 현재 시간을 서울 시간대로 설정
+	    eventReview.setWriteTime(new Date());
+		
         log.info("리플 작성 요청 Reply : " + eventReview);
+        
+        CalcTime calcTime = new CalcTime();
+        
+        String timeDiff = calcTime.getTimeDiff(eventReview.getWriteTime());
+        eventReview.setTimeDiff(timeDiff);
 	    
 	    int result = service.saveReply(eventReview);
 	    
