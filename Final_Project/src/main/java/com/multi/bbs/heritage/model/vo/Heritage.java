@@ -1,7 +1,6 @@
 package com.multi.bbs.heritage.model.vo;
 
 import java.util.Date;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,4 +28,6 @@ public class Heritage {
 	private String era;
 	private String img;
 	private String content;
+	private String bookmark;
+	private double average;
 }

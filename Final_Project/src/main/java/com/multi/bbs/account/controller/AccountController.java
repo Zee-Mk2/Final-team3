@@ -1,5 +1,7 @@
 package com.multi.bbs.account.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.multi.bbs.account.model.service.AccountService;
 import com.multi.bbs.account.model.vo.Member;
+import com.multi.bbs.heritage.model.service.HeritageService;
+import com.multi.bbs.heritage.model.vo.HeriBookmark;
+import com.multi.bbs.heritage.model.vo.Heritage;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +27,9 @@ public class AccountController {
 
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private HeritageService heriService;
 	
 	final static private String savePath = "C:\\upfiles\\";
 	
@@ -78,14 +86,24 @@ public class AccountController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/mypage/bookmark")
-	public String bookMarkPage(Model model, HttpSession session) {
-		Member loginMember = (Member) session.getAttribute("loginMember");
-		if (loginMember == null) {
-			model.addAttribute("msg", "잘못된 접근입니다.");
+	@GetMapping("mypage/bookmark")
+	public String heriBookmarkPage(Model model, HttpSession session) {
+		Member loginMember =(Member) session.getAttribute("loginMember");
+		model.addAttribute("loginMember", loginMember);
+		if(loginMember == null) {
+			model.addAttribute("msg","로그인이 필요합니다.");
 			model.addAttribute("location", "/sign-in");
 			return "common/msg";
 		}
+		int mno = loginMember.getMno();
+		
+		List<Heritage> list = heriService.getHeritageByHeriBookmarkList(mno);
+		
+		for (Heritage item : list) {
+			item.setBookmark("Y");
+		}
+		model.addAttribute("list", list);
+
 		return "account/account-bookMark";
 	}
 }

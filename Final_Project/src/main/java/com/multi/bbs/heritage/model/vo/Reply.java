@@ -15,5 +15,6 @@ public class Reply {
 	private int mNo;
 	private String name;
 	private String content;
-	private Date enroll_Date;
+	private Date enrollDate;
+	private String timeDiff;
 }

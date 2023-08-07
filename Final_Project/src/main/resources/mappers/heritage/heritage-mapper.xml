@@ -22,6 +22,8 @@
 		<result property="era"  	  column="ERA" />
 		<result property="img"  	  column="IMG" />
 		<result property="content"    column="CONTENT" />
+		<result property="bookmark"    column="BOOKMARK" />
+		<result property="average"    column="average" />
 	</resultMap> 
 	
 	<resultMap type="Reply" id="heritageReplyResultMap">
@@ -30,27 +32,46 @@
 		<result property="mNo" 			column="mNo"/>
 		<result property="name" 		column="NAME"/>
 		<result property="content" 		column="CONTENT"/>
-		<result property="enroll_Date" 	column="ENROLL_DATE"/>
+		<result property="enrollDate" 	column="enrollDate"/>
 	</resultMap>
-	
-	
+
 	<select id="selectHeritageList" parameterType="map" resultMap="heritageresultMap">
-		SELECT * 
-		FROM HERITAGE
-		WHERE 1 = 1
+		SELECT H.*, HS.average
+		<if test="mno != null">
+			, IF(B.MNO = #{mno},'Y','N') AS BOOKMARK
+		</if>
+		FROM HERITAGE H 
+		LEFT JOIN HERIBOOKMARK B ON(H.HNO = B.HNO)
+		LEFT JOIN (
+			SELECT hNo, AVG(rating) AS average
+			FROM HeritageStars
+			GROUP BY hNo
+	    ) HS ON (H.hNo = HS.hNo)
+		WHERE 
+			(B.MNO IS NULL 
+ 			<if test="mno != null">
+				OR B.MNO = #{mno}
+			</if>
+			)
  			<if test="name != null">
-				AND NAME LIKE '%${name}%' 
+				AND H.NAME LIKE '%${name}%' 
 			</if>
  			<if test="address != null">
-				AND LOCATION LIKE '%${address}%' 
+				AND H.LOCATION LIKE '%${address}%' 
 			</if>
 			<if test="era != null">
-				AND ERA LIKE '%${era}%' 
+				AND H.ERA LIKE '%${era}%' 
 			</if>
 			<if test="type != null">
-				AND GCODENAME LIKE '%${type}%' 
-			</if> 
-		LIMIT ${limit} OFFSET ${offset}
+				AND H.GCODENAME LIKE '%${type}%' 
+			</if>
+			<if test="order == 'name'">
+				ORDER BY H.name
+			</if>
+			<if test="order == null">
+				ORDER BY H.HNO DESC	
+			</if>
+			LIMIT ${limit} OFFSET ${offset}
 	</select>
 	
 	<select id="selectHeritageCount" resultType="int" parameterType="map">
@@ -58,37 +79,49 @@
 			COUNT(*)
 		FROM HERITAGE
 		WHERE 1 = 1
-			<if test="name != null">
-				AND NAME LIKE '%${name}%' 
-			</if>
- 			<if test="address != null">
-				AND LOCATION LIKE '%${address}%' 
-			</if>
-			<if test="era != null">
-				AND ERA LIKE '%${era}%' 
-			</if>
-			<if test="type != null">
-				AND GCODENAME LIKE '%${type}%' 
-			</if> 
+		<if test="name != null">
+			AND NAME LIKE '%${name}%' 
+		</if>
+			<if test="address != null">
+			AND LOCATION LIKE '%${address}%' 
+		</if>
+		<if test="era != null">
+			AND ERA LIKE '%${era}%' 
+		</if>
+		<if test="type != null">
+			AND GCODENAME LIKE '%${type}%' 
+		</if> 
 	</select>
 	
-	<select id="selectHeritageByNo" parameterType="int" resultMap="heritageresultMap">
-		SELECT 
-			*
-		FROM HERITAGE
-		WHERE 1=1
-		AND hNo = #{hNo}
+	<select id="selectHeritageByNo" parameterType="Map" resultMap="heritageresultMap">
+		SELECT H.*, HS.average
+		<if test="mno != null">
+			, IF(B.MNO = #{mno},'Y','N') AS BOOKMARK
+		</if>
+			FROM HERITAGE H
+			LEFT JOIN HERIBOOKMARK B ON(H.HNO = B.HNO)
+			LEFT JOIN (
+				SELECT hno, AVG(rating) AS average
+					FROM HeritageStars
+					GROUP BY hno
+			) HS ON (H.hNo = HS.hno)
+			WHERE 1=1
+			AND H.hNo = #{no};
 	</select>
 	
 	<insert id="insertReply" parameterType="Reply">
 		INSERT INTO REPLY(
 			RNO, HNO, MNO,
-			NAME, CONTENT, ENROLL_DATE)
+			NAME, CONTENT, ENROLLDATE)
 			VALUES(
 				0, #{hNo}, #{mNo}, 
 				#{name}, #{content}, DEFAULT
 			)
 	</insert>
+	
+	<delete id="deleteReply" parameterType="int">
+    DELETE FROM REPLY WHERE rNo = #{rNo}
+	</delete>
 	
 	<select id="getRepliesList" parameterType="int" resultType="com.multi.bbs.heritage.model.vo.Reply">
 		SELECT * FROM REPLY 
@@ -99,47 +132,48 @@
 		SELECT
 			COUNT(*) FROM HERIBOOKMARK
 		WHERE 1 = 1
-		AND mNo = #{mNo}
-		AND hNo = #{hNO}		
+		AND mno = #{mno}
+		AND hNo = #{hNo}		
 	</select>
 
 	<insert id="insertHeriBookmark" parameterType="map">
-		INSERT INTO HERIBOOKMARK(mNo, hNo) values(#{mNo}, #{hNO})
+		INSERT INTO HERIBOOKMARK(mno, hNo) values(#{mno}, #{hNo})
 	</insert>
 
 	<delete id="deleteHeriBookmark" parameterType="map">
 		DELETE FROM HERIBOOKMARK
 		WHERE 1 = 1
-		AND mNo = #{mNo}
-		AND hNo = #{hNO}
+		AND mno = #{mno}
+		AND hNo = #{hNo}
 	</delete>
 
-	<select id="selectHeriBookmarkList" parameterType="int" resultType="com.multi.bbs.heritage.model.vo.HeriBookmark">
-		SELECT * FROM HERIBOOKMARK 
-		INNER JOIN MEMBER ON HERIBOOKMARK.mNo = Member.mNo
-		INNER JOIN HERITAGE ON HERIBOOKMARK.hNo = HERITAGE.hNo
-		WHERE Member.mNo = #{mNo}	
+	<select id="selectBookmarkHeritage" parameterType="int" resultType="com.multi.bbs.heritage.model.vo.Heritage">
+		SELECT H.*, HS.average FROM HERITAGE H
+			INNER JOIN heribookmark HB ON (H.hno = HB.hno)
+			LEFT JOIN (
+				SELECT hno, AVG(rating) AS average
+					FROM HeritageStars
+					GROUP BY hno
+			) HS ON (H.hNo = HS.hno)
+			WHERE HB.mno = #{mno};
+	</select>
+
+	<insert id="submitHeriStar" parameterType="Map">
+		INSERT INTO HERITAGESTARS (hno, mno, rating) VALUES (#{no}, #{mno}, #{score})
+	</insert>
+	
+	<select id="getHeriStar" parameterType="Map" resultType="Map">
+		SELECT * FROM HERITAGESTARS WHERE hno = #{no} AND mno = #{mno}
 	</select>
 	
-	<select id="selectHeritageByHNo" parameterType="java.util.List" resultType="com.multi.bbs.heritage.model.vo.Heritage">
-		 SELECT * FROM HERITAGE WHERE hNo IN
-	    <foreach collection="list" item="hNo" open="(" close=")" separator=",">
-	        #{hNo}
-	    </foreach>
+	<update id="updateHeriStar" parameterType="Map">
+		UPDATE HERITAGESTARS SET rating = #{score} WHERE hno = #{no} AND mno = #{mno}
+	</update>
+	
+	<select id="selectReplyCountByHNo" resultType="int" parameterType="int">
+	    SELECT COUNT(*) as replyCount
+	    FROM REPLY
+	    WHERE hNo = #{hNo}
 	</select>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </mapper>

@@ -30,7 +30,7 @@
               <div class="offcanvas-lg offcanvas-start" id="sidebarAccount">
                 <button class="btn-close position-absolute top-0 end-0 mt-3 me-3 d-lg-none" type="button" data-bs-dismiss="offcanvas" data-bs-target="#sidebarAccount"></button>
                 <div class="offcanvas-body">
-                  <div class="pb-2 pb-lg-0 mb-4 mb-lg-5"><img class="d-block rounded-circle mb-2" src="assets/img/avatar/02.jpg" width="80" alt="Isabella Bocouse">
+                  <div class="pb-2 pb-lg-0 mb-4 mb-lg-5"><img class="d-block rounded-circle mb-2" src="assets/img/avatar/02.jpg" width="80" alt="Isabella Bocouse"></img>
                     <h3 class="h5 mb-1">테스트 이름</h3>
                     <p class="fs-sm text-muted mb-0">text@email.com</p>
                   </div>
@@ -59,8 +59,7 @@
           <!-- Page content-->
           <div class="col-lg-9 pt-4 pb-2 pb-sm-4">
             <div class="d-flex align-items-center mb-4">
-              <h1 class="h2 mb-0">북마크: 카드 썸네일 이미지 리사이징 작업하기</span></h1>
-              <button class="btn btn-sm btn-outline-danger ms-auto" type="button"><i class="ai-trash ms-n1 me-2"></i>모두 지우기</button>
+              <h1 class="h2 mb-0">북마크</span></h1>
             </div>
             <div class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4">
               <div class="card-header">
@@ -73,72 +72,83 @@
                   </li>
                 </ul>
               </div>
-              <div class="card-body pb-4">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-                <!-- Item-->
-				<th:block th:each="item : ${list}">
-						<div class="row g-0 border-0 mb-4 align-items-center">
-							<div class="card-hover position-relative bg-secondary rounded-1 mb-4 overflow-hidden col-4">
-							<!-- 뱃지 -->
-							<!-- <span class="badge bg-faded-danger text-danger position-absolute top-0 start-0 mt-3 ms-3">Sale</span> -->
-								 <th:block th:if="${loginMember != null}">
-					            <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
-					            <!--  <i class="ai-heart fs-xl" style="color: var(--ar-gray-500)"
-									                            th:onclick="addFavor(this, |${item.hNo}|, |${loginMember.mno}|)"></i>  -->
-					               <i class="ai-bookmark fs-xl d-dark-mode-none" style="color: --ar-gray-500 " th:onclick="addFavor(this, ${item.hNo}, ${loginMember.mno})"></i>
-					              <i class="ai-bookmark text-nav fs-xl d-none d-dark-mode-block"></i> 
-					            </button>
-					            </th:block>
-							<a class="d-block" th:href="|/heritage/detail?no=${item.hNo}|"> <img th:src="${item.img}" class="rounded-4"></a>
-								</div>
-								   <div class="col-8">
-									<div class="pb-sm-4 ps-sm-4 pe-lg-4" style="margin-left: 10%">
-										<a th:href="|/heritage/detail?no=${item.hNo}|" style="text-decoration: none">
-										<div class="h3 my-card-title"> [[${item.name}]]([[${item.name2}]])</div>
-										</a>
-												<table class="table">
-													<tr>
-														<td class="fw-bold text-black" style="white-space: nowrap"><i
-															class="far fa-address-book text-primary"></i>분류</td>
-														<td>[[${item.gcodeName}]] / [[${item.bcodeName}]] /
-															[[${item.mcodeName}]] / [[${item.scodeName}]]</td>
-													</tr>
-													<tr>
-														<td class="fw-bold text-black" style="white-space: nowrap"><i
-															class="fas fa-phone text-primary"></i>시대</td>
-														<td>[[${item.era}]]</td>
-													</tr>
-													<tr>
-														<td class="fw-bold text-black" style="white-space: nowrap"><i
-															class="far fa-calendar text-primary"></i>지정일</td>
-														<td>[[${#dates.format(item.asDate, 'yyyy-MM-dd')}]]</td>
-													</tr>
-												<tr>
-											<td class="fw-bold text-black"
-													style="white-space: nowrap; border-bottom: none"><i
-												class="fas fa-calendar-day text-primary"></i>소재지</td>
-											<td style="border-bottom: none">[[${item.location}]]
-										</td>
-									</tr>
-									</table>
-										<div class="d-flex mt-1 ps-2">
-											<i class="ai-star-filled text-warning"></i> <i
-												class="ai-star-filled text-warning"></i> <i
-												class="ai-star-filled text-warning"></i> <i
-												class="ai-star-half text-warning"></i> <i
-												class="ai-star text-warning"></i> <span
-												class="text-warning fw-bold mt-n1 ms-2">3.5</span> <span
-												class="text-muted mt-n1 ms-2">(1,234)</span>
-										</div>
-								</div>
-							</div>
-						</div>
-					</th:block>
+						  <div class="row align-items-center gy-2 mb-4 pb-1 pb-sm-2 pb-lg-3">
+          <div class="col-lg-5"></div>
+          <div class="col-xl-2 offset-xl-1 col-lg-3 col-sm-5"></div>
+          <div class="col-lg-4 col-sm-7">
+            <div class="position-relative"></div>
+          </div>
+        </div>
+        <!-- 검색 결과-->
+        <style>
+          .my-card-title {
+            color: #121519 !important;
+            transition: 0.4s;
+          }
+          .my-card-title:hover {
+            color: #e8ae50 !important;
+            transition: 0.4s;
+          }
+        </style>
+        <!-- ITEM -->
+        <th:block th:each="item : ${list}">
+        <div class="row g-0 border-0 mb-4 align-items-center">
+          <div class="card-hover position-relative bg-secondary rounded-1 mb-4 col-4">
+            <!-- 북마크 -->
+            <th:block th:if="${loginMember != null}">
+	            <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3" type="button">
+	            <th:block th:if="${item.bookmark} == 'Y'">
+	               <i th:value="${item.bookmark}" class="ai-heart-filled fs-xl"  th:onclick="addFavor(this, [[${item.hNo}]], [[${loginMember.mno}]])"></i>
+				</th:block>
+	            <th:block th:if="${item.bookmark} != 'Y'">
+	               <i th:value="${item.bookmark}" class="ai-heart fs-xl"  th:onclick="addFavor(this, [[${item.hNo}]], [[${loginMember.mno}]])"></i>
+				</th:block>
+
+	            </button>
+            </th:block>
+            <a class="d-block" th:href="|/heritage/detail?no=${item.hNo}|">
+              <img th:src="${item.img}" class="rounded-4">
+            </a>
+          </div>
+          <div class="col-8">
+            <div class="pb-sm-4 ps-sm-4 pe-lg-4" style="margin-left: 10%">
+              <a th:href="|/heritage/detail?no=${item.hNo}|" style="text-decoration: none">
+                <div class="h3 my-card-title"> 
+                	[[${item.name}]]([[${item.name2}]])
                 </div>
+              </a>
+              <table class="table">
+                <tr>
+                  <td class="fw-bold text-black" style="white-space: nowrap"><i class="far fa-address-book text-primary"></i>분류</td>
+                  <td> [[${item.gcodeName}]]   / [[${item.bcodeName}]]   / [[${item.mcodeName}]]   / [[${item.scodeName}]]  </td>
+                </tr>
+                <tr>
+                  <td class="fw-bold text-black" style="white-space: nowrap"><i class="fas fa-phone text-primary"></i>시대</td>
+                  <td> [[${item.era}]] </td>
+                </tr>
+                <tr>
+                  <td class="fw-bold text-black" style="white-space: nowrap"><i class="far fa-calendar text-primary"></i>지정일</td>
+                  <td>[[${#dates.format(item.asDate, 'yyyy-MM-dd')}]]</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold text-black" style="white-space: nowrap; border-bottom: none"><i class="fas fa-calendar-day text-primary"></i>소재지</td>
+                  <td style="border-bottom: none"> [[${item.location}]] </td>
+                </tr>
+              </table>
+              <div class="d-flex mt-1 ps-2" name="stars" th:data-hno="${item.hNo}" th:data-average="${item.average}">
+                <i class="ai-star text-warning" th:id="'star-1-' + ${item.hNo}"></i>
+                <i class="ai-star text-warning" th:id="'star-2-' + ${item.hNo}"></i>
+                <i class="ai-star text-warning" th:id="'star-3-' + ${item.hNo}"></i>
+                <i class="ai-star text-warning" th:id="'star-4-' + ${item.hNo}"></i>
+                <i class="ai-star text-warning" th:id="'star-5-' + ${item.hNo}"></i>
+                <span class="list-inline-item me-1 h6 mb-0 px-1" th:text="${#numbers.formatDecimal(item.average, 1, 1)}"></span>
               </div>
             </div>
           </div>
         </div>
+        </th:block>
+
+		</div>
       </div>
       <!-- Divider for dark mode only-->
       <hr class="d-none d-dark-mode-block">
@@ -157,32 +167,38 @@
     <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
     <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <!-- Main theme script-->
     <script src="assets/js/theme.min.js"></script>
-    
-    <!-- 북마크  -->
+     <script type="text/javascript">
+		function orderBy(param) {
+			searchForm.order.value = param;
+			searchForm.submit();
+		}
+	</script>
+	<!-- 북마크  -->
 	<script>
-		function addFavor(heriBookmark, hNo, mNo) {
-			var $heriBookmark = $(heriBookmark);
+		function addFavor(heriBookmark, hNo, mno) {
+			var heriBookmark = $(heriBookmark);
+			console.log(heriBookmark);
 			$.ajax({
 				type : "POST",
 				url : "/heritage/addHeriBookmark",
 				data : JSON.stringify({
 					hNo : hNo,
-					mNo : mNo
+					mno : mno
 				}),
 				dataType : "json",
 				contentType : "application/json;charset=UTF-8",
 				success : function(response) {
 					alert(response.message);
 
-					if (response.message === "즐겨찾기에 추가되었습니다.") {
-						$heriBookmark.attr("class", "ai-bookmark-filled fs-xl d-dark-mode-none");
-						$heriBookmark.css("color", " --ar-warning ");
-					}
-					if (response.message === "이미 즐겨찾기에 추가되어 있습니다. 삭제합니다.") {
-						$heriBookmark.attr("class", "ai-bookmark fs-xl");
-						$heriBookmark.css("color", "d-dark-mode-none");
+					if (heriBookmark.hasClass('ai-heart')) {
+						heriBookmark.removeClass("ai-heart");
+						heriBookmark.addClass("ai-heart-filled");
+					} else {
+						heriBookmark.removeClass("ai-heart-filled");
+						heriBookmark.addClass("ai-heart");
 					}
 				},
 				error : function(xhr, status, error) {
@@ -190,7 +206,26 @@
 				}
 			});
 		}
+		
+		$(document).ready(function () {
+			$('[name=stars]').each(function () {
+				var hno = $(this).data('hno');
+				var stars = $(this).data('average');
+				for (var i = 1; i <= 5; i++) {
+					var id = '#star-' + i + '-' + hno;
+					var icon = $(id);
+		    		if (stars >= 1) {
+		    			icon.removeClass('ai-star');
+		    			icon.addClass('ai-star-filled');
+		    			stars -= 1;
+		    		} else if (stars >= 0.5) {
+		    			icon.removeClass('ai-star');
+		    			icon.addClass('ai-star-half');
+		    			stars = 0;
+		    		}
+				}
+			});
+		});
 	</script>
-    
   </body>
 </html>

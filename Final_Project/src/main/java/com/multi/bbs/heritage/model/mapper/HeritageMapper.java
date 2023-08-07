@@ -17,23 +17,38 @@ public interface HeritageMapper {
 
 	List<Heritage> selectHeritageList(Map<String, Object> paramMap);
 
-	Heritage selectHeritageByNo(int No);
+	Heritage selectHeritageByNo(Map<String, String> param);
 
 	int insertReply(Reply reply);
 
 	List<Reply> getRepliesList(int hNo);
 
+	int deleteReply(int rNo);
 	
 	// 북마크
 	List<HeriBookmark> selectHeriBookmarkList(int mno);
 
-	List<Heritage> selectHeritageByHNo(List<Integer> hNoList);
+	List<Heritage> selectBookmarkHeritage(int mno);
 
 	int selectHeriBookmarkCount(Map<String, Object> map);
 
 	int deleteHeriBookmark(Map<String, Object> map);
 
 	int insertHeriBookmark(Map<String, Object> map);
+
+	
+	Double selectHeritageStarsAverage(int no);
+	  
+
+	int selectReplyCountByHNo(int no);
+
+	int submitHeriStar(Map<String, String> param);
+
+	Map<String, Object> getHeriStar(Map<String, String> param);
+
+	int updateHeriStar(Map<String, String> param);
+	 
+
 
 
 
