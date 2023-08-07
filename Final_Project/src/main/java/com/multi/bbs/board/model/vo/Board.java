@@ -1,7 +1,6 @@
 package com.multi.bbs.board.model.vo;
 
 import java.util.Date;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,8 +19,8 @@ public class Board {
 	private String content;
 	private String fileName;
 	private String reFileName;
-	private List<Comment> commentList; 
 	private Date writeTime;
 	private String isModified;
 	private int views;
+	private String timeDiff;
 }

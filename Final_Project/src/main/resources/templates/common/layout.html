@@ -180,7 +180,10 @@
         </a>
         <div class="dropdown nav d-none d-sm-block order-lg-3 ms-3" th:if="${loginMember != null}">
           <a class="nav-link d-flex align-items-center p-0" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-            <img class="border rounded-circle" th:src="@{/assets/img/avatar/01.jpg}" width="40" alt="Isabella Bocouse" />
+            <div class="rounded-circle border overflow-hidden align-items-center" style="width: 48px !important; height: 48px !important; display: flex">
+              <i class="ai-user mx-auto" style="font-size: 28px; color: #303030;" th:if="${loginMember.reFileName == null}"></i>
+              <img th:src="@{'/board/file/' + ${loginMember.reFileName}}" style="width: 48px; height: 48px;" th:if="${loginMember.reFileName != null}">
+            </div>
             <div class="ps-2">
               <div class="fs-sm dropdown-toggle fw-bold" th:text="${loginMember.name}"></div>
             </div>
@@ -242,11 +245,11 @@
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">커뮤니티</a>
+            <a class="nav-link dropdown-toggle fw-bold" th:href="@{/board}" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">커뮤니티</a>
             <ul class="dropdown-menu">
-              <li class="dropdown"><a class="dropdown-item" href="#">문화 소식</a></li>
-              <li class="dropdown"><a class="dropdown-item" href="#">자유게시판</a></li>
-              <li class="dropdown"><a class="dropdown-item" href="#">포토게시판</a></li>
+              <li class="dropdown"><a class="dropdown-item" th:href="@{/board/noti}">문화 소식</a></li>
+              <li class="dropdown"><a class="dropdown-item" th:href="@{/board/free}">자유게시판</a></li>
+              <li class="dropdown"><a class="dropdown-item" th:href="@{/board/photo}">포토게시판</a></li>
             </ul>
           </li>
         </ul>
@@ -284,17 +287,17 @@
             <div class="row">
               <div class="col-6">
                 <ul class="nav flex-column pb-2 pb-md-0">
-                  <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">회원가입</a></li>
-                  <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">문화재</a></li>
-                  <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">행사일정</a></li>
-                  <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">온라인 전시</a></li>
+                  <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" th:href="@{/sign-up}">회원가입</a></li>
+                  <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" th:href="@{/heritage/list}">문화재</a></li>
+                  <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" th:href="@{/event}">행사일정</a></li>
+                  <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" th:href="@{/exhibition}">온라인 전시</a></li>
                 </ul>
               </div>
               <div class="col-6">
                 <ul class="nav flex-column pb-2 pb-md-0">
-                  <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">로그인</a></li>
-                  <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">박물관</a></li>
-                  <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">투어</a></li>
+                  <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" th:href="@{/sign-in}">로그인</a></li>
+                  <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" th:href="@{/museum}">박물관</a></li>
+                  <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" th:href="@{/tour}">투어</a></li>
                   <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">쇼핑몰</a></li>
                 </ul>
               </div>
@@ -314,9 +317,9 @@
             data-hide-label="Decors"></a>
           <div class="collapse d-md-block" id="decors" data-bs-parent="#links">
             <ul class="nav flex-column pb-2 pb-md-0">
-              <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">자유게시판</a></li>
-              <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">문화소식</a></li>
-              <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" href="#">포토게시판</a></li>
+              <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" th:href="@{/board/noti}">문화소식</a></li>
+              <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" th:href="@{/board/free}">자유게시판</a></li>
+              <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" th:href="@{/board/photo}">포토게시판</a></li>
             </ul>
           </div>
         </div>
@@ -335,17 +338,17 @@
             <div class="row">
               <div class="col-6">
                 <ul class="nav flex-column pb-2 pb-md-0">
-                  <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">김상혁</span></li>
-                  <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">정희선</span></li>
-                  <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">차용택</span></li>
-                  <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">함지우</span></li>
+                  <li class="nav-item"><span class="nav-link fw-normal px-0 py-1">김상혁</span></li>
+                  <li class="nav-item"><span class="nav-link fw-normal px-0 py-1">정희선</span></li>
+                  <li class="nav-item"><span class="nav-link fw-normal px-0 py-1">차용택</span></li>
+                  <li class="nav-item"><span class="nav-link fw-normal px-0 py-1">함지우</span></li>
                 </ul>
               </div>
               <div class="col-6">
                 <ul class="nav flex-column pb-2 pb-md-0">
-                  <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">봉홍석</span></li>
-                  <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">지석환</span></li>
-                  <li class="nav-item"><span class="nav-link fw-normal px-0 py-1" href="#">추정빈</span></li>
+                  <li class="nav-item"><span class="nav-link fw-normal px-0 py-1">봉홍석</span></li>
+                  <li class="nav-item"><span class="nav-link fw-normal px-0 py-1">지석환</span></li>
+                  <li class="nav-item"><span class="nav-link fw-normal px-0 py-1">추정빈</span></li>
                 </ul>
               </div>
             </div>
@@ -371,5 +374,19 @@
       </div>
     </div>
   </footer>
+  
+  
+  <aside class="col-lg-3" id="boardSidebar">
+    <div class="offcanvas-lg offcanvas-start">
+      <div class="offcanvas-body pt-2 pt-lg-0 pe-lg-4">
+        <ul class="nav flex-column">
+          <li class="h4 nav-item px-0 pb-3">카테고리</li>
+          <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" th:href="@{/board/noti}">문화소식</a></li>
+          <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" th:href="@{/board/free}">자유게시판</a></li>
+          <li class="nav-item"><a class="nav-link fw-normal px-0 py-1" th:href="@{/board/photo}">포토게시판</a></li>
+        </ul>
+      </div>
+    </div>
+  </aside>
 </body>
 </html>

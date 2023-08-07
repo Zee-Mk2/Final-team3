@@ -159,7 +159,7 @@
         <!-- Home button-->
         <a
           class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4"
-          href="index.html"
+          th:href="@{/}"
           data-bs-toggle="tooltip"
           data-bs-placement="left"
           title="Back to home">
@@ -168,13 +168,32 @@
         <!-- Sign up form-->
         <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5">
           <div class="w-100 mt-auto" style="max-width: 526px">
-            <a href="index.html"><img src="assets/img/logo_crimson.png" class="d-dark-mode-none mb-4" width="55" /></a>
+            <a th:href="@{/}"><img src="assets/img/logo_crimson.png" class="d-dark-mode-none mb-4" width="55" /></a>
             <h1>회원가입</h1>
             <p class="pb-3 mb-3 mb-lg-4">
               이미 계정이 있나요?&nbsp;&nbsp;
               <a th:href="@{sign-in}">여기에서 로그인하세요!</a>
             </p>
-            <form class="needs-validation" method="post" th:action="@{/sign-up}" id="form">
+            <form class="needs-validation" method="post" th:action="@{/sign-up}" id="form" enctype="multipart/form-data">
+                <div class="d-flex align-items-center mb-4">
+                  <label
+                    for="upfile"
+                    id="image-preview"
+                    class="d-flex flex-column justify-content-end position-relative overflow-hidden rounded-circle bg-size-cover bg-position-center flex-shrink-0 border"
+                    style="width: 80px; height: 80px; background-image: url(assets/img/logo_black.png)">
+                    <span class="d-block text-light text-center lh-1 pb-1" style="background-color: rgba(0, 0, 0, 0.5)"><i class="ai-camera"></i></span>
+                  </label>
+                  <div class="ps-3 w-100">
+                    <input class="form-control form-control-lg" type="file" id="upfile" name="upfile" accept="image/*" onchange="showImagePreview(event)">
+                  </div>
+                  <script>
+	                  function showImagePreview(event) {
+	                      const previewLabel = document.querySelector('#image-preview');
+	                      const previewImage = URL.createObjectURL(event.target.files[0]);
+	                      previewLabel.style.backgroundImage = `url(${previewImage})`;
+	                  }
+                  </script>
+                </div>
               <div class="row row-cols-1 row-cols-sm-2">
                 <div class="col mb-4">
                   <input class="form-control form-control-lg" type="text" placeholder="이름" required name="name" id="name"/>

@@ -18,26 +18,8 @@ import com.multi.bbs.common.util.PageInfo;
 
 @Service
 public class BoardService {
-	
 	@Autowired
-	private BoardMapper mapper;
-	
-	@Transactional(rollbackFor = Exception.class)
-	public int saveBoard(Board board) {
-		int result = 0;
-		if(board.getBno() == 0) {
-			result = mapper.insertBoard(board);
-		}else {
-			result = mapper.updateBoard(board);
-		}
-		return result;
-	}
-	
-	@Transactional(rollbackFor = Exception.class)
-	public int saveComment(Comment comment) {
-		return mapper.insertComment(comment);
-	}
-	
+	BoardMapper mapper;
 	
 	public String saveFile(MultipartFile upFile, String savePath) {
 		File folder = new File(savePath);
@@ -50,8 +32,7 @@ public class BoardService {
 		
 		// 파일이름을 랜덤하게 바꾸는 코드, test.txt -> 20221213_1728291212.txt
 		String originalFileName = upFile.getOriginalFilename();
-		String reNameFileName = 
-					LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmssSSS"));
+		String reNameFileName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmssSSS"));
 		reNameFileName += originalFileName.substring(originalFileName.lastIndexOf("."));
 		String reNamePath = savePath + "/" + reNameFileName;
 		
@@ -63,43 +44,46 @@ public class BoardService {
 		}
 		return reNameFileName;
 	}
-	
-	public int getBoardCount(Map<String, String> param) {
-		return mapper.selectBoardCount(param);
-	}
-	
-	public List<Board> getBoardList(PageInfo pageInfo, Map<String, String> param){
-		param.put("limit", "" + pageInfo.getListLimit());
-		param.put("offset", "" + (pageInfo.getStartList() - 1));
-		return mapper.selectBoardList(param);
-	}
-	
+
 	@Transactional(rollbackFor = Exception.class)
-	public Board findByNo(int boardNo) {
-		Board board = mapper.selectBoardByNo(boardNo); 
-		board.setViews(board.getViews() + 1);  
-		mapper.updateReadCount(board);
-		return board; 
-	}
-	
-	public void deleteFile(String filePath) {
-		File file = new File(filePath);
-		if(file.exists()) {
-			file.delete();
+	public int insertBoard(Board board, String isUpdate, String bno) {
+		if (isUpdate == null) {
+			return mapper.insertBoard(board);
+		} else {
+			board.setBno(Integer.valueOf(bno));
+			return mapper.updateBoard(board);
 		}
 	}
-	
-	@Transactional(rollbackFor = Exception.class)
-	public int deleteBoard(int no, String rootPath) {
-		Board board = mapper.selectBoardByNo(no);
-		deleteFile(rootPath + "\\" + board.getReFileName());
-		return mapper.deleteBoard(no);
-	}
-	
-	@Transactional(rollbackFor = Exception.class)
-	public int deleteComment(int no) {
-		return mapper.deleteComment(no);
+
+	public List<Board> getBoardList(Map<String, String> param, PageInfo pageInfo) {
+		param.put("limit", "" + pageInfo.getListLimit());
+		param.put("offset", "" + (pageInfo.getStartList() - 1));
+		return mapper.getBoardList(param);
 	}
 
+	public int getBoardCount(Map<String, String> param) {
+		return mapper.getBoardCount(param);
+	}
 
+	public Board getBoardByBno(int bno) {
+		mapper.increaseViews(bno);
+		return mapper.getBoardByBno(bno);
+	}
+
+	public int deleteBoard(Map<String, String> param) {
+		return mapper.deleteBoard(param);
+	}
+
+	public int postComment(Comment comment) {
+		return mapper.insertComment(comment);
+	}
+
+	public List<Comment> getComment(int bno) {
+		return mapper.getComment(bno);
+	}
+
+	public int deleteComment(int cno) {
+		return mapper.deleteComment(cno);
+	}
+	
 }

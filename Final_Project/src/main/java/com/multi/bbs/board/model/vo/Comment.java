@@ -18,4 +18,6 @@ public class Comment {
 	private String content;
 	private Date writeTime;
 	private String isModified;
+	private String timeDiff;
+	private String reFileName;
 }

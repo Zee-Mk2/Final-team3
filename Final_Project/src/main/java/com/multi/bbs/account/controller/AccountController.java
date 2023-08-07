@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.multi.bbs.account.model.service.AccountService;
 import com.multi.bbs.account.model.vo.Member;
@@ -22,6 +23,8 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService;
 	
+	final static private String savePath = "C:\\upfiles\\";
+	
 	@GetMapping("/sign-in")
 	public String signInPage() {
 		return "account/account-signin";
@@ -33,9 +36,20 @@ public class AccountController {
 	}
 	
 	@PostMapping("/sign-up")
-	public String signUp(@ModelAttribute Member member) {
+	public String signUp(@ModelAttribute Member member, MultipartFile upfile) {
 		System.out.println("member : " + member);
+		
+		// 파일 저장 로직
+		if(upfile != null && upfile.isEmpty() == false) {
+			String renameFileName = accountService.saveFile(upfile, savePath);
+			
+			if(renameFileName != null) {
+				member.setReFileName(renameFileName);
+			}
+		}
+		
 		accountService.signUp(member);
+		
 		return "account/account-signin";
 	}
 	

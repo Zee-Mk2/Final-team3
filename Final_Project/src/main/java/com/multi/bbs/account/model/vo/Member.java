@@ -18,4 +18,5 @@ public class Member {
 	private String phone;
 	private String state;
 	private Date enrollDate;
+	private String reFileName;
 }

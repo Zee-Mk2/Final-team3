@@ -72,6 +72,7 @@ public class TourService {
 		return mapper.getComments(tno);
 	}
 
+	@Transactional(rollbackFor = Exception.class)
 	public int deleteComment(int cno) {
 		return mapper.deleteComment(cno);
 	}
@@ -79,7 +80,8 @@ public class TourService {
 	public List<TourReplyComment> getReply(int tno) {
 		return mapper.getReply(tno);
 	}
-
+	
+	@Transactional(rollbackFor = Exception.class)
 	public int deleteReply(int rcno) {
 		return mapper.deleteReply(rcno);
 	}
@@ -92,6 +94,7 @@ public class TourService {
 		}
 	}
 
+	@Transactional(rollbackFor = Exception.class)
 	public int deleteTour(int tno) {
 		return mapper.deleteTour(tno);
 	}

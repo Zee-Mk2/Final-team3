@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+  <!-- Vendor styles-->
+    <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/flatpickr/dist/flatpickr.min.css}"/>
+    <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
+    
+  <!-- Body-->
+  <body>
+    <!-- Page loading spinner-->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Loading...</span>
+      </div>
+    </div>
+    <!-- Page wrapper-->
+    <main class="page-wrapper">
+     <!-- 헤더 시작 -->
+     <header th:replace="~{common/layout :: #header}"></header>
+
+      <section>
+        <div class="jarallax bg-dark py-5" data-jarallax data-type="scroll-opacity" data-speed="0.7"
+          style="height: 70vh !important;">
+          <div class="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-60"></div>
+          <div class="jarallax-img"
+            style="background-image: url(https://plus.unsplash.com/premium_photo-1661948404806-391a240d6d40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fCVFQSVCMiVCRCVFQiVCMyVCNSVFQSVCNiU4MXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80);">
+          </div>
+          <div class="container position-relative zindex-5">
+            <!-- Text + button-->
+            <div class="row pt-lg-2 py-xl-4 py-xxl-5 mb-md-4 mb-lg-5">
+              <div class="col-md-10 col-lg-9 col-xl-8 col-xxl-7 pt-5 mb-5 mb-lg-5">
+                <h4 class="display-4 text-light pb-sm-2 pb-md-3 mb-lg-5">커뮤니티</h4>
+                <br><br><br><br><br>
+              </div>
+              <form class="row g-3 bg-white rounded-pill align-items-center">
+                <div class="col-2 my-1">
+                  <select class="form-select" style="border: none;">
+                    <option selected>자유게시판</option>
+                    <option>문화소식</option>
+                    <option>포토게시판</option>
+                  </select>
+                </div>
+                <div class="col-9 my-1">
+                  <input type="text" class="form-control" style="border: none;" placeholder="키워드로 검색">
+                </div>
+                <div class="col-1 my-1">
+                  <button type="submit" class="btn py-2 ms-3"><i class='ai-search'
+                      style="font-size: 26px; color: #202020;"></i></button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page content-->
+      <div class="container py-3 mt-3 mb-lg-4 mb-xl-5">
+        <!-- Breadcrumb-->
+        <nav aria-label="breadcrumb">
+          <ol class="pb-md-1 pb-lg-3 breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/}">홈</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/board}">커뮤니티</a></li>
+            <li class="breadcrumb-item" th:if="${board.boardCat == 'free'}"><a th:href="@{/board/free}">자유게시판</a></li>
+            <li class="breadcrumb-item" th:if="${board.boardCat == 'noti'}"><a th:href="@{/board/free}">문화소식</a></li>
+            <li class="breadcrumb-item" th:if="${board.boardCat == 'photo'}"><a th:href="@{/board/free}">포토게시판</a></li>
+            <li class="breadcrumb-item active" aria-current="page">게시글 보기</li>
+          </ol>
+        </nav>
+
+        <div class="row pb-2 pb-sm-4">
+          <!-- 사이드바 -->
+          <aside th:replace="~{common/layout :: #boardSidebar}"></aside>
+
+          <div class="col-lg-9">
+            <div class="row mt-5">
+              <div class="container">
+                <div class="mb-4">
+                  <h3>[[${board.title}]]</h3>
+                </div>
+                <table class="table">
+                 
+                  <tr>
+                    <div class="row">
+                    
+                    </div>
+                    <div class="row">
+                      <td><P style="color: #E8AE50;">작성자</P></td>
+                      <td>[[${board.name}]]</td>
+                      <td></td>
+                      <td></td>
+                      <td><p style="color: #E8AE50;">조회수</p></td>
+                      <td>[[${board.views}]]</td>
+                      <td></td>
+                      <td></td>
+                      <td><p style="color: #E8AE50;">등록일</p></td>
+                      <td>[[${board.timeDiff}]]</td>
+                    </div>    
+                  </tr>
+                  </table>
+                  
+                <!-- 첨부파일 -->
+                <div class="mb-lg-5">
+                  <th:block th:if="${board.reFileName != null}">
+	                <img th:src="@{'/board/file/' + ${board.reFileName}}"></img>
+                  </th:block>
+                </div>
+                
+                <div>
+                  <p th:each="line: ${lines}">
+                    <span>[[${line}]]<br></span>
+                  </p>
+                </div>
+              </div>
+              <div class="mt-4 row py-3 border-bottom">
+                <div class="col">
+                  <a class="btn btn-primary" th:href="@{'/board/' + ${board.boardCat}}">목록</a>
+                </div>
+                <div class="text-end col" th:if="${(loginMember != null) && (loginMember.mno == board.mno)}">
+                  <a class="btn btn-warning" th:href="@{/board/update(bno=${board.bno}, boardCat=${board.boardCat})}">수정</a>
+                  <a class="btn btn-danger" th:onclick="deleteBoard([[${board.bno}]], [[${board.boardCat}]]); return false;">삭제</a>
+                </div>
+              </div>
+          <!-- Comments-->
+          <div class="mt-5" id="comments">
+            <!-- Comment-->
+            <div th:if="${#lists.isEmpty(comments)}" class="h4 text-muted mb-5 text-center">아직 댓글이 없습니다.</div>
+            <div class="border-bottom py-4 mt-2 mb-4" th:each="comment: ${comments}">
+              <div class="d-flex align-items-center pb-1 mb-3">
+	            <div class="rounded-circle border overflow-hidden align-items-center" style="width: 48px !important; height: 48px !important; display: flex">
+	              <i class="ai-user mx-auto" style="font-size: 28px; color: #303030;" th:if="${comment.reFileName == null}"></i>
+	              <img th:src="@{'/board/file/' + ${comment.reFileName}}" style="width: 48px; height: 48px;" th:if="${comment.reFileName != null}">
+	            </div>
+                <div class="ps-3">
+                  <h6 class="mb-0">[[${comment.name}]]</h6>
+                  <span class="fs-sm text-muted">[[${comment.timeDiff}]]</span>
+                </div>
+                <th:block th:if="${loginMember != null}">
+                  <th:block th:if="${loginMember.mno == comment.mno}">
+	              	<a th:onclick="deleteComment([[${comment.cno}]], [[${board.bno}]]); return false;" class="btn btn-danger px-3 py-1 rounded-1 mt-0" style="margin-left: auto;">삭제</a>
+                  </th:block>
+                </th:block>
+              </div>
+              <p class="pb-2 mb-0">
+                [[${comment.content}]]
+              </p>
+            </div>
+            <!-- Comment form-->
+            <div class="card border-0 bg-secondary p-md-2 p-xl-3 p-xxl-4 mt-md-0" th:if="${loginMember != null}">
+              <div class="card-body">
+                <h2 class="pb-2 pb-lg-3 pb-xl-4">댓글 작성</h2>
+                <form class="row needs-validation g-4" method="post" th:action="@{/board/comment}">
+                  <input type="hidden" name="bno" th:value="${board.bno}">
+                  <input type="hidden" name="boardCat" th:value="${board.boardCat}">
+                  <div class="col-12">
+                    <textarea class="form-control bg-white" rows="4" required id="c-comment" name="content"></textarea>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-warning" type="submit">등록하기</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+              <!-- Sidebar toggle button-->
+              <button class="d-lg-none btn btn-sm fs-sm btn-primary w-100 rounded-0 fixed-bottom" data-bs-toggle="offcanvas" data-bs-target="#sidebarBlog"><i class="ai-layout-column me-2"></i>Sidebar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+  <!-- Footer-->
+  <footer th:replace="~{common/layout :: #footer}"></footer>
+  
+  <!-- Back to top button--><a class="btn-scroll-top" href="#top" data-scroll>
+    <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
+    </svg><i class="ai-arrow-up"></i></a>
+  <!-- Vendor scripts: js libraries and plugins-->
+  <script th:src="@{/assets/vendor/bootstrap/dist/js/bootstrap.bundle.js}"></script>
+  <script th:src="@{/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.js}"></script>
+  <script th:src="@{/assets/vendor/jarallax/dist/jarallax.min.js}"></script>
+  <script th:src="@{/assets/vendor/flatpickr/dist/flatpickr.min.js}"></script>
+  <script th:src="@{/assets/vendor/flatpickr/dist/plugins/rangePlugin.js}"></script>
+  <!-- Main theme script-->
+  <script th:src="@{/assets/js/theme.js}"></script>
+  <script>
+  	function deleteBoard(bno, boardCat) {
+  		var url = '/board/delete?bno=' + bno + '&boardCat=' + boardCat;
+  		if (confirm ('정말 삭제하시겠습니까?')) {
+  			window.location.href = url;
+  		}
+  	}
+  	
+  	function deleteComment(cno, bno) {
+  		var url = '/board/comment/delete?cno=' + cno + '&bno=' + bno;
+  		if (confirm ('정말 댓글을 삭제하시겠습니까?')) {
+  			window.location.href = url;
+  		}
+  	}
+  </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<!-- 향후 Mapper interface가 정의 될 위치 -->
+<mapper namespace="com.multi.bbs.board.model.mapper.BoardMapper">
+	<insert id="insertBoard" parameterType="com.multi.bbs.board.model.vo.Board">
+		INSERT INTO Board (bno, mno, name, state, boardCat, title, content, fileName, reFileName, writeTime, isModified, views)
+			VALUES (DEFAULT, #{mno}, #{name}, DEFAULT, #{boardCat}, #{title}, #{content}, #{fileName}, #{reFileName}, DEFAULT, DEFAULT, 0)
+	</insert>
+	
+	<select id="getBoardList" parameterType="Map" resultType="com.multi.bbs.board.model.vo.Board">
+		SELECT bno, title, name, writeTime, views, fileName, reFileName
+			FROM Board
+			WHERE state = 'Y'
+			AND boardCat = #{boardCat}
+			<if test="searchType == 'title'">
+				AND title LIKE '%${keyword}%'
+			</if>
+			<if test="searchType == 'name'">
+				AND name LIKE '%${keyword}%'
+			</if>
+			ORDER BY bno DESC LIMIT ${limit} OFFSET ${offset}
+	</select>
+	
+	<select id="getBoardCount" parameterType="Map" resultType="int">
+		SELECT COUNT(bno)
+			FROM Board
+			WHERE state = 'Y'
+			AND boardCat = #{boardCat}
+			<if test="searchType == 'title'">
+				AND title LIKE '%${keyword}%'
+			</if>
+			<if test="searchType == 'name'">
+				AND name LIKE '%${keyword}%'
+			</if>
+	</select>
+	
+	<select id="getBoardByBno" parameterType="int" resultType="com.multi.bbs.board.model.vo.Board">
+		SELECT * FROM Board
+			WHERE bno = ${bno}
+	</select>
+	
+	<update id="increaseViews" parameterType="int">
+		UPDATE Board SET views = (views + 1) WHERE bno = #{bno}
+	</update>
+	
+	<update id="deleteBoard" parameterType="Map">
+		UPDATE Board SET state = 'N' WHERE bno = #{bno}
+	</update>
+	
+	<update id="updateBoard" parameterType="com.multi.bbs.board.model.vo.Board">
+		UPDATE BOARD
+			SET title = #{title}, content = #{content}
+			<if test="fileName != null">
+				, fileName = #{fileName}, reFileName = #{reFileName}
+			</if>
+			WHERE bno = #{bno}
+	</update>
+	
+	<insert id="insertComment" parameterType="com.multi.bbs.board.model.vo.Comment">
+		INSERT INTO Comment (cno, bno, mno, name, state, content, writeTime, isModified)
+			VALUES (DEFAULT, #{bno}, #{mno}, #{name}, DEFAULT, #{content}, DEFAULT, DEFAULT)
+	</insert>
+	
+	<select id="getComment" parameterType="int" resultType="com.multi.bbs.board.model.vo.Comment">
+		SELECT C.*, M.reFileName FROM Comment C
+			JOIN Member M ON C.mno = M.mno
+			WHERE C.state = 'Y' AND C.bno = #{bno}
+	</select>
+	
+	<update id="deleteComment" parameterType="int">
+		UPDATE Comment SET state = 'N' WHERE cno = #{cno}
+	</update>
+	
+</mapper>
