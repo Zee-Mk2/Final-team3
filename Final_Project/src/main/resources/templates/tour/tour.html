@@ -54,7 +54,10 @@
             
             <!-- Post-->
             <article class="row g-0 border-0 mb-4" th:each="tour: ${tours}">
-              <a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" th:href="@{/tour/detail(tno=${tour.tno})}" style="background-image: url(assets/img/blog/list/01.jpg); min-height: 14rem"></a>
+              <a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5 overflow-hidden" th:href="@{/tour/detail(tno=${tour.tno})}" style="max-height: 14rem">
+                <img th:src="@{/assets/img/blog/list/01.jpg}" th:if="${tour.reFileName == null}" class="w-100"/>
+                <img th:src="@{'/board/file/' + ${tour.reFileName}}" th:if="${tour.reFileName != null}" name="thumbnail"/>
+              </a>
               <div class="col-sm-7">
                 <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
                   <h3>
@@ -200,6 +203,7 @@
     <script th:src="@{/assets/vendor/jarallax/dist/jarallax.min.js}"></script>
     <script th:src="@{/assets/vendor/flatpickr/dist/flatpickr.min.js}"></script>
     <script th:src="@{/assets/vendor/flatpickr/dist/plugins/rangePlugin.js}"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <!-- Main theme script-->
     <script th:src="@{/assets/js/theme.js}"></script>
     <script type="text/javascript">
@@ -207,6 +211,24 @@
 			searchForm.page.value = page;
 			searchForm.submit();
 		}
+		$(document).ready(function () {
+	        $("[name=thumbnail]").each(function () {
+	            var img = $(this);
+	            var frame = $(this).parent();
+	            var width = parseInt(img.css("width"));
+	            var ratio = parseInt(frame.css("height")) / parseInt(img.css("height"));
+	
+	            if (ratio > 1) {
+	              img.css("max-width", "none");
+	              img.css("width", width * ratio);
+	              var translate = (parseInt(img.css("width")) - parseInt(frame.css("width"))) / 2;
+	              img.css("position", "relative");
+	              img.css("left", -translate + "px");
+	            } else {
+	              img.css("width", "100%");
+	            }
+          	});
+		});
 	</script>
   </body>
 </html>

@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class EventReview {
 	private int evntReviewNo;
 	private int evntNo;
@@ -20,5 +19,5 @@ public class EventReview {
 	private Date writeTime;
 	private String name;
 	private String timeDiff;
-
+	private String reFileName;
 }

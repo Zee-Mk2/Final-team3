@@ -20,4 +20,5 @@ public class TourComment {
 	private String isModified;
 	private String isReply;
 	private String timeDiff;
+	private String reFileName;
 }

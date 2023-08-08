@@ -4,6 +4,7 @@
 
  	<!-- Vendor styles-->
     <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/nouislider/dist/nouislider.min.css}" />
+    <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/lightgallery/css/lightgallery-bundle.min.css}" />
     <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
   
     
@@ -162,7 +163,10 @@
 				<div th:each="review : ${eventReviews}">
 				    <div class="border-bottom py-4 mt-2 mb-4">
 				        <div class="d-flex align-items-center pb-1 mb-3">
-				            <img class="rounded-circle" th:src="@{/assets/img/avatar/07.jpg}" width="48" alt="Comment author" />
+				            <div class="rounded-circle border overflow-hidden align-items-center" style="width: 48px !important; height: 48px !important; display: flex">
+				              <i class="ai-user mx-auto" style="font-size: 28px; color: #303030;" th:if="${review.reFileName == null}"></i>
+				              <img th:src="@{'/board/file/' + ${review.reFileName}}" style="width: 48px; height: 48px;" th:if="${review.reFileName != null}">
+				            </div>
 				            <div class="ps-3">
 				                <h6 class="mb-0" th:text="${review.name}"></h6>
 				                <span th:if="${review.rating == 1}"><i class="ai-star-filled text-warning"></i></span>
@@ -170,7 +174,7 @@
 							    <span th:if="${review.rating == 3}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i></span>
 							    <span th:if="${review.rating == 4}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i></span>
 							    <span th:if="${review.rating == 5}"><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i><i class="ai-star-filled text-warning"></i></span>
-							    <span th:text="${review.timeDiff}"></span>
+							    <span th:text="${review.timeDiff}" class="text-muted me-2"></span>
 				            </div>
 				        </div>
 				        <p class="pb-2 mb-0" th:text="${review.content}"></p>
@@ -184,26 +188,24 @@
 
               <!-- 후기 작성 -->
 				<div class="card-body" id="content">
-				  <h2 class="pb-2 pb-lg-3 pb-xl-4">후기 작성</h2>
+				  <h2 class="pb-2 pb-lg-3 pb-xl-4 my-4">후기 작성</h2>
 				  <form class="row needs-validation g-4" th:action="@{/reply}" method="post" id="eventReviewForm">
 				  <div class="row d-flex">
-				  <div class="fw-bold"><h4 style="color: #780422;">별점 남기기</h4></div>
                       <div class="text-warning" id="starFormat">
-                        <input type="radio" name="rating" id="1star" value="1" style="opacity: 0;" th:checked="${ratingValue == 1}" >
+                        <input type="radio" name="rating" id="1star" value="1" style="opacity: 0;" th:checked="${ratingValue == 1}" required>
                         <label class="ai-star fs-2" for="1star" id="1starLabel"></label>
-                        <input type="radio" name="rating" id="2star" value="2" style="opacity: 0;" th:checked="${ratingValue == 2}" >
+                        <input type="radio" name="rating" id="2star" value="2" style="opacity: 0;" th:checked="${ratingValue == 2}" required>
                         <label class="ai-star fs-2" for="2star" id="2starLabel"></label>
-                        <input type="radio" name="rating" id="3star" value="3" style="opacity: 0;" th:checked="${ratingValue == 3}">
+                        <input type="radio" name="rating" id="3star" value="3" style="opacity: 0;" th:checked="${ratingValue == 3}" required>
                         <label class="ai-star fs-2" for="3star" id="3starLabel"></label>
-                        <input type="radio" name="rating" id="4star" value="4" style="opacity: 0;" th:checked="${ratingValue == 4}">
+                        <input type="radio" name="rating" id="4star" value="4" style="opacity: 0;" th:checked="${ratingValue == 4}" required>
                         <label class="ai-star fs-2" for="4star" id="4starLabel"></label>
-                        <input type="radio" name="rating" id="5star" value="5" style="opacity: 0;" th:checked="${ratingValue == 5}">
+                        <input type="radio" name="rating" id="5star" value="5" style="opacity: 0;" th:checked="${ratingValue == 5}" required>
                         <label class="ai-star fs-2" for="5star" id="5starLabel"></label>
                       </div>
                       </div>
 				    <div class="col-12">
-				      <label class="form-label"><h4 style="color: #780422;">내용</h4></label>
-				      <textarea class="form-control" rows="4" placeholder="후기를 작성해 주세요..." name="content"></textarea>
+				      <textarea class="form-control" rows="4" placeholder="후기를 작성해 주세요..." name="content" required></textarea>
 				    </div>
 				    <div class="col-12"></div>
 				    <input type="hidden" name="evntNo" th:value="${event.evntNo}">
@@ -303,5 +305,6 @@
     <script th:src="@{/assets/vendor/lightgallery/plugins/video/lg-video.min.js}"></script>
     <script th:src="@{/assets/vendor/lightgallery/plugins/thumbnail/lg-thumbnail.min.js}"></script>
     <!-- Main theme script-->
+	<script th:src="@{/assets/js/theme.js}"></script>
   </body>
 </html>

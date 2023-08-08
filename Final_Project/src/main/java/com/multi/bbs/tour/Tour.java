@@ -26,4 +26,5 @@ public class Tour {
 	private String reFileName;
 	private Date writeTime;
 	private String timeDiff;
+	private String profilePic;
 }

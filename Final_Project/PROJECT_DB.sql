@@ -110,6 +110,7 @@ CREATE TABLE Member (
     password VARCHAR(100) NOT NULL,
     phone 	 VARCHAR(13),
     state 	 VARCHAR(1) DEFAULT 'Y' CHECK(STATE IN('Y', 'N')),
+    reFileName VARCHAR(100),
     enrollDate DATETIME  DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -232,6 +233,31 @@ CREATE TABLE EventImg(
 );
 
 SELECT * FROM EventImg;
+
+DROP table eventReview;
+CREATE TABLE EventReview (
+	evntReviewNo INT PRIMARY KEY auto_increment,
+    evntNo INT,
+    Mno INT,
+    content VARCHAR(100),
+    rating INT,
+    writeTime DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (evntNo) REFERENCES Event (evntNo) ON DELETE CASCADE,
+    FOREIGN KEY (Mno) REFERENCES Member (mno) ON DELETE CASCADE
+);
+
+SELECT * FROM EventReview;
+
+DROP table EventStars;
+CREATE TABLE EventStars(
+	mno int,
+    evntNo int,
+    rating int,
+    FOREIGN KEY (evntNo) REFERENCES Event(evntNo) ON DELETE CASCADE,
+    FOREIGN KEY (mno) REFERENCES member(mno) ON DELETE CASCADE
+);
+
+SELECT * FROM EventReview;
 
 ------------------------------------------------
 --------------- Board 관련 테이블 ------------------

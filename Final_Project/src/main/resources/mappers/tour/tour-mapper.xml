@@ -15,7 +15,7 @@
 			SELECT @@IDENTITY AS tno
 		</selectKey>
 		INSERT INTO Tour (tno, mno, name, state, title, region, numOfPeople, startDate, endDate, duration, category, content, fileName, reFileName, writeTime)
-			VALUES (DEFAULT, #{mno}, #{name}, DEFAULT, #{title}, #{region}, 2, #{startDate}, #{endDate}, DEFAULT, #{category}, #{content}, null, null, DEFAULT)
+			VALUES (DEFAULT, #{mno}, #{name}, DEFAULT, #{title}, #{region}, #{numOfPeople}, #{startDate}, #{endDate}, DEFAULT, #{category}, #{content}, #{fileName}, #{reFileName}, DEFAULT)
 	</insert>
 	
 	<insert id="insertTourSchedule" parameterType="com.multi.bbs.tour.TourSchedule">
@@ -73,7 +73,9 @@
 	</select>
 	
 	<select id="getTourByTno" parameterType="int" resultType="com.multi.bbs.tour.Tour">
-		SELECT * FROM Tour WHERE tno = #{tno}
+		SELECT T.*, M.reFileName AS profilePic FROM Tour T
+			LEFT JOIN Member M ON (T.mno = M.mno)
+			WHERE T.tno = #{tno}
 	</select>
 	
 	<select id="getSchedulsByTno" parameterType="int" resultType="com.multi.bbs.tour.TourSchedule">
@@ -86,7 +88,9 @@
 	</insert>
 	
 	<select id="getComments" parameterType="int" resultType="com.multi.bbs.tour.TourComment">
-		SELECT * FROM TourComment WHERE state = 'Y' AND tno = #{tno}
+		SELECT TC.*, M.reFileName FROM TourComment TC
+			LEFT JOIN Member M ON (TC.mno = M.mno)
+			WHERE TC.state = 'Y' AND TC.tno = #{tno}
 	</select>
 	
 	<update id="deleteComment" parameterType="int">
@@ -99,7 +103,9 @@
 	</insert>
 	
 	<select id="getReply" parameterType="int" resultType="com.multi.bbs.tour.TourReplyComment">
-		SELECT * FROM TourReplyComment WHERE state = 'Y' AND tno = #{tno}
+		SELECT TRC.*, M.reFileName FROM TourReplyComment TRC
+			LEFT JOIN Member M ON (TRC.mno = M.mno)
+			WHERE TRC.state = 'Y' AND TRC.tno = #{tno}
 	</select>
 	
 	<update id="deleteReply" parameterType="int">

@@ -40,7 +40,6 @@ public class EventController {
 		
 		model.addAttribute("startDate", param.get("startDate"));
 		model.addAttribute("list", list);
-		System.out.println(list);
 		model.addAttribute("param", param);
 		
 		return "event/event";
@@ -55,23 +54,20 @@ public class EventController {
         
         Event event = service.getEventByNo(no);
         model.addAttribute("event", event);
-        System.out.println(event);
         
         List<EventImg> eventImages = service.getEventImagesByNo(no);
         model.addAttribute("eventImages", eventImages);
-        System.out.println(eventImages);
         
         List<EventReview> eventReviewsWithMember = service.getEventReviewsWithMemberByNo(no);
         model.addAttribute("eventReviews", eventReviewsWithMember);
-        System.out.println(eventReviewsWithMember);
         
 		model.addAttribute("eventProgramList", eventProgramDTOList);
-		System.out.println(eventProgramDTOList);
 		
 		CalcTime calcTime = new CalcTime();
 		for (EventReview review : eventReviewsWithMember) {
 	        String timeDiff = calcTime.getTimeDiff(review.getWriteTime());
 	        review.setTimeDiff(timeDiff);
+	        System.out.println(review);
 	    }
 		
 		int eventStars = service.getEventStarsByEventNo(no);
