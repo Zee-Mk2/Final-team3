@@ -25,11 +25,10 @@
         <!-- Breadcrumb-->
         <nav aria-label="breadcrumb">
           <ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">홈</a></li>
-            <li class="breadcrumb-item"><a href="shop-catalog.html">박물관 검색</a></li>
-            <li class="breadcrumb-item"><a href="shop-catalog.html">박물관 상세</a></li>
-            <li class="breadcrumb-item"><a href="shop-catalog.html">예약하기</a></li>
-            <li class="breadcrumb-item"><a href="shop-catalog.html" style="color: #e39d2c">전시 해설 예약</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/}">홈</a></li>
+            <li class="breadcrumb-item"><a th:href="@{museum}">박물관 검색</a></li>
+            <li class="breadcrumb-item"><a th:href="|/museumDetail?no=${museum.musNo}|">박물관 상세</a></li>
+            <li class="breadcrumb-item"><a th:href="@{museumBooking2}" style="color: #e39d2c">예약하기</a></li>
           </ol>
         </nav>
         <!-- Page title-->
@@ -40,7 +39,7 @@
             <div class="rounded-5 position-absolute top-0 start-0 w-100 h-100"></div>
             <img
               class="d-block position-relative zindex-2 mx-auto"
-              src="https://www.museum.go.kr/uploadfile/ecms/media/2023/01/2923999D-4175-39CB-89ED-B9AA0EB4E41E_thumb.png"
+              src="${museum.ProgramImg}"
               width="636"
               alt="Image"
               style="border-radius: 7%" />
@@ -110,7 +109,7 @@
               <td class="text-center py-2">1/10</td>
               <td class="text-center py-2">-</td>
               <td class="text-center py-2">
-                <button class="btn btn-lg btn-warning w-25 h-50 me-2 btn-sm" type="button">접수중</button>
+                <a th:href="@{museumBooking3}"><button class="btn btn-lg btn-warning w-25 h-50 me-2 btn-sm" type="button">접수중</button></a>
               </td>
             </tr>
             <tr class="border-bottom border-2">

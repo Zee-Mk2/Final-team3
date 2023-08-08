@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<!-- 향후 Mapper interface가 정의 될 위치 -->
+<mapper namespace="com.multi.bbs.museum.model.mapper.MuseumMapper">
+
+	<resultMap type="Museum" id="museumresultMap">
+	
+	</resultMap>
+	
+	<select id="selectMuseumList" resultType="com.multi.bbs.museum.model.vo.Museum" parameterType="map">
+		SELECT M.* , MS.average
+		<if test="mno != null">
+			, IF(MB.MNO = #{mno},'Y','N') AS bookmark
+		</if>
+		FROM museum M
+		LEFT JOIN museBookmark MB ON (M.musNo = MB.musNo)
+		LEFT JOIN (
+			SELECT musNo, AVG(rating) AS average
+			FROM MuseumStars
+			GROUP BY musNo
+	    ) MS ON (M.musNo = MS.musNo)
+		WHERE 1 = 1
+		<if test="name != null">
+			AND name LIKE '%${name}%'
+		</if>
+		<if test="address != null">
+			AND address LIKE '%${address}%'
+		</if>
+		ORDER BY musNo DESC LIMIT ${limit} OFFSET ${offset}
+	</select>
+	
+	<select id="selectResultCount" resultType="int">
+		SELECT count(*)
+		FROM Museum
+		WHERE 1 = 1
+		<if test="musNo != null">
+			AND musNo LIKE '%${musNo}%'
+		</if>
+		<if test="name != null">
+			AND name LIKE '%${name}%'
+		</if>
+		<if test="summary != null">
+			AND summary LIKE '%${summary}%'
+		</if>
+		<if test="viewHours != null">
+			AND viewHours LIKE '%${viewHours}%'
+		</if>
+		<if test="fee != null">
+			AND fee LIKE '%${fee}%'
+		</if>
+		<if test="tel != null">
+			AND tel LIKE '%${tel}%'
+		</if>
+		<if test="img != null">
+			AND img LIKE '%${img}%'
+		</if>
+		<if test="sumImg != null">
+			AND sumImg LIKE '%${sumImg}%'
+		</if>
+		<if test="la != null">
+			AND la LIKE '%${la}%'
+		</if>
+		<if test="lo != null">
+			AND lo LIKE '%${lo}%'
+		</if>
+		<if test="ProgramImg != null">
+			AND ProgramImg LIKE '%${ProgramImg}%'
+		</if>
+		<if test="address != null">
+			AND address LIKE '%${address}%'
+		</if>
+	</select>
+	
+	<select id="selectMuseumByNo" parameterType="Map" resultType="com.multi.bbs.museum.model.vo.Museum">
+		SELECT M.* , MS.average
+		<if test="mno != null">
+			, IF(MB.MNO = #{mno},'Y','N') AS bookmark
+		</if>
+		FROM museum M
+		LEFT JOIN museBookmark MB ON (M.musNo = MB.musNo)
+		LEFT JOIN (
+			SELECT musNo, AVG(rating) AS average
+			FROM MuseumStars
+			GROUP BY musNo
+	    ) MS ON (M.musNo = MS.musNo)
+	    WHERE 1=1
+			AND M.musNo = #{no};
+	</select>
+	
+	<insert id="insertComment" parameterType="com.multi.bbs.museum.model.vo.MuseComment">
+		INSERT INTO MuseComment(cno, musNo, mno, name, state, content, writeTime, isModified)
+			VALUES (DEFAULT, #{musNo}, #{mno}, #{name}, DEFAULT, #{content}, DEFAULT, DEFAULT)
+	</insert>
+	
+	<select id="getComments" parameterType="int" resultType="com.multi.bbs.museum.model.vo.MuseComment">
+		SELECT * FROM MuseComment WHERE state = 'Y' AND musNo = #{musNo}
+	</select>
+	
+	<update id="deleteComment" parameterType="int">
+		UPDATE MuseComment SET state = 'N' WHERE cno = #{cno}
+	</update>
+	
+	<insert id="insertReplyComment" parameterType="com.multi.bbs.museum.model.vo.MuseComment">
+		INSERT INTO MuseReplyComment(rcno, cno, musNo, mno, name, state, content, writeTime, isModified, isReply)
+			VALUES (DEFAULT, #{cno}, #{musNo}, #{mno}, #{name}, DEFAULT, #{content}, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	<select id="getReply" parameterType="int" resultType="com.multi.bbs.museum.model.vo.MuseReplyComment">
+		SELECT * FROM MuseReplyComment WHERE state = 'Y' AND musNo = #{musNo}
+	</select>
+	
+	<update id="deleteReply" parameterType="int">
+		UPDATE MuseReplyComment SET state = 'N' WHERE rcno = #{rcno}
+	</update>
+	
+	<select id="selectMuseBookmarkCount" resultType="int" parameterType="map">
+		SELECT
+			COUNT(*) FROM museBookmark
+		WHERE 1 = 1
+		AND mno = #{mno}
+		AND musNo = #{musNo}		
+	</select>
+
+	<insert id="insertMuseBookmark" parameterType="map">
+		INSERT INTO museBookmark(mno, musNo) values(#{mno}, #{musNo})
+	</insert>
+
+	<delete id="deleteMuseBookmark" parameterType="map">
+		DELETE FROM museBookmark
+		WHERE 1 = 1
+		AND mno = #{mno}
+		AND musNo = #{musNo}
+	</delete>
+	
+	<select id="selectBookmarkMuseum" parameterType="int" resultType="com.multi.bbs.museum.model.vo.Museum">
+		SELECT M.*, MS.average FROM Museum M
+			INNER JOIN museBookmark MB ON (M.musNo = MB.musNo)
+			LEFT JOIN (
+				SELECT musNo, AVG(rating) AS average
+					FROM MuseumStars
+					GROUP BY musNo
+			) MS ON (M.musNo = MS.musNo)
+			WHERE MB.mno = #{mno};
+	</select>
+
+	<insert id="submitMuseStar" parameterType="Map">
+		INSERT INTO MuseumStars (musNo, mno, rating) VALUES (#{no}, #{mno}, #{score})
+	</insert>
+	
+	<select id="getMuseStar" parameterType="Map" resultType="Map">
+		SELECT * FROM MuseumStars WHERE musNo = #{no} AND mno = #{mno}
+	</select>
+	
+	<update id="updateMuseStar" parameterType="Map">
+		UPDATE MuseumStars SET rating = #{score} WHERE musNo = #{no} AND mno = #{mno}
+	</update>
+	
+	
+	
+</mapper>
+
+
+
+
+
