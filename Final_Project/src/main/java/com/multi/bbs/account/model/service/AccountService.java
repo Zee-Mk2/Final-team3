@@ -3,6 +3,7 @@ package com.multi.bbs.account.model.service;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.multi.bbs.account.model.mapper.AccountMapper;
 import com.multi.bbs.account.model.vo.Member;
+import com.multi.bbs.shop.OrderedList;
 
 @Service
 public class AccountService {
@@ -84,6 +86,10 @@ public class AccountService {
 	
 	public Member findById(String id) {
 		return accountMapper.selectMember(id);
+	}
+
+	public List<OrderedList> getOrderedList(int mno) {
+		return accountMapper.getOrderedList(mno);
 	}
 
 

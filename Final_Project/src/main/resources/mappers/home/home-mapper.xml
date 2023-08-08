@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<!-- 향후 Mapper interface가 정의 될 위치 -->
+<mapper namespace="com.multi.bbs.HomeMapper">
+	<select id="getTour" resultType="com.multi.bbs.tour.Tour">
+		SELECT tno, title, region, numOfPeople, startDate, endDate, duration, category, content, state
+			FROM Tour
+			WHERE state = 'Y'
+			ORDER BY writeTime DESC LIMIT 2
+	</select>
+	
+	<select id="getProduct" resultType="com.multi.bbs.shop.Product">
+		SELECT P.productId, P.title, P.image, P.lprice, PR.average, PR.quantity
+			FROM Product P
+			LEFT JOIN (
+				SELECT productId, AVG(score) AS average, COUNT(score) AS quantity
+				FROM ProductReview GROUP BY productId
+			) PR ON (P.productId = PR.productId)
+			LIMIT 8
+	</select>
+	
+	<select id="getHeritage" resultType="com.multi.bbs.heritage.model.vo.Heritage">
+		SELECT H.*, HS.average FROM Heritage H
+			LEFT JOIN (
+				SELECT hno, AVG(rating) AS average
+				FROM HeritageStars GROUP BY hno
+			) HS ON (H.hno = HS.hno)
+			LIMIT 8
+	</select>
+	
+	<select id="getMuseum" resultType="com.multi.bbs.museum.model.vo.Museum">
+		SELECT M.*, MS.average FROM Museum M
+			LEFT JOIN (
+				SELECT musNo, AVG(rating) AS average
+				FROM MuseumStars GROUP BY musNo
+			) MS ON (M.musNo = MS.musNo)
+			WHERE name = #{name}
+	</select>
+	
+	<select id="getEvent" parameterType="String" resultType="com.multi.bbs.event.model.vo.Event">
+		SELECT * FROM Event
+			WHERE startDate LIKE '%${startDate}%'
+			LIMIT 2
+	</select>
+	
+</mapper>

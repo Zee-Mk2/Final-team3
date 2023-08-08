@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-	
-	<!-- Vendor styles-->
-    <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/flatpickr/dist/flatpickr.min.css}"/>
-    <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
-    
+  <!-- Vendor styles-->
+  <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/flatpickr/dist/flatpickr.min.css}" />
+  <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
+
   <!-- Body-->
   <body>
     <!-- Page loading spinner-->
     <div class="page-loading active">
       <div class="page-loading-inner">
-        <div class="page-spinner"></div><span>Loading...</span>
+        <div class="page-spinner"></div>
+        <span>Loading...</span>
       </div>
     </div>
     <!-- Page wrapper-->
@@ -22,191 +22,250 @@
           <div class="modal-content">
             <div class="modal-header d-block position-relative border-0 pb-3">
               <form class="position-relative w-100 mt-2 mb-4">
-                <button class="btn-close position-absolute top-50 end-0 translate-middle-y m-0 me-n1" type="reset" data-bs-dismiss="modal"></button><i class="ai-search fs-xl position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                <input class="form-control form-control-lg px-5" type="search" placeholder="Type to search" data-focus-on-open="[&quot;modal&quot;, &quot;#searchModal&quot;]">
+                <button class="btn-close position-absolute top-50 end-0 translate-middle-y m-0 me-n1" type="reset" data-bs-dismiss="modal"></button>
+                <i class="ai-search fs-xl position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                <input class="form-control form-control-lg px-5" type="search" placeholder="Type to search" data-focus-on-open='["modal", "#searchModal"]' />
               </form>
               <div class="fs-xs fw-medium text-muted text-uppercase">Suggestions</div>
             </div>
             <div class="modal-body pt-3">
-              <div class="d-flex align-items-center border-bottom pb-4 mb-4"><a class="position-relative d-inline-block flex-shrink-0 bg-secondary rounded-1" href="shop-single.html"><span class="badge bg-success position-absolute top-0 start-100 translate-middle ms-n1">Shop</span><img th:src="@{/assets/img/shop/cart/01.png}" width="90" alt="Product"></a>
+              <div class="d-flex align-items-center border-bottom pb-4 mb-4">
+                <a class="position-relative d-inline-block flex-shrink-0 bg-secondary rounded-1" href="shop-single.html">
+                  <span class="badge bg-success position-absolute top-0 start-100 translate-middle ms-n1">Shop</span>
+                  <img th:src="@{/assets/img/shop/cart/01.png}" width="90" alt="Product" />
+                </a>
                 <div class="ps-3">
-                  <h4 class="h6 mb-2"><a href="shop-single.html">Candle in concrete bowl</a></h4><span class="mb-0 me-2">$11.00</span>
+                  <h4 class="h6 mb-2"><a href="shop-single.html">Candle in concrete bowl</a></h4>
+                  <span class="mb-0 me-2">$11.00</span>
                   <del class="fs-sm text-muted ms-auto">$15.00</del>
                 </div>
               </div>
-              <div class="d-flex align-items-center border-bottom pb-4 mb-4"><a class="position-relative d-inline-block flex-shrink-0" href="#"><span class="badge bg-info position-absolute top-0 start-100 translate-middle ms-n1">Blog</span><img class="rounded-1" th:src="@{/assets/img/landing/shop/instagram/02.jpg}" width="90" alt="Post"></a>
+              <div class="d-flex align-items-center border-bottom pb-4 mb-4">
+                <a class="position-relative d-inline-block flex-shrink-0" href="#">
+                  <span class="badge bg-info position-absolute top-0 start-100 translate-middle ms-n1">Blog</span>
+                  <img class="rounded-1" th:src="@{/assets/img/landing/shop/instagram/02.jpg}" width="90" alt="Post" />
+                </a>
                 <div class="ps-3">
                   <h4 class="h6 mb-0"><a href="#">Bedroom decoration explained. Tips &amp; tricks from the field experts.</a></h4>
                 </div>
               </div>
-              <div class="d-flex align-items-center"><a class="position-relative d-inline-block flex-shrink-0 bg-secondary rounded-1" href="shop-single.html"><span class="badge bg-success position-absolute top-0 start-100 translate-middle ms-n1">Shop</span><img th:src="@{/assets/img/shop/cart/02.png}" width="90" alt="Product"></a>
+              <div class="d-flex align-items-center">
+                <a class="position-relative d-inline-block flex-shrink-0 bg-secondary rounded-1" href="shop-single.html">
+                  <span class="badge bg-success position-absolute top-0 start-100 translate-middle ms-n1">Shop</span>
+                  <img th:src="@{/assets/img/shop/cart/02.png}" width="90" alt="Product" />
+                </a>
                 <div class="ps-3">
-                  <h4 class="h6 mb-2"><a href="shop-single.html">Exquisite glass vase</a></h4><span class="mb-0 me-2">$23.00</span>
+                  <h4 class="h6 mb-2"><a href="shop-single.html">Exquisite glass vase</a></h4>
+                  <span class="mb-0 me-2">$23.00</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
+
       <!-- 헤더 시작 -->
       <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
       <header th:replace="~{common/layout :: #header}"></header>
 
       <!-- Page content-->
-      <div class="d-none d-lg-block bg-secondary position-fixed top-0 start-0 h-100" style="width: 52.5%;"></div>
-      <form class="needs-validation container position-relative zindex-2 pt-5 pb-lg-5 pb-md-4 pb-2" method="post" th:action="@{/shop/checkout}" novalidate>
+      <div class="d-none d-lg-block bg-secondary position-fixed top-0 start-0 h-100" style="width: 52.5%"></div>
+      <form class="needs-validation container position-relative zindex-2 pt-5 pb-lg-5 pb-md-4 pb-2" method="post" th:action="@{/kakaoPay}" novalidate>
         <div class="row">
           <div class="col-lg-6">
             <!-- Breadcrumb-->
             <nav aria-label="breadcrumb">
               <ol class="mt-5 pt-lg-3 pb-md-1 pb-lg-3 breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">처음</a></li>
-                <li class="breadcrumb-item"><a href="shop-catalog.html">상점</a></li>
+                <li class="breadcrumb-item"><a th:href="@{/}">홈</a></li>
+                <li class="breadcrumb-item"><a th:href="@{/shop}">쇼핑몰</a></li>
                 <li class="breadcrumb-item active" aria-current="page">결제</li>
               </ol>
             </nav>
             <h1 class="h2 pb-3">주문 정보 입력</h1>
             <!-- Checkout form fields-->
-            <h3 class="fs-base fw-normal text-body text-uppercase pb-2 pb-sm-3">1.<span class="text-decoration-underline ms-1">배송 정보</span></h3>
+            <h3 class="fs-base fw-normal text-body text-uppercase pb-2 pb-sm-3">
+              1.
+              <span class="text-decoration-underline ms-1">배송 정보</span>
+            </h3>
             <div class="row g-4 pb-4 pb-md-5 mb-3 mb-md-1">
               <div class="col-sm-6">
                 <label class="form-label fs-base" for="c-fn">성명</label>
-                <input class="form-control form-control-lg" type="text"  required id="c-name">
+                <input class="form-control form-control-lg bg-white" type="text" required name="name" />
               </div>
               <div class="col-sm-6">
                 <label class="form-label fs-base" for="c-email">전자우편</label>
-                <div class="position-relative"><i class="ai-mail fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                  <input class="form-control form-control-lg ps-5" type="email" required id="c-email">
+                <div class="position-relative">
+                  <i class="ai-mail fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                  <input class="form-control form-control-lg ps-5 bg-white" type="email" required name="email" />
                 </div>
               </div>
               <div class="col-sm-6">
                 <label class="form-label fs-base" for="c-phone">전화번호</label>
-                <div class="position-relative"><i class="ai-phone fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                  <input class="form-control form-control-lg ps-5" type="tel"   required id="c-phone">
+                <div class="position-relative">
+                  <i class="ai-phone fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                  <input class="form-control form-control-lg ps-5 bg-white" type="tel" required name="phone" />
                 </div>
               </div>
               <div class="col-sm-6">
                 <label class="form-label fs-base" for="c-zip">우편번호</label>
-                <input class="form-control form-control-lg" type="text"  required id="c-zip">
+                <input class="form-control form-control-lg bg-white" type="text" required name="zip" />
               </div>
               <div class="col-12">
                 <label class="form-label fs-base" for="c-address">주소</label>
-                <input class="form-control form-control-lg" type="text" required id="c-address">
+                <input class="form-control form-control-lg bg-white" type="text" required name="address" />
               </div>
               <div class="col-12">
-                <label class="form-label fs-base" for="c-notes">배송 시 요청 사항 <span class='text-muted'>(선택)</span></label>
-                <textarea class="form-control form-control-lg" rows="5" id="c-notes"></textarea>
+                <label class="form-label fs-base" for="c-notes">
+                  배송 시 요청 사항
+                  <span class="text-muted">(선택)</span>
+                </label>
+                <textarea class="form-control form-control-lg bg-white" rows="5" name="notes"></textarea>
               </div>
-             
             </div>
-            
-            <h3 class="fs-base fw-normal text-body text-uppercase mt-n4 mt-md-n3 pt-5 pb-2 pb-sm-3">2.<span class="text-decoration-underline ms-1">결제 수단</span></h3>
+
+            <h3 class="fs-base fw-normal text-body text-uppercase mt-n4 mt-md-n3 pt-5 pb-2 pb-sm-3">
+              2.
+              <span class="text-decoration-underline ms-1">결제 수단</span>
+            </h3>
             <div class="form-check mb-4">
-              <input class="form-check-input" type="radio" name="payment" checked id="kakaopay">
-              <label class="form-check-label" for="card"><span><span class="d-block fs-base text-dark fw-medium mb-1">카카오페이</span></span></label>
+              <input class="form-check-input" type="radio" name="payment" checked value="kakaopay" />
+              <label class="form-check-label" for="card">
+                <span><span class="d-block fs-base text-dark fw-medium mb-1">카카오페이</span></span>
+              </label>
             </div>
             <div class="form-check mb-4">
-              <input class="form-check-input" type="radio" name="payment" id="other">
-              <label class="form-check-label" for="cash"><span><span class="d-block fs-base text-dark fw-medium mb-1">기타</span></span></label>
+              <input class="form-check-input" type="radio" name="payment" value="other" disabled/>
+              <label class="form-check-label" for="cash">
+                <span><span class="d-block fs-base text-dark fw-medium mb-1">기타</span></span>
+              </label>
             </div>
             <!-- Place an order button visible on screens > 991px-->
             <div class="d-none d-lg-block pt-5 mt-n3">
               <div class="form-check mb-4">
-                <input class="form-check-input" type="checkbox" checked id="save-info">
-                <label class="form-check-label" for="save-info"><a class="fw-medium" href="#">개인정보 처리 방침</a><span class="text-muted">에 동의합니다.</span></label>
+                <input class="form-check-input" type="checkbox" id="save-info" required/>
+                <label class="form-check-label" for="save-info">
+                  <a class="fw-medium" href="#">개인정보 처리 방침</a>
+                  <span class="text-muted">에 동의합니다.</span>
+                </label>
               </div>
               <button class="btn btn-lg btn-primary" type="submit">주문하기</button>
             </div>
           </div>
           <!-- Order summary-->
           <div class="col-lg-5 offset-lg-1 pt-1">
-            <h2 class="pb-2 pt-md-2 my-4 mt-lg-5">주문하신 상품 <span class='fs-base fw-normal text-muted'>(4 개 품목)</span></h2>
+            <h2 class="pb-2 pt-md-2 my-4 mt-lg-5" th:if="${#lists.isEmpty(items)}">
+              담긴 상품
+              <span class="fs-base fw-normal text-muted">(0 개 품목)</span>
+            </h2>
+            <h2 class="pb-2 pt-md-2 my-4 mt-lg-5" th:if="${!#lists.isEmpty(items)}">
+              담긴 상품
+              <span class="fs-base fw-normal text-muted">([[${#lists.size(items)}]] 개 품목)</span>
+            </h2>
             <!-- Item-->
-            <div class="d-sm-flex align-items-center border-top py-4"><a class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-sm-2 p-xl-3 mb-2 mb-sm-0" href="shop-single.html"><img th:src="@{/assets/img/shop/cart/01.png}" width="110" alt="Product"></a>
+            <div class="d-sm-flex align-items-center border-top py-4" th:each="item: ${items}" th:id="${item.productId}">
+              <a class="d-inline-block flex-shrink-0 bg-secondary rounded-1 overflow-hidden mb-2 mb-sm-0" style="width: 142px" th:href="@{/shop/detail(productId=${item.productId})}">
+                <img th:src="${item.image}" width="100%" alt="Product" />
+              </a>
               <div class="w-100 pt-1 ps-sm-4">
                 <div class="d-flex">
                   <div class="me-3">
-                    <h3 class="h5 mb-2"><a href="shop-single.html">Candle in concrete bowl</a></h3>
-                    <div class="d-sm-flex flex-wrap">
-                      <div class="text-muted fs-sm me-3">Color: <span class='text-dark fw-medium'>Gray night</span></div>
-                      <div class="text-muted fs-sm me-3">Weight: <span class='text-dark fw-medium'>140g</span></div>
-                    </div>
-                  </div>
-                  <div class="text-end ms-auto">
-                    <div class="fs-5 mb-2">$11.00</div>
-                    <del class="text-muted ms-auto">$15.00</del>
+                    <h3 class="h5 mb-2"><a th:href="@{/shop/detail(productId=${item.productId})}">[[${item.title}]]</a></h3>
                   </div>
                 </div>
-                <div class="count-input ms-n3">
-                  <button class="btn btn-icon fs-xl" type="button" data-decrement>-</button>
-                  <input class="form-control" type="number" value="2" readonly>
-                  <button class="btn btn-icon fs-xl" type="button" data-increment>+</button>
+                <div class="h4 text-warning mb-2" th:id="${item.productId} + 'price'">₩ [[${#numbers.formatInteger(item.lprice, 1, 'COMMA')}]]</div>
+                <div class="nav justify-content-end row align-items-center">
+                  <div class="count-input col-6" th:data-price="${item.lprice}">
+                    <button class="btn btn-icon fs-xl" name="quantityBtn" type="button" data-decrement>-</button>
+                    <input class="form-control" name="quantity" type="number" th:value="${item.quantity}" th:id="${item.productId} + 'quantity'" readonly />
+                    <button class="btn btn-icon fs-xl" name="quantityBtn" type="button" data-increment>+</button>
+                  </div>
+                  <div class="col-6 text-end">
+                    <a class="fs-xl p-2" th:onclick="deleteCart([[${item.productId}]])" style="cursor: pointer;"><i class="ai-trash"></i></a>
+                  </div>
                 </div>
-                <div class="nav justify-content-end mt-n5 mt-sm-n3"><a class="nav-link fs-xl p-2" href="#" data-bs-toggle="tooltip" title="Remove"><i class="ai-trash"></i></a></div>
               </div>
             </div>
-            <!-- Item-->
-            <div class="d-sm-flex align-items-center border-top py-4"><a class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-sm-2 p-xl-3 mb-2 mb-sm-0" href="shop-single.html"><img th:src="@{/assets/img/shop/cart/02.png}" width="110" alt="Product"></a>
-              <div class="w-100 pt-1 ps-sm-4">
-                <div class="d-flex">
-                  <div class="me-3">
-                    <h3 class="h5 mb-2"><a href="shop-single.html">Exquisite glass vase</a></h3>
-                  </div>
-                  <div class="text-end ms-auto">
-                    <div class="fs-5 mb-2">$23.00</div>
-                  </div>
-                </div>
-                <div class="count-input ms-n3">
-                  <button class="btn btn-icon fs-xl" type="button" data-decrement>-</button>
-                  <input class="form-control" type="number" value="1" readonly>
-                  <button class="btn btn-icon fs-xl" type="button" data-increment>+</button>
-                </div>
-                <div class="nav justify-content-end mt-n5 mt-sm-n3"><a class="nav-link fs-xl p-2" href="#" data-bs-toggle="tooltip" title="Remove"><i class="ai-trash"></i></a></div>
-              </div>
-            </div>
-            <!-- Item-->
-            <div class="d-sm-flex align-items-center border-top py-4"><a class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-sm-2 p-xl-3 mb-2 mb-sm-0" href="shop-single.html"><img th:src="@{/assets/img/shop/cart/03.png}" width="110" alt="Product"></a>
-              <div class="w-100 pt-1 ps-sm-4">
-                <div class="d-flex">
-                  <div class="me-3">
-                    <h3 class="h5 mb-2"><a href="shop-single.html">Set for a dinner party of 7 items</a></h3>
-                  </div>
-                  <div class="text-end ms-auto">
-                    <div class="fs-5 mb-2">$47.00</div>
-                  </div>
-                </div>
-                <div class="count-input ms-n3">
-                  <button class="btn btn-icon fs-xl" type="button" data-decrement>-</button>
-                  <input class="form-control" type="number" value="1" readonly>
-                  <button class="btn btn-icon fs-xl" type="button" data-increment>+</button>
-                </div>
-                <div class="nav justify-content-end mt-n5 mt-sm-n3"><a class="nav-link fs-xl p-2" href="#" data-bs-toggle="tooltip" title="Remove"><i class="ai-trash"></i></a></div>
-              </div>
-            </div>
-            
+
             <ul class="list-unstyled py-3 mb-0">
-              <li class="d-flex justify-content-between mb-2">상품 가격:<span class="fw-semibold ms-2">$92.00</span></li>
-              <li class="d-flex justify-content-between mb-2">배송 비용:<span class="fw-semibold ms-2">$15.00</span></li>
+              <li class="d-flex justify-content-between mb-2">
+                상품 가격:
+                <span class="fw-semibold ms-2" id="sumPrice"></span>
+              </li>
+              <li class="d-flex justify-content-between mb-2">
+                배송 비용:
+                <span class="fw-semibold ms-2" id="charge"></span>
+              </li>
             </ul>
-            <div class="d-flex align-items-center justify-content-between border-top fs-xl pt-4">청구 금액:<span class="fs-3 fw-semibold text-dark ms-2">$115.00</span></div>
+            <div class="d-flex align-items-center justify-content-between border-top fs-xl pt-4">
+              청구 금액:
+              <span class="h3 fw-semibold text-dark ms-2" id="totalPrice"></span>
+              <input name="total_amount" th:value="${totalPrice}" type="hidden" id="totalPriceInput">
+              <input name="item_name" th:value="${itemName}" type="hidden">
+            </div>
           </div>
         </div>
       </form>
     </main>
 
     <!-- Footer-->
-	<footer th:replace="~{common/layout :: #footer}"></footer>
-	
-    <!-- Back to top button--><a class="btn-scroll-top" href="#top" data-scroll>
+    <footer th:replace="~{common/layout :: #footer}"></footer>
+
+    <!-- Back to top button-->
+    <a class="btn-scroll-top" href="#top" data-scroll>
       <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
-      </svg><i class="ai-arrow-up"></i></a>
+      </svg>
+      <i class="ai-arrow-up"></i>
+    </a>
     <!-- Vendor scripts: js libraries and plugins-->
     <script th:src="@{/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js}"></script>
     <script th:src="@{/assets/vendor/cleave.js/dist/cleave.min.js}"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <!-- Main theme script-->
     <script th:src="@{/assets/js/theme.js}"></script>
+    <script th:inline="javascript">
+      function deleteCart(id) {
+        $.ajax({
+          url: "/shop/deleteCart",
+          type: "POST",
+          dataType: "text",
+          data: {productId: id},
+          success: function (resp) {
+            alert(resp);
+            calcPrice();
+          },
+          error: function (xhr, status, error) {
+            console.error(xhr, status, error);
+          },
+        });
+
+        $('#' + id).remove();
+      }
+      
+      $(document).ready(function () {
+    	  calcPrice();
+	   	  $('[name=quantityBtn]').on('click', function () {
+	   		  calcPrice();
+	   	  });
+      });
+      
+      function calcPrice() {
+    	  var sumPrice = 0;
+    	  var charge = 0;
+    	  $('[name=quantity]').each(function () {
+    		  var quantity = parseInt($(this).val());
+    		  var price = parseInt($(this).parent().data('price'));
+    		  sumPrice += quantity * price;
+    		  if (quantity != 0) {
+	    		  charge += 3000;
+    		  }
+    	  });
+    	  $('#sumPrice').html('₩ ' + sumPrice.toLocaleString());
+   		  $('#charge').html('₩ ' + charge.toLocaleString());
+    	  $('#totalPrice').html('₩ ' + (sumPrice + charge).toLocaleString());
+    	  $('#totalPriceInput').val(sumPrice + charge);
+      }
+    </script>
   </body>
 </html>

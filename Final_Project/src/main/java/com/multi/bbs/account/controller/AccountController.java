@@ -8,15 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.multi.bbs.account.model.service.AccountService;
 import com.multi.bbs.account.model.vo.Member;
 import com.multi.bbs.heritage.model.service.HeritageService;
-import com.multi.bbs.heritage.model.vo.HeriBookmark;
 import com.multi.bbs.heritage.model.vo.Heritage;
+import com.multi.bbs.shop.OrderedList;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -78,7 +76,7 @@ public class AccountController {
 		}
 	}
 	
-	@RequestMapping("/logout")
+	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		if (session != null) {
 			session.invalidate();
@@ -105,6 +103,24 @@ public class AccountController {
 		model.addAttribute("list", list);
 
 		return "account/account-bookMark";
+	}
+	
+	@GetMapping("/mypage/orders")
+	public String ordersPage(Model model, HttpSession session) {
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		model.addAttribute("loginMember", loginMember);
+		if (loginMember == null) {
+			model.addAttribute("msg", "잘못된 접근입니다.");
+			model.addAttribute("location", "/sign-in");
+			return "common/msg";
+		}
+		List<OrderedList> items = accountService.getOrderedList(loginMember.getMno());
+		for (OrderedList item : items) {
+			System.out.println(item.toString());
+		}
+		model.addAttribute("items", items);
+		
+		return "account/account-orders";
 	}
 }
 

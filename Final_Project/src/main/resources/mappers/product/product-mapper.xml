@@ -58,12 +58,17 @@
 	</select>
 	
 	<select id="getProductById" parameterType="long" resultType="com.multi.bbs.shop.Product">
-		SELECT * FROM Product WHERE productId = #{productId}
+		SELECT P.*, PS.average FROM Product P
+			LEFT JOIN (
+				SELECT productId, AVG(score) AS average
+				FROM ProductReview WHERE state = 'Y' GROUP BY productId
+			) PS ON (P.productId = PS.productId)
+			WHERE P.productId = #{productId}
 	</select>
 	
 	<insert id="insertReview" parameterType="com.multi.bbs.shop.ProductReview">
-		INSERT INTO ProductReview (prno, productId, mno, content, createTime, state)
-			VALUES (DEFAULT, #{productId}, #{mno}, #{content}, DEFAULT, DEFAULT)
+		INSERT INTO ProductReview (prno, productId, mno, content, createTime, state, score)
+			VALUES (DEFAULT, #{productId}, #{mno}, #{content}, DEFAULT, DEFAULT, #{score})
 	</insert>
 	
 	<select id="getReviews" parameterType="long" resultType="com.multi.bbs.shop.ProductReview">
@@ -78,4 +83,14 @@
 			WHERE productId != #{productId}
 			LIMIT 4
 	</select>
+	
+	<insert id="insertOrder" parameterType="com.multi.bbs.shop.OrderedList">
+		INSERT INTO OrderedList (orderNo, productId, mno, title, image, price, quantity, orderDate, address)
+			VALUES (DEFAULT, #{productId}, #{mno}, #{title}, #{image}, #{price}, #{quantity}, DEFAULT, #{address})
+	</insert>
+	
+	<update id="deleteReview" parameterType="int">
+		UPDATE ProductReview SET state = 'N' WHERE prno = #{prno}
+	</update>
+	
 </mapper>

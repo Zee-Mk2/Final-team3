@@ -41,5 +41,14 @@ public class ShopService {
 	public List<Product> getAnotherProducts(long productId) {
 		return mapper.getAnotherProducts(productId);
 	}
+
+	@Transactional(rollbackFor = Exception.class)
+	public void insertOrder(OrderedList order) {
+		mapper.insertOrder(order);
+	}
+
+	public int deleteReview(int prno) {
+		return mapper.deleteReview(prno);
+	}
 	
 }
