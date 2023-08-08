@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class HeriBookmark {
 
-	private int mNo;
+	private int mno;
 	private int hNo;
 }

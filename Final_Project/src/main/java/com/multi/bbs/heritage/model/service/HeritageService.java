@@ -31,10 +31,8 @@ public class HeritageService {
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
-	public Heritage findByNo(int hNo) {
-		Heritage heritage = mapper.selectHeritageByNo(hNo);
-		
-		return heritage;
+	public Heritage findByNo(Map<String, String> param) {
+		return mapper.selectHeritageByNo(param);
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
@@ -46,6 +44,9 @@ public class HeritageService {
 		return mapper.getRepliesList(hNo);
 	}
 
+	public int deleteReply(int rNo) {
+		return mapper.deleteReply(rNo);
+	}
 	
 	// 북마크
 	
@@ -53,14 +54,8 @@ public class HeritageService {
 		return mapper.selectHeriBookmarkList(mno);
 	}
 
-	public List<Heritage> getHeritageByHeriBookmarkList(List<HeriBookmark> heriBookmarkList) {
-		List<Integer> hNoList = new ArrayList<>();
-		for(HeriBookmark heriBookmark : heriBookmarkList) {
-			hNoList.add(heriBookmark.getHNo());
-		}
-		List<Heritage> heritage = mapper.selectHeritageByHNo(hNoList);
-		
-		return heritage;
+	public List<Heritage> getHeritageByHeriBookmarkList(int mno) {
+		return mapper.selectBookmarkHeritage(mno);
 	}
 
 	public int getHeriBookmarkCount(Map<String, Object> map) {
@@ -74,6 +69,32 @@ public class HeritageService {
 	public int addHeriBookmark(Map<String, Object> map) {
 		return mapper.insertHeriBookmark(map);
 	}
+
+
+	
+	 public Double getheritageStarsAverage(int no) { 
+		 return mapper.selectHeritageStarsAverage(no); }
+	  
+
+	public int getHeritageStarsByHNo(int no) {
+		return mapper.selectReplyCountByHNo(no);
+	}
+
+	public int getReplyCountByHNo(int no) {
+		return mapper.selectReplyCountByHNo(no);
+	}
+
+	public int submitHeriStar(Map<String, String> param) {
+		Map<String, Object> result = mapper.getHeriStar(param);
+		if (result == null) {
+			return mapper.submitHeriStar(param);
+		} else {
+			return mapper.updateHeriStar(param);
+		}
+	}
+	 
+
+
 
 
 	
