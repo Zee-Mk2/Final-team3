@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -31,6 +32,7 @@ public class TourController {
 	TourService service;
 	
 	CalcTime calcTime = new CalcTime();
+	final static private String savePath = "C:\\upfiles\\";
 	
 	@GetMapping("/tour")
 	public String tourPage(Model model, HttpSession session, @RequestParam Map<String, String> param) {
@@ -118,7 +120,7 @@ public class TourController {
 	}
 	
 	@PostMapping("/tour/post")
-	public String tourPost(HttpSession session, Model model, String jsonData, Tour tour) {
+	public String tourPost(HttpSession session, Model model, String jsonData, Tour tour, MultipartFile upfile) {
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		model.addAttribute("loginMember", loginMember);
 		String[] arr = jsonData.split("/");
@@ -140,6 +142,17 @@ public class TourController {
 		tour.setStartDate(tour.getStartDate().split(" ")[0]);
 		tour.setMno(loginMember.getMno());
 		tour.setName(loginMember.getName());
+		
+		// 파일 저장 로직
+		if(upfile != null && upfile.isEmpty() == false) {
+			String renameFileName = service.saveFile(upfile, savePath); 
+			
+			if(renameFileName != null) {
+				tour.setFileName(upfile.getOriginalFilename());
+				tour.setReFileName(renameFileName);
+			}
+		}
+		
 		int result = service.insertTour(tour);
 		if (result < 1) {
 			model.addAttribute("msg", "투어플랜 작성에 실패했습니다.");

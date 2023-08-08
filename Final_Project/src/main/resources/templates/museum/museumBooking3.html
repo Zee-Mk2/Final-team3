@@ -167,11 +167,10 @@
         <!-- Breadcrumb-->
         <nav aria-label="breadcrumb">
           <ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">홈</a></li>
-            <li class="breadcrumb-item"><a href="shop-catalog.html">박물관 검색</a></li>
-            <li class="breadcrumb-item"><a href="shop-catalog.html">박물관 상세</a></li>
-            <li class="breadcrumb-item"><a href="shop-catalog.html">예약하기</a></li>
-            <li class="breadcrumb-item"><a href="shop-catalog.html" style="color: #e39d2c">전시 해설 예약</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/}">홈</a></li>
+            <li class="breadcrumb-item"><a th:href="@{museum}">박물관 검색</a></li>
+            <li class="breadcrumb-item"><a th:href="@{museumDetail}">박물관 상세</a></li>
+            <li class="breadcrumb-item"><a th:href="@{museumBooking3}" style="color: #e39d2c">예약하기</a></li>
           </ol>
         </nav>
         <!-- Item-->

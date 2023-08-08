@@ -58,7 +58,7 @@
         </nav>
         <div class="row mb-md-2 mb-xl-4">
           <!-- Tabs content -->
-          <form class="tab-content" id="myForm" method="post" th:action="@{/tour/post}">
+          <form class="tab-content" id="myForm" method="post" th:action="@{/tour/post}" enctype="multipart/form-data">
             <!-- STEP1 -->
             <div class="tab-pane show active" id="step1" role="tabpanel">
               <div class="steps steps-horizontal-md steps-center">
@@ -188,7 +188,7 @@
                 <div class="mb-2 mb-md-3 mt-n3 mt-md-0 row align-items-center">
                   <div class="col-md-2 col-form-label fs-5 fw-bold">썸네일</div>
                   <div class="col-md-10">
-                    <input class="form-control bg-white" type="file" id="file-input" />
+                	<input class="form-control bg-white" type="file" id="file-input" name="upfile" accept="image/*">
                   </div>
                 </div>
               </div>

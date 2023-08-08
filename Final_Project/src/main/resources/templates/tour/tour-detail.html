@@ -66,7 +66,10 @@
           </h1>
           <div class="d-flex flex-wrap align-items-center justify-content-between border-bottom mb-4">
             <div class="d-flex align-items-center mb-4 me-4">
-              <img th:src="@{/assets/img/avatar/01.jpg}" class="rounded-circle" style="height: 50px" />
+	          <div class="rounded-circle border overflow-hidden align-items-center" style="width: 48px !important; height: 48px !important; display: flex">
+	            <i class="ai-user mx-auto" style="font-size: 28px; color: #303030;" th:if="${tour.profilePic == null}"></i>
+	            <img th:src="@{'/board/file/' + ${tour.profilePic}}" style="width: 48px; height: 48px;" th:if="${tour.profilePic != null}">
+	          </div>
               <span class="fw-bold ms-3">[[${tour.name}]]</span>
               <span class="text-muted mx-3">|</span>
               <span class="text-muted">[[${tour.timeDiff}]]</span>
@@ -84,14 +87,14 @@
           <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b405a10ab3aef9b7d1801f29c81327a2"></script>
           <div id="calendar" class="mt-4"></div>
           <th:block th:if="${loginMember != null}">
-	          <div class="row mt-4" th:if="${loginMember.mno == tour.mno}">
+	          <div class="row mt-4">
 	            <div class="col-6">
+	              <a th:href="@{/tour}" class="btn btn-primary">목록</a>
+	            </div>
+	            <div class="col-6 text-end" th:if="${loginMember.mno == tour.mno}">
 	              <a th:href="@{/tour/complete(tno=${tour.tno}, complete='true')}" class="btn btn-success me-2" th:if="${tour.state == 'C'}">모집</a>
 	              <a th:href="@{/tour/complete(tno=${tour.tno}, complete='false')}" class="btn btn-success me-2" th:if="${tour.state == 'Y'}">마감</a>
-	              <a href="#" class="btn btn-warning">수정</a>
-	            </div>
-	            <div class="col-6 text-end">
-	              <a th:href="@{/tour/delete(tno=${tour.tno})}" class="btn btn-danger">삭제</a>
+	              <a th:onclick="deleteTour([[${tour.tno}]]); return false;" class="btn btn-danger">삭제</a>
 	            </div>
 	          </div>
           </th:block>
@@ -102,7 +105,10 @@
             <!-- Comment-->
             <div class="border-bottom py-4 mt-2 mb-4" th:each="comment: ${comments}">
               <div class="d-flex align-items-center pb-1 mb-3">
-                <img class="rounded-circle" th:src="@{/assets/img/avatar/08.jpg}" width="48" alt="Comment author" />
+	            <div class="rounded-circle border overflow-hidden align-items-center" style="width: 48px !important; height: 48px !important; display: flex">
+	              <i class="ai-user mx-auto" style="font-size: 28px; color: #303030;" th:if="${comment.reFileName == null}"></i>
+	              <img th:src="@{'/board/file/' + ${comment.reFileName}}" style="width: 48px; height: 48px;" th:if="${comment.reFileName != null}">
+	            </div>
                 <div class="ps-3">
                   <h6 class="mb-0">[[${comment.name}]]</h6>
                   <span class="fs-sm text-muted">[[${comment.timeDiff}]]</span>
@@ -141,7 +147,10 @@
 	              <!-- Comment reply-->
 	              <div class="card card-body border-0 bg-secondary mt-4" th:if="${comment.cno == reply.cno}">
 	                <div class="d-flex align-items-center pb-1 mb-3">
-	                  <img class="rounded-circle" th:src="@{/assets/img/avatar/10.jpg}" width="48" alt="Comment author" />
+			          <div class="rounded-circle border overflow-hidden align-items-center" style="width: 48px !important; height: 48px !important; display: flex">
+			            <i class="ai-user mx-auto" style="font-size: 28px; color: #303030;" th:if="${reply.reFileName == null}"></i>
+			            <img th:src="@{'/board/file/' + ${reply.reFileName}}" style="width: 48px; height: 48px;" th:if="${reply.reFileName != null}">
+			          </div>
 	                  <div class="ps-3">
 	                    <h6 class="mb-0">[[${reply.name}]]</h6>
 	                    <span class="fs-sm text-muted">[[${reply.timeDiff}]]</span>
@@ -276,6 +285,13 @@
         var moveLocation = new kakao.maps.LatLng(tourSchedules[tourSchedules.length - 1].la, tourSchedules[tourSchedules.length - 1].lo);
         map.panTo(moveLocation);
       });
+      
+      function deleteTour(tno) {
+    		var url = '/tour/delete?tno=' + tno;
+      		if (confirm ('정말 삭제하시겠습니까?')) {
+      			window.location.href = url;
+      		}
+      }
     </script>
   </body>
 </html>

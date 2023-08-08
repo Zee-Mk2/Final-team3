@@ -1,4 +1,4 @@
-package com.multi.bbs.tour;
+package com.multi.bbs.shop;
 
 import java.util.Date;
 
@@ -9,16 +9,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TourComment {
-	private int cno;
-	private int tno;
+public class ProductReview {
+	private int prno;
+	private String productId;
 	private int mno;
-	private String name;
-	private String state;
 	private String content;
-	private Date writeTime;
-	private String isModified;
-	private String isReply;
+	private Date createTime;
 	private String timeDiff;
 	private String reFileName;
+	private String name;
 }

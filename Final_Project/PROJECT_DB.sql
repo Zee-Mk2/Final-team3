@@ -44,6 +44,67 @@ CREATE TABLE Museum (
 
 SELECT * FROM Museum;
 
+CREATE TABLE MuseumReview (
+	rno INT PRIMARY KEY AUTO_INCREMENT,
+    musNo INT,
+    content VARCHAR(1000)
+);
+
+SELECT * FROM MuseumReview;
+
+DROP TABLE MuseComment;
+CREATE TABLE MuseComment (
+	cno			INT PRIMARY KEY AUTO_INCREMENT,
+	musNo		INT,
+	mno			INT,
+	name		VARCHAR(20),
+	state		VARCHAR(1) DEFAULT 'Y',
+	content		VARCHAR(1000),
+	writeTime	DATETIME DEFAULT CURRENT_TIMESTAMP,
+	isModified	VARCHAR(1) DEFAULT 'N',
+    FOREIGN KEY (musNo) REFERENCES Museum(musNo) ON DELETE CASCADE,
+    FOREIGN KEY (mno) REFERENCES Member(mno) ON DELETE CASCADE
+);
+
+SELECT * FROM MuseComment;
+
+DROP TABLE MuseReplyComment;
+CREATE TABLE MuseReplyComment (
+	rcno		INT PRIMARY KEY AUTO_INCREMENT,
+    cno			INT,
+	musNo		INT,
+	mno			INT,
+	name		VARCHAR(20),
+	state		VARCHAR(1) DEFAULT 'Y',
+	content		VARCHAR(1000),
+	writeTime	DATETIME DEFAULT CURRENT_TIMESTAMP,
+	isModified	VARCHAR(1) DEFAULT 'N',
+    isReply		VARCHAR(1) DEFAULT 'Y',
+    FOREIGN KEY (cno) REFERENCES MuseComment(cno) ON DELETE CASCADE,
+    FOREIGN KEY (musNo) REFERENCES Museum(musNo) ON DELETE CASCADE,
+    FOREIGN KEY (mno) REFERENCES Member(mno) ON DELETE CASCADE
+);
+
+SELECT * FROM MuseReplyComment;
+
+drop table museBookmark;
+CREATE TABLE `museBookmark` (
+	`mno`	INT,
+	`musNo`	INT,
+    FOREIGN KEY (mno) REFERENCES MEMBER(mno),
+    FOREIGN KEY (musNo) REFERENCES Museum(musNo)
+);
+
+SELECT * FROM museBookmark;
+
+DROP table MuseumStars;
+CREATE TABLE MuseumStars(
+	musNo int,
+    mno int,
+    rating int,
+    FOREIGN KEY (musNo) REFERENCES Museum(musNo) ON DELETE CASCADE,
+    FOREIGN KEY (mno) REFERENCES member(mno) ON DELETE CASCADE
+);
 
 ------------------------------------------------
 --------------- HERITAGE 관련 테이블 ------------------
@@ -74,6 +135,40 @@ CREATE TABLE Heritage (
 
 SELECT * FROM Heritage;
 
+drop table reply;
+create table reply(
+	rNo int primary key auto_increment,
+	hNo int,
+	mNo int,
+	NAME varchar(20),
+	CONTENT varchar(1000),
+	enrollDate datetime DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (hNo) REFERENCES Heritage(hNo) ON DELETE CASCADE,
+    FOREIGN KEY (mNo) REFERENCES Member(mNo) ON DELETE CASCADE
+);
+
+select * from reply;
+
+drop table heribookmark;
+CREATE TABLE `heribookmark` (
+	`mno`	INT,
+	`hNo`	INT,
+    FOREIGN KEY (mno) REFERENCES MEMBER(mno),
+    FOREIGN KEY (hNo) REFERENCES HERITAGE(hNo)
+);
+
+SELECT * FROM Heribookmark;
+
+DROP table HERITAGESTARS;
+CREATE TABLE HERITAGESTARS(
+	hno int,
+    mno int,
+    rating int,
+    FOREIGN KEY (hno) REFERENCES HERITAGE(hno) ON DELETE CASCADE,
+    FOREIGN KEY (mno) REFERENCES member(mno) ON DELETE CASCADE
+);
+
+SELECT * FROM Heritagestars;
 
 ------------------------------------------------
 --------------- PRODUCT 관련 테이블 ------------------
@@ -96,6 +191,19 @@ CREATE TABLE Product (
 
 SELECT * FROM Product;
 
+DROP TABLE ProductReview;
+CREATE TABLE ProductReview (
+	prno		INT PRIMARY KEY AUTO_INCREMENT,
+    productId	VARCHAR(100),
+    mno			INT,
+    content		VARCHAR(1000),
+    createTime	DATETIME DEFAULT CURRENT_TIMESTAMP,
+    state		VARCHAR(1) DEFAULT 'Y',
+    FOREIGN KEY (productId) REFERENCES Product (productId) ON DELETE CASCADE,
+    FOREIGN KEY (mno) REFERENCES Member (mno) ON DELETE CASCADE
+);
+
+SELECT * FROM ProductReview;
 
 ------------------------------------------------
 --------------- MEMBER 관련 테이블 ------------------
@@ -110,6 +218,7 @@ CREATE TABLE Member (
     password VARCHAR(100) NOT NULL,
     phone 	 VARCHAR(13),
     state 	 VARCHAR(1) DEFAULT 'Y' CHECK(STATE IN('Y', 'N')),
+    reFileName VARCHAR(100),
     enrollDate DATETIME  DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -232,6 +341,31 @@ CREATE TABLE EventImg(
 );
 
 SELECT * FROM EventImg;
+
+DROP table eventReview;
+CREATE TABLE EventReview (
+	evntReviewNo INT PRIMARY KEY auto_increment,
+    evntNo INT,
+    Mno INT,
+    content VARCHAR(100),
+    rating INT,
+    writeTime DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (evntNo) REFERENCES Event (evntNo) ON DELETE CASCADE,
+    FOREIGN KEY (Mno) REFERENCES Member (mno) ON DELETE CASCADE
+);
+
+SELECT * FROM EventReview;
+
+DROP table EventStars;
+CREATE TABLE EventStars(
+	mno int,
+    evntNo int,
+    rating int,
+    FOREIGN KEY (evntNo) REFERENCES Event(evntNo) ON DELETE CASCADE,
+    FOREIGN KEY (mno) REFERENCES member(mno) ON DELETE CASCADE
+);
+
+SELECT * FROM EventReview;
 
 ------------------------------------------------
 --------------- Board 관련 테이블 ------------------

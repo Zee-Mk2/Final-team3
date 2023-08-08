@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
-	private String productid;
-    private String producttype;
+	private String productId;
+    private String productType;
     private String title;
     private String image;
     private int lprice;
@@ -17,5 +17,6 @@ public class Product {
     private String category2;
     private String category3;
     private String category4;
-    private String mallname;
+    private String mallName;
+    private int quantity;
 }

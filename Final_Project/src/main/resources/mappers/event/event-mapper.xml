@@ -34,7 +34,7 @@
 	
 	<select id="selectEventReviewsWithMemberByNo" parameterType="int" resultType="eventReview">
         SELECT ER.evntReviewNo, ER.evntNo, ER.Mno, ER.content, ER.rating, ER.writeTime,
-               M.role, M.name
+               M.role, M.name, M.reFileName
         FROM EventReview ER
         JOIN Member M ON ER.Mno = M.Mno
         WHERE ER.evntNo = #{no}
@@ -51,7 +51,7 @@
 	
 	<select id="selectEventReviewsByEventNo" resultType="eventReview" parameterType="int">
 	    SELECT ER.evntReviewNo, ER.evntNo, ER.Mno, ER.content, ER.rating, ER.writeTime,
-	           M.role, M.name
+	           M.role, M.name, M.reFileName
 	    FROM EventReview ER
 	    JOIN Member M ON ER.Mno = M.Mno
 	    WHERE ER.evntNo = #{evntNo}

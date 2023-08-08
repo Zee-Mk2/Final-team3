@@ -1,4 +1,4 @@
-package com.multi.bbs.tour;
+package com.multi.bbs.museum.model.vo;
 
 import java.util.Date;
 
@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TourComment {
+public class MuseReplyComment {
+	private int rcno;
 	private int cno;
-	private int tno;
+	private int musNo;
 	private int mno;
 	private String name;
 	private String state;
@@ -20,5 +21,4 @@ public class TourComment {
 	private String isModified;
 	private String isReply;
 	private String timeDiff;
-	private String reFileName;
 }

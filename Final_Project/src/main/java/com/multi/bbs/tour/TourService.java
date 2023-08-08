@@ -1,18 +1,46 @@
 package com.multi.bbs.tour;
 
+import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.multi.bbs.common.util.PageInfo;
 
 @Service
 public class TourService {
 	@Autowired
-	TourMapper mapper;
+	TourMapper mapper;	
+	
+	public String saveFile(MultipartFile upFile, String savePath) {
+		File folder = new File(savePath);
+		
+		// 폴더 없으면 만드는 코드
+		if(folder.exists() == false) {
+			folder.mkdir();
+		}
+		System.out.println("savePath : " + savePath);
+		
+		// 파일이름을 랜덤하게 바꾸는 코드, test.txt -> 20221213_1728291212.txt
+		String originalFileName = upFile.getOriginalFilename();
+		String reNameFileName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmssSSS"));
+		reNameFileName += originalFileName.substring(originalFileName.lastIndexOf("."));
+		String reNamePath = savePath + "/" + reNameFileName;
+		
+		try {
+			// 실제 파일이 저장되는 코드
+			upFile.transferTo(new File(reNamePath));
+		} catch (Exception e) {
+			return null;
+		}
+		return reNameFileName;
+	}
 
 	public List<TourList> getMuseumList(String keyword) {
 		return mapper.getMuseumList(keyword);

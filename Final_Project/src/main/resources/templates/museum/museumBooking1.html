@@ -25,10 +25,10 @@
         <!-- Breadcrumb-->
         <nav aria-label="breadcrumb">
           <ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">홈</a></li>
-            <li class="breadcrumb-item"><a href="shop-catalog.html">박물관 검색</a></li>
-            <li class="breadcrumb-item"><a href="shop-catalog.html">박물관 상세</a></li>
-            <li class="breadcrumb-item"><a href="shop-catalog.html" style="color: #e39d2c">예약하기</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/}">홈</a></li>
+            <li class="breadcrumb-item"><a th:href="@{museum}">박물관 검색</a></li>
+            <li class="breadcrumb-item"><a th:href="|/museumDetail?no=${museum.musNo}|">박물관 상세</a></li>
+            <li class="breadcrumb-item"><a th:href="@{museumBooking1}" style="color: #e39d2c">예약하기</a></li>
           </ol>
         </nav>
         <!-- Page title-->
@@ -40,7 +40,7 @@
               <div class="rounded-5 position-absolute top-0 start-0 w-100 h-100"></div>
               <img
                 class="d-block position-relative zindex-2 mx-auto"
-                src="https://www.museum.go.kr/uploadfile/ecms/media/2023/01/2923999D-4175-39CB-89ED-B9AA0EB4E41E_thumb.png"
+                th:src="${museum.ProgramImg}"
                 width="400"
                 alt="Image"
                 style="border-radius: 7%" />
