@@ -36,6 +36,7 @@ public class HeritageController {
 	
 	@GetMapping("/heritage/list")
 	public String heritageListPage(Model model, HttpSession session, @RequestParam Map<String, Object> paramMap) {
+		// 정렬 
 		if (paramMap.size() == 0) {
 			paramMap.put("order", "hNo");
 		}
@@ -44,6 +45,18 @@ public class HeritageController {
 		}
 		if (paramMap.size() == 0) {
 			paramMap.put("order", "average");
+		}
+		// 지정년도 슬라이더
+		if (paramMap.get("minasDate") != null) {
+			String minasDate = (String) paramMap.get("minasDate");
+			String maxasDate = (String) paramMap.get("maxasDate");
+			paramMap.put("minasDate", minasDate + "-01-01");
+			paramMap.put("maxasDate", maxasDate + "-01-01");
+			model.addAttribute("min", Integer.valueOf(minasDate));
+			model.addAttribute("max", Integer.valueOf(maxasDate));
+		} else {
+			model.addAttribute("min", 1939);
+			model.addAttribute("max", 2023);
 		}
 		
 		Member loginMember = (Member) session.getAttribute("loginMember");

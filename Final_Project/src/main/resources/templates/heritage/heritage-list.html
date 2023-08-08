@@ -58,16 +58,16 @@
               </div>
             </div>
             <div class="border rounded-2 bg-white row">
-              <div class="range-slider col-6 p-4" data-start-min="1960" data-start-max="2002" data-min="1939" data-max="2023" data-step="1" data-pips="true">
+              <div class="range-slider col-6 p-4" th:data-start-min="${min}" th:data-start-max="${max}" data-min="1939" data-max="2023" data-step="1" data-pips="true">
                 <div class="range-slider-ui"></div>
                 <div class="d-flex">
                   <div class="d-flex align-items-center w-50">
-                    <label for="rs-min" class="form-label fs-xs me-2 mb-0">년~</label>
-                    <input type="number" id="rs-min" class="form-control form-control-sm range-slider-value-min" style="max-width: 6rem" />
+                    <label for="asDate-min" class="form-label fs-xs me-2 mb-0">년~</label>
+                    <input type="number" class="form-control form-control-sm range-slider-value-min" style="max-width: 6rem" id="asDate-min" name="minasDate" />
                   </div>
                   <div class="d-flex align-items-center w-50">
-                    <label for="rs-max" class="form-label fs-xs me-2 mb-0">년</label>
-                    <input type="number" id="rs-max" class="form-control form-control-sm range-slider-value-max" style="max-width: 6rem" />
+                    <label for="asDate-max" class="form-label fs-xs me-2 mb-0">년</label>
+                    <input type="number" class="form-control form-control-sm range-slider-value-max" style="max-width: 6rem" id="asDate-max" name="maxasDate" />
                   </div>
                 </div>
               </div>

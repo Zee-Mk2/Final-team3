@@ -53,6 +53,12 @@
 				OR B.MNO = #{mno}
 			</if>
 			)
+			<if test="minasDate != null">
+				AND ASDATE >= #{minasDate}
+			</if>
+			<if test="maxasDate != null">
+				AND #{maxasDate} >= ASDATE
+			</if>
  			<if test="name != null">
 				AND H.NAME LIKE '%${name}%' 
 			</if>
@@ -82,6 +88,13 @@
 			COUNT(*)
 		FROM HERITAGE
 		WHERE 1 = 1
+		
+			<if test="minasDate != null">
+				AND ASDATE >= #{minasDate}
+			</if>
+			<if test="maxasDate != null">
+				AND #{maxasDate} >= ASDATE
+			</if>
 		<if test="name != null">
 			AND NAME LIKE '%${name}%' 
 		</if>
