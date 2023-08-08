@@ -37,8 +37,15 @@ public class HeritageController {
 	@GetMapping("/heritage/list")
 	public String heritageListPage(Model model, HttpSession session, @RequestParam Map<String, Object> paramMap) {
 		if (paramMap.size() == 0) {
+			paramMap.put("order", "hNo");
+		}
+		if (paramMap.size() == 0) {
 			paramMap.put("order", "name");
 		}
+		if (paramMap.size() == 0) {
+			paramMap.put("order", "average");
+		}
+		
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		model.addAttribute("loginMember", loginMember);
 		String name = (String) paramMap.get("name");
@@ -60,7 +67,11 @@ public class HeritageController {
 		if (loginMember != null) {
 			paramMap.put("mno", loginMember.getMno());
 		}
-
+		
+//		Map<String, String> paramMap = new HashMap<>();
+//		paramMap.put("hNo", hNo);
+//		model.addAttribute("paramMap", paramMap);
+		
 		int page = 1;
 		log.info("page : " + page);
 		log.info("@@@@@@@@@@@@" + paramMap);
@@ -75,7 +86,7 @@ public class HeritageController {
 		int count = service.getHeritageCount(paramMap);
 		PageInfo pageInfo = new PageInfo(page, 5, count, 5);
 		List<Heritage> list = service.getHeritageList(pageInfo, paramMap);
-
+		
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("pageInfo", pageInfo);
@@ -88,6 +99,11 @@ public class HeritageController {
 	public String heritageDetailPage(Model model, @RequestParam("no") int no, HttpSession session) {
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		model.addAttribute("loginMember", loginMember);
+		
+//		Map<String, String> paramMap = new HashMap<>();
+//		paramMap.put("hNo", hNo);
+//		model.addAttribute("paramMap", paramMap);
+		
 		Map<String, String> param = new HashMap<>();
 		param.put("no", String.valueOf(no));
 		if (loginMember != null) {
@@ -97,7 +113,13 @@ public class HeritageController {
 		if (heritage == null) {
 			return "common/error";
 		}
-		System.err.println(heritage.toString());
+		String[] lines = heritage.getContent().split("\\.");
+		System.out.println(lines.length);
+		for (int i = 0; i < lines.length; i++) {
+			lines[i] = (lines[i] + ".").strip();
+			System.out.println(lines[i]);
+		}
+		model.addAttribute("lines", lines);
 		model.addAttribute("item", heritage);
 
 		List<Reply> replies = service.getRepliesList(heritage.getHNo());
@@ -197,5 +219,23 @@ public class HeritageController {
 		}
 		return "redirect:/heritage/detail?no=" + param.get("no");
 	}
+	
+//	@GetMapping("/orderBy")
+//	    public String orderBy(@RequestParam String orderBy, Model model) {
+//	        List<Heritage> sortedHeritageList;
+//
+//	        if ("hNo".equals(orderBy)) {
+//	            sortedHeritageList = service.findAllOrderByHNoAsc();
+//	        } else if ("name".equals(orderBy)) {
+//	            sortedHeritageList = service.findAllOrderByNameAsc();
+//	        } else if ("average".equals(orderBy)) {
+//	            sortedHeritageList = service.findAllOrderByAverageDesc();
+//	        } else {
+//	            sortedHeritageList = service.getAllHeritages();
+//	        }
+//
+//	        model.addAttribute("heritageList", sortedHeritageList);
+//	        return "/heritage/heritage-list";
+//	    }
 
 }

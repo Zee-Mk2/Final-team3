@@ -65,11 +65,14 @@
 			<if test="type != null">
 				AND H.GCODENAME LIKE '%${type}%' 
 			</if>
-			<if test="order == 'name'">
-				ORDER BY H.name
+			<if test="order == 'hNo'">
+				ORDER BY H.HNO ASC	
 			</if>
-			<if test="order == null">
-				ORDER BY H.HNO DESC	
+			<if test="order == 'name'">
+				ORDER BY H.name ASC
+			</if>
+			<if test="order == 'average'">
+				ORDER BY average DESC	
 			</if>
 			LIMIT ${limit} OFFSET ${offset}
 	</select>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-  
-   <!-- Vendor styles-->
-    <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/nouislider/dist/nouislider.min.css}" />
-    <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
- 
+  <!-- Vendor styles-->
+  <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/nouislider/dist/nouislider.min.css}" />
+
+  <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
+
   <!-- Body-->
 
   <body>
@@ -20,15 +20,12 @@
     <main class="page-wrapper">
       <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
       <header th:replace="~{common/layout :: #header}"></header>
-      
+
       <!-- Hero-->
       <section>
-        <div class="jarallax bg-dark py-5" data-jarallax data-type="scroll-opacity" data-speed="0.7" style="height:70vh !important">
-          <div class="position-absolute top-0 start-0 w-100 h-100  opacity-60"></div>
-          <div
-            class="jarallax-img zindex-1"
-            style="background-image: url(http://t1.daumcdn.net/brunch/service/user/7YAa/image/NPsPJXoCTkYydCMCoeWf0O6v_Tw.jpg)"
-          ></div>
+        <div class="jarallax bg-dark py-5" data-jarallax data-type="scroll-opacity" data-speed="0.7" style="height: 70vh !important">
+          <div class="position-absolute top-0 start-0 w-100 h-100 opacity-60"></div>
+          <div class="jarallax-img zindex-1" style="background-image: url(http://t1.daumcdn.net/brunch/service/user/7YAa/image/NPsPJXoCTkYydCMCoeWf0O6v_Tw.jpg)"></div>
           <div class="container position-relative zindex-5">
             <!-- Text + button-->
             <div class="row pt-lg-2 py-xl-4 py-xxl-5 mb-md-4 mb-lg-5">
@@ -43,10 +40,10 @@
             </div>
           </div>
         </div>
-        <div class="container position-relative zindex-5" style="margin-top: -10rem;">
+        <div class="container position-relative zindex-5" style="margin-top: -10rem">
           <form name="searchForm" th:action="@{/heritage/list}" method="get">
-            <input type="hidden" name="page">
-            <input type="hidden" name="order" value="name">
+            <input type="hidden" name="page" />
+            <input type="hidden" name="order" id="orderInput" th:value="${param.order}" />
             <div class="row g-3 rounded-pill align-items-center border mb-3 bg-white">
               <div class="col-2 my-1">
                 <select class="form-select" style="border: none">
@@ -61,7 +58,7 @@
               </div>
             </div>
             <div class="border rounded-2 bg-white row">
-               <div class="range-slider col-6 p-4" data-start-min="1960" data-start-max="2002" data-min="1939" data-max="2023" data-step="1" data-pips="true">
+              <div class="range-slider col-6 p-4" data-start-min="1960" data-start-max="2002" data-min="1939" data-max="2023" data-step="1" data-pips="true">
                 <div class="range-slider-ui"></div>
                 <div class="d-flex">
                   <div class="d-flex align-items-center w-50">
@@ -76,10 +73,10 @@
               </div>
               <div class="mb-3 col-6 p-4">
                 <label for="address" class="form-label">지역</label>
-                <select id="address" name="address"  class="form-select" th:value="${paramMap.address}" >
-                  <option value=""> 지역을 선택해주세요</option>
+                <select id="address" name="address" class="form-select" th:value="${paramMap.address}">
+                  <option value="">지역을 선택해주세요</option>
                   <option th:selected="${paramMap.address == '서울'} ? 'selected' : null ">서울</option>
-               	  <option th:selected="${paramMap.address == '경기도'} ? 'selected' : null ">경기도</option>
+                  <option th:selected="${paramMap.address == '경기도'} ? 'selected' : null ">경기도</option>
                   <option th:selected="${paramMap.address == '대전광역시'} ? 'selected' : null ">대전광역시</option>
                   <option th:selected="${paramMap.address == '충청북도'} ? 'selected' : null ">충청북도</option>
                   <option th:selected="${paramMap.address == '충청남도'} ? 'selected' : null ">충청남도</option>
@@ -91,14 +88,14 @@
                   <option th:selected="${paramMap.address == '경상북도'} ? 'selected' : null ">경상북도</option>
                   <option th:selected="${paramMap.address == '경상남도'} ? 'selected' : null ">경상남도</option>
                   <option th:selected="${paramMap.address == '부산광역시'} ? 'selected' : null ">부산광역시</option>
-                  <option th:selected="${paramMap.address == '제주도'} ? 'selected' : null ">제주도</option>  
+                  <option th:selected="${paramMap.address == '제주도'} ? 'selected' : null ">제주도</option>
                 </select>
               </div>
               <div class="mb-3 col-6 p-4">
                 <label for="era" class="form-label">시대</label>
                 <select id="era" name="era" class="form-select" th:value="${paramMap.era}">
                   <option value="">시대를 선택해주세요</option>
-      			  <option th:selected="${paramMap.era == '선사시대'} ? 'selected' : null ">선사시대</option>
+                  <option th:selected="${paramMap.era == '선사시대'} ? 'selected' : null ">선사시대</option>
                   <option th:selected="${paramMap.era == '석기시대'} ? 'selected' : null ">석기시대</option>
                   <option th:selected="${paramMap.era == '청동기시대'} ? 'selected' : null ">청동기시대</option>
                   <option th:selected="${paramMap.era == '철기시대'} ? 'selected' : null ">철기시대</option>
@@ -112,7 +109,7 @@
                   <option th:selected="${paramMap.era == '고려시대'} ? 'selected' : null ">고려시대</option>
                   <option th:selected="${paramMap.era == '조선시대'} ? 'selected' : null ">조선시대</option>
                   <option th:selected="${paramMap.era == '대한제국시대'} ? 'selected' : null ">대한제국시대</option>
-                  <option th:selected="${paramMap.era == '일제강점기'} ? 'selected' : null ">일제강점기</option> 
+                  <option th:selected="${paramMap.era == '일제강점기'} ? 'selected' : null ">일제강점기</option>
                 </select>
               </div>
               <div class="mb-3 col-6 p-4">
@@ -120,7 +117,7 @@
                 <select id="type" name="type" class="form-select" th:value="${paramMap.type}">
                   <option value="">유형을 선택해주세요</option>
                   <option th:selected="${paramMap.type == '유적건조물'} ? 'selected' : null ">유적건조물</option>
-         	      <option th:selected="${paramMap.type == '기록유산'} ? 'selected' : null ">기록유산</option>
+                  <option th:selected="${paramMap.type == '기록유산'} ? 'selected' : null ">기록유산</option>
                   <option th:selected="${paramMap.type == '자연유산'} ? 'selected' : null ">자연유산</option>
                   <option th:selected="${paramMap.type == '무형문화재'} ? 'selected' : null ">무형문화재</option>
                   <option th:selected="${paramMap.type == '등록문화재'} ? 'selected' : null ">등록문화재</option>
@@ -147,13 +144,11 @@
             </nav>
           </div>
           <div class="text-end col-6">
-            <div class="btn-group dropdown">
-              <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">이름순</button>
-              <div class="dropdown-menu my-1">
-                <a href="#" class="dropdown-item">이름순</a>
-                <a onclick="orderBy('rating');" class="dropdown-item">별점순</a>
-              </div>
-            </div>
+            <select class="form-select w-25 ms-auto" id="order">
+              <option value="hNo" th:selected="${paramMap.order == 'hNo'}">번호순</option>
+              <option value="name" th:selected="${paramMap.order == 'name'}">이름순</option>
+              <option value="average" th:selected="${paramMap.order == 'average'}">별점순</option>
+            </select>
           </div>
         </div>
         <!-- 리스트 -->
@@ -170,6 +165,7 @@
             color: #121519 !important;
             transition: 0.4s;
           }
+
           .my-card-title:hover {
             color: #e8ae50 !important;
             transition: 0.4s;
@@ -177,122 +173,114 @@
         </style>
         <!-- ITEM -->
         <th:block th:each="item : ${list}">
-        <div class="row g-0 border-0 mb-4 align-items-center">
-          <div class="card-hover position-relative bg-secondary rounded-1 mb-4 col-4">
-            <!-- 북마크 -->
-            <th:block th:if="${loginMember != null}">
-	            <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3" type="button">
-	            <th:block th:if="${item.bookmark} == 'Y'">
-	               <i th:value="${item.bookmark}" class="ai-heart-filled fs-xl"  th:onclick="addFavor(this, [[${item.hNo}]], [[${loginMember.mno}]])"></i>
-				</th:block>
-	            <th:block th:if="${item.bookmark} != 'Y'">
-	               <i th:value="${item.bookmark}" class="ai-heart fs-xl"  th:onclick="addFavor(this, [[${item.hNo}]], [[${loginMember.mno}]])"></i>
-				</th:block>
-
-	            </button>
-            </th:block>
-            <a class="d-block" th:href="|/heritage/detail?no=${item.hNo}|">
-              <img th:src="${item.img}" class="rounded-4">
-            </a>
-          </div>
-          <div class="col-8">
-            <div class="pb-sm-4 ps-sm-4 pe-lg-4" style="margin-left: 10%">
-              <a th:href="|/heritage/detail?no=${item.hNo}|" style="text-decoration: none">
-                <div class="h3 my-card-title"> 
-                	[[${item.name}]]([[${item.name2}]])
-                </div>
+          <div class="row g-0 border-0 mb-4 align-items-center">
+            <div class="card-hover position-relative bg-secondary rounded-1 mb-4 col-4">
+              <!-- 북마크 -->
+              <th:block th:if="${loginMember != null}">
+                <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3" type="button">
+                  <th:block th:if="${item.bookmark} == 'Y'">
+                    <i th:value="${item.bookmark}" class="ai-heart-filled fs-xl" th:onclick="addFavor(this, [[${item.hNo}]], [[${loginMember.mno}]])"></i>
+                  </th:block>
+                  <th:block th:if="${item.bookmark} != 'Y'">
+                    <i th:value="${item.bookmark}" class="ai-heart fs-xl" th:onclick="addFavor(this, [[${item.hNo}]], [[${loginMember.mno}]])"></i>
+                  </th:block>
+                </button>
+              </th:block>
+              <a class="d-block" th:href="|/heritage/detail?no=${item.hNo}|">
+                <img th:src="${item.img}" class="rounded-4" />
               </a>
-              <table class="table">
-                <tr>
-                  <td class="fw-bold text-black" style="white-space: nowrap"><i class="far fa-address-book text-primary"></i>분류</td>
-                  <td> [[${item.gcodeName}]]   / [[${item.bcodeName}]]   / [[${item.mcodeName}]]   / [[${item.scodeName}]]  </td>
-                </tr>
-                <tr>
-                  <td class="fw-bold text-black" style="white-space: nowrap"><i class="fas fa-phone text-primary"></i>시대</td>
-                  <td> [[${item.era}]] </td>
-                </tr>
-                <tr>
-                  <td class="fw-bold text-black" style="white-space: nowrap"><i class="far fa-calendar text-primary"></i>지정일</td>
-                  <td>[[${#dates.format(item.asDate, 'yyyy-MM-dd')}]]</td>
-                </tr>
-                <tr>
-                  <td class="fw-bold text-black" style="white-space: nowrap; border-bottom: none"><i class="fas fa-calendar-day text-primary"></i>소재지</td>
-                  <td style="border-bottom: none"> [[${item.location}]] </td>
-                </tr>
-              </table>
-              <div class="d-flex mt-1 ps-2" name="stars" th:data-hno="${item.hNo}" th:data-average="${item.average}">
-                <i class="ai-star text-warning" th:id="'star-1-' + ${item.hNo}"></i>
-                <i class="ai-star text-warning" th:id="'star-2-' + ${item.hNo}"></i>
-                <i class="ai-star text-warning" th:id="'star-3-' + ${item.hNo}"></i>
-                <i class="ai-star text-warning" th:id="'star-4-' + ${item.hNo}"></i>
-                <i class="ai-star text-warning" th:id="'star-5-' + ${item.hNo}"></i> 
-                 <span class="list-inline-item me-1 h6 mb-0 px-1" th:text="${#numbers.formatDecimal(item.average, 1, 1)}"></span>
+            </div>
+            <div class="col-8">
+              <div class="pb-sm-4 ps-sm-4 pe-lg-4" style="margin-left: 10%">
+                <a th:href="|/heritage/detail?no=${item.hNo}|" style="text-decoration: none">
+                  <div class="h3 my-card-title">[[${item.name}]]([[${item.name2}]])</div>
+                </a>
+                <table class="table">
+                  <tr>
+                    <td class="fw-bold text-black" style="white-space: nowrap"><i class="far fa-address-book text-primary"></i>분류</td>
+                    <td>[[${item.gcodeName}]] / [[${item.bcodeName}]] / [[${item.mcodeName}]] / [[${item.scodeName}]]</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-bold text-black" style="white-space: nowrap"><i class="fas fa-phone text-primary"></i>시대</td>
+                    <td>[[${item.era}]]</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-bold text-black" style="white-space: nowrap"><i class="far fa-calendar text-primary"></i>지정일</td>
+                    <td>[[${#dates.format(item.asDate, 'yyyy-MM-dd')}]]</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-bold text-black" style="white-space: nowrap; border-bottom: none"><i class="fas fa-calendar-day text-primary"></i>소재지</td>
+                    <td style="border-bottom: none">[[${item.location}]]</td>
+                  </tr>
+                </table>
+                <div class="d-flex mt-1 ps-2" name="stars" th:data-hno="${item.hNo}" th:data-average="${item.average}">
+                  <i class="ai-star text-warning" th:id="'star-1-' + ${item.hNo}"></i>
+                  <i class="ai-star text-warning" th:id="'star-2-' + ${item.hNo}"></i>
+                  <i class="ai-star text-warning" th:id="'star-3-' + ${item.hNo}"></i>
+                  <i class="ai-star text-warning" th:id="'star-4-' + ${item.hNo}"></i>
+                  <i class="ai-star text-warning" th:id="'star-5-' + ${item.hNo}"></i>
+                  <span class="list-inline-item me-1 h6 mb-0 px-1" th:text="${#numbers.formatDecimal(item.average, 1, 1)}"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </th:block>
+
+        <!-- Pagination-->
+        <div class="row">
+          <div class="col-12">
+            <div class="row gy-3 align-items-center mt-lg-5 pt-2 pt-md-3 pt-lg-0 mb-md-2 mb-xl-4" align="center">
+              <div class="order-md-3 order-2">
+                <nav aria-label="Page navigation">
+                  <ul class="pagination pagination-sm justify-content-center">
+                    <th:block th:if="${list != null && #lists.size(list) != 0}">
+                      <!--이전 페이지 -->
+                      <li class="page-item">
+                        <a class="page-link" style="cursor: pointer" th:onclick="|movePage(${pageInfo.prevPage});|">
+                          <i class="ai-arrow-left fs-xl"></i>
+                        </a>
+                      </li>
+
+                      <!-- 5개 페이지 -->
+                      <th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+                        <th:block th:if="${status.current == pageInfo.currentPage}">
+                          <li class="page-item active" aria-current="page">
+                            <span class="visually-hidden">(current)</span>
+                            <button class="page-link" style="font-size: 1.2rem" disabled>[[${status.current}]]</button>
+                          </li>
+                        </th:block>
+
+                        <th:block th:if="${status.current != pageInfo.currentPage}">
+                          <button class="page-link" style="font-size: 1.2rem" th:onclick="|movePage(${status.current});|">[[${status.current}]]</button>
+                        </th:block>
+                      </th:block>
+
+                      <!--다음 페이지 -->
+                      <li class="page-item">
+                        <a class="page-link" style="cursor: pointer" th:onclick="|movePage(${pageInfo.nextPage});|">
+                          <i class="ai-arrow-right fs-xl"></i>
+                        </a>
+                      </li>
+                    </th:block>
+                  </ul>
+                </nav>
               </div>
             </div>
           </div>
         </div>
-        </th:block>
-
-		<!-- Pagination-->
-			<div class="row">
-				<div class="col-12">
-					<div class="row gy-3 align-items-center mt-lg-5 pt-2 pt-md-3 pt-lg-0 mb-md-2 mb-xl-4" align="center">
-						<div class="order-md-3 order-2">
-							<nav aria-label="Page navigation">
-								<ul class="pagination pagination-sm justify-content-center">
-									<th:block th:if="${list != null && #lists.size(list) != 0}">
-										
-										<!--이전 페이지 -->
-										<li class="page-item">
-											<a class="page-link" style="cursor:pointer;"
-												th:onclick="|movePage(${pageInfo.prevPage});|">
-												<i class="ai-arrow-left fs-xl"></i>
-											</a>
-										</li>
-										
-										<!-- 5개 페이지 -->
-										<th:block
-											th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
-											<th:block th:if="${status.current == pageInfo.currentPage}">
-												<li class="page-item active" aria-current="page"><span
-													class="visually-hidden">(current)</span>
-													<button class="page-link" style="font-size: 1.2rem"
-														disabled>[[${status.current}]]</button></li>
-											</th:block>
-											
-											<th:block th:if="${status.current != pageInfo.currentPage}">
-												<button class="page-link" style="font-size: 1.2rem"
-													th:onclick="|movePage(${status.current});|">
-													[[${status.current}]]</button>
-											</th:block>
-										</th:block>
-										
-										<!--다음 페이지 -->
-										<li class="page-item">
-										<a class="page-link" style="cursor:pointer;"
-											th:onclick="|movePage(${pageInfo.nextPage});|">
-											<i class="ai-arrow-right fs-xl"></i>
-										</a>
-										</li>
-									</th:block>
-								</ul>
-							</nav>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+      </div>
     </main>
-    
+
     <!-- Footer-->
     <footer th:replace="~{common/layout :: #footer}"></footer>
-    
+
     <!-- Back to top button-->
     <a class="btn-scroll-top" href="#top" data-scroll>
       <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle></svg>
-      	<i class="ai-arrow-up"></i>
-   	</a>
+        <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
+      </svg>
+      <i class="ai-arrow-up"></i>
+    </a>
     <!-- Vendor scripts: js libraries and plugins-->
     <script th:src="@{/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/assets/vendor/nouislider/dist/nouislider.min.js}"></script>
@@ -302,68 +290,69 @@
     <!-- Main theme script-->
     <script th:src="@{/assets/js/theme.min.js}"></script>
     <script type="text/javascript">
-		function movePage(page){
-			searchForm.page.value = page;
-			searchForm.submit();
-		}
-		function orderBy(param) {
-			searchForm.order.value = param;
-			searchForm.submit();
-		}
-	</script>
-	<!-- 북마크  -->
-	<script>
-		function addFavor(heriBookmark, hNo, mno) {
-			var heriBookmark = $(heriBookmark);
-			console.log(heriBookmark);
-			$.ajax({
-				type : "POST",
-				url : "/heritage/addHeriBookmark",
-				data : JSON.stringify({
-					hNo : hNo,
-					mno : mno
-				}),
-				dataType : "json",
-				contentType : "application/json;charset=UTF-8",
-				success : function(response) {
-					alert(response.message);
+      function movePage(page) {
+        searchForm.page.value = page;
+        searchForm.submit();
+      }
+      $(document).ready(function () {
+        $("#order").change(function () {
+          var orderBy = $(this).val();
+          $("#orderInput").val(orderBy);
+          searchForm.submit();
+        });
+      });
+    </script>
 
-					if (heriBookmark.hasClass('ai-heart')) {
-						heriBookmark.removeClass("ai-heart");
-						heriBookmark.addClass("ai-heart-filled");
-					} else {
-						heriBookmark.removeClass("ai-heart-filled");
-						heriBookmark.addClass("ai-heart");
-					}
-				},
-				error : function(xhr, status, error) {
-					console.log("에러 발생:", error);
-				}
-			});
-		}
-		
-		$(document).ready(function () {
-			$('[name=stars]').each(function () {
-				var hno = $(this).data('hno');
-				var stars = $(this).data('average');
-				for (var i = 1; i <= 5; i++) {
-					var id = '#star-' + i + '-' + hno;
-					var icon = $(id);
-		    		if (stars >= 1) {
-		    			icon.removeClass('ai-star');
-		    			icon.addClass('ai-star-filled');
-		    			stars -= 1;
-		    		} else if (stars >= 0.5) {
-		    			icon.removeClass('ai-star');
-		    			icon.addClass('ai-star-half');
-		    			stars = 0;
-		    		}
-				}
-			});
-		});
-	</script>
+    <!-- 북마크  -->
+    <script>
+      function addFavor(heriBookmark, hNo, mno) {
+        var heriBookmark = $(heriBookmark);
+        console.log(heriBookmark);
+        $.ajax({
+          type: "POST",
+          url: "/heritage/addHeriBookmark",
+          data: JSON.stringify({
+            hNo: hNo,
+            mno: mno,
+          }),
+          dataType: "json",
+          contentType: "application/json;charset=UTF-8",
+          success: function (response) {
+            alert(response.message);
 
-</body>
+            if (heriBookmark.hasClass("ai-heart")) {
+              heriBookmark.removeClass("ai-heart");
+              heriBookmark.addClass("ai-heart-filled");
+            } else {
+              heriBookmark.removeClass("ai-heart-filled");
+              heriBookmark.addClass("ai-heart");
+            }
+          },
+          error: function (xhr, status, error) {
+            console.log("에러 발생:", error);
+          },
+        });
+      }
+
+      $(document).ready(function () {
+        $("[name=stars]").each(function () {
+          var hno = $(this).data("hno");
+          var stars = $(this).data("average");
+          for (var i = 1; i <= 5; i++) {
+            var id = "#star-" + i + "-" + hno;
+            var icon = $(id);
+            if (stars >= 1) {
+              icon.removeClass("ai-star");
+              icon.addClass("ai-star-filled");
+              stars -= 1;
+            } else if (stars >= 0.5) {
+              icon.removeClass("ai-star");
+              icon.addClass("ai-star-half");
+              stars = 0;
+            }
+          }
+        });
+      });
+    </script>
+  </body>
 </html>
- 
-

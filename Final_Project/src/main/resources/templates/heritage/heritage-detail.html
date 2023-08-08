@@ -120,7 +120,9 @@
                     <h3 class="mb-0 title fs-2">문화재 설명</h3>
                   </div>
                   <div class="p-0 pt-3 text-black mb-5">
-                    <p class="mb-1">[[${item.content}]]</p>
+                    <p class="mb-1" th:each="line: ${lines}">
+                      <span>[[${line}]]</span> <br><br>
+                    </p>
                   </div>
                   
                   <div class="border-bottom py-4 mt-2 mb-4">
@@ -410,7 +412,7 @@
 			});
 		}
 	</script>
-    <script th:inline="javascript">
+    <script >
     	var stars = [[${item.average}]];
     	for (var i = 1; i <= 5; i++) {
     		var id = '#star-' + i;
