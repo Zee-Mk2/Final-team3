@@ -35,6 +35,33 @@
 		)
 	</insert>
 	
+	<update id="updateMember" parameterType="com.multi.bbs.account.model.vo.Member">
+		UPDATE Member 
+			SET mno = mno
+			<if test="reFileName != null">
+				, reFileName = #{reFileName} 
+			</if>
+			<if test="name != null">
+				, name = #{name}
+			</if>
+			<if test="email != null">
+				, email = #{email}
+			</if>
+			<if test="phone != null">
+				, phone = #{phone}
+			</if>
+			WHERE mno = #{mno}
+	</update>
 	
+	<update id="updatePassword" parameterType="map">
+	    UPDATE Member 
+	    SET password = #{newPassword}
+	    WHERE mno = #{mno}
+	</update>
+	
+	<delete id="deleteAccountInfo" parameterType="int">
+        DELETE FROM MEMBER
+        WHERE MNO = #{mno}
+    </delete>
 	
 </mapper>

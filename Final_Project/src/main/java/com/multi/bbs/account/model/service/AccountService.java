@@ -3,6 +3,7 @@ package com.multi.bbs.account.model.service;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -84,6 +85,26 @@ public class AccountService {
 	
 	public Member findById(String id) {
 		return accountMapper.selectMember(id);
+	}
+
+	public void deleteFile(String string) {
+		File file = new File(string);
+		if(file.exists()) {
+			file.delete();
+		}
+	}
+
+	public int updateMember(Member updatedMember) {
+		return accountMapper.updateMember(updatedMember);
+	}
+
+
+	public int updatePassword(Map<String, Object> paramMap) {
+		return accountMapper.updatePassword(paramMap);
+	}
+
+	public int deleteAccount(int mno) {
+		return accountMapper.deleteAccountInfo(mno);
 	}
 
 
