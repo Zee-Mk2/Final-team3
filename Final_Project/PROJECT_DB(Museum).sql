@@ -48,20 +48,7 @@ CREATE TABLE MuseumReview (
     content VARCHAR(1000)
 );
 
-SELECT M.*, COUNT(MR.content) AS reviewCount
-    FROM Museum M
-    LEFT JOIN MuseumReview MR ON M.musNo = MR.musNo
-    GROUP BY M.musNo;
-
-INSERT INTO MuseumReview(rno, musNo, content) VALUE(DEFAULT, 1, "사람이 너무 많아서 사진 찍기 좀 짜증났지만 전시된 작품들의 수준이 너무 좋음. 마지막 섹션에 모네 마네 르누와르 고흐 고갱 볼때 정말 기쁨이 충만하였음");
--- INSERT INTO MuseumReview(rno, musNo, content) VALUE(DEFAULT, 1, "집에서 멀지 않음에도 계속 못가보다 큰맘먹고 비오는 와중에도 가봤더니 예상외로 외국관광객만이 아니라 많은 시민들이 방문중이었습니다~~");
--- INSERT INTO MuseumReview(rno, musNo, content) VALUE(DEFAULT, 1, "웅장한 규모와 많은 전시물 압권 입니다. 다만 전시가 전문가 혹은 학자의 입장에서 정리한것 같아 일반인에게는 약간 정리가 필요한듯 합니다.");
-INSERT INTO MuseumReview(rno, musNo, content) VALUE(DEFAULT, 2, "2층애서 하는 이상향 영상은 완성도와 테마. 화질 모두 매우 우수하니 꼭 시간맞춰 볼것을 추천한다.");
--- INSERT INTO MuseumReview(rno, musNo, content) VALUE(DEFAULT, 2, "국립 박물관이긴 해도 작은 곳이라 별 기대 없이 갔다가 생각보다 좋았던 곳. 매시 정각마다 틀어주는 관동팔경을 소재로 한 파노라마 영상은 꼭 볼 것");
-INSERT INTO MuseumReview(rno, musNo, content) VALUE(DEFAULT, 3, "볼거리도 많고 관람료도 무료라서 좋네요.");
--- INSERT INTO MuseumReview(rno, musNo, content) VALUE(DEFAULT, 3, "리노베이션 이후 일반전시실의 정보 전달력이 매우 높아짐.");
--- INSERT INTO MuseumReview(rno, musNo, content) VALUE(DEFAULT, 3, "새로운 분위기 고급스럽고 새로운 박물관이라고 애들이 좋아해요");
--- INSERT INTO MuseumReview(rno, musNo, content) VALUE(DEFAULT, 3, "건축가 김수근님의 작품으로  건물자체가 예술입니다. ");
+SELECT * FROM MuseumReview;
 
 DROP TABLE MuseComment;
 CREATE TABLE MuseComment (
@@ -98,13 +85,6 @@ CREATE TABLE MuseReplyComment (
 
 SELECT * FROM MuseReplyComment;
 
-SELECT musNo, name, (POWER(127.3432902 - la, 2) + POWER(36.3421655 - lo, 2)) AS distance FROM Museum ORDER BY distance LIMIT 5;
-
-SELECT * FROM Museum;
-
-
-SELECT * FROM Museum;
-
 drop table museBookmark;
 CREATE TABLE `museBookmark` (
 	`mno`	INT,
@@ -115,7 +95,6 @@ CREATE TABLE `museBookmark` (
 
 SELECT * FROM museBookmark;
 
-
 DROP table MuseumStars;
 CREATE TABLE MuseumStars(
 	musNo int,
@@ -124,44 +103,6 @@ CREATE TABLE MuseumStars(
     FOREIGN KEY (musNo) REFERENCES Museum(musNo) ON DELETE CASCADE,
     FOREIGN KEY (mno) REFERENCES member(mno) ON DELETE CASCADE
 );
-
-SELECT M.*, MS.average FROM Museum M
-	INNER JOIN museBookmark MB ON (M.musNo = MB.musNo)
-	LEFT JOIN (
-		SELECT musNo, AVG(rating) AS average
-			FROM MuseumStars
-			GROUP BY musNo
-	) MS ON (M.musNo = MS.musNo)
-	WHERE MB.mno = 1;
-
-SELECT * FROM MuseumStars;
-select m.*, b.*, if(b.mno is not null ,'Y','N') as museBookmark from Museum m
-LEFT OUTER JOIN museBookmark b ON(m.musNo = b.musNo)
-where b.mno is null or b.mno = 1
-order by m.musNo desc;
-
-
-SELECT
-	COUNT(*) FROM museBookmark
-	WHERE 1 = 1
-	AND mno = 1;
-	
-
-
-
-
-select * from member;
-
-SELECT M.*, MS.average FROM Museum M
-			INNER JOIN museBookmark MB ON (M.musNo = MB.musNo)
-			LEFT JOIN (
-				SELECT musNo, AVG(rating) AS average
-					FROM MuseumStars
-					GROUP BY musNo
-			) MS ON (M.musNo = MS.musNo)
-			WHERE MB.mno = 1;
-
-
 
 ------------------------------------------------
 --------------- HERITAGE 관련 테이블 ------------------

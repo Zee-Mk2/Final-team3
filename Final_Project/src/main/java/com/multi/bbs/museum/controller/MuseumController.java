@@ -40,7 +40,7 @@ public class MuseumController {
 		try {
 			page = Integer.parseInt((String) param.get("page"));
 		} catch (Exception e) {}
-		
+		System.out.println("museumList param>> " + param);
 		int resultCount = museumService.getResultCount(param);
 		PageInfo pageInfo = new PageInfo(page, 5, resultCount, 6);
 		List<Museum> list = museumService.getMuseumList(param, pageInfo);
@@ -62,6 +62,7 @@ public class MuseumController {
 		if (loginMember != null) {
 			param.put("mno", String.valueOf(loginMember.getMno()));
 		}
+		System.out.println("museumDetail.param>> " + param);
 		Museum museum = museumService.findByNo(param);
 		if(museum == null) {
 			return "common/error";

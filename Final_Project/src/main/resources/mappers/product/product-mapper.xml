@@ -4,11 +4,78 @@
 
 <!-- 향후 Mapper interface가 정의 될 위치 -->
 <mapper namespace="com.multi.bbs.shop.ShopMapper">
-	<select id="searchProducts" parameterType="String" resultType="com.multi.bbs.shop.Product">
+	<select id="searchProducts" parameterType="Map" resultType="com.multi.bbs.shop.Product">
 		SELECT * FROM Product
-		WHERE 1 = 1
-		<if test="keyword != null">
-			AND title LIKE '%${keyword}%'
-		</if>
-	</select>	
+			WHERE 1 = 1
+			<if test="keyword != null">
+				AND title LIKE '%${keyword}%'
+			</if>
+			<if test="minPrice != null">
+				AND lPrice >= #{minPrice}
+			</if>
+			<if test="maxPrice != null">
+				AND #{maxPrice} >= lPrice
+			</if>
+			<if test="sort == 'low-high'">
+				ORDER BY lPrice
+			</if>
+			<if test="sort == 'high-low'">
+				ORDER BY lPrice DESC
+			</if>
+			<if test="sort == 'az'">
+				ORDER BY title
+			</if>
+			<if test="sort == 'za'">
+				ORDER BY title DESC
+			</if>
+			LIMIT ${limit} OFFSET ${offset}
+	</select>
+	
+	<select id="getCount" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM Product
+			WHERE 1 = 1
+			<if test="keyword != null">
+				AND title LIKE '%${keyword}%'
+			</if>
+			<if test="minPrice != null">
+				AND lPrice >= #{minPrice}
+			</if>
+			<if test="maxPrice != null">
+				AND #{maxPrice} >= lPrice
+			</if>
+			<if test="sort == 'low-high'">
+				ORDER BY lPrice
+			</if>
+			<if test="sort == 'high-low'">
+				ORDER BY lPrice DESC
+			</if>
+			<if test="sort == 'az'">
+				ORDER BY title
+			</if>
+			<if test="sort == 'za'">
+				ORDER BY title DESC
+			</if>
+	</select>
+	
+	<select id="getProductById" parameterType="long" resultType="com.multi.bbs.shop.Product">
+		SELECT * FROM Product WHERE productId = #{productId}
+	</select>
+	
+	<insert id="insertReview" parameterType="com.multi.bbs.shop.ProductReview">
+		INSERT INTO ProductReview (prno, productId, mno, content, createTime, state)
+			VALUES (DEFAULT, #{productId}, #{mno}, #{content}, DEFAULT, DEFAULT)
+	</insert>
+	
+	<select id="getReviews" parameterType="long" resultType="com.multi.bbs.shop.ProductReview">
+		SELECT PR.*, M.reFileName, M.name FROM ProductReview PR
+			LEFT JOIN Member M ON(PR.mno = M.mno)
+			WHERE PR.state = 'Y' AND PR.productId = #{productId}
+	</select>
+	
+	<select id="getAnotherProducts" parameterType="long" resultType="com.multi.bbs.shop.Product">
+		SELECT title, image, lprice, productId
+			FROM Product
+			WHERE productId != #{productId}
+			LIMIT 4
+	</select>
 </mapper>

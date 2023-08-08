@@ -21,48 +21,13 @@
 			FROM MuseumStars
 			GROUP BY musNo
 	    ) MS ON (M.musNo = MS.musNo)
-		WHERE 
-			(MB.MNO IS NULL 
- 			<if test="mno != null">
-				OR MB.MNO = #{mno}
-			</if>
-			)
-		<if test="musNo != null">
-			AND musNo LIKE '%${musNo}%'
-		</if>
+		WHERE 1 = 1
 		<if test="name != null">
 			AND name LIKE '%${name}%'
 		</if>
-		<if test="summary != null">
-			AND summary LIKE '%${summary}%'
-		</if>
-		<if test="viewHours != null">
-			AND viewHours LIKE '%${viewHours}%'
-		</if>
-		<if test="fee != null">
-			AND fee LIKE '%${fee}%'
-		</if>
-		<if test="tel != null">
-			AND tel LIKE '%${tel}%'
-		</if>
-		<if test="img != null">
-			AND img LIKE '%${img}%'
-		</if>
-		<if test="sumImg != null">
-			AND sumImg LIKE '%${sumImg}%'
-		</if>
-		<if test="la != null">
-			AND la LIKE '%${la}%'
-		</if>
-		<if test="lo != null">
-			AND lo LIKE '%${lo}%'
-		</if>
-		<if test="ProgramImg != null">
-			AND ProgramImg LIKE '%${ProgramImg}%'
-		</if>
 		<if test="address != null">
 			AND address LIKE '%${address}%'
-		</if>	
+		</if>
 		ORDER BY musNo DESC LIMIT ${limit} OFFSET ${offset}
 	</select>
 	
@@ -111,7 +76,7 @@
 	<select id="selectMuseumByNo" parameterType="Map" resultType="com.multi.bbs.museum.model.vo.Museum">
 		SELECT M.* , MS.average
 		<if test="mno != null">
-			, IF(MB.MNO = #{mno},'Y','N') AS museBookmark
+			, IF(MB.MNO = #{mno},'Y','N') AS bookmark
 		</if>
 		FROM museum M
 		LEFT JOIN museBookmark MB ON (M.musNo = MB.musNo)
