@@ -140,8 +140,9 @@
 	</delete>
 	
 	<select id="getRepliesList" parameterType="int" resultType="com.multi.bbs.heritage.model.vo.Reply">
-		SELECT * FROM REPLY 
-		WHERE hNo = #{hNo}
+		SELECT R.*, M.reFileName FROM REPLY R
+			LEFT JOIN Member M ON (R.mno = M.mno)
+			WHERE hNo = #{hNo}
 	</select>
 
 	<select id="selectHeriBookmarkCount" resultType="int" parameterType="map">

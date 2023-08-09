@@ -26,8 +26,7 @@ public class MuseumService {
 		return museumMapper.selectMuseumList(paramMap);
 	}
 
-	@Transactional(rollbackFor = Exception.class)
-	public Museum findByNo(Map<String, String> param) {
+	public Museum findByNo(Map<String, Object> param) {
 		return museumMapper.selectMuseumByNo(param);
 	}
 	
@@ -44,8 +43,8 @@ public class MuseumService {
 		}
 	}
 	
-	public List<MuseComment> getComments(int musNo) {
-		return museumMapper.getComments(musNo);
+	public List<MuseComment> getComments(Map<String, Object> param) {
+		return museumMapper.getComments(param);
 	}
 
 	public int deleteComment(int cno) {
@@ -56,8 +55,8 @@ public class MuseumService {
 		return museumMapper.deleteReply(rcno);
 	}
 
-	public List<MuseReplyComment> getReply(int musNo) {
-		return museumMapper.getReply(musNo);
+	public List<MuseReplyComment> getReply(Map<String, Object> param) {
+		return museumMapper.getReply(param);
 	}
 
 	public int submitMuseStar(Map<String, String> param) {
@@ -79,6 +78,10 @@ public class MuseumService {
 
 	public int addMuseBookmark(Map<String, Object> map) {
 		return museumMapper.insertMuseBookmark(map);
+	}
+
+	public List<Museum> getAroundMuseum(Map<String, Object> param) {
+		return museumMapper.getAroundMuseum(param);
 	}
 	
 

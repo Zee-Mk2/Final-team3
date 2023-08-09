@@ -33,22 +33,6 @@
                 <h4 class="display-4 text-light pb-sm-2 pb-md-3 mb-lg-5">커뮤니티</h4>
                 <br><br><br><br><br>
               </div>
-              <form class="row g-3 bg-white rounded-pill align-items-center">
-                <div class="col-2 my-1">
-                  <select class="form-select" style="border: none;">
-                    <option selected>자유게시판</option>
-                    <option>문화소식</option>
-                    <option>포토게시판</option>
-                  </select>
-                </div>
-                <div class="col-9 my-1">
-                  <input type="text" class="form-control" style="border: none;" placeholder="키워드로 검색">
-                </div>
-                <div class="col-1 my-1">
-                  <button type="submit" class="btn py-2 ms-3"><i class='ai-search'
-                      style="font-size: 26px; color: #202020;"></i></button>
-                </div>
-              </form>
             </div>
           </div>
         </div>
@@ -80,7 +64,6 @@
               <div class="mb-3">
                 <label for="titileinput" class="form-label">
                   <select class="form-select" name="boardCat">
-                    <option value="noti" th:selected="${boardCat == 'noti'}">문화소식</option>
                     <option value="free" th:selected="${boardCat == 'free'}">자유게시판</option>
                     <option value="photo" th:selected="${boardCat == 'photo'}">포토게시판</option>
                   </select>

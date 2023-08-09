@@ -54,13 +54,15 @@ public class MuseumController {
 	}
 	
 	@GetMapping("/museumDetail")
-	public String museumDetail(Model model, @RequestParam("no") int no, HttpSession session) {
+	public String museumDetail(Model model, @RequestParam Map<String, String> paramMap, HttpSession session) {
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		model.addAttribute("loginMember", loginMember);
-		Map<String, String> param = new HashMap<>();
-		param.put("no", String.valueOf(no));
+		Map<String, Object> param = new HashMap<>();
+		param.put("la", Double.valueOf(paramMap.get("la")));
+		param.put("lo", Double.valueOf(paramMap.get("lo")));
+		param.put("no", Integer.valueOf(paramMap.get("no")));
 		if (loginMember != null) {
-			param.put("mno", String.valueOf(loginMember.getMno()));
+			param.put("mno", Integer.valueOf(loginMember.getMno()));
 		}
 		System.out.println("museumDetail.param>> " + param);
 		Museum museum = museumService.findByNo(param);
@@ -68,19 +70,26 @@ public class MuseumController {
 			return "common/error";
 		}
 		model.addAttribute("museum", museum);
-		System.out.println("museumDetail>> " + museum);
+		String[] lines = museum.getSummary().split("\\.");
+		for (int i = 0; i < lines.length; i++) {
+			lines[i] = lines[i].strip() + ".";
+		}
+		model.addAttribute("lines", lines);
 		
 		CalcTime calcTime = new CalcTime();
-		List<MuseComment> comments = museumService.getComments(no);
+		List<MuseComment> comments = museumService.getComments(param);
 		for (MuseComment comment : comments) {
 			comment.setTimeDiff(calcTime.getTimeDiff(comment.getWriteTime()));
 		}
-		List<MuseReplyComment> replies = museumService.getReply(no);
+		List<MuseReplyComment> replies = museumService.getReply(param);
 		for (MuseReplyComment reply : replies) {
 			reply.setTimeDiff(calcTime.getTimeDiff(reply.getWriteTime()));
 		}
 		model.addAttribute("replies", replies);
 		model.addAttribute("comments", comments);
+		
+		List<Museum> items = museumService.getAroundMuseum(param);
+		model.addAttribute("items", items);
 		
 		return "/museum/museumDetail";
 	}

@@ -198,10 +198,6 @@
               <i class="ai-bookmark fs-base opacity-70 me-2 mt-n1"></i>
               북마크
             </a>
-            <a class="dropdown-item" href="account-billing.html">
-              <i class="ai-dashboard fs-base opacity-70 me-2 mt-n1"></i>
-              내 예약 정보
-            </a>
             <a class="dropdown-item" href="account-settings.html">
               <i class="ai-settings fs-lg opacity-70 me-2"></i>
               설정
@@ -384,5 +380,60 @@
       </div>
     </div>
   </aside>
+  
+          <aside class="col-lg-3 pe-lg-4 pe-xl-5 mt-n3" id="mypageSidebar">
+            <div class="position-lg-sticky top-0">
+              <div class="d-none d-lg-block" style="padding-top: 105px"></div>
+              <div class="offcanvas-lg offcanvas-start" id="sidebarAccount">
+                <button class="btn-close position-absolute top-0 end-0 mt-3 me-3 d-lg-none" type="button" data-bs-dismiss="offcanvas" data-bs-target="#sidebarAccount"></button>
+                <div class="offcanvas-body">
+                  <div class="pb-2 pb-lg-0 mb-4 mb-lg-5">
+		            <div class="rounded-circle border overflow-hidden align-items-center mb-2" style="width: 80px !important; height: 80px !important; display: flex">
+		              <i class="ai-user mx-auto" style="font-size: 40px; color: #303030;" th:if="${loginMember.reFileName == null}"></i>
+		              <img th:src="@{'/board/file/' + ${loginMember.reFileName}}" style="width: 80px !important; height: 80px !important;" th:if="${loginMember.reFileName != null}">
+		            </div>
+                    <h3 class="h5 mb-1" th:if="${loginMember != null}">[[${loginMember.name}]]</h3>
+                    <p class="fs-sm text-muted mb-0" th:if="${loginMember != null}">[[${loginMember.email}]]</p>
+                  </div>
+
+                  <nav class="nav flex-column pb-2 pb-lg-4 mb-3">
+                    <div class="border-bottom border-1 mb-3"></div>
+                    <h4 class="fs-xs fw-medium text-muted text-uppercase pb-1 mb-2">계정</h4>
+                    <a class="nav-link fw-semibold py-2 px-0" th:href="@{/myinfo}">
+                      <i class="ai-user-check fs-5 opacity-60 me-2"></i>
+                      내정보
+                    </a>
+                    <a class="nav-link fw-semibold py-2 px-0" th:href="@{/mypage/bookmark}">
+                      <i class="ai-bookmark fs-5 opacity-60 me-2"></i>
+                      북마크
+                    </a>
+                    <a class="nav-link fw-semibold py-2 px-0" href="account-settings.html">
+                      <i class="ai-settings fs-5 opacity-60 me-2"></i>
+                      설정
+                    </a>
+                  </nav>
+                  <nav class="nav flex-column pb-2 pb-lg-4 mb-3">
+                    <div class="border-bottom border-1"></div>
+                    <h4 class="fs-xs fw-medium text-muted text-uppercase pb-1 mb-2 pt-3">쇼핑몰</h4>
+                    <a class="nav-link fw-semibold py-2 px-0" th:href="@{/mypage/orders}">
+                      <i class="ai-file-text fs-5 opacity-60 me-2"></i>
+                      주문내역
+                    </a>
+                    <a class="nav-link fw-semibold py-2 px-0" th:href="@{/shop/checkout}">
+                      <i class="ai-cart fs-5 opacity-60 me-2"></i>
+                      장바구니
+                    </a>
+                  </nav>
+                  <nav class="nav flex-column">
+                    <div class="border-bottom border-1"></div>
+                    <a class="nav-link fw-semibold py-2 px-0" th:href="@{/logout}">
+                      <i class="ai-logout fs-5 opacity-60 me-2" style="color: rgb(222, 58, 58)"></i>
+                      <span style="color: rgb(238, 109, 109)">로그아웃</span>
+                    </a>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </aside>
 </body>
 </html>

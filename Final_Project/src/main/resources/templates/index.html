@@ -44,15 +44,15 @@
                 <a class="btn btn-outline-primary px-3 py-2 fs-5" th:href="@{/event/eventDetail?no=8}">더보기</a>
               </div>
             </div>
-            <form class="row g-3 bg-white rounded-pill align-items-center">
+            <form class="row g-3 bg-white rounded-pill align-items-center" method="get" th:action="@{/search}">
               <div class="col-2 my-1">
-                <select class="form-select" style="border: none">
-                  <option selected>문화재</option>
-                  <option>박물관</option>
+                <select class="form-select" style="border: none" name="searchType">
+                  <option value="heritage" selected>문화재</option>
+                  <option value="museum">박물관</option>
                 </select>
               </div>
               <div class="col-9 my-1">
-                <input type="text" class="form-control" style="border: none" placeholder="키워드로 검색" />
+                <input type="text" class="form-control" style="border: none" placeholder="키워드로 검색" name="keyword" />
               </div>
               <div class="col-1 my-1">
                 <button type="submit" class="btn py-2 ms-3"><i class="ai-search" style="font-size: 26px; color: #202020"></i></button>

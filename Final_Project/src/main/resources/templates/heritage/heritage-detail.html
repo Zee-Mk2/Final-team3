@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-  
- 	 <!-- Vendor styles-->
-    <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}" />
-    <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/lightgallery/css/lightgallery-bundle.min.css}" />
-    <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
-  
+  <!-- Vendor styles-->
+  <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}" />
+  <link rel="stylesheet" media="screen" th:href="@{/assets/vendor/lightgallery/css/lightgallery-bundle.min.css}" />
+  <head th:fragment="head" th:replace="~{common/layout :: head}"></head>
+
   <!-- Body-->
 
   <body>
@@ -20,8 +19,8 @@
     <!-- Page wrapper-->
     <main class="page-wrapper">
       <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
-	  <header th:replace="~{common/layout :: #header}"></header>
-	  
+      <header th:replace="~{common/layout :: #header}"></header>
+
       <!-- Page content-->
       <section class="container py-5 mt-5 mb-sm-2 mb-lg-3 mb-xl-4 mb-xxl-5">
         <!-- Breadcrumb-->
@@ -53,36 +52,34 @@
               </div>
             </a>
           </div>
-          </th:block>
           <div class="col-md-6 col-xl-5 offset-xl-1">
             <div class="d-none d-md-block"></div>
             <div class="top-0 ps-md-4 ps-lg-5 ps-xl-0">
               <div class="d-none d-md-block" style="padding-top: 90px"></div>
-              <div class="h3 my-card-title" style="font-size: 40px; font-weight: bold;"> [[${item.name}]]([[${item.name2}]]) </div>
+              <div class="h3 my-card-title" style="font-size: 40px; font-weight: bold">[[${item.name}]]([[${item.name2}]])</div>
               <!-- Action buttons-->
               <div class="d-sm-flex d-md-block d-lg-flex py-4 py-md-5 my-3 my-md-0 mt-lg-0 mb-lg-1">
                 <div class="align-items-center">
                   <div class="d-flex align-items-center mt-3">
-                  <th:block th:if="${loginMember != null}">
-                  <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
-                   </button>
-                    <div class="nav">
-                      <th:block th:if="${item.bookmark} != 'Y'">
-		                <i th:value="${item.bookmark}" class="ai-heart fs-xl"  th:onclick="addFavor(this, [[${item.hNo}]], [[${loginMember.mno}]])"></i>
-					  </th:block>
-		           	  <th:block th:if="${item.bookmark} == 'Y'">
-		                <i th:value="${item.bookmark}" class="ai-heart-filled fs-xl"  th:onclick="addFavor(this, [[${item.hNo}]], [[${loginMember.mno}]])"></i>
-					  </th:block>
-                    </div>
-                  </th:block>
+                    <th:block th:if="${loginMember != null}">
+                      <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button"></button>
+                      <div class="nav">
+                        <th:block th:if="${item.bookmark} != 'Y'">
+                          <i th:value="${item.bookmark}" class="ai-heart fs-xl" th:onclick="addFavor(this, [[${item.hNo}]], [[${loginMember.mno}]])"></i>
+                        </th:block>
+                        <th:block th:if="${item.bookmark} == 'Y'">
+                          <i th:value="${item.bookmark}" class="ai-heart-filled fs-xl" th:onclick="addFavor(this, [[${item.hNo}]], [[${loginMember.mno}]])"></i>
+                        </th:block>
+                      </div>
+                    </th:block>
                     <div class="d-flex mt-1 ps-2">
-	                  <i class="ai-star text-warning" id="star-1"></i>
-	                  <i class="ai-star text-warning" id="star-2"></i>
-	                  <i class="ai-star text-warning" id="star-3"></i>
-	                  <i class="ai-star text-warning" id="star-4"></i>
-	                  <i class="ai-star text-warning" id="star-5"></i>
-	                  <span class="list-inline-item me-1 h6 mb-0 px-1" th:text="${#numbers.formatDecimal(item.average, 1, 1)}"></span>
-              		</div>
+                      <i class="ai-star text-warning" id="star-1"></i>
+                      <i class="ai-star text-warning" id="star-2"></i>
+                      <i class="ai-star text-warning" id="star-3"></i>
+                      <i class="ai-star text-warning" id="star-4"></i>
+                      <i class="ai-star text-warning" id="star-5"></i>
+                      <span class="list-inline-item me-1 h6 mb-0 px-1" th:text="${#numbers.formatDecimal(item.average, 1, 1)}"></span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -101,7 +98,6 @@
               </div>
             </div>
           </div>
-          
         </div>
       </section>
 
@@ -121,38 +117,40 @@
                   </div>
                   <div class="p-0 pt-3 text-black mb-5">
                     <p class="mb-1" th:each="line: ${lines}">
-                      <span>[[${line}]]</span> <br><br>
+                      <span>[[${line}]]</span>
+                      <br />
+                      <br />
                     </p>
                   </div>
-                  
-                  <div class="border-bottom py-4 mt-2 mb-4">
-                  <h2 class="h2 py-lg-1 py-xl-3 border-bottom">댓글</h2>
-                  <th:block th:if="${replies != null}">
-                  	<th:block  th:each="reply : ${replies}"> 
-                  <!-- Comment-->
-                    <div class="d-flex align-items-center pb-1 mb-3">
-                      <img class="rounded-circle" th:src="@{/assets/img/avatar/08.jpg}" width="48" alt="Comment author" />
-                      <div class="ps-3">
-                        <h6 class="mb-0" th:text="${reply.name}"></h6>
-                        <span class="fs-sm text-muted" th:text="${reply.timeDiff}"></span>
-                      </div>
-                    </div>
-                    <p class="pb-2 mb-0" th:text="${reply.content}"></p>
-				         	<th:block th:if="${session.loginMember != null && 
+
+                  <div class="py-4 mt-2 mb-4">
+                    <h2 class="h2 py-lg-1 py-xl-3 border-bottom">댓글</h2>
+                    <th:block th:if="${replies != null}">
+                      <div th:each="reply : ${replies}" class="py-4 border-bottom">
+                        <!-- Comment-->
+                        <div class="d-flex align-items-center pb-1 mb-3">
+                          <div class="rounded-circle border overflow-hidden align-items-center" style="width: 60px !important; height: 60px !important; display: flex">
+                            <i class="ai-user mx-auto" style="font-size: 28px; color: #303030" th:if="${reply.reFileName == null}"></i>
+                            <img th:src="@{'/board/file/' + ${reply.reFileName}}" style="width: 60px; height: 60px" th:if="${reply.reFileName != null}" />
+                          </div>
+                          <div class="ps-3">
+                            <h6 class="mb-0" th:text="${reply.name}"></h6>
+                            <span class="fs-sm text-muted" th:text="${reply.timeDiff}"></span>
+                          </div>
+                        <th:block
+                          th:if="${session.loginMember != null && 
 							(session.loginMember.name == reply.name || session.loginMember.role == 'ROLE_ADMIN')}">
-				     <form th:action="@{/heritage/replyDel}" method="post">
-				            <input type="hidden" name="rNo" th:value="${reply.rNo}" />
-				            <input type="hidden" name="hNo" th:value="${reply.hNo}" />
-				            <button type="submit" class="btn btn-sm btn-danger offset-11" >삭제</button>
-				        </form> 
-						</th:block> 
-                  	</th:block>
-                  </th:block>
-                  	<th:block th:if="${replies == null}">
-					<tr>
-						<td colspan="3" style="text-align: center;">등록된 댓글이 없습니다.</td>
-					</tr>
-				</th:block>
+                          <form th:action="@{/heritage/replyDel}" method="post" class="ms-auto">
+                            <input type="hidden" name="rNo" th:value="${reply.rNo}" />
+                            <input type="hidden" name="hNo" th:value="${reply.hNo}" />
+                            <button type="submit" class="btn btn-sm btn-danger">삭제</button>
+                          </form>
+                        </th:block>
+                        </div>
+                        <p class="pb-2 mb-0" th:text="${reply.content}"></p>
+                      </div>
+                    </th:block>
+                    <div th:if="${#lists.isEmpty(replies)}" class="h3 mt-5 text-center text-muted">등록된 댓글이 없습니다.</div>
                   </div>
                 </div>
               </div>
@@ -167,21 +165,21 @@
                     <!-- List -->
                     <table class="table">
                       <tr>
-                        <h1 class="fw-bold"  style="text-align: center; font-size: 35px; color: #780422;">문화재 정보</h1>
+                        <h1 class="fw-bold" style="text-align: center; font-size: 35px; color: #780422">문화재 정보</h1>
                       </tr>
                       <tr>
                         <td class="fw-bold text-black" style="white-space: nowrap">
                           <i class="far fa-address-book text-primary"></i>
                           분류
                         </td>
-                        <td> [[${item.gcodeName}]]   / [[${item.bcodeName}]]   / [[${item.mcodeName}]]   / [[${item.scodeName}]]  </td>
+                        <td>[[${item.gcodeName}]] / [[${item.bcodeName}]] / [[${item.mcodeName}]] / [[${item.scodeName}]]</td>
                       </tr>
                       <tr>
                         <td class="fw-bold text-black" style="white-space: nowrap">
                           <i class="fas fa-phone text-primary"></i>
                           시대
                         </td>
-                        <td>[[${item.era}]] </td>
+                        <td>[[${item.era}]]</td>
                       </tr>
                       <tr>
                         <td class="fw-bold text-black" style="white-space: nowrap">
@@ -195,7 +193,7 @@
                           <i class="fas fa-calendar-day text-primary"></i>
                           소재지
                         </td>
-                        <td style="border-bottom: none" th:text="${item.location}"> </td>
+                        <td style="border-bottom: none" th:text="${item.location}"></td>
                       </tr>
                     </table>
                   </div>
@@ -235,95 +233,93 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12" style="padding-top: 20px;">
-                  <div class="card card-body bg-light">
-                    <div class="fw-bold text-center fs-2 pb-3" style="color: #780422;">별점 남기기</div>
-                    <hr>
-                      <div class="align-items-center text-center text-warning pt-4" id="starFormat">
-                        <input type="radio" name="stars" id="1star" value="1" style="opacity: 0;">
-                        <label class="ai-star fs-2" for="1star" id="1starLabel"></label>
-                        <input type="radio" name="stars" id="2star" value="2" style="opacity: 0;">
-                        <label class="ai-star fs-2" for="2star" id="2starLabel"></label>
-                        <input type="radio" name="stars" id="3star" value="3" style="opacity: 0;">
-                        <label class="ai-star fs-2" for="3star" id="3starLabel"></label>
-                        <input type="radio" name="stars" id="4star" value="4" style="opacity: 0;">
-                        <label class="ai-star fs-2" for="4star" id="4starLabel"></label>
-                        <input type="radio" name="stars" id="5star" value="5" style="opacity: 0;">
-                        <label class="ai-star fs-2" for="5star" id="5starLabel"></label>
-                      </div>
-                    </div>
-                    <script src="http://code.jquery.com/jquery-latest.js"></script>
-                    <script th:inline="javascript">
-                      $(document).ready(function() {
-                        $('#starFormat label').each(function() {
-                          var icon = $(this);
-                          icon.hover(function() {
-                            var num = parseInt($(this).attr('id').charAt(0), 10);
-                            for (var i = 1; i <= 5; i++) {
-                              var id = '#' + i + 'starLabel';
-                              if (i <= num) {
-                                $(id).removeClass('ai-star');
-                                $(id).addClass('ai-star-filled');
-                              } else {
-                                $(id).addClass('ai-star');
-                                $(id).removeClass('ai-star-filled');
-                              }
-                            }
-                          });
-                        });
-                        var hNo = [[${item.hNo}]];
-                        var url = '/heritage/star?no=' + hNo;
-                        $('#starFormat input').each(function() {
-                          var button = $(this);
-                          button.change(function () {
-                            var loginMember = [[${loginMember}]];
-                            if (loginMember == null) {
-                          	  alert('별점을 제출하려면 로그인해야 합니다.');
-                          	  return;
-                            }
-                            var mno = loginMember.mno;
-                            var score = button.val();
-                            url += '&score=' + score + '&mno=' + mno;
-                            alert('이 장소의 별점이 ' + score + '점으로 제출되었습니다.');
-                            window.location.href = url;
-                          });
-                        });
-                      });
-                    </script>
-                      <style>
-                        .star-rating {
-                          display: flex;
-                          flex-direction: row-reverse;
-                          font-size: 2.25rem;
-                          line-height: 2.5rem;
-                          justify-content: space-around;
-                          padding: 0 0.2em;
-                          text-align: center;
-                          width: 5em;
-                        }
-                        
-                        .star-rating input {
-                          display: none;
-                        }
-                        
-                        .star-rating label {
-                          -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
-                          -webkit-text-stroke-width: 2.3px;
-                          -webkit-text-stroke-color: #2b2a29;
-                          cursor: pointer;
-                        }
-                        
-                        .star-rating :checked ~ label {
-                          -webkit-text-fill-color: gold;
-                        }
-                        
-                        .star-rating label:hover,
-                        .star-rating label:hover ~ label {
-                          -webkit-text-fill-color: #fff58c;
-                        }
-                      </style>
-                    </div>
+              <div class="col-12" style="padding-top: 20px">
+                <div class="card card-body bg-light">
+                  <div class="fw-bold text-center fs-2 pb-3" style="color: #780422">별점 남기기</div>
+                  <hr />
+                  <div class="align-items-center text-center text-warning pt-4" id="starFormat">
+                    <input type="radio" name="stars" id="1star" value="1" style="opacity: 0" />
+                    <label class="ai-star fs-2" for="1star" id="1starLabel"></label>
+                    <input type="radio" name="stars" id="2star" value="2" style="opacity: 0" />
+                    <label class="ai-star fs-2" for="2star" id="2starLabel"></label>
+                    <input type="radio" name="stars" id="3star" value="3" style="opacity: 0" />
+                    <label class="ai-star fs-2" for="3star" id="3starLabel"></label>
+                    <input type="radio" name="stars" id="4star" value="4" style="opacity: 0" />
+                    <label class="ai-star fs-2" for="4star" id="4starLabel"></label>
+                    <input type="radio" name="stars" id="5star" value="5" style="opacity: 0" />
+                    <label class="ai-star fs-2" for="5star" id="5starLabel"></label>
+                  </div>
                 </div>
+                <script src="http://code.jquery.com/jquery-latest.js"></script>
+                <script th:inline="javascript">
+                  $(document).ready(function() {
+                    $('#starFormat label').each(function() {
+                      var icon = $(this);
+                      icon.hover(function() {
+                        var num = parseInt($(this).attr('id').charAt(0), 10);
+                        for (var i = 1; i <= 5; i++) {
+                          var id = '#' + i + 'starLabel';
+                          if (i <= num) {
+                            $(id).removeClass('ai-star');
+                            $(id).addClass('ai-star-filled');
+                          } else {
+                            $(id).addClass('ai-star');
+                            $(id).removeClass('ai-star-filled');
+                          }
+                        }
+                      });
+                    });
+                    var hNo = [[${item.hNo}]];
+                    var url = '/heritage/star?no=' + hNo;
+                    $('#starFormat input').each(function() {
+                      var button = $(this);
+                      button.change(function () {
+                        var loginMember = [[${loginMember}]];
+                        if (loginMember == null) {
+                      	  alert('별점을 제출하려면 로그인해야 합니다.');
+                      	  return;
+                        }
+                        var mno = loginMember.mno;
+                        var score = button.val();
+                        url += '&score=' + score + '&mno=' + mno;
+                        alert('이 장소의 별점이 ' + score + '점으로 제출되었습니다.');
+                        window.location.href = url;
+                      });
+                    });
+                  });
+                </script>
+                <style>
+                  .star-rating {
+                    display: flex;
+                    flex-direction: row-reverse;
+                    font-size: 2.25rem;
+                    line-height: 2.5rem;
+                    justify-content: space-around;
+                    padding: 0 0.2em;
+                    text-align: center;
+                    width: 5em;
+                  }
+
+                  .star-rating input {
+                    display: none;
+                  }
+
+                  .star-rating label {
+                    -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+                    -webkit-text-stroke-width: 2.3px;
+                    -webkit-text-stroke-color: #2b2a29;
+                    cursor: pointer;
+                  }
+
+                  .star-rating :checked ~ label {
+                    -webkit-text-fill-color: gold;
+                  }
+
+                  .star-rating label:hover,
+                  .star-rating label:hover ~ label {
+                    -webkit-text-fill-color: #fff58c;
+                  }
+                </style>
               </div>
             </aside>
             <!-- Right side content END -->
@@ -342,8 +338,8 @@
               <div class="card-body">
                 <h2 class="pb-2 pb-lg-3 pb-xl-4">댓글 남기기</h2>
                 <form class="row needs-validation g-4" novalidate action="/heritage/reply" method="post">
-              <!-- <input type="hidden" name="name" th:value="${item.name}" />  -->  
-               	 <input type="hidden" name="hNo" th:value="${item.hNo}" />
+                  <!-- <input type="hidden" name="name" th:value="${item.name}" />  -->
+                  <input type="hidden" name="hNo" th:value="${item.hNo}" />
                   <div class="col-12">
                     <textarea class="form-control" rows="4" placeholder="댓글을 작성해주세요." required id="content" name="content"></textarea>
                   </div>
@@ -358,10 +354,10 @@
       </section>
       <!-- Trending products (carousel)-->
     </main>
-    
+
     <!-- Footer-->
     <footer th:replace="~{common/layout :: #footer}"></footer>
-    
+
     <!-- Back to top button-->
     <a class="btn-scroll-top" href="#top" data-scroll>
       <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -380,54 +376,54 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <!-- Main theme script-->
     <script th:src="@{/assets/js/theme.min.js}"></script>
-    	
- 	<!-- 북마크  -->
-	<script>
-		function addFavor(heriBookmark, hNo, mno) {
-			var heriBookmark = $(heriBookmark);
-			console.log(heriBookmark);
-			$.ajax({
-				type : "POST",
-				url : "/heritage/addHeriBookmark",
-				data : JSON.stringify({
-					hNo : hNo,
-					mno : mno
-				}),
-				dataType : "json",
-				contentType : "application/json;charset=UTF-8",
-				success : function(response) {
-					alert(response.message);
 
-					if (heriBookmark.hasClass('ai-heart')) {
-						heriBookmark.removeClass("ai-heart");
-						heriBookmark.addClass("ai-heart-filled");
-					} else {
-						heriBookmark.removeClass("ai-heart-filled");
-						heriBookmark.addClass("ai-heart");
-					}
-				},
-				error : function(xhr, status, error) {
-					console.log("에러 발생:", error);
-				}
-			});
-		}
-	</script>
-    <script >
-    	var stars = [[${item.average}]];
-    	for (var i = 1; i <= 5; i++) {
-    		var id = '#star-' + i;
-    		var icon = $(id);
-    		if (stars >= 1) {
-    			console.log(stars);
-    			icon.removeClass('ai-star');
-    			icon.addClass('ai-star-filled');
-    			stars -= 1;
-    		} else if (stars >= 0.5) {
-    			icon.removeClass('ai-star');
-    			icon.addClass('ai-star-half');
-    			stars = 0;
-    		}
-    	}
+    <!-- 북마크  -->
+    <script>
+      function addFavor(heriBookmark, hNo, mno) {
+        var heriBookmark = $(heriBookmark);
+        console.log(heriBookmark);
+        $.ajax({
+          type: "POST",
+          url: "/heritage/addHeriBookmark",
+          data: JSON.stringify({
+            hNo: hNo,
+            mno: mno,
+          }),
+          dataType: "json",
+          contentType: "application/json;charset=UTF-8",
+          success: function (response) {
+            alert(response.message);
+
+            if (heriBookmark.hasClass("ai-heart")) {
+              heriBookmark.removeClass("ai-heart");
+              heriBookmark.addClass("ai-heart-filled");
+            } else {
+              heriBookmark.removeClass("ai-heart-filled");
+              heriBookmark.addClass("ai-heart");
+            }
+          },
+          error: function (xhr, status, error) {
+            console.log("에러 발생:", error);
+          },
+        });
+      }
+    </script>
+    <script>
+      var stars = [[${item.average}]];
+      for (var i = 1; i <= 5; i++) {
+      	var id = '#star-' + i;
+      	var icon = $(id);
+      	if (stars >= 1) {
+      		console.log(stars);
+      		icon.removeClass('ai-star');
+      		icon.addClass('ai-star-filled');
+      		stars -= 1;
+      	} else if (stars >= 0.5) {
+      		icon.removeClass('ai-star');
+      		icon.addClass('ai-star-half');
+      		stars = 0;
+      	}
+      }
     </script>
   </body>
 </html>

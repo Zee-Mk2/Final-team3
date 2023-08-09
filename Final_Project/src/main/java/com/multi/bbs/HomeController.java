@@ -1,5 +1,7 @@
 package com.multi.bbs;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -57,5 +59,21 @@ public class HomeController {
 		
 		return "index";
 	}
+
+	@GetMapping("search")
+	public String homeSearch(String searchType, String keyword) {
+	    try {
+	    	String encodedKeyword = URLEncoder.encode(keyword, "UTF-8");
+	        if (searchType.equals("heritage")) {
+	            return "redirect:/heritage/list?page=&order=&name=" + encodedKeyword + "&minasDate=1939&maxasDate=2023&address=&era=&type=";
+	        } else {
+	            return "redirect:/museum?address=&name=" + encodedKeyword;
+	        }
+	    } catch (UnsupportedEncodingException e) {
+	    }
+	    
+	    return "redirect:/";
+	}
+
 	
 }

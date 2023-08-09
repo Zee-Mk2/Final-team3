@@ -17,4 +17,5 @@ public class Reply {
 	private String content;
 	private Date enrollDate;
 	private String timeDiff;
+	private String reFileName;
 }

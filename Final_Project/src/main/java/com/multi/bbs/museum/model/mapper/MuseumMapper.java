@@ -21,19 +21,19 @@ public interface MuseumMapper {
 
 	List<MusBookmark> getMuseumLike(int musNo);
 
-	Museum selectMuseumByNo(Map<String, String> param);
+	Museum selectMuseumByNo(Map<String, Object> param);
 
 	int insertComment(MuseComment comment);
 
 	int insertReplyComment(MuseComment comment);
 
-	List<MuseComment> getComments(int musNo);
+	List<MuseComment> getComments(Map<String, Object> param);
 
 	int deleteComment(int cno);
 
 	int deleteReply(int rcno);
 
-	List<MuseReplyComment> getReply(int musNo);
+	List<MuseReplyComment> getReply(Map<String, Object> param);
 
 	Map<String, Object> getMuseStar(Map<String, String> param);
 
@@ -46,6 +46,8 @@ public interface MuseumMapper {
 	int deleteMuseBookmark(Map<String, Object> map);
 
 	int selectMuseBookmarkCount(Map<String, Object> map);
+
+	List<Museum> getAroundMuseum(Map<String, Object> param);
 
 	
 	

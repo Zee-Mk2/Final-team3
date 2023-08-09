@@ -94,8 +94,10 @@
 			VALUES (DEFAULT, #{musNo}, #{mno}, #{name}, DEFAULT, #{content}, DEFAULT, DEFAULT)
 	</insert>
 	
-	<select id="getComments" parameterType="int" resultType="com.multi.bbs.museum.model.vo.MuseComment">
-		SELECT * FROM MuseComment WHERE state = 'Y' AND musNo = #{musNo}
+	<select id="getComments" parameterType="Map" resultType="com.multi.bbs.museum.model.vo.MuseComment">
+		SELECT C.*, M.reFileName FROM MuseComment C
+			LEFT JOIN Member M ON (C.mno = M.mno)
+			WHERE C.state = 'Y' AND C.musNo = #{musNo}
 	</select>
 	
 	<update id="deleteComment" parameterType="int">
@@ -107,7 +109,7 @@
 			VALUES (DEFAULT, #{cno}, #{musNo}, #{mno}, #{name}, DEFAULT, #{content}, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
-	<select id="getReply" parameterType="int" resultType="com.multi.bbs.museum.model.vo.MuseReplyComment">
+	<select id="getReply" parameterType="Map" resultType="com.multi.bbs.museum.model.vo.MuseReplyComment">
 		SELECT * FROM MuseReplyComment WHERE state = 'Y' AND musNo = #{musNo}
 	</select>
 	
@@ -157,7 +159,9 @@
 		UPDATE MuseumStars SET rating = #{score} WHERE musNo = #{no} AND mno = #{mno}
 	</update>
 	
-	
+	<select id="getAroundMuseum" parameterType="Map" resultType="com.multi.bbs.museum.model.vo.Museum">
+		SELECT *, (POWER(#{la} - la, 2) + POWER(#{lo} - lo, 2)) AS distance FROM Museum ORDER BY distance LIMIT 5;
+	</select>	
 	
 </mapper>
 
