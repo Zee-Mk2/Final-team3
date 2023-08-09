@@ -18,4 +18,5 @@ public class ProductReview {
 	private String timeDiff;
 	private String reFileName;
 	private String name;
+	private int score;
 }

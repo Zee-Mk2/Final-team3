@@ -3,6 +3,7 @@ package com.multi.bbs.account.model.service;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.multi.bbs.account.model.mapper.AccountMapper;
 import com.multi.bbs.account.model.vo.Member;
+import com.multi.bbs.shop.OrderedList;
 
 @Service
 public class AccountService {
@@ -87,6 +89,10 @@ public class AccountService {
 		return accountMapper.selectMember(id);
 	}
 
+	public List<OrderedList> getOrderedList(int mno) {
+		return accountMapper.getOrderedList(mno);
+	}
+
 	public void deleteFile(String string) {
 		File file = new File(string);
 		if(file.exists()) {
@@ -106,6 +112,5 @@ public class AccountService {
 	public int deleteAccount(int mno) {
 		return accountMapper.deleteAccountInfo(mno);
 	}
-
 
 }

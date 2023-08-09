@@ -47,6 +47,7 @@ public interface HeritageMapper {
 	Map<String, Object> getHeriStar(Map<String, String> param);
 
 	int updateHeriStar(Map<String, String> param);
+
 	 
 
 

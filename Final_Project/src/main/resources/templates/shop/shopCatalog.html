@@ -107,10 +107,6 @@
               <!-- Item-->
               <div class="col pb-2 pb-sm-3" th:each="item: ${products}">
                 <div class="card-hover position-relative bg-secondary rounded-1 mb-4 overflow-hidden border" style="height: 306px !important;">
-                  <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
-                    <i class="ai-heart fs-xl d-dark-mode-none"></i>
-                    <i class="ai-heart text-nav fs-xl d-none d-dark-mode-block"></i>
-                  </button>
                   <a th:href="@{/shop/detail(productId=${item.productId})}">
                     <img th:src="${item.image}" alt="Product" name="thumbnail" />
                   </a>
@@ -127,7 +123,7 @@
                     data-bs-placement="left"
                     title="장바구니에 추가"
                   >
-                    <a class="nav-link fs-lg py-2 px-1" href="#"><i class="ai-cart"></i></a>
+                    <a class="nav-link fs-lg py-2 px-1" th:onclick="addCart([[${item}]]); return false;"><i class="ai-cart"></i></a>
                   </div>
                 </div>
               </div> 
@@ -204,6 +200,29 @@
 	            }
     		});
     	});
+    	
+        function addCart(product) {
+            $.ajax({
+              url: "/shop/addCart",
+              type: "POST",
+              dataType: "text",
+          	  contentType : "application/json;charset=UTF-8",
+              data: JSON.stringify({
+                lprice: product.lprice,
+                productId: product.productId,
+                quantity: 1,
+                image: product.image,
+                title: product.title
+              }),
+              success: function (resp) {
+                alert(resp);
+              },
+              error: function (xhr, status, error) {
+                console.error(xhr, status, error);
+              },
+            });
+          }
+    	
 		function movePage(page){
 			searchForm.page.value = page;
 			searchForm.submit();

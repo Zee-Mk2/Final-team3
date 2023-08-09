@@ -33,15 +33,15 @@
             <div class="row pt-lg-2 py-xl-4 py-xxl-5 mb-md-4 mb-lg-5">
               <div class="col-md-10 col-lg-9 col-xl-8 col-xxl-7 pt-5 mb-5">
                 <h1 class="display-2 text-light pb-sm-2 pb-md-3">오늘의 추천</h1>
-                <h5 class="display-4 text-light pb-sm-2 pb-md-3">경복궁</h5>
+                <h5 class="display-4 text-light pb-sm-2 pb-md-3">수원 화성</h5>
                 <p class="text-light opacity-70 pb-3 pb-md-4 mb-3" style="max-width: 520px">
-                  달 밝은 밤 도심 속 궁궐 야경 이색체험을 통해
+                  달 밝은 밤 도심 속 성 야경 이색체험을 통해
                   <br />
-                  우리 궁궐의 역사 문화적 가치와 아름다움을 감상하며 널리 알리기 위한
+                  우리 성의 역사 문화적 가치와 아름다움을 감상하며 널리 알리기 위한
                   <br />
-                  2023년 봄 경복궁 야간 관람에 여러분을 초대합니다.
+                  2023년 여름 수원화성 야간 관람에 여러분을 초대합니다.
                 </p>
-                <a class="btn btn-outline-primary px-3 py-2 fs-5" href="shop-catalog.html">더보기</a>
+                <a class="btn btn-outline-primary px-3 py-2 fs-5" th:href="@{/event/eventDetail?no=8}">더보기</a>
               </div>
             </div>
             <form class="row g-3 bg-white rounded-pill align-items-center">
@@ -65,7 +65,7 @@
       <!-- Trending products (carousel)-->
       <section class="container mb-5 mt-5 pb-5">
         <div class="d-flex align-items-center justify-content-between pb-4 mb-2 mb-md-3">
-          <a href="#" style="text-decoration: none">
+          <a th:href="@{/heritage/list}" style="text-decoration: none">
             <h2 class="h1 pt-1 mb-0 text-primary">인기 문화재</h2>
           </a>
           <!-- Slider prev/next buttons-->
@@ -99,7 +99,7 @@
     }'>
           <div class="swiper-wrapper" id="resize">
             <!-- Item-->
-            <div class="swiper-slide">
+            <div class="swiper-slide" th:each="item: ${heritages}">
               <div class="card-hover position-relative bg-secondary rounded-1 mb-4 overflow-hidden" style="height: 20rem">
                 <!-- 뱃지 -->
                 <!-- <span class="badge bg-faded-danger text-danger position-absolute top-0 start-0 mt-3 ms-3">Sale</span> -->
@@ -107,140 +107,23 @@
                   <i class="ai-bookmark fs-xl d-dark-mode-none"></i>
                   <i class="ai-bookmark text-nav fs-xl d-none d-dark-mode-block"></i>
                 </button>
-                <a class="d-block" href="shop-single.html">
-                  <img class="d-block mx-auto" src="http://www.cha.go.kr/unisearch/images/national_treasure/2685609.jpg" />
+                <a class="d-block" th:href="@{/heritage/detail(no=${item.hNo})}">
+                  <img class="d-block mx-auto" th:src="${item.img}" />
                 </a>
               </div>
               <div class="d-flex mb-1">
-                <h3 class="h4 mb-0"><a href="shop-single.html">숭례문</a></h3>
+                <h3 class="h4 mb-0"><a th:href="@{/heritage/detail(no=${item.hNo})}">[[${item.name}]]</a></h3>
               </div>
-              <div class="d-flex align-items-center text-muted text-truncate">
-                <span class="me-2">서울 중구 세종대로 40 (남대문로4가)</span>
+              <div class="d-flex align-items-center text-muted">
+                <span class="me-2">[[${item.location}]]</span>
               </div>
-              <div class="d-flex mt-1">
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-half text-warning"></i>
-                <i class="ai-star text-warning"></i>
-                <span class="text-warning fw-bold mt-n1 ms-2">3.5</span>
-                <span class="text-muted mt-n1 ms-2">(1,234)</span>
-              </div>
-            </div>
-            <!-- Item-->
-            <div class="swiper-slide">
-              <div class="card-hover position-relative bg-secondary rounded-1 mb-4 overflow-hidden" style="height: 20rem">
-                <!-- 뱃지 -->
-                <!-- <span class="badge bg-faded-danger text-danger position-absolute top-0 start-0 mt-3 ms-3">Sale</span> -->
-                <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
-                  <i class="ai-bookmark fs-xl d-dark-mode-none"></i>
-                  <i class="ai-bookmark text-nav fs-xl d-none d-dark-mode-block"></i>
-                </button>
-                <a class="d-block" href="shop-single.html">
-                  <img class="d-block mx-auto" src="http://www.cha.go.kr/unisearch/images/national_treasure/1611449.jpg" />
-                </a>
-              </div>
-              <div class="d-flex mb-1">
-                <h3 class="h4 mb-0"><a href="shop-single.html">원각사지 십층석탑</a></h3>
-              </div>
-              <div class="d-flex align-items-center text-muted text-truncate">
-                <span class="me-2">서울 종로구 종로 99 (종로2가)</span>
-              </div>
-              <div class="d-flex mt-1">
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-half text-warning"></i>
-                <i class="ai-star text-warning"></i>
-                <span class="text-warning fw-bold mt-n1 ms-2">3.5</span>
-                <span class="text-muted mt-n1 ms-2">(1,234)</span>
-              </div>
-            </div>
-            <!-- Item-->
-            <div class="swiper-slide">
-              <div class="card-hover position-relative bg-secondary rounded-1 mb-4 overflow-hidden" style="height: 20rem">
-                <!-- 뱃지 -->
-                <!-- <span class="badge bg-faded-danger text-danger position-absolute top-0 start-0 mt-3 ms-3">Sale</span> -->
-                <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
-                  <i class="ai-bookmark fs-xl d-dark-mode-none"></i>
-                  <i class="ai-bookmark text-nav fs-xl d-none d-dark-mode-block"></i>
-                </button>
-                <a class="d-block" href="shop-single.html">
-                  <img class="d-block mx-auto" src="http://www.cha.go.kr/unisearch/images/national_treasure/1611458.jpg" />
-                </a>
-              </div>
-              <div class="d-flex mb-1">
-                <h3 class="h4 mb-0"><a href="shop-single.html">신라 진흥왕 순수비</a></h3>
-              </div>
-              <div class="d-flex align-items-center text-muted text-truncate">
-                <span class="me-2">서울 용산구 서빙고로 137, 국립중앙박물관 (용산동6가)</span>
-              </div>
-              <div class="d-flex mt-1">
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-half text-warning"></i>
-                <i class="ai-star text-warning"></i>
-                <span class="text-warning fw-bold mt-n1 ms-2">3.5</span>
-                <span class="text-muted mt-n1 ms-2">(1,234)</span>
-              </div>
-            </div>
-            <!-- Item-->
-            <div class="swiper-slide">
-              <div class="card-hover position-relative bg-secondary rounded-1 mb-4 overflow-hidden" style="height: 20rem">
-                <!-- 뱃지 -->
-                <!-- <span class="badge bg-faded-danger text-danger position-absolute top-0 start-0 mt-3 ms-3">Sale</span> -->
-                <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
-                  <i class="ai-bookmark fs-xl d-dark-mode-none"></i>
-                  <i class="ai-bookmark text-nav fs-xl d-none d-dark-mode-block"></i>
-                </button>
-                <a class="d-block" href="shop-single.html">
-                  <img class="d-block mx-auto" src="http://www.cha.go.kr/unisearch/images/national_treasure/1612029.jpg" />
-                </a>
-              </div>
-              <div class="d-flex mb-1">
-                <h3 class="h4 mb-0"><a href="shop-single.html">고달사지 승탑</a></h3>
-              </div>
-              <div class="d-flex align-items-center text-muted text-truncate">
-                <span class="me-2">경기도 여주시 북내면 상교리 411-1</span>
-              </div>
-              <div class="d-flex mt-1">
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-half text-warning"></i>
-                <i class="ai-star text-warning"></i>
-                <span class="text-warning fw-bold mt-n1 ms-2">3.5</span>
-                <span class="text-muted mt-n1 ms-2">(1,234)</span>
-              </div>
-            </div>
-            <!-- Item-->
-            <div class="swiper-slide">
-              <div class="card-hover position-relative bg-secondary rounded-1 mb-4 overflow-hidden" style="height: 20rem">
-                <!-- 뱃지 -->
-                <!-- <span class="badge bg-faded-danger text-danger position-absolute top-0 start-0 mt-3 ms-3">Sale</span> -->
-                <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
-                  <i class="ai-bookmark fs-xl d-dark-mode-none"></i>
-                  <i class="ai-bookmark text-nav fs-xl d-none d-dark-mode-block"></i>
-                </button>
-                <a class="d-block" href="shop-single.html">
-                  <img class="d-block mx-auto" src="http://www.cha.go.kr/unisearch/images/national_treasure/1612140.jpg" />
-                </a>
-              </div>
-              <div class="d-flex mb-1">
-                <h3 class="h4 mb-0"><a href="shop-single.html">법주사 쌍사자 석등</a></h3>
-              </div>
-              <div class="d-flex align-items-center text-muted text-truncate">
-                <span class="me-2">충북 보은군 속리산면 법주사로 379, 법주사 (사내리)</span>
-              </div>
-              <div class="d-flex mt-1">
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-half text-warning"></i>
-                <i class="ai-star text-warning"></i>
-                <span class="text-warning fw-bold mt-n1 ms-2">3.5</span>
-                <span class="text-muted mt-n1 ms-2">(1,234)</span>
+              <div class="d-flex mt-1" name="stars" th:data-productId="${item.hNo}" th:data-average="${item.average}">
+                <i class="ai-star text-warning" th:id="'star-1-' + ${item.hNo}"></i>
+                <i class="ai-star text-warning" th:id="'star-2-' + ${item.hNo}"></i>
+                <i class="ai-star text-warning" th:id="'star-3-' + ${item.hNo}"></i>
+                <i class="ai-star text-warning" th:id="'star-4-' + ${item.hNo}"></i>
+                <i class="ai-star text-warning" th:id="'star-5-' + ${item.hNo}"></i>
+                <span class="text-warning fw-bold mt-n1 ms-2">[[${#numbers.formatDecimal(item.average, 1, 1)}]]</span>
               </div>
             </div>
           </div>
@@ -252,66 +135,49 @@
         <div class="row">
           <div class="col-7">
             <div class="row align-items-center container pe-5">
-              <a href="#" style="text-decoration: none">
+              <a th:href="@{/museum}" style="text-decoration: none">
                 <div class="h1 pb-3 mb-4 text-primary">오늘의 박물관</div>
               </a>
               <article class="zoom-effect position-relative border-bottom pb-3 mb-4">
                 <div class="zoom-effect-wrapper">
                   <div class="zoom-effect-img">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipO2KheCFYzkAoJSWpOGQdEyxNhfcI5jP2ty9YMa=s680-w680-h510" alt="Image" />
+                    <img th:src="${museum.img}" alt="Image" />
                   </div>
                 </div>
                 <div class="pt-4 mt-lg-2">
                   <h2 class="h4 mb-2">
-                    <a href="#" class="stretched-link">국립중앙박물관</a>
+                    <a th:href="@{/museumDetail(no=${museum.musNo})}" class="stretched-link">[[${museum.name}]]</a>
                   </h2>
                   <div class="d-flex justify-content-between fs-lg text-muted row">
-                    <div class="col-6">서울 용산구 서빙고로 139</div>
-                    <div class="col-6 text-end">
-                      <i class="ai-star-filled text-warning"></i>
-                      <i class="ai-star-filled text-warning"></i>
-                      <i class="ai-star-filled text-warning"></i>
-                      <i class="ai-star-half text-warning"></i>
-                      <i class="ai-star text-warning"></i>
-                      <span class="text-warning fw-bold ms-2">3.5</span>
-                      <span class="text-muted ms-2">(1,234)</span>
+                    <div class="col-8">[[${museum.address}]]</div>
+              		<div class="d-flex mt-1" name="stars" th:data-productId="${museum.musNo}" th:data-average="${museum.average}">
+                      <i class="ai-star text-warning" th:id="'star-1-' + ${museum.musNo}"></i>
+                      <i class="ai-star text-warning" th:id="'star-2-' + ${museum.musNo}"></i>
+                      <i class="ai-star text-warning" th:id="'star-3-' + ${museum.musNo}"></i>
+                      <i class="ai-star text-warning" th:id="'star-4-' + ${museum.musNo}"></i>
+                      <i class="ai-star text-warning" th:id="'star-5-' + ${museum.musNo}"></i>
+                      <span class="text-warning fw-bold ms-2">[[${#numbers.formatDecimal(museum.average, 1, 1)}]]</span>
                     </div>
                   </div>
                 </div>
               </article>
-              <a href="#" style="text-decoration: none">
+              <a th:href="@{/event}" style="text-decoration: none">
                 <div class="h1 pb-3 mb-lg-4 text-primary">이달의 행사</div>
               </a>
               <article class="row">
-                <div class="col-6">
+                <div class="col-6" th:each="event: ${events}">
                   <div class="px-2">
-                    <a href="#" class="card-hover d-block">
+                    <a th:href="@{/event/eventDetail(no=${event.evntNo})}" class="card-hover d-block">
                       <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 rounded-1 overflow-hidden zindex-2 opacity-0">
                         <div class="position-relative zindex-2 text-center">
                           <div class="fs-sm text-white">
-                            <div class="fw-semibold fs-xl">서대문 문화재 야행</div>
-                            <div>독립공원 및 서대문구</div>
+                            <div class="fw-semibold fs-xl px-3">[[${event.name}]]</div>
+                            <div>[[${event.location}]]</div>
                           </div>
                         </div>
-                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-30"></div>
+                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-50"></div>
                       </div>
-                      <img src="http://sdmnightroad.com/data/editor/2208/13f88301bcc31fdb9d19ffccb382254a_1660631008_7608.jpg" class="d-block rounded-1" alt="Instagram image" />
-                    </a>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="px-2">
-                    <a href="#" class="card-hover d-block">
-                      <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 rounded-1 overflow-hidden zindex-2 opacity-0">
-                        <div class="position-relative zindex-2 text-center">
-                          <div class="fs-sm text-white">
-                            <div class="fw-semibold fs-xl">부여 문화재 야행</div>
-                            <div>정림사지/석탑로/의열로/이색창조거리 일대</div>
-                          </div>
-                        </div>
-                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-30"></div>
-                      </div>
-                      <img src="https://www.buyeo.go.kr/Upl/_board/yahaeng_0105/middle_yahaeng_0105_0_1661300651.jpg" class="d-block rounded-1" alt="Instagram image" />
+                      <img th:src="${event.poster}" class="d-block rounded-1" alt="Instagram image" />
                     </a>
                   </div>
                 </div>
@@ -319,11 +185,11 @@
             </div>
           </div>
           <div class="col-5">
-            <a href="#" style="text-decoration: none">
+            <a th:href="@{/tour}" style="text-decoration: none">
               <div class="h1 pb-3 mb-4 text-primary">투어</div>
             </a>
             <!-- 투어플랜 만들기 -->
-            <a href="#" class="card card-hover-primary bg-secondary border-0 text-decoration-none mb-5">
+            <a th:href="@{/tour/post}" class="card card-hover-primary bg-secondary border-0 text-decoration-none mb-5">
               <div class="card-body pb-0">
                 <h3 class="h4 card-title mt-0">나의 투어플랜 만들기</h3>
                 <p class="card-text" style="word-break: keep-all">나만의 투어플랜을 만들고 투어플랜을 함께 할 친구를 모집해보세요.</p>
@@ -333,53 +199,29 @@
               </div>
             </a>
             <!-- 투어플랜 모집 -->
-            <div class="card text-center mb-5">
+            <div class="card text-center mb-5" th:each="tour: ${tours}">
               <div class="card-header">
-                <span class="badge bg-secondary fs-sm">문화재</span>
-                <span class="h4 card-title">같이 경주 둘러보실 분</span>
+                <span class="badge bg-secondary fs-sm" th:if="${tour.category == 'heritage'}">문화재</span>
+                <span class="badge bg-primary fs-sm" th:if="${tour.category == 'museum'}">문화재</span>
+                <span class="h4 card-title">[[${tour.title}]]</span>
               </div>
               <div class="card-body">
                 <div class="card-text text-start">
                   <span class="fw-bold pe-3">지역</span>
-                  경상북도
+                  [[${tour.region}]]
                   <br />
                   <span class="fw-bold pe-3">기간</span>
-                  07-01 ~ 07-02 | 1박 2일
+                  [[${tour.startDate}]] ~ [[${tour.endDate}]] | [[${tour.duration}]]박 [[${tour.duration + 1}]]일
                   <br />
                   <span class="fw-bold pe-3">인원</span>
-                  2명
+                  [[${tour.numOfPeople}]]명
                   <br />
                   <div class="text-truncate">
                     <span class="fw-bold pe-3">내용</span>
-                    경주에 관심 있는 분들과 함께 둘러보고 싶어요!
+                    [[${tour.content}]]
                   </div>
                 </div>
-                <a href="#" class="btn btn-primary">자세히 보기</a>
-              </div>
-            </div>
-            <!-- 투어플랜 모집 -->
-            <div class="card text-center mb-5">
-              <div class="card-header">
-                <span class="badge bg-info fs-sm">박물관</span>
-                <span class="h4 card-title">한글박물관 같이 가요</span>
-              </div>
-              <div class="card-body">
-                <div class="card-text text-start">
-                  <span class="fw-bold pe-3">지역</span>
-                  서울
-                  <br />
-                  <span class="fw-bold pe-3">기간</span>
-                  07-01 ~ 07-01 | 당일
-                  <br />
-                  <span class="fw-bold pe-3">인원</span>
-                  2명
-                  <br />
-                  <div class="text-truncate">
-                    <span class="fw-bold pe-3">내용</span>
-                    한글박물관에서 함께 즐거운 시간을 보낼 분을 찾습니다. 한글의 아름다움과 역사를 함께 알아보고 싶어요.
-                  </div>
-                </div>
-                <a href="#" class="btn btn-primary">자세히 보기</a>
+                <a th:href="@{/tour/detail(tno=${tour.tno})}" class="btn btn-primary">자세히 보기</a>
               </div>
             </div>
           </div>
@@ -504,7 +346,7 @@
       <!-- Trending products (carousel)-->
       <section class="container mb-5 mt-5">
         <div class="d-flex align-items-center justify-content-between pb-4 mb-2 mb-md-3">
-          <a href="#" style="text-decoration: none">
+          <a th:href="@{/shop}" style="text-decoration: none">
             <h2 class="h1 pt-1 mb-0 text-primary">쇼핑몰</h2>
           </a>
           <!-- Slider prev/next buttons-->
@@ -538,119 +380,32 @@
         }'>
           <div class="swiper-wrapper" id="resize">
             <!-- Item-->
-            <div class="swiper-slide">
+            <div class="swiper-slide" th:each="item: ${products}">
               <div class="card-hover position-relative bg-secondary rounded-1 mb-4 overflow-hidden" style="height: 20rem">
                 <!-- 뱃지 -->
                 <!-- <span class="badge bg-faded-danger text-danger position-absolute top-0 start-0 mt-3 ms-3">Sale</span> -->
-                <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
+                <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button" th:onclick="addCart([[${item}]]); return false;">
                   <i class="ai-cart fs-xl d-dark-mode-none"></i>
                   <i class="ai-cart text-nav fs-xl d-none d-dark-mode-block"></i>
                 </button>
-                <a class="d-block" href="shop-single.html">
-                  <img class="d-block mx-auto" src="https://shop-phinf.pstatic.net/20200209_69/1581258162764RUzMx_JPEG/18619705371612978_1835379085.jpg?type=m510" />
+                <a class="d-block" th:href="@{/shop/detail(productId=${item.productId})}">
+                  <img class="d-block mx-auto" th:src="${item.image}" />
                 </a>
               </div>
               <div class="d-flex mb-1">
-                <h3 class="h5 mb-0"><a href="shop-single.html">복주머니 (네츄럴) / 한국기념품, 외국인선물, 한국전통선물</a></h3>
+                <h3 class="h5 mb-0"><a th:href="@{/shop/detail(productId=${item.productId})}">[[${item.title}]]</a></h3>
               </div>
               <div class="d-flex align-items-center text-warning text-truncate">
-                <span class="me-2 fs-4 fw-bold">₩ 18,000</span>
+                <span class="me-2 fs-4 fw-bold">₩ [[${#numbers.formatInteger(item.lprice, 1, 'COMMA')}]]</span>
               </div>
-              <div class="d-flex mt-1">
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-half text-warning"></i>
-                <i class="ai-star text-warning"></i>
-                <span class="text-warning fw-bold mt-n1 ms-2">3.5</span>
-                <span class="text-muted mt-n1 ms-2">(1,234)</span>
-              </div>
-            </div>
-            <!-- Item-->
-            <div class="swiper-slide">
-              <div class="card-hover position-relative bg-secondary rounded-1 mb-4 overflow-hidden" style="height: 20rem">
-                <!-- 뱃지 -->
-                <!-- <span class="badge bg-faded-danger text-danger position-absolute top-0 start-0 mt-3 ms-3">Sale</span> -->
-                <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
-                  <i class="ai-cart fs-xl d-dark-mode-none"></i>
-                  <i class="ai-cart text-nav fs-xl d-none d-dark-mode-block"></i>
-                </button>
-                <a class="d-block" href="shop-single.html">
-                  <img class="d-block mx-auto" src="https://shop-phinf.pstatic.net/20230131_119/1675135682554z1gad_JPEG/76271466219827036_1339220938.JPG?type=m510" />
-                </a>
-              </div>
-              <div class="d-flex mb-1">
-                <h3 class="h5 mb-0"><a href="shop-single.html">나전칠기-외국인선물 전통 한국 자개볼펜 기념품</a></h3>
-              </div>
-              <div class="d-flex align-items-center text-warning text-truncate">
-                <span class="me-2 fs-4 fw-bold">₩ 14,800</span>
-              </div>
-              <div class="d-flex mt-1">
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-half text-warning"></i>
-                <i class="ai-star text-warning"></i>
-                <span class="text-warning fw-bold mt-n1 ms-2">3.5</span>
-                <span class="text-muted mt-n1 ms-2">(1,234)</span>
-              </div>
-            </div>
-            <!-- Item-->
-            <div class="swiper-slide">
-              <div class="card-hover position-relative bg-secondary rounded-1 mb-4 overflow-hidden" style="height: 20rem">
-                <!-- 뱃지 -->
-                <!-- <span class="badge bg-faded-danger text-danger position-absolute top-0 start-0 mt-3 ms-3">Sale</span> -->
-                <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
-                  <i class="ai-cart fs-xl d-dark-mode-none"></i>
-                  <i class="ai-cart text-nav fs-xl d-none d-dark-mode-block"></i>
-                </button>
-                <a class="d-block" href="shop-single.html">
-                  <img class="d-block mx-auto" src="https://shop-phinf.pstatic.net/20220510_209/1652170142852cDjYL_JPEG/53305925510207687_1132332146.jpg?type=m510" />
-                </a>
-              </div>
-              <div class="d-flex mb-1">
-                <h3 class="h5 mb-0"><a href="shop-single.html">청사초롱 전통등만들기 한국전통선물 초롱불 소품만들기</a></h3>
-              </div>
-              <div class="d-flex align-items-center text-warning text-truncate">
-                <span class="me-2 fs-4 fw-bold">₩ 1,700</span>
-              </div>
-              <div class="d-flex mt-1">
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-half text-warning"></i>
-                <i class="ai-star text-warning"></i>
-                <span class="text-warning fw-bold mt-n1 ms-2">3.5</span>
-                <span class="text-muted mt-n1 ms-2">(1,234)</span>
-              </div>
-            </div>
-            <!-- Item-->
-            <div class="swiper-slide">
-              <div class="card-hover position-relative bg-secondary rounded-1 mb-4 overflow-hidden" style="height: 20rem">
-                <!-- 뱃지 -->
-                <!-- <span class="badge bg-faded-danger text-danger position-absolute top-0 start-0 mt-3 ms-3">Sale</span> -->
-                <button class="btn btn-icon btn-sm btn-light bg-light border-0 rounded-circle position-absolute top-0 end-0 mt-3 me-3 zindex-5 opacity-0" type="button">
-                  <i class="ai-cart fs-xl d-dark-mode-none"></i>
-                  <i class="ai-cart text-nav fs-xl d-none d-dark-mode-block"></i>
-                </button>
-                <a class="d-block" href="shop-single.html">
-                  <img class="d-block mx-auto" src="https://shopping-phinf.pstatic.net/main_2868743/28687437561.20230312102144.jpg?type=f640" />
-                </a>
-              </div>
-              <div class="d-flex mb-1">
-                <h3 class="h5 mb-0"><a href="shop-single.html">전통 목각 원앙 세트 大 혼례 폐백용품 신혼부부 선물</a></h3>
-              </div>
-              <div class="d-flex align-items-center text-warning text-truncate">
-                <span class="me-2 fs-4 fw-bold">₩ 9,000</span>
-              </div>
-              <div class="d-flex mt-1">
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-filled text-warning"></i>
-                <i class="ai-star-half text-warning"></i>
-                <i class="ai-star text-warning"></i>
-                <span class="text-warning fw-bold mt-n1 ms-2">3.5</span>
-                <span class="text-muted mt-n1 ms-2">(1,234)</span>
+              <div class="d-flex mt-1" name="stars" th:data-productId="${item.productId}" th:data-average="${item.average}">
+                <i class="ai-star text-warning" th:id="'star-1-' + ${item.productId}"></i>
+                <i class="ai-star text-warning" th:id="'star-2-' + ${item.productId}"></i>
+                <i class="ai-star text-warning" th:id="'star-3-' + ${item.productId}"></i>
+                <i class="ai-star text-warning" th:id="'star-4-' + ${item.productId}"></i>
+                <i class="ai-star text-warning" th:id="'star-5-' + ${item.productId}"></i>
+                <span class="text-warning fw-bold mt-n1 ms-2">[[${#numbers.formatDecimal(item.average, 1, 1)}]]</span>
+                <span class="text-muted mt-n1 ms-2">([[${#numbers.formatInteger(item.quantity, 1, 'COMMA')}]])</span>
               </div>
             </div>
           </div>
@@ -685,6 +440,28 @@
     <!-- Main theme script-->
     <script src="assets/js/theme.js"></script>
     <script>
+	    function addCart(product) {
+	        $.ajax({
+	          url: "/shop/addCart",
+	          type: "POST",
+	          dataType: "text",
+	      	  contentType : "application/json;charset=UTF-8",
+	          data: JSON.stringify({
+	            lprice: product.lprice,
+	            productId: product.productId,
+	            quantity: 1,
+	            image: product.image,
+	            title: product.title
+	          }),
+	          success: function (resp) {
+	            alert(resp);
+	          },
+	          error: function (xhr, status, error) {
+	            console.error(xhr, status, error);
+	          },
+	        });
+	      }
+	    
       $(document).ready(function () {
         console.log("jQuery is ready");
         $("#resize a img").each(function () {
@@ -703,6 +480,24 @@
             img.css("max-width", "100%");
           }
         });
+        
+      	$('[name=stars]').each(function () {
+      		var productId = $(this).attr('data-productId');
+      		var average = $(this).attr('data-average');
+      		for (var i = 1; i <= 5; i++) {
+      			var id = '#star-' + i + '-' + productId;
+      			var star = $(id);
+      			if (average >= 1) {
+      				star.removeClass('ai-star');
+      				star.addClass('ai-star-filled');
+      				average -= 1;
+      			} else if (average >= 0.5) {
+      				star.removeClass('ai-star');
+      				star.addClass('ai-star-half');
+      				average = 0;
+      			}
+      		}
+      	});
       });
     </script>
   </body>

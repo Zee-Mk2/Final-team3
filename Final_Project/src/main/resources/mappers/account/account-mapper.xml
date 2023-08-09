@@ -63,5 +63,9 @@
         DELETE FROM MEMBER
         WHERE MNO = #{mno}
     </delete>
+    
+	<select id="getOrderedList" parameterType="int" resultType="com.multi.bbs.shop.OrderedList">
+		SELECT * FROM OrderedList WHERE mno = #{mno} ORDER BY orderDate DESC
+	</select>
 	
 </mapper>

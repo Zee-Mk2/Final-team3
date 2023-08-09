@@ -55,7 +55,7 @@ public class TourController {
 			page = Integer.parseInt(param.get("page"));
 		}
 		int boardCount = service.getBoardCount(param);
-		PageInfo pageInfo = new PageInfo(page, 5, boardCount, 10);
+		PageInfo pageInfo = new PageInfo(page, 5, boardCount, 8);
 		List<Tour> tours = service.getTourList(param, pageInfo);
 		for (Tour tour : tours) {
 			tour.setStartDate(tour.getStartDate().split(" ")[0]);
@@ -67,9 +67,6 @@ public class TourController {
 				tour.setCategory("문화재");
 			}
 			tour.setTimeDiff(calcTime.getTimeDiff(tour.getWriteTime()));
-		}
-		for (Tour tour : tours) {
-			System.out.println(tour.toString());
 		}
 		model.addAttribute("tours", tours);
 		model.addAttribute("pageInfo", pageInfo);

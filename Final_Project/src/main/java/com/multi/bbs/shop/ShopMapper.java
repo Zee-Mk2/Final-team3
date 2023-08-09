@@ -20,4 +20,8 @@ public interface ShopMapper {
 
 	List<Product> getAnotherProducts(long productId);
 
+	void insertOrder(OrderedList order);
+
+	int deleteReview(int prno);
+
 }

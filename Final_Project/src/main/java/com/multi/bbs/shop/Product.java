@@ -19,4 +19,5 @@ public class Product {
     private String category4;
     private String mallName;
     private int quantity;
+    private double average;
 }
